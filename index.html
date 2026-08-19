@@ -3,478 +3,433 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>HelloFriendsHelp | Kaam Dhoondo • Kaam Do • Madad Karo</title>
+<title>HelloFriendsHelp - Kaam, Education & Help</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#f4f8ff;
-  color:#172033;
+font-family:Arial,Helvetica,sans-serif;
+background:#f3f7ff;
+color:#172033;
+line-height:1.5;
 }
 
 .container{
-  width:94%;
-  max-width:1100px;
-  margin:auto;
+width:94%;
+max-width:1150px;
+margin:auto;
 }
 
 /* HERO */
-
 .hero{
-  background:linear-gradient(135deg,#0759b5,#0d8bf2);
-  color:white;
-  padding:55px 20px;
-  text-align:center;
+background:linear-gradient(135deg,#063b91,#087df0,#00a8e8);
+color:#fff;
+padding:55px 18px;
+text-align:center;
 }
 
 .logo{
-  font-size:42px;
-  font-weight:900;
-  margin-bottom:10px;
+font-size:42px;
+font-weight:900;
+margin-bottom:8px;
+}
+
+.tagline{
+font-size:18px;
+margin-bottom:15px;
 }
 
 .hero h1{
-  font-size:34px;
-  margin-bottom:12px;
+font-size:35px;
+margin-bottom:12px;
 }
 
 .hero p{
-  font-size:17px;
-  opacity:.95;
-  line-height:1.6;
+max-width:750px;
+margin:auto;
+font-size:16px;
 }
 
 .hero-buttons{
-  margin-top:25px;
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+margin-top:25px;
 }
 
 .btn{
-  padding:14px 22px;
-  border-radius:12px;
-  border:none;
-  font-weight:bold;
-  cursor:pointer;
-  text-decoration:none;
-  display:inline-block;
+display:inline-block;
+padding:14px 23px;
+border-radius:12px;
+text-decoration:none;
+font-weight:bold;
+border:0;
+cursor:pointer;
 }
 
-.btn-white{
-  background:white;
-  color:#0759b5;
+.white{
+background:#fff;
+color:#0759b5;
 }
 
-.btn-green{
-  background:#25D366;
-  color:white;
+.green{
+background:#25D366;
+color:#fff;
 }
 
 /* FEATURES */
-
 .features{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-  margin:30px auto;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+margin:30px auto;
 }
 
 .feature{
-  background:white;
-  padding:22px 15px;
-  border-radius:18px;
-  text-align:center;
-  box-shadow:0 7px 25px rgba(0,50,120,.08);
+background:#fff;
+padding:22px 14px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 8px 25px rgba(0,50,120,.09);
 }
 
-.feature-icon{
-  font-size:35px;
-  margin-bottom:10px;
+.icon{
+font-size:35px;
+margin-bottom:8px;
 }
 
 .feature h3{
-  color:#0759b5;
-  margin-bottom:7px;
+color:#0759b5;
 }
 
-/* FORM BOX */
-
+/* MAIN BOX */
 .box{
-  background:white;
-  margin:30px auto;
-  padding:30px;
-  border-radius:25px;
-  box-shadow:0 10px 35px rgba(0,50,120,.12);
+background:#fff;
+margin:30px auto;
+padding:30px;
+border-radius:25px;
+box-shadow:0 12px 35px rgba(0,50,120,.11);
 }
 
-.section-title{
-  text-align:center;
-  color:#0759b5;
-  font-size:28px;
-  margin-bottom:8px;
+.title{
+text-align:center;
+color:#0759b5;
+font-size:29px;
+margin-bottom:6px;
 }
 
-.section-subtitle{
-  text-align:center;
-  color:#777;
-  margin-bottom:25px;
+.subtitle{
+text-align:center;
+color:#777;
+margin-bottom:25px;
 }
 
 /* TABS */
-
 .tabs{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin-bottom:25px;
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:8px;
+margin-bottom:25px;
 }
 
 .tab{
-  border:none;
-  padding:15px 8px;
-  border-radius:12px;
-  background:#eaf2ff;
-  color:#0759b5;
-  font-weight:bold;
-  cursor:pointer;
+padding:13px 6px;
+border:0;
+border-radius:11px;
+background:#e9f2ff;
+color:#0759b5;
+font-weight:bold;
+cursor:pointer;
 }
 
 .tab.active{
-  background:#0759b5;
-  color:white;
+background:#0759b5;
+color:#fff;
 }
 
 /* FORM */
-
 .form-section{
-  display:none;
+display:none;
 }
 
 .form-section.active{
-  display:block;
+display:block;
 }
 
 .form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
 }
 
 .full{
-  grid-column:1/-1;
+grid-column:1/-1;
 }
 
 label{
-  display:block;
-  font-weight:bold;
-  margin-bottom:6px;
-  color:#26344a;
+display:block;
+font-weight:bold;
+margin-bottom:6px;
 }
 
-input,
-select,
-textarea{
-  width:100%;
-  padding:13px;
-  border:1px solid #d9e2ef;
-  border-radius:11px;
-  outline:none;
-  font-size:15px;
-  background:#fff;
+input,select,textarea{
+width:100%;
+padding:13px;
+border:1px solid #d8e1ef;
+border-radius:11px;
+font-size:15px;
+outline:none;
+background:#fff;
 }
 
 textarea{
-  min-height:100px;
-  resize:vertical;
+min-height:100px;
+resize:vertical;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
-  border-color:#0759b5;
-  box-shadow:0 0 0 3px rgba(7,89,181,.08);
+input:focus,select:focus,textarea:focus{
+border-color:#087df0;
+box-shadow:0 0 0 3px rgba(8,125,240,.08);
 }
 
-.whatsapp-btn{
-  width:100%;
-  margin-top:22px;
-  padding:16px;
-  border:none;
-  border-radius:13px;
-  background:#25D366;
-  color:white;
-  font-size:17px;
-  font-weight:800;
-  cursor:pointer;
+.send{
+width:100%;
+margin-top:22px;
+padding:16px;
+border:0;
+border-radius:13px;
+background:#25D366;
+color:#fff;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
 }
 
-.whatsapp-btn:hover{
-  background:#1ebe5d;
+.send:hover{
+background:#1ebe5d;
 }
 
 /* COMMISSION */
-
 .commission{
-  background:linear-gradient(135deg,#effff4,#e2fff0);
-  border:1px solid #b8e8c7;
-  padding:22px;
-  border-radius:18px;
-  margin-top:25px;
+margin-top:25px;
+padding:20px;
+border-radius:17px;
+background:#effff4;
+border:1px solid #b9e8c7;
 }
 
 .commission h3{
-  color:#16833b;
-  margin-bottom:8px;
-}
-
-.commission p{
-  line-height:1.6;
+color:#16833b;
 }
 
 /* DONATION */
-
 .donation{
-  margin:35px auto;
-  padding:35px 20px;
-  border-radius:25px;
-  text-align:center;
-  background:linear-gradient(135deg,#fff7e6,#fff);
-  border:1px solid #ffe0a3;
-  box-shadow:0 8px 30px rgba(150,90,0,.08);
+margin:35px auto;
+padding:35px 20px;
+text-align:center;
+border-radius:25px;
+background:linear-gradient(135deg,#fff7e5,#fff);
+border:1px solid #ffe0a0;
 }
 
 .donation h2{
-  color:#d97900;
-  margin-bottom:10px;
+color:#d87900;
+margin-bottom:10px;
 }
 
 .upi{
-  display:inline-block;
-  margin:15px 0;
-  padding:13px 18px;
-  border-radius:10px;
-  background:white;
-  border:1px dashed #d97900;
-  font-weight:bold;
+display:inline-block;
+margin:15px 0;
+padding:13px 18px;
+border:1px dashed #d87900;
+border-radius:10px;
+background:#fff;
+font-weight:bold;
 }
 
-.donate-btn{
-  display:inline-block;
-  background:#ff8a00;
-  color:white;
-  padding:14px 24px;
-  border-radius:12px;
-  text-decoration:none;
-  font-weight:bold;
+.donate{
+display:inline-block;
+background:#ff8800;
+color:#fff;
+padding:14px 25px;
+border-radius:12px;
+text-decoration:none;
+font-weight:bold;
 }
 
 /* CONTACT */
-
 .contact{
-  background:#0b1f3a;
-  color:white;
-  padding:35px 20px;
-  text-align:center;
+background:#071a33;
+color:#fff;
+padding:40px 20px;
+text-align:center;
 }
 
 .contact h2{
-  margin-bottom:10px;
+margin-bottom:10px;
 }
 
 .contact a{
-  color:#25D366;
-  font-size:20px;
-  font-weight:bold;
-  text-decoration:none;
+color:#25D366;
+font-size:21px;
+font-weight:bold;
+text-decoration:none;
 }
 
 /* FOOTER */
-
 footer{
-  background:#061326;
-  color:#aaa;
-  text-align:center;
-  padding:18px;
-  font-size:13px;
+background:#041021;
+color:#aaa;
+text-align:center;
+padding:18px;
+font-size:13px;
 }
 
-.small-note{
-  margin-top:12px;
-  font-size:12px;
-  color:#777;
-  line-height:1.5;
+/* NOTICE */
+.notice{
+background:#f1f6ff;
+border-left:4px solid #087df0;
+padding:14px;
+margin-top:20px;
+font-size:13px;
+color:#555;
 }
 
-/* MOBILE */
-
-@media(max-width:750px){
-
-  .features{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .tabs{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .form-grid{
-    grid-template-columns:1fr;
-  }
-
-  .full{
-    grid-column:auto;
-  }
-
-  .hero h1{
-    font-size:27px;
-  }
-
-  .logo{
-    font-size:34px;
-  }
-
+@media(max-width:850px){
+.features{grid-template-columns:1fr 1fr}
+.tabs{grid-template-columns:1fr 1fr 1fr}
 }
 
-@media(max-width:450px){
-
-  .features{
-    grid-template-columns:1fr;
-  }
-
-  .tabs{
-    grid-template-columns:1fr;
-  }
-
-  .box{
-    padding:20px 15px;
-  }
-
+@media(max-width:600px){
+.features{grid-template-columns:1fr}
+.tabs{grid-template-columns:1fr 1fr}
+.form-grid{grid-template-columns:1fr}
+.full{grid-column:auto}
+.logo{font-size:34px}
+.hero h1{font-size:27px}
+.box{padding:20px 15px}
 }
 
+@media(max-width:400px){
+.tabs{grid-template-columns:1fr}
+}
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 
 <section class="hero">
-
 <div class="container">
 
-<div class="logo">
-🤝 HelloFriendsHelp
+<div class="logo">🤝 HelloFriendsHelp</div>
+
+<div class="tagline">
+Kaam • Rozgaar • Education • Help
 </div>
 
 <h1>KAAM DHOONDO • KAAM DO • MADAD KARO</h1>
 
 <p>
-Workers ko kaam se aur kaam karwane walon ko trusted workers se connect karne ka simple platform.
+Workers ko jobs se, employers ko workers se, teachers ko students se
+aur students ko education opportunities se connect karne ka platform.
 </p>
 
 <div class="hero-buttons">
 
-<a href="#registration" class="btn btn-white">
+<a href="#services" class="btn white">
 🚀 Get Started
 </a>
 
-<a href="https://wa.me/917763082034" class="btn btn-green">
-💬 WhatsApp Us
+<a href="https://wa.me/917763082034" class="btn green">
+💬 WhatsApp Inquiry
 </a>
 
 </div>
 
 </div>
-
 </section>
 
 
-<!-- FEATURES -->
+<!-- ================= FEATURES ================= -->
 
-<section class="container">
+<section class="container" id="services">
 
 <div class="features">
 
 <div class="feature">
-<div class="feature-icon">👷</div>
-<h3>Find Work</h3>
-<p>Apni skill ke according kaam dhoondhein.</p>
+<div class="icon">👷</div>
+<h3>Jobs</h3>
+<p>Job seekers ko suitable work se connect karein.</p>
 </div>
 
 <div class="feature">
-<div class="feature-icon">🏢</div>
-<h3>Find Workers</h3>
-<p>Apne kaam ke liye suitable worker dhoondhein.</p>
+<div class="icon">🏢</div>
+<h3>Workers</h3>
+<p>Apne kaam ke liye suitable person dhoondhein.</p>
 </div>
 
 <div class="feature">
-<div class="feature-icon">👨‍🏫</div>
-<h3>Teachers</h3>
-<p>Teacher aur students ko connect karein.</p>
+<div class="icon">🎓</div>
+<h3>Admission</h3>
+<p>College courses aur admission inquiries.</p>
 </div>
 
 <div class="feature">
-<div class="feature-icon">❤️</div>
-<h3>Help Others</h3>
-<p>Donation ke through zaruratmand bachhon ki madad.</p>
+<div class="icon">❤️</div>
+<h3>Help</h3>
+<p>Zaruratmand bachhon ki voluntary madad.</p>
 </div>
 
 </div>
-
 </section>
 
 
-<!-- REGISTRATION -->
+<!-- ================= REGISTRATION ================= -->
 
-<section class="container" id="registration">
+<section class="container">
 
 <div class="box">
 
-<h2 class="section-title">
-Registration & Inquiry
-</h2>
+<h2 class="title">HelloFriendsHelp Registration</h2>
 
-<p class="section-subtitle">
+<p class="subtitle">
 Apni requirement select karein aur direct WhatsApp par inquiry bhejein.
 </p>
 
-
 <div class="tabs">
 
-<button class="tab active"
-onclick="openTab('worker',this)">
+<button class="tab active" onclick="openTab('worker',this)">
 👷 Worker
 </button>
 
-<button class="tab"
-onclick="openTab('employer',this)">
+<button class="tab" onclick="openTab('employer',this)">
 🏢 Employer
 </button>
 
-<button class="tab"
-onclick="openTab('teacher',this)">
+<button class="tab" onclick="openTab('teacher',this)">
 👨‍🏫 Teacher
 </button>
 
-<button class="tab"
-onclick="openTab('student',this)">
+<button class="tab" onclick="openTab('student',this)">
 👨‍🎓 Student
+</button>
+
+<button class="tab" onclick="openTab('admission',this)">
+🎓 Admission
+</button>
+
+<button class="tab" onclick="openTab('college',this)">
+🏫 College
 </button>
 
 </div>
 
 
-<!-- WORKER -->
+<!-- ================= WORKER ================= -->
 
 <div id="worker" class="form-section active">
 
@@ -482,12 +437,22 @@ onclick="openTab('student',this)">
 
 <div>
 <label>Full Name *</label>
-<input id="w_name" placeholder="Your name">
+<input id="w_name" placeholder="Full name">
 </div>
 
 <div>
 <label>Mobile Number *</label>
 <input id="w_phone" type="tel" placeholder="10 digit mobile">
+</div>
+
+<div>
+<label>Father's Name</label>
+<input id="w_father">
+</div>
+
+<div>
+<label>Mother's Name</label>
+<input id="w_mother">
 </div>
 
 <div>
@@ -506,23 +471,18 @@ onclick="openTab('student',this)">
 </div>
 
 <div>
-<label>City / Area *</label>
-<input id="w_city" placeholder="Where do you live?">
-</div>
-
-<div>
 <label>Education</label>
-<input id="w_edu" placeholder="Qualification">
+<input id="w_education" placeholder="Qualification">
 </div>
 
 <div>
-<label>Work Experience</label>
-<input id="w_exp" placeholder="Example: 3 years">
+<label>Experience</label>
+<input id="w_experience" placeholder="Example: 3 years">
 </div>
 
 <div>
 <label>ID Proof Type</label>
-<select id="w_id">
+<select id="w_idtype">
 <option>Select</option>
 <option>Aadhaar</option>
 <option>Voter ID</option>
@@ -532,24 +492,25 @@ onclick="openTab('student',this)">
 </div>
 
 <div>
-<label>ID Verification</label>
-<select id="w_verify">
-<option>Not Verified</option>
-<option>Available for Verification</option>
-<option>Already Verified</option>
-</select>
+<label>ID Proof Last 4 Digits</label>
+<input id="w_idlast" maxlength="4" placeholder="Last 4 digits only">
 </div>
 
 <div>
-<label>Which Work Do You Want?</label>
+<label>City / Area *</label>
+<input id="w_city">
+</div>
+
+<div>
+<label>Work Wanted *</label>
 <input id="w_work"
-placeholder="Driver, Labour, Mason, Electrician...">
+placeholder="Labour, Driver, Mason, Electrician...">
 </div>
 
 <div class="full">
-<label>Skills</label>
+<label>Which Work Can You Do?</label>
 <textarea id="w_skills"
-placeholder="Apni skills aur experience detail mein likhein"></textarea>
+placeholder="Apni skills aur kaam ka complete experience"></textarea>
 </div>
 
 <div class="full">
@@ -559,21 +520,21 @@ placeholder="Apni skills aur experience detail mein likhein"></textarea>
 
 </div>
 
-<button class="whatsapp-btn" onclick="workerWhatsApp()">
-💬 Send Worker Inquiry on WhatsApp
+<button class="send" onclick="workerSend()">
+💬 Send Worker / Job Seeker Inquiry
 </button>
 
 </div>
 
 
-<!-- EMPLOYER -->
+<!-- ================= EMPLOYER ================= -->
 
 <div id="employer" class="form-section">
 
 <div class="form-grid">
 
 <div>
-<label>Name / Company *</label>
+<label>Name / Company Name *</label>
 <input id="e_name">
 </div>
 
@@ -583,34 +544,56 @@ placeholder="Apni skills aur experience detail mein likhein"></textarea>
 </div>
 
 <div>
-<label>Work Location *</label>
+<label>Father's Name</label>
+<input id="e_father">
+</div>
+
+<div>
+<label>Mother's Name</label>
+<input id="e_mother">
+</div>
+
+<div>
+<label>City / Area *</label>
 <input id="e_city">
 </div>
 
 <div>
-<label>What Work Do You Need? *</label>
+<label>Job / Work Required *</label>
 <input id="e_work"
-placeholder="Construction, painting, driver...">
+placeholder="Mason, Driver, Labour, Teacher...">
 </div>
 
 <div>
-<label>Number of Workers</label>
-<input id="e_workers" type="number">
+<label>Number of Persons Required</label>
+<input id="e_people" type="number">
 </div>
 
 <div>
-<label>Budget</label>
-<input id="e_budget" placeholder="₹">
+<label>Budget / Salary</label>
+<input id="e_salary" placeholder="₹">
 </div>
 
 <div>
 <label>Required Experience</label>
-<input id="e_exp">
+<input id="e_experience">
 </div>
 
 <div>
-<label>Required Date</label>
+<label>Joining / Work Date</label>
 <input id="e_date" type="date">
+</div>
+
+<div class="full">
+<label>Which Person Do You Need?</label>
+<textarea id="e_person"
+placeholder="Example: Mujhe 2 experienced electricians chahiye..."></textarea>
+</div>
+
+<div class="full">
+<label>Complete Job Details</label>
+<textarea id="e_details"
+placeholder="Kaam ki complete details, timing, location etc."></textarea>
 </div>
 
 <div class="full">
@@ -618,33 +601,27 @@ placeholder="Construction, painting, driver...">
 <textarea id="e_address"></textarea>
 </div>
 
-<div class="full">
-<label>Complete Work Details</label>
-<textarea id="e_details"
-placeholder="Kaam ki complete details likhein"></textarea>
-</div>
-
 </div>
 
 <div class="commission">
 
-<h3>💰 HelloFriendsHelp Commission — 10%</h3>
+<h3>💰 HelloFriendsHelp Platform Commission: 10%</h3>
 
 <p>
-Successful service/job payment par platform commission
-<strong>10%</strong> rahega, subject to the agreed service/payment terms.
+Successful job/service transaction ke agreed terms ke according
+HelloFriendsHelp platform commission <strong>10%</strong> rahega.
 </p>
 
 </div>
 
-<button class="whatsapp-btn" onclick="employerWhatsApp()">
-💬 Send Job Requirement on WhatsApp
+<button class="send" onclick="employerSend()">
+💬 Send Worker Requirement
 </button>
 
 </div>
 
 
-<!-- TEACHER -->
+<!-- ================= TEACHER ================= -->
 
 <div id="teacher" class="form-section">
 
@@ -661,25 +638,36 @@ Successful service/job payment par platform commission
 </div>
 
 <div>
+<label>Father's Name</label>
+<input id="t_father">
+</div>
+
+<div>
+<label>Mother's Name</label>
+<input id="t_mother">
+</div>
+
+<div>
+<label>Education / Qualification *</label>
+<input id="t_education"
+placeholder="B.Ed, M.Ed, MSc etc.">
+</div>
+
+<div>
+<label>Teaching Experience</label>
+<input id="t_experience">
+</div>
+
+<div>
 <label>Subject *</label>
 <input id="t_subject"
 placeholder="Math, English, Science...">
 </div>
 
 <div>
-<label>Education / Qualification</label>
-<input id="t_edu">
-</div>
-
-<div>
-<label>Teaching Experience</label>
-<input id="t_exp">
-</div>
-
-<div>
 <label>Classes</label>
-<input id="t_class"
-placeholder="Class 1-10 etc.">
+<input id="t_classes"
+placeholder="Class 1-10, 11-12 etc.">
 </div>
 
 <div>
@@ -693,25 +681,44 @@ placeholder="Class 1-10 etc.">
 
 <div>
 <label>Expected Fee</label>
-<input id="t_fee"
-placeholder="₹ per month/hour">
+<input id="t_fee" placeholder="₹ per month/hour">
 </div>
 
-<div class="full">
-<label>Teaching Location</label>
+<div>
+<label>City / Area</label>
 <input id="t_city">
 </div>
 
+<div>
+<label>ID Verification</label>
+<select id="t_verify">
+<option>Not Verified</option>
+<option>Available for Verification</option>
+<option>Verified</option>
+</select>
 </div>
 
-<button class="whatsapp-btn" onclick="teacherWhatsApp()">
-💬 Send Teacher Inquiry on WhatsApp
+<div class="full">
+<label>Teaching Details</label>
+<textarea id="t_details"
+placeholder="Apni teaching skills aur subjects ke baare mein likhein"></textarea>
+</div>
+
+<div class="full">
+<label>Address</label>
+<textarea id="t_address"></textarea>
+</div>
+
+</div>
+
+<button class="send" onclick="teacherSend()">
+💬 Send Teacher Inquiry
 </button>
 
 </div>
 
 
-<!-- STUDENT -->
+<!-- ================= STUDENT ================= -->
 
 <div id="student" class="form-section">
 
@@ -728,6 +735,16 @@ placeholder="₹ per month/hour">
 </div>
 
 <div>
+<label>Father's Name</label>
+<input id="s_father">
+</div>
+
+<div>
+<label>Mother's Name</label>
+<input id="s_mother">
+</div>
+
+<div>
 <label>Parent Mobile *</label>
 <input id="s_phone" type="tel">
 </div>
@@ -738,9 +755,8 @@ placeholder="₹ per month/hour">
 </div>
 
 <div>
-<label>Subjects Required</label>
-<input id="s_subject"
-placeholder="Math, English, Science...">
+<label>School / College Name</label>
+<input id="s_school">
 </div>
 
 <div>
@@ -748,24 +764,228 @@ placeholder="Math, English, Science...">
 <input id="s_city">
 </div>
 
+<div>
+<label>Subjects Required</label>
+<input id="s_subject"
+placeholder="Math, English, Science...">
+</div>
+
+<div>
+<label>Teacher Required?</label>
+<select id="s_teacher">
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+
 <div class="full">
 <label>Learning Requirement</label>
 <textarea id="s_details"
-placeholder="Child ko kis subject/teacher ki requirement hai?"></textarea>
+placeholder="Child ko kis subject/teacher/coaching ki requirement hai?"></textarea>
+</div>
+
+<div class="full">
+<label>Address</label>
+<textarea id="s_address"></textarea>
 </div>
 
 </div>
 
-<button class="whatsapp-btn" onclick="studentWhatsApp()">
-💬 Send Coaching Inquiry on WhatsApp
+<button class="send" onclick="studentSend()">
+💬 Send Student / Coaching Inquiry
 </button>
 
 </div>
 
 
-<div class="small-note">
-🔒 Privacy: Aadhaar number, full ID number, OTP, bank PIN ya sensitive documents
-WhatsApp par share na karein. Verification zarurat ke according separately ki ja sakti hai.
+<!-- ================= ADMISSION ================= -->
+
+<div id="admission" class="form-section">
+
+<div class="form-grid">
+
+<div>
+<label>Student Name *</label>
+<input id="a_name">
+</div>
+
+<div>
+<label>Mobile Number *</label>
+<input id="a_phone" type="tel">
+</div>
+
+<div>
+<label>Father's Name</label>
+<input id="a_father">
+</div>
+
+<div>
+<label>Mother's Name</label>
+<input id="a_mother">
+</div>
+
+<div>
+<label>Date of Birth</label>
+<input id="a_dob" type="date">
+</div>
+
+<div>
+<label>Gender</label>
+<select id="a_gender">
+<option>Select</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+</div>
+
+<div>
+<label>Course Required *</label>
+<select id="a_course">
+<option>Select Course</option>
+<option>B.Sc Nursing</option>
+<option>B.Pharm</option>
+<option>DMLT</option>
+<option>BMLT</option>
+<option>B.Tech</option>
+<option>LLB</option>
+<option>ITI</option>
+</select>
+</div>
+
+<div>
+<label>Admission Type</label>
+<select id="a_type">
+<option>I Need Admission</option>
+<option>I Want to Help Someone Get Admission</option>
+</select>
+</div>
+
+<div>
+<label>Previous Qualification</label>
+<input id="a_qualification"
+placeholder="12th, Graduation etc.">
+</div>
+
+<div>
+<label>Preferred City / State</label>
+<input id="a_city">
+</div>
+
+<div>
+<label>Preferred College Name</label>
+<input id="a_college">
+</div>
+
+<div>
+<label>Admission Session</label>
+<input id="a_session" placeholder="2026-27">
+</div>
+
+<div class="full">
+<label>Admission Requirement</label>
+<textarea id="a_details"
+placeholder="Course, college, budget, hostel etc."></textarea>
+</div>
+
+<div class="full">
+<label>Address</label>
+<textarea id="a_address"></textarea>
+</div>
+
+</div>
+
+<div class="commission">
+
+<h3>🎓 Admission Assistance</h3>
+
+<p>
+HelloFriendsHelp students ko suitable college/course information
+aur admission assistance ke liye connect karta hai.
+Any service/assistance fee, if applicable, will be communicated clearly
+before proceeding.
+</p>
+
+</div>
+
+<button class="send" onclick="admissionSend()">
+💬 Send Admission Inquiry
+</button>
+
+</div>
+
+
+<!-- ================= COLLEGE ================= -->
+
+<div id="college" class="form-section">
+
+<div class="form-grid">
+
+<div>
+<label>College Name *</label>
+<input id="c_name">
+</div>
+
+<div>
+<label>Contact Person</label>
+<input id="c_person">
+</div>
+
+<div>
+<label>Official Contact Number *</label>
+<input id="c_phone" type="tel">
+</div>
+
+<div>
+<label>College City / State</label>
+<input id="c_city">
+</div>
+
+<div>
+<label>Course Offered</label>
+<input id="c_course"
+placeholder="BSc Nursing, BTech, LLB...">
+</div>
+
+<div>
+<label>Admission Session</label>
+<input id="c_session">
+</div>
+
+<div>
+<label>Total Seats</label>
+<input id="c_seats" type="number">
+</div>
+
+<div>
+<label>Approx. Fee</label>
+<input id="c_fee" placeholder="₹">
+</div>
+
+<div class="full">
+<label>Admission Details</label>
+<textarea id="c_details"
+placeholder="Eligibility, documents, hostel, fees etc."></textarea>
+</div>
+
+<div class="full">
+<label>College Address</label>
+<textarea id="c_address"></textarea>
+</div>
+
+</div>
+
+<button class="send" onclick="collegeSend()">
+💬 Send College Admission Inquiry
+</button>
+
+</div>
+
+
+<div class="notice">
+🔒 Privacy & Safety: Full Aadhaar/ID number, OTP, ATM PIN, UPI PIN,
+password ya sensitive documents WhatsApp par share na karein.
+College admission details ko independently verify karke hi payment karein.
 </div>
 
 </div>
@@ -773,7 +993,7 @@ WhatsApp par share na karein. Verification zarurat ke according separately ki ja
 </section>
 
 
-<!-- DONATION -->
+<!-- ================= DONATION ================= -->
 
 <section class="container">
 
@@ -782,9 +1002,8 @@ WhatsApp par share na karein. Verification zarurat ke according separately ki ja
 <h2>❤️ Help Underprivileged Children</h2>
 
 <p>
-Agar aap kisi zaruratmand bachhe ki education ya basic needs mein
-madad karna chahte hain, aap apni voluntary donation directly
-hamare UPI par bhej sakte hain.
+Agar aap kisi zaruratmand bachhe ki education, books ya basic needs
+mein voluntary help karna chahte hain, aap directly donation bhej sakte hain.
 </p>
 
 <div class="upi">
@@ -793,15 +1012,13 @@ UPI ID: 7763082034@kotak
 
 <br>
 
-<a
-class="donate-btn"
+<a class="donate"
 href="upi://pay?pa=7763082034@kotak&pn=HelloFriendsHelp&cu=INR">
 ❤️ Donate via UPI
 </a>
 
-<p class="small-note">
-Donation completely voluntary hai. Payment karne se pehle UPI details
-apne UPI app mein verify kar lein.
+<p style="margin-top:15px;font-size:13px;color:#777">
+Payment karne se pehle apne UPI app mein recipient details verify karein.
 </p>
 
 </div>
@@ -809,13 +1026,13 @@ apne UPI app mein verify kar lein.
 </section>
 
 
-<!-- CONTACT -->
+<!-- ================= CONTACT ================= -->
 
 <section class="contact">
 
-<h2>📲 Need Help?</h2>
+<h2>📲 HelloFriendsHelp Support</h2>
 
-<p>Directly HelloFriendsHelp se contact karein</p>
+<p>Job • Worker • Teacher • Student • Admission • Help</p>
 
 <br>
 
@@ -828,9 +1045,11 @@ WhatsApp: +91 77630 82034
 
 <footer>
 
-© 2026 HelloFriendsHelp  
-<br>
-Kaam • Rozgaar • Education • Help
+© 2026 HelloFriendsHelp
+
+<br><br>
+
+<strong>Kaam Dhoondo • Kaam Do • Education • Help</strong>
 
 </footer>
 
@@ -839,38 +1058,33 @@ Kaam • Rozgaar • Education • Help
 
 /* ================= SETTINGS ================= */
 
-const WHATSAPP_NUMBER = "917763082034";
+const WHATSAPP = "917763082034";
 
 
-/* ================= TABS ================= */
+/* ================= TAB SYSTEM ================= */
 
-function openTab(tabName,button){
+function openTab(id,button){
 
 document.querySelectorAll(".form-section")
-.forEach(function(section){
-section.classList.remove("active");
-});
+.forEach(x=>x.classList.remove("active"));
 
 document.querySelectorAll(".tab")
-.forEach(function(tab){
-tab.classList.remove("active");
-});
+.forEach(x=>x.classList.remove("active"));
 
-document.getElementById(tabName)
-.classList.add("active");
+document.getElementById(id).classList.add("active");
 
 button.classList.add("active");
 
 }
 
 
-/* ================= WHATSAPP ================= */
+/* ================= WHATSAPP FUNCTION ================= */
 
-function sendWhatsApp(message){
+function sendWA(message){
 
-const url =
+let url =
 "https://wa.me/" +
-WHATSAPP_NUMBER +
+WHATSAPP +
 "?text=" +
 encodeURIComponent(message);
 
@@ -881,46 +1095,54 @@ window.open(url,"_blank");
 
 /* ================= WORKER ================= */
 
-function workerWhatsApp(){
+function workerSend(){
 
 let name=document.getElementById("w_name").value;
 let phone=document.getElementById("w_phone").value;
 
 if(!name || !phone){
 
-alert("Please enter Name and Mobile Number");
+alert("Please enter Name and Mobile Number.");
 
 return;
 
 }
 
-let message=
+let msg=
 `🤝 HELLOFRIENDSHELP
 👷 WORKER / JOB SEEKER
 
 Name: ${name}
 Mobile: ${phone}
 
-Age: ${document.getElementById("w_age").value}
+Father's Name:
+${document.getElementById("w_father").value}
 
-Gender: ${document.getElementById("w_gender").value}
+Mother's Name:
+${document.getElementById("w_mother").value}
 
-City/Area:
-${document.getElementById("w_city").value}
+Age:
+${document.getElementById("w_age").value}
+
+Gender:
+${document.getElementById("w_gender").value}
 
 Education:
-${document.getElementById("w_edu").value}
+${document.getElementById("w_education").value}
 
 Experience:
-${document.getElementById("w_exp").value}
+${document.getElementById("w_experience").value}
 
-ID Proof Type:
-${document.getElementById("w_id").value}
+ID Proof:
+${document.getElementById("w_idtype").value}
 
-Verification:
-${document.getElementById("w_verify").value}
+ID Last 4 Digits:
+${document.getElementById("w_idlast").value}
 
-WORK WANTED:
+City:
+${document.getElementById("w_city").value}
+
+JOB WANTED:
 ${document.getElementById("w_work").value}
 
 SKILLS:
@@ -929,33 +1151,33 @@ ${document.getElementById("w_skills").value}
 ADDRESS:
 ${document.getElementById("w_address").value}
 
-HelloFriendsHelp Commission: 10%
+Platform Commission: 10%
 
 Please help me find suitable work.`;
 
-sendWhatsApp(message);
+sendWA(msg);
 
 }
 
 
 /* ================= EMPLOYER ================= */
 
-function employerWhatsApp(){
+function employerSend(){
 
 let name=document.getElementById("e_name").value;
 let phone=document.getElementById("e_phone").value;
 
 if(!name || !phone){
 
-alert("Please enter Name and Mobile Number");
+alert("Please enter Name and Mobile Number.");
 
 return;
 
 }
 
-let message=
+let msg=
 `🤝 HELLOFRIENDSHELP
-🏢 JOB / WORK REQUIREMENT
+🏢 EMPLOYER / JOB REQUIREMENT
 
 Name/Company:
 ${name}
@@ -963,75 +1185,90 @@ ${name}
 Mobile:
 ${phone}
 
-Work Location:
+Father's Name:
+${document.getElementById("e_father").value}
+
+Mother's Name:
+${document.getElementById("e_mother").value}
+
+City:
 ${document.getElementById("e_city").value}
 
-WORK REQUIRED:
+JOB REQUIRED:
 ${document.getElementById("e_work").value}
 
-Workers Required:
-${document.getElementById("e_workers").value}
+Persons Required:
+${document.getElementById("e_people").value}
 
-Budget:
-${document.getElementById("e_budget").value}
+Salary/Budget:
+${document.getElementById("e_salary").value}
 
 Required Experience:
-${document.getElementById("e_exp").value}
+${document.getElementById("e_experience").value}
 
-Required Date:
+Work Date:
 ${document.getElementById("e_date").value}
 
-Work Address:
-${document.getElementById("e_address").value}
+PERSON REQUIRED:
+${document.getElementById("e_person").value}
 
-WORK DETAILS:
+JOB DETAILS:
 ${document.getElementById("e_details").value}
+
+WORK ADDRESS:
+${document.getElementById("e_address").value}
 
 HelloFriendsHelp Commission: 10%
 
-Please help me find suitable workers.`;
+Please help me find a suitable person/worker.`;
 
-sendWhatsApp(message);
+sendWA(msg);
 
 }
 
 
 /* ================= TEACHER ================= */
 
-function teacherWhatsApp(){
+function teacherSend(){
 
 let name=document.getElementById("t_name").value;
 let phone=document.getElementById("t_phone").value;
 
 if(!name || !phone){
 
-alert("Please enter Teacher Name and Mobile Number");
+alert("Please enter Teacher Name and Mobile Number.");
 
 return;
 
 }
 
-let message=
+let msg=
 `🤝 HELLOFRIENDSHELP
 👨‍🏫 TEACHER / TUTOR
 
-Teacher Name:
+Teacher:
 ${name}
 
 Mobile:
 ${phone}
 
+Father's Name:
+${document.getElementById("t_father").value}
+
+Mother's Name:
+${document.getElementById("t_mother").value}
+
+Education:
+${document.getElementById("t_education").value}
+
+Experience:
+${document.getElementById("t_experience").value}
+
 Subject:
 ${document.getElementById("t_subject").value}
 
-Qualification:
-${document.getElementById("t_edu").value}
-
-Experience:
-${document.getElementById("t_exp").value}
-
 Classes:
-${document.getElementById("t_class").value}
+${document.getElementById("t_classes").value}
 
 Teaching Mode:
 ${document.getElementById("t_mode").value}
@@ -1039,19 +1276,28 @@ ${document.getElementById("t_mode").value}
 Expected Fee:
 ${document.getElementById("t_fee").value}
 
-Location:
+City:
 ${document.getElementById("t_city").value}
+
+Verification:
+${document.getElementById("t_verify").value}
+
+Teaching Details:
+${document.getElementById("t_details").value}
+
+Address:
+${document.getElementById("t_address").value}
 
 Please help me connect with students.`;
 
-sendWhatsApp(message);
+sendWA(msg);
 
 }
 
 
 /* ================= STUDENT ================= */
 
-function studentWhatsApp(){
+function studentSend(){
 
 let name=document.getElementById("s_name").value;
 let parent=document.getElementById("s_parent").value;
@@ -1059,21 +1305,27 @@ let phone=document.getElementById("s_phone").value;
 
 if(!name || !parent || !phone){
 
-alert("Please enter Student Name, Parent Name and Mobile Number");
+alert("Please enter required details.");
 
 return;
 
 }
 
-let message=
+let msg=
 `🤝 HELLOFRIENDSHELP
-👨‍🎓 STUDENT / CHILD COACHING
+👨‍🎓 STUDENT / CHILD
 
-Student/Child:
+Student:
 ${name}
 
 Parent/Guardian:
 ${parent}
+
+Father:
+${document.getElementById("s_father").value}
+
+Mother:
+${document.getElementById("s_mother").value}
 
 Parent Mobile:
 ${phone}
@@ -1081,18 +1333,151 @@ ${phone}
 Class:
 ${document.getElementById("s_class").value}
 
+School/College:
+${document.getElementById("s_school").value}
+
+City:
+${document.getElementById("s_city").value}
+
 Subjects:
 ${document.getElementById("s_subject").value}
 
-City/Area:
-${document.getElementById("s_city").value}
+Teacher Required:
+${document.getElementById("s_teacher").value}
 
-LEARNING REQUIREMENT:
+Learning Requirement:
 ${document.getElementById("s_details").value}
 
-Please help me find a suitable teacher/tutor.`;
+Address:
+${document.getElementById("s_address").value}
 
-sendWhatsApp(message);
+Please help me find a suitable teacher/coaching.`;
+
+sendWA(msg);
+
+}
+
+
+/* ================= ADMISSION ================= */
+
+function admissionSend(){
+
+let name=document.getElementById("a_name").value;
+let phone=document.getElementById("a_phone").value;
+
+if(!name || !phone){
+
+alert("Please enter Student Name and Mobile Number.");
+
+return;
+
+}
+
+let msg=
+`🤝 HELLOFRIENDSHELP
+🎓 COLLEGE ADMISSION INQUIRY
+
+Student:
+${name}
+
+Mobile:
+${phone}
+
+Father:
+${document.getElementById("a_father").value}
+
+Mother:
+${document.getElementById("a_mother").value}
+
+DOB:
+${document.getElementById("a_dob").value}
+
+Gender:
+${document.getElementById("a_gender").value}
+
+COURSE:
+${document.getElementById("a_course").value}
+
+Admission Type:
+${document.getElementById("a_type").value}
+
+Previous Qualification:
+${document.getElementById("a_qualification").value}
+
+Preferred City/State:
+${document.getElementById("a_city").value}
+
+Preferred College:
+${document.getElementById("a_college").value}
+
+Session:
+${document.getElementById("a_session").value}
+
+REQUIREMENT:
+${document.getElementById("a_details").value}
+
+ADDRESS:
+${document.getElementById("a_address").value}
+
+Please help with verified admission information.`;
+
+sendWA(msg);
+
+}
+
+
+/* ================= COLLEGE ================= */
+
+function collegeSend(){
+
+let name=document.getElementById("c_name").value;
+let phone=document.getElementById("c_phone").value;
+
+if(!name || !phone){
+
+alert("Please enter College Name and Contact Number.");
+
+return;
+
+}
+
+let msg=
+`🤝 HELLOFRIENDSHELP
+🏫 COLLEGE / ADMISSION PARTNERSHIP
+
+College:
+${name}
+
+Contact Person:
+${document.getElementById("c_person").value}
+
+Official Contact:
+${phone}
+
+City/State:
+${document.getElementById("c_city").value}
+
+Course:
+${document.getElementById("c_course").value}
+
+Admission Session:
+${document.getElementById("c_session").value}
+
+Seats:
+${document.getElementById("c_seats").value}
+
+Approx Fee:
+${document.getElementById("c_fee").value}
+
+Admission Details:
+${document.getElementById("c_details").value}
+
+College Address:
+${document.getElementById("c_address").value}
+
+HelloFriendsHelp admission inquiry/partnership.`;
+
+sendWA(msg);
 
 }
 
