@@ -2,1135 +2,213 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#071a35">
-<title>HelloFriendsHelp — India Connect</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#07152f">
+<title>HelloFriendsHelp | India Connect</title>
 
 <style>
 :root{
-  --navy:#06152e;
-  --blue:#1769ff;
-  --cyan:#13b8ff;
-  --green:#0bbf7a;
-  --red:#ef476f;
-  --gold:#f6b73c;
-  --purple:#7657ff;
-  --bg:#f5f8fd;
-  --white:#fff;
-  --text:#13213a;
-  --muted:#667085;
-  --line:#e5eaf2;
-  --shadow:0 18px 55px rgba(9,35,75,.10);
-  --shadow2:0 8px 28px rgba(9,35,75,.08);
-  --radius:24px;
+--navy:#07152f;--blue:#1769ff;--cyan:#11b9f5;--green:#09b979;
+--red:#ef476f;--gold:#f4b63f;--purple:#7657ff;
+--bg:#f5f8fd;--white:#fff;--text:#14213d;--muted:#667085;
+--line:#e5eaf2;--shadow:0 20px 60px rgba(10,35,75,.10);
+--shadow2:0 8px 28px rgba(10,35,75,.07);--radius:22px;
 }
-
 *{box-sizing:border-box;margin:0;padding:0}
-
 html{scroll-behavior:smooth}
-
-body{
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.55;
-}
-
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
 button,input,select,textarea{font:inherit}
-
 button{cursor:pointer}
-
 a{text-decoration:none;color:inherit}
-
-.container{
-  width:min(1180px,92%);
-  margin:auto;
-}
-
+.container{width:min(1180px,92%);margin:auto}
 .hidden{display:none!important}
 
-/* ---------- NAVBAR ---------- */
+/* NAV */
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.92);
+backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:950;font-size:20px;letter-spacing:-.5px;cursor:pointer}
+.logoMark{width:38px;height:38px;display:grid;place-items:center;border-radius:13px;
+color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 8px 22px #1769ff45}
+.logo span{color:var(--blue)}
+.navlinks{display:flex;align-items:center;gap:3px}
+.navlinks button{border:0;background:transparent;padding:9px 8px;border-radius:9px;
+font-size:11px;font-weight:850;color:#344054}
+.navlinks button:hover{background:#eef4ff;color:var(--blue)}
+.lang{border:1px solid var(--line)!important;color:var(--blue)!important;background:#fff!important}
+.profileBtn{background:var(--navy)!important;color:#fff!important}
+.menuBtn{display:none;border:0;background:#edf4ff;color:var(--blue);border-radius:10px;padding:9px 12px;font-size:20px}
+.mobileMenu{display:none;background:#fff;border-top:1px solid var(--line);padding:10px;box-shadow:var(--shadow)}
+.mobileMenu button{width:100%;text-align:left;border:0;background:#fff;padding:11px;border-radius:9px;font-weight:800}
+.mobileMenu button:hover{background:#eef4ff;color:var(--blue)}
 
-.navbar{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(255,255,255,.90);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(229,234,242,.85);
-}
-
-.nav{
-  min-height:76px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  font-size:21px;
-  font-weight:950;
-  letter-spacing:-.6px;
-  cursor:pointer;
-  white-space:nowrap;
-}
-
-.logoMark{
-  width:38px;
-  height:38px;
-  display:grid;
-  place-items:center;
-  border-radius:13px;
-  color:#fff;
-  background:linear-gradient(135deg,var(--blue),var(--cyan));
-  box-shadow:0 8px 20px rgba(23,105,255,.28);
-}
-
-.logoText span{color:var(--blue)}
-
-.navlinks{
-  display:flex;
-  align-items:center;
-  gap:3px;
-}
-
-.navlinks button{
-  border:0;
-  background:transparent;
-  color:#344054;
-  padding:9px 8px;
-  font-size:12px;
-  font-weight:800;
-  border-radius:9px;
-}
-
-.navlinks button:hover{
-  color:var(--blue);
-  background:#f0f5ff;
-}
-
-.lang{
-  border:1px solid var(--line)!important;
-  background:#fff!important;
-  color:var(--blue)!important;
-  border-radius:10px!important;
-  padding:9px!important;
-}
-
-.profileBtn{
-  background:var(--navy)!important;
-  color:#fff!important;
-}
-
-.menuBtn{
-  display:none;
-  border:0;
-  background:#eef4ff;
-  color:var(--blue);
-  border-radius:11px;
-  padding:9px 12px;
-  font-size:21px;
-}
-
-.mobileMenu{
-  display:none;
-  background:#fff;
-  border-top:1px solid var(--line);
-  padding:12px;
-  box-shadow:var(--shadow);
-}
-
-.mobileMenu button{
-  display:block;
-  width:100%;
-  text-align:left;
-  border:0;
-  background:#fff;
-  padding:12px;
-  border-radius:10px;
-  font-weight:800;
-}
-
-.mobileMenu button:hover{
-  background:#f0f5ff;
-  color:var(--blue);
-}
-
-/* ---------- PAGE SYSTEM ---------- */
-
+/* PAGE */
 .page{display:none;min-height:70vh}
 .page.active{display:block}
 
-/* ---------- HERO ---------- */
+/* HERO */
+.hero{position:relative;overflow:hidden;color:#fff;padding:82px 0 105px;
+background:radial-gradient(circle at 8% 20%,#11b9f540,transparent 28%),
+radial-gradient(circle at 88% 75%,#7657ff40,transparent 30%),
+linear-gradient(135deg,#04132d,#082d69,#075bd5)}
+.heroGrid{position:relative;z-index:2;display:grid;grid-template-columns:1.08fr .92fr;gap:50px;align-items:center}
+.badge{display:inline-flex;padding:8px 13px;border-radius:50px;border:1px solid #ffffff2b;
+background:#ffffff12;font-size:10px;font-weight:900;margin-bottom:18px}
+.hero h1{font-size:clamp(40px,5.4vw,67px);line-height:1.02;letter-spacing:-3px}
+.hero h1 span{background:linear-gradient(90deg,#8cecff,#fff);-webkit-background-clip:text;color:transparent}
+.heroText{max-width:680px;margin-top:18px;color:#ffffffd0;font-size:16px}
+.heroActions{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}
+.btn{border:0;border-radius:12px;padding:12px 17px;font-weight:900;display:inline-flex;
+align-items:center;justify-content:center;gap:7px;transition:.2s}
+.btn:hover{transform:translateY(-2px)}
+.blue{background:var(--blue);color:#fff}.white{background:#fff;color:var(--blue)}
+.green{background:var(--green);color:#fff}.dark{background:var(--navy);color:#fff}
+.red{background:var(--red);color:#fff}.gold{background:var(--gold);color:#251a00}
+.soft{background:#edf4ff;color:var(--blue)}
 
-.hero{
-  position:relative;
-  overflow:hidden;
-  color:#fff;
-  padding:85px 0 105px;
-  background:
-    radial-gradient(circle at 8% 20%,rgba(19,184,255,.25),transparent 28%),
-    radial-gradient(circle at 88% 75%,rgba(118,87,255,.25),transparent 30%),
-    linear-gradient(135deg,#04132d 0%,#082a62 45%,#075bd5 100%);
-}
+.heroPanel{padding:22px;border:1px solid #ffffff29;border-radius:27px;background:#ffffff10;
+backdrop-filter:blur(20px);box-shadow:0 30px 80px #0003}
+.panelHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.online{font-size:9px;font-weight:900;color:#a7ffd8;background:#09b9791b;padding:6px 9px;border-radius:20px}
+.quickGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.quick{padding:14px;border-radius:16px;border:1px solid #ffffff20;background:#ffffff0d;cursor:pointer;transition:.2s}
+.quick:hover{transform:translateY(-3px);background:#ffffff18}
+.quickIcon{font-size:25px}.quick b{display:block;font-size:11px;margin-top:4px}.quick small{font-size:9px;color:#ffffff91}
 
-.hero:before{
-  content:"";
-  position:absolute;
-  width:420px;
-  height:420px;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:50%;
-  right:-130px;
-  top:-140px;
-}
+/* SEARCH */
+.searchWrap{position:relative;z-index:10;margin-top:-38px}
+.searchCard{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:15px}
+.searchGrid{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px}
+input,select,textarea{width:100%;border:1px solid var(--line);background:#fff;color:var(--text);
+border-radius:11px;padding:11px 12px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 4px #1769ff12}
+textarea{min-height:105px;resize:vertical}
 
-.hero:after{
-  content:"";
-  position:absolute;
-  width:280px;
-  height:280px;
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:50%;
-  left:-100px;
-  bottom:-120px;
-}
+/* SECTION */
+section{padding:65px 0}
+.sectionHead{text-align:center;max-width:750px;margin:0 auto 30px}
+.mini{font-size:10px;font-weight:950;letter-spacing:1.2px;color:var(--blue)}
+.sectionHead h2{font-size:34px;letter-spacing:-1.4px;margin:5px 0}
+.sectionHead p{font-size:13px;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.card,.listing,.form,.safety{background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+padding:21px;box-shadow:var(--shadow2);transition:.22s}
+.card:hover,.listing:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.iconBox{width:52px;height:52px;display:grid;place-items:center;border-radius:16px;
+background:linear-gradient(135deg,#edf4ff,#f9fbff);font-size:26px;margin-bottom:13px}
+.card h3{font-size:16px}.card p,.listing p{font-size:12px;color:var(--muted);margin-top:5px}
+.cardAction{border:0;margin-top:14px;padding:9px 12px;border-radius:9px;background:#edf4ff;
+color:var(--blue);font-size:10px;font-weight:900}
 
-.heroGrid{
-  position:relative;
-  z-index:2;
-  display:grid;
-  grid-template-columns:1.08fr .92fr;
-  gap:55px;
-  align-items:center;
-}
+/* STATS */
+.stats{padding:0 0 10px}
+.statsGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.stat{text-align:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:var(--shadow2)}
+.stat strong{display:block;font-size:25px;color:var(--blue)}.stat span{font-size:10px;color:var(--muted);font-weight:700}
 
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  padding:8px 13px;
-  border-radius:50px;
-  border:1px solid rgba(255,255,255,.18);
-  background:rgba(255,255,255,.08);
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:.3px;
-  margin-bottom:18px;
-}
+/* BAND */
+.band{background:var(--navy);color:#fff;border-radius:29px;padding:34px;box-shadow:var(--shadow)}
+.bandGrid{display:grid;grid-template-columns:1.4fr .6fr;gap:25px;align-items:center}
+.band p{color:#aebbd0;font-size:13px}
+.bandList{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:17px}
+.bandList div{padding:9px;border-radius:10px;background:#ffffff0a;color:#d9e2f0;font-size:10px}
 
-.hero h1{
-  font-size:clamp(40px,5.5vw,67px);
-  line-height:1.02;
-  letter-spacing:-3.5px;
-  max-width:760px;
-}
+/* PAGE HERO */
+.pageHero{padding:48px 0;color:#fff;background:radial-gradient(circle at 90% 20%,#11b9f533,transparent 25%),
+linear-gradient(135deg,#06152e,#0a397d,#075bd2)}
+.pageHero h1{font-size:42px;letter-spacing:-1.5px}.pageHero p{color:#ffffffbd;margin-top:4px}
 
-.hero h1 span{
-  background:linear-gradient(90deg,#8cecff,#fff);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.heroText{
-  max-width:690px;
-  margin-top:20px;
-  font-size:17px;
-  color:rgba(255,255,255,.82);
-}
-
-.heroActions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:27px;
-}
-
-.btn{
-  border:0;
-  border-radius:13px;
-  padding:13px 18px;
-  font-weight:900;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  transition:.2s;
-}
-
-.btn:hover{
-  transform:translateY(-2px);
-}
-
-.btnBlue{background:var(--blue);color:#fff}
-.btnWhite{background:#fff;color:var(--blue)}
-.btnGreen{background:var(--green);color:#fff}
-.btnDark{background:var(--navy);color:#fff}
-.btnSoft{background:#edf4ff;color:var(--blue)}
-.btnGold{background:var(--gold);color:#271900}
-.btnRed{background:var(--red);color:#fff}
-
-.heroPanel{
-  position:relative;
-  padding:23px;
-  border-radius:28px;
-  border:1px solid rgba(255,255,255,.17);
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(22px);
-  box-shadow:0 30px 80px rgba(0,0,0,.18);
-}
-
-.heroPanelTop{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:15px;
-}
-
-.online{
-  font-size:10px;
-  font-weight:900;
-  padding:6px 9px;
-  border-radius:20px;
-  color:#a9ffd9;
-  background:rgba(16,185,129,.12);
-  border:1px solid rgba(16,185,129,.2);
-}
-
-.quickGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.quick{
-  min-height:94px;
-  padding:15px;
-  border-radius:17px;
-  border:1px solid rgba(255,255,255,.13);
-  background:rgba(255,255,255,.07);
-  transition:.2s;
-  cursor:pointer;
-}
-
-.quick:hover{
-  transform:translateY(-4px);
-  background:rgba(255,255,255,.13);
-}
-
-.quickIcon{font-size:25px}
-.quick b{
-  display:block;
-  font-size:12px;
-  margin-top:6px;
-}
-.quick small{
-  display:block;
-  color:rgba(255,255,255,.55);
-  font-size:9px;
-}
-
-/* ---------- SEARCH ---------- */
-
-.searchWrap{
-  position:relative;
-  z-index:10;
-  margin-top:-37px;
-}
-
-.searchCard{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:21px;
-  box-shadow:var(--shadow);
-  padding:16px;
-}
-
-.searchGrid{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr auto;
-  gap:9px;
-}
-
-input,select,textarea{
-  width:100%;
-  border:1px solid var(--line);
-  background:#fff;
-  color:var(--text);
-  border-radius:12px;
-  padding:12px 13px;
-  outline:none;
-}
-
-input:focus,select:focus,textarea:focus{
-  border-color:var(--blue);
-  box-shadow:0 0 0 4px rgba(23,105,255,.08);
-}
-
-textarea{
-  min-height:110px;
-  resize:vertical;
-}
-
-/* ---------- SECTIONS ---------- */
-
-section{padding:68px 0}
-
-.sectionHead{
-  max-width:760px;
-  margin:0 auto 32px;
-  text-align:center;
-}
-
-.sectionHead .mini{
-  color:var(--blue);
-  font-weight:950;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:1.3px;
-}
-
-.sectionHead h2{
-  font-size:34px;
-  letter-spacing:-1.4px;
-  margin:7px 0;
-}
-
-.sectionHead p{
-  color:var(--muted);
-  font-size:14px;
-}
-
-.grid2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-}
-
-.grid3{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:17px;
-}
-
-.grid4{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-}
-
-.card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:22px;
-  box-shadow:var(--shadow2);
-  transition:.25s;
-}
-
-.card:hover{
-  transform:translateY(-5px);
-  box-shadow:var(--shadow);
-}
-
-.iconBox{
-  width:54px;
-  height:54px;
-  display:grid;
-  place-items:center;
-  border-radius:17px;
-  font-size:27px;
-  background:linear-gradient(135deg,#edf4ff,#f8fbff);
-  margin-bottom:14px;
-}
-
-.card h3{
-  font-size:16px;
-  letter-spacing:-.2px;
-}
-
-.card p{
-  margin-top:6px;
-  color:var(--muted);
-  font-size:12px;
-}
-
-.cardAction{
-  border:0;
-  margin-top:15px;
-  padding:9px 12px;
-  border-radius:10px;
-  background:#edf4ff;
-  color:var(--blue);
-  font-size:11px;
-  font-weight:900;
-}
-
-/* ---------- STATS ---------- */
-
-.stats{
-  padding:0 0 15px;
-}
-
-.statsGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-
-.stat{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:17px;
-  padding:18px;
-  text-align:center;
-  box-shadow:var(--shadow2);
-}
-
-.stat strong{
-  display:block;
-  font-size:25px;
-  color:var(--blue);
-}
-
-.stat span{
-  font-size:10px;
-  color:var(--muted);
-  font-weight:700;
-}
-
-/* ---------- FEATURE BAND ---------- */
-
-.featureBand{
-  color:#fff;
-  background:var(--navy);
-  border-radius:30px;
-  padding:35px;
-  overflow:hidden;
-  position:relative;
-}
-
-.featureBand:after{
-  content:"";
-  position:absolute;
-  width:300px;
-  height:300px;
-  border-radius:50%;
-  background:rgba(23,105,255,.22);
-  right:-100px;
-  top:-140px;
-}
-
-.featureBandGrid{
-  position:relative;
-  z-index:2;
-  display:grid;
-  grid-template-columns:1.4fr .6fr;
-  gap:25px;
-  align-items:center;
-}
-
-.featureBand p{color:#aebbd0;font-size:13px}
-
-.featureList{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:17px;
-}
-
-.featureList div{
-  padding:10px;
-  border-radius:11px;
-  background:rgba(255,255,255,.06);
-  color:#d9e2f0;
-  font-size:11px;
-}
-
-/* ---------- PAGE HERO ---------- */
-
-.pageHero{
-  color:#fff;
-  padding:52px 0;
-  background:
-    radial-gradient(circle at 90% 20%,rgba(19,184,255,.2),transparent 25%),
-    linear-gradient(135deg,#06152e,#0a397d,#075bd2);
-}
-
-.pageHero h1{
-  font-size:42px;
-  letter-spacing:-1.7px;
-}
-
-.pageHero p{
-  color:rgba(255,255,255,.75);
-  margin-top:5px;
-}
-
-/* ---------- FORMS ---------- */
-
-.form{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:25px;
-  box-shadow:var(--shadow);
-}
-
-.formGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin-top:20px;
-}
-
+/* FORM */
+.form h2{font-size:22px}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:18px}
 .full{grid-column:1/-1}
+label{display:block;font-size:10px;font-weight:950;margin-bottom:5px}
+.submit{width:100%;margin-top:17px;border:0;border-radius:11px;padding:14px;
+color:#fff;background:linear-gradient(135deg,var(--blue),#008bd9);font-weight:950}
+.notice{margin-top:16px;padding:12px 14px;border-left:4px solid var(--blue);
+border-radius:8px;background:#f1f6ff;color:#667085;font-size:10px}
 
-label{
-  display:block;
-  margin-bottom:6px;
-  font-size:11px;
-  font-weight:950;
-}
+/* TABS */
+.tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
+.tab{border:0;background:#edf4ff;color:var(--blue);padding:10px 13px;border-radius:10px;font-size:10px;font-weight:900}
+.tab.active{background:var(--blue);color:#fff}
 
-.submit{
-  width:100%;
-  margin-top:18px;
-  padding:14px;
-  border:0;
-  border-radius:12px;
-  color:#fff;
-  background:linear-gradient(135deg,var(--blue),#008bd9);
-  font-weight:950;
-}
-
-/* ---------- TABS ---------- */
-
-.tabs{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  margin-bottom:20px;
-}
-
-.tab{
-  border:0;
-  background:#edf4ff;
-  color:var(--blue);
-  padding:10px 14px;
-  border-radius:10px;
-  font-size:11px;
-  font-weight:900;
-}
-
-.tab.active{
-  color:#fff;
-  background:var(--blue);
-}
-
-/* ---------- LISTING ---------- */
-
-.listing{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:20px;
-  box-shadow:var(--shadow2);
-  transition:.2s;
-}
-
-.listing:hover{
-  transform:translateY(-3px);
-}
-
-.listTop{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.listIcon{
-  width:51px;
-  height:51px;
-  display:grid;
-  place-items:center;
-  border-radius:15px;
-  background:#edf4ff;
-  font-size:25px;
-}
-
-.verified{
-  color:#0a8d58;
-  background:#eafff5;
-  padding:5px 8px;
-  border-radius:20px;
-  font-size:9px;
-  font-weight:950;
-}
-
-.tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:5px;
-  margin:12px 0;
-}
-
-.tag{
-  padding:6px 8px;
-  border-radius:8px;
-  background:#f4f6f9;
-  font-size:9px;
-  color:#475467;
-  font-weight:800;
-}
-
-.listBottom{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  margin-top:14px;
-}
-
+/* LISTINGS */
+.listTop{display:flex;justify-content:space-between;gap:8px}
+.listIcon{width:50px;height:50px;display:grid;place-items:center;border-radius:15px;background:#edf4ff;font-size:24px}
+.verified{font-size:8px;font-weight:950;color:#078454;background:#eafff5;padding:5px 8px;border-radius:20px}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin:11px 0}.tag{padding:5px 7px;border-radius:7px;background:#f3f5f8;font-size:8px;font-weight:800;color:#475467}
+.listBottom{display:flex;justify-content:space-between;align-items:center;margin-top:13px}
 .stars{color:#f5a623}
 
-/* ---------- DONATION ---------- */
+/* DONATION */
+.donation{color:#fff;padding:34px;border-radius:27px;background:radial-gradient(circle at 85% 20%,#ffffff20,transparent 25%),
+linear-gradient(135deg,#082d70,#0759d9,#6c4dff);box-shadow:var(--shadow)}
+.donation p{color:#ffffffc7;font-size:12px}
+.upi{display:inline-flex;margin:15px 0;padding:11px 14px;border:1px dashed #ffffff66;border-radius:10px;background:#ffffff12;font-weight:950}
 
-.donation{
-  position:relative;
-  overflow:hidden;
-  color:#fff;
-  padding:35px;
-  border-radius:28px;
-  background:
-    radial-gradient(circle at 85% 20%,rgba(255,255,255,.12),transparent 25%),
-    linear-gradient(135deg,#082d70,#0759d9,#6c4dff);
-  box-shadow:var(--shadow);
-}
+/* PRODUCTS */
+.productGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.product{overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow2)}
+.productImage{height:145px;display:grid;place-items:center;font-size:55px;background:linear-gradient(135deg,#edf4ff,#f9fbff)}
+.productBody{padding:16px}.productBody p{font-size:10px;color:var(--muted)}.price{font-size:20px;font-weight:950;color:var(--blue);margin:5px 0}
+.productBody button{width:100%;border:0;padding:9px;border-radius:8px;background:var(--blue);color:#fff;font-weight:900}
 
-.donation p{color:rgba(255,255,255,.78)}
+/* PROFILE */
+.profile{display:grid;grid-template-columns:105px 1fr;gap:20px}
+.avatar{width:95px;height:95px;display:grid;place-items:center;border-radius:50%;font-size:42px;background:#edf4ff}
+.profileTags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.profileTags span{padding:6px 8px;border-radius:8px;background:#f3f5f8;font-size:8px;font-weight:850}
 
-.upi{
-  display:inline-flex;
-  margin:17px 0;
-  padding:12px 15px;
-  border:1px dashed rgba(255,255,255,.35);
-  border-radius:11px;
-  background:rgba(255,255,255,.08);
-  font-weight:950;
-}
+/* ADMIN */
+.admin{color:#fff;background:linear-gradient(135deg,#06152e,#0a2e64);border-radius:26px;padding:27px;box-shadow:var(--shadow)}
+.admin p{color:#9fb0c8;font-size:12px}.adminGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}
+.adminStat{padding:15px;border-radius:12px;background:#ffffff0b}.adminStat strong{display:block;font-size:23px;color:#fff}
 
-/* ---------- PRODUCT ---------- */
+/* MODAL */
+.modal{position:fixed;inset:0;z-index:5000;display:none;align-items:center;justify-content:center;padding:15px;background:#0009}
+.modalBox{width:min(700px,100%);max-height:91vh;overflow:auto;padding:24px;border-radius:22px;background:#fff;box-shadow:0 30px 100px #0005}
+.modalHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.close{width:35px;height:35px;border:0;border-radius:50%;background:#f1f3f5;font-size:20px}
 
-.productGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-}
-
-.product{
-  overflow:hidden;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:20px;
-  box-shadow:var(--shadow2);
-  transition:.2s;
-}
-
-.product:hover{
-  transform:translateY(-4px);
-}
-
-.productImage{
-  height:155px;
-  display:grid;
-  place-items:center;
-  font-size:58px;
-  background:linear-gradient(135deg,#edf4ff,#f9fbff);
-}
-
-.productBody{padding:17px}
-
-.productBody p{
-  color:var(--muted);
-  font-size:11px;
-}
-
-.price{
-  color:var(--blue);
-  font-size:20px;
-  font-weight:950;
-  margin:6px 0;
-}
-
-.productBody button{
-  width:100%;
-  border:0;
-  border-radius:9px;
-  padding:10px;
-  color:#fff;
-  background:var(--blue);
-  font-weight:900;
-}
-
-/* ---------- HELP ---------- */
-
-.helpCard{
-  padding:30px;
-  border-radius:25px;
-  background:#fff;
-  border:1px solid var(--line);
-  box-shadow:var(--shadow);
-}
-
-.need{border-top:5px solid var(--red)}
-.helper{border-top:5px solid var(--green)}
-
-/* ---------- PROFILE ---------- */
-
-.profile{
-  display:grid;
-  grid-template-columns:110px 1fr;
-  gap:22px;
-}
-
-.avatar{
-  width:100px;
-  height:100px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  font-size:45px;
-  background:linear-gradient(135deg,#eaf2ff,#f8fbff);
-}
-
-.profileTags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:13px;
-}
-
-.profileTags span{
-  padding:7px 9px;
-  border-radius:8px;
-  background:#f3f5f8;
-  color:#475467;
-  font-size:9px;
-  font-weight:850;
-}
-
-/* ---------- SAFETY ---------- */
-
-.safety{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:23px;
-  padding:25px;
-  box-shadow:var(--shadow2);
-}
-
-.notice{
-  margin-top:17px;
-  padding:13px 15px;
-  border-left:4px solid var(--blue);
-  border-radius:8px;
-  background:#f1f6ff;
-  color:#667085;
-  font-size:11px;
-}
-
-/* ---------- ADMIN ---------- */
-
-.admin{
-  color:#fff;
-  background:linear-gradient(135deg,#06152e,#0a2e64);
-  border-radius:27px;
-  padding:28px;
-  box-shadow:var(--shadow);
-}
-
-.admin p{color:#9fb0c8}
-
-.adminGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:11px;
-  margin-top:22px;
-}
-
-.adminStat{
-  padding:16px;
-  border-radius:13px;
-  background:rgba(255,255,255,.07);
-}
-
-.adminStat strong{
-  display:block;
-  font-size:24px;
-  color:#fff;
-}
-
-/* ---------- MODAL ---------- */
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:5000;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  background:rgba(0,0,0,.62);
-}
-
-.modalBox{
-  width:min(620px,100%);
-  max-height:90vh;
-  overflow:auto;
-  padding:25px;
-  border-radius:23px;
-  background:#fff;
-  box-shadow:0 30px 100px rgba(0,0,0,.25);
-}
-
-.modalHead{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:15px;
-}
-
-.close{
-  width:36px;
-  height:36px;
-  border:0;
-  border-radius:50%;
-  background:#f1f3f5;
-  font-size:20px;
-}
-
-/* ---------- FLOATING WHATSAPP ---------- */
-
-.whatsappFloat{
-  position:fixed;
-  right:19px;
-  bottom:22px;
-  z-index:3500;
-  width:57px;
-  height:57px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  color:#fff;
-  background:#16b864;
-  box-shadow:0 12px 30px rgba(22,184,100,.32);
-  font-size:27px;
-  transition:.2s;
-}
-
-.whatsappFloat:hover{
-  transform:scale(1.08);
-}
-
-/* ---------- FOOTER ---------- */
-
-footer{
-  margin-top:30px;
-  padding:52px 0 25px;
-  color:#aeb9ca;
-  background:#041021;
-}
-
-.footerGrid{
-  display:grid;
-  grid-template-columns:1.7fr 1fr 1fr 1fr;
-  gap:28px;
-}
-
-footer h3,footer h4{
-  color:#fff;
-  margin-bottom:10px;
-}
-
-footer p,footer a{
-  font-size:12px;
-}
-
-footer a{
-  display:block;
-  margin:7px 0;
-}
-
-.copyright{
-  border-top:1px solid rgba(255,255,255,.1);
-  margin-top:30px;
-  padding-top:18px;
-  text-align:center;
-  font-size:10px;
-}
-
-/* ---------- MOBILE ---------- */
-
+/* FLOAT */
+.whatsappFloat{position:fixed;right:18px;bottom:20px;z-index:3500;width:56px;height:56px;display:grid;place-items:center;
+border-radius:50%;background:#16b864;color:#fff;font-size:26px;box-shadow:0 12px 30px #16b86455}
 .bottomNav{display:none}
 
-@media(max-width:1050px){
+/* FOOTER */
+footer{margin-top:25px;padding:50px 0 22px;background:#041021;color:#aeb9ca}
+.footerGrid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:25px}
+footer h3,footer h4{color:#fff;margin-bottom:9px}footer p,footer a{font-size:11px}footer a{display:block;margin:7px 0}
+.copyright{text-align:center;border-top:1px solid #ffffff12;margin-top:27px;padding-top:16px;font-size:9px}
 
-.navlinks button:nth-child(-n+2){
-  display:none;
-}
-
-.heroGrid{
-  grid-template-columns:1fr;
-}
-
-.grid4,.productGrid{
-  grid-template-columns:1fr 1fr;
-}
-
-}
-
+/* MOBILE */
+@media(max-width:1050px){.navlinks button:nth-child(-n+2){display:none}.heroGrid{grid-template-columns:1fr}.grid4,.productGrid{grid-template-columns:1fr 1fr}}
 @media(max-width:720px){
-
-body{padding-bottom:65px}
-
-.nav{
-  min-height:68px;
+body{padding-bottom:65px}.nav{min-height:67px}.navlinks{display:none}.menuBtn{display:block}
+.hero{padding:58px 0 82px}.hero h1{font-size:41px;letter-spacing:-2px}.heroText{font-size:14px}
+.searchGrid,.grid2,.grid3,.grid4,.productGrid{grid-template-columns:1fr}.statsGrid{grid-template-columns:1fr 1fr}
+.formGrid{grid-template-columns:1fr}.full{grid-column:auto}.bandGrid{grid-template-columns:1fr}
+.profile{grid-template-columns:1fr;text-align:center}.avatar{margin:auto}.adminGrid{grid-template-columns:1fr 1fr}
+.footerGrid{grid-template-columns:1fr}.bottomNav{position:fixed;display:flex;left:0;right:0;bottom:0;z-index:4000;
+justify-content:space-around;padding:7px 2px;background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 30px #00000012}
+.bottomNav button{border:0;background:none;color:#475467;font-size:8px;font-weight:900}.whatsappFloat{bottom:75px}
 }
-
-.navlinks{display:none}
-
-.menuBtn{display:block}
-
-.hero{
-  padding:60px 0 82px;
-}
-
-.hero h1{
-  font-size:41px;
-  letter-spacing:-2px;
-}
-
-.heroText{
-  font-size:14px;
-}
-
-.heroGrid{
-  gap:30px;
-}
-
-.searchGrid{
-  grid-template-columns:1fr;
-}
-
-.grid2,.grid3,.grid4,.productGrid{
-  grid-template-columns:1fr;
-}
-
-.statsGrid{
-  grid-template-columns:1fr 1fr;
-}
-
-.formGrid{
-  grid-template-columns:1fr;
-}
-
-.full{
-  grid-column:auto;
-}
-
-.featureBandGrid{
-  grid-template-columns:1fr;
-}
-
-.profile{
-  grid-template-columns:1fr;
-  text-align:center;
-}
-
-.avatar{
-  margin:auto;
-}
-
-.adminGrid{
-  grid-template-columns:1fr 1fr;
-}
-
-.footerGrid{
-  grid-template-columns:1fr;
-}
-
-.quickGrid{
-  gap:8px;
-}
-
-.quick{
-  min-height:83px;
-  padding:12px;
-}
-
-.bottomNav{
-  position:fixed;
-  display:flex;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index:4000;
-  justify-content:space-around;
-  padding:7px 3px;
-  background:#fff;
-  border-top:1px solid var(--line);
-  box-shadow:0 -8px 30px rgba(0,0,0,.08);
-}
-
-.bottomNav button{
-  border:0;
-  background:none;
-  color:#475467;
-  font-size:9px;
-  font-weight:900;
-}
-
-.whatsappFloat{
-  bottom:75px;
-}
-
-}
-
-/* ---------- ANIMATION ---------- */
-
-@keyframes floatCard{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-}
-
-.heroPanel{
-  animation:floatCard 5s ease-in-out infinite;
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
-
 <header class="navbar">
-
 <div class="container nav">
 
 <div class="logo" onclick="go('home')">
-  <div class="logoMark">🤝</div>
-  <div class="logoText">Hello<span>FriendsHelp</span></div>
+<div class="logoMark">🤝</div>
+<div>Hello<span>FriendsHelp</span></div>
 </div>
 
 <nav class="navlinks">
-
 <button onclick="go('home')">🏠 Home</button>
 <button onclick="go('jobs')">👷 Jobs</button>
 <button onclick="go('services')">🔧 Services</button>
@@ -1156,32 +234,26 @@ body{padding-bottom:65px}
 </select>
 
 <button class="profileBtn" onclick="go('profile')">👤 Profile</button>
-
 </nav>
 
 <button class="menuBtn" onclick="toggleMenu()">☰</button>
-
 </div>
 
 <div class="mobileMenu" id="mobileMenu">
-
 <button onclick="go('home')">🏠 Home / मुख्य पृष्ठ</button>
 <button onclick="go('jobs')">👷 Jobs / नौकरी</button>
-<button onclick="go('hire')">🏢 Hire Worker / कर्मचारी चाहिए</button>
+<button onclick="go('hire')">🏢 Worker चाहिए</button>
 <button onclick="go('services')">🔧 Services / सेवाएं</button>
-<button onclick="go('teachers')">👨‍🏫 Teachers / शिक्षक</button>
-<button onclick="go('education')">🎓 Education / शिक्षा</button>
-<button onclick="go('shopping')">🛒 Shopping / खरीदारी</button>
+<button onclick="go('teachers')">👨‍🏫 Teachers</button>
+<button onclick="go('education')">🎓 Education / Admission</button>
+<button onclick="go('shopping')">🛒 Shopping</button>
 <button onclick="go('blood')">🩸 Blood / रक्त</button>
 <button onclick="go('rooms')">🏠 Room / PG</button>
-<button onclick="go('health')">🏥 Health / स्वास्थ्य</button>
-<button onclick="go('government')">🏛️ Government / सरकारी</button>
-<button onclick="go('help')">❤️ Help / मदद</button>
+<button onclick="go('health')">🏥 Health</button>
+<button onclick="go('help')">❤️ Help / Donation</button>
 <button onclick="go('resume')">📄 CV / Resume</button>
-<button onclick="go('profile')">👤 Profile / प्रोफ़ाइल</button>
-
+<button onclick="go('profile')">👤 Profile</button>
 </div>
-
 </header>
 
 
@@ -1190,403 +262,130 @@ body{padding-bottom:65px}
 <main id="home" class="page active">
 
 <section class="hero">
-
 <div class="container heroGrid">
 
 <div>
+<div class="badge">🇮🇳 ALL INDIA • सबके लिए • CONNECT • HELP • GROW</div>
 
-<div class="badge">
-🇮🇳 ALL INDIA • सबके लिए • 24/7 CONNECTION
-</div>
-
-<h1>
-Har Haath Ko <span>Kaam.</span><br>
-Har Zarurat Ko <span>Madad.</span>
-</h1>
+<h1>Har Haath Ko <span>Kaam.</span><br>Har Zarurat Ko <span>Madad.</span></h1>
 
 <p class="heroText">
-Jobs, workers, services, education, shopping, blood,
-accommodation aur genuine community help — sab ek hi
-smart platform par.
+Jobs, workers, services, education, shopping, blood, accommodation
+और genuine community support — एक ही platform पर.
 </p>
 
 <div class="heroActions">
-
-<button class="btn btnWhite" onclick="go('jobs')">
-👷 मुझे नौकरी चाहिए
-</button>
-
-<button class="btn btnWhite" onclick="go('hire')">
-🏢 मुझे कर्मचारी चाहिए
-</button>
-
-<button class="btn btnGreen" onclick="whatsapp('HelloFriendsHelp par mujhe inquiry karni hai.')">
-💬 WhatsApp Inquiry
-</button>
-
+<button class="btn white" onclick="openFlow('job')">👷 मुझे नौकरी चाहिए</button>
+<button class="btn white" onclick="openFlow('worker')">🏢 मुझे worker चाहिए</button>
+<button class="btn green" onclick="whatsapp('HelloFriendsHelp par mujhe general inquiry karni hai.')">💬 WhatsApp</button>
 </div>
-
 </div>
-
 
 <div class="heroPanel">
-
-<div class="heroPanelTop">
-
+<div class="panelHead">
 <div>
-<strong style="font-size:16px">आपको क्या चाहिए?</strong>
-<div style="font-size:10px;color:rgba(255,255,255,.55)">
-What do you need today?
+<strong>आपको क्या चाहिए?</strong>
+<div style="font-size:9px;color:#ffffff8c">What do you need today?</div>
 </div>
-</div>
-
-<div class="online">● PLATFORM ONLINE</div>
-
+<div class="online">● ONLINE</div>
 </div>
 
 <div class="quickGrid">
 
-<div class="quick" onclick="go('jobs')">
-<div class="quickIcon">👷</div>
-<b>मुझे नौकरी चाहिए</b>
-<small>I Need a Job</small>
-</div>
-
-<div class="quick" onclick="go('hire')">
-<div class="quickIcon">🏢</div>
-<b>मुझे कर्मचारी चाहिए</b>
-<small>I Need a Worker</small>
-</div>
-
-<div class="quick" onclick="go('services')">
-<div class="quickIcon">🔧</div>
-<b>मुझे सेवा चाहिए</b>
-<small>I Need a Service</small>
-</div>
-
-<div class="quick" onclick="go('education')">
-<div class="quickIcon">🎓</div>
-<b>मुझे एडमिशन चाहिए</b>
-<small>I Need Admission</small>
-</div>
-
-<div class="quick" onclick="go('shopping')">
-<div class="quickIcon">🛒</div>
-<b>मुझे खरीदारी करनी है</b>
-<small>I Want to Shop</small>
-</div>
-
-<div class="quick" onclick="go('blood')">
-<div class="quickIcon">🩸</div>
-<b>मुझे रक्त चाहिए</b>
-<small>I Need Blood</small>
-</div>
-
-<div class="quick" onclick="go('help')">
-<div class="quickIcon">❤️</div>
-<b>मुझे मदद चाहिए</b>
-<small>I Need Help</small>
-</div>
-
-<div class="quick" onclick="go('rooms')">
-<div class="quickIcon">🏠</div>
-<b>मुझे Room / PG चाहिए</b>
-<small>I Need Accommodation</small>
-</div>
+<div class="quick" onclick="openFlow('job')"><div class="quickIcon">👷</div><b>मुझे नौकरी चाहिए</b><small>I Need a Job</small></div>
+<div class="quick" onclick="openFlow('worker')"><div class="quickIcon">🏢</div><b>मुझे worker चाहिए</b><small>I Need a Worker</small></div>
+<div class="quick" onclick="openFlow('service')"><div class="quickIcon">🔧</div><b>मुझे service चाहिए</b><small>Need a Service</small></div>
+<div class="quick" onclick="openFlow('admission')"><div class="quickIcon">🎓</div><b>Admission चाहिए</b><small>Education</small></div>
+<div class="quick" onclick="openFlow('shopping')"><div class="quickIcon">🛒</div><b>Shopping</b><small>Buy / Sell</small></div>
+<div class="quick" onclick="openFlow('blood')"><div class="quickIcon">🩸</div><b>Blood चाहिए</b><small>Blood Help</small></div>
+<div class="quick" onclick="openFlow('health')"><div class="quickIcon">🏥</div><b>Health Help</b><small>Healthcare</small></div>
+<div class="quick" onclick="openFlow('help')"><div class="quickIcon">❤️</div><b>मुझे मदद चाहिए</b><small>Community Help</small></div>
 
 </div>
-
 </div>
-
 </div>
-
 </section>
 
-
-<!-- SEARCH -->
 
 <div class="searchWrap">
-
 <div class="container">
-
 <div class="searchCard">
-
 <div class="searchGrid">
-
-<input id="searchInput"
-placeholder="🔎 आपको क्या चाहिए? / What do you need?">
-
+<input id="searchInput" placeholder="🔎 आपको क्या चाहिए? / What do you need?">
 <select id="searchLocation">
-
 <option>🇮🇳 All India / पूरा भारत</option>
-<option>Punjab / पंजाब</option>
-<option>Bihar / बिहार</option>
-<option>Delhi / दिल्ली</option>
-<option>Haryana / हरियाणा</option>
-<option>Uttar Pradesh / उत्तर प्रदेश</option>
-<option>Maharashtra / महाराष्ट्र</option>
-<option>Gujarat / गुजरात</option>
-<option>Rajasthan / राजस्थान</option>
-<option>West Bengal / पश्चिम बंगाल</option>
-<option>Karnataka / कर्नाटक</option>
-<option>Tamil Nadu / तमिलनाडु</option>
+<option>Punjab / पंजाब</option><option>Bihar / बिहार</option><option>Delhi / दिल्ली</option>
+<option>Haryana / हरियाणा</option><option>Uttar Pradesh / उत्तर प्रदेश</option>
+<option>Maharashtra / महाराष्ट्र</option><option>Gujarat / गुजरात</option>
+<option>Rajasthan / राजस्थान</option><option>West Bengal / पश्चिम बंगाल</option>
+<option>Karnataka / कर्नाटक</option><option>Tamil Nadu / तमिलनाडु</option>
 <option>Kerala / केरल</option>
-
 </select>
-
 <select id="searchCategory">
-
 <option>All Categories / सभी</option>
-<option>Jobs / नौकरी</option>
-<option>Worker / कर्मचारी</option>
-<option>Services / सेवाएं</option>
-<option>Education / शिक्षा</option>
-<option>Shopping / खरीदारी</option>
-<option>Blood / रक्त</option>
-<option>Room / कमरा</option>
-<option>Help / मदद</option>
-
+<option>Jobs</option><option>Worker</option><option>Services</option>
+<option>Education</option><option>Shopping</option><option>Blood</option><option>Health</option><option>Help</option>
 </select>
-
-<button class="btn btnBlue" onclick="smartSearch()">
-🔎 Search
-</button>
-
+<button class="btn blue" onclick="smartSearch()">🔎 Search</button>
+</div>
+</div>
+</div>
 </div>
 
-</div>
-
-</div>
-
-</div>
-
-
-<!-- STATS -->
 
 <section class="stats">
-
 <div class="container statsGrid">
-
-<div class="stat">
-<strong>30+</strong>
-<span>Categories / श्रेणियां</span>
+<div class="stat"><strong>30+</strong><span>Services / Categories</span></div>
+<div class="stat"><strong>🇮🇳</strong><span>All India</span></div>
+<div class="stat"><strong>10%</strong><span>Platform Commission</span></div>
+<div class="stat"><strong>24/7</strong><span>Inquiry via WhatsApp</span></div>
 </div>
-
-<div class="stat">
-<strong>🇮🇳</strong>
-<span>All India / पूरा भारत</span>
-</div>
-
-<div class="stat">
-<strong>10%</strong>
-<span>Platform Commission</span>
-</div>
-
-<div class="stat">
-<strong>24/7</strong>
-<span>WhatsApp Inquiry</span>
-</div>
-
-</div>
-
 </section>
 
 
-<!-- MAIN CATEGORIES -->
-
 <section>
-
 <div class="container">
-
 <div class="sectionHead">
-
 <div class="mini">ONE PLATFORM • MANY SOLUTIONS</div>
-
-<h2>
-आपकी जरूरत, हमारा connection.
-</h2>
-
-<p>
-Find people. Find work. Find services. Find help.
-</p>
-
+<h2>आपकी जरूरत, हमारा connection.</h2>
+<p>हर category में पहले complete details भरें, फिर final query हमारे WhatsApp पर भेजें.</p>
 </div>
-
 
 <div class="grid4">
 
-<div class="card">
-<div class="iconBox">👷</div>
-<h3>Jobs / नौकरी</h3>
-<p>Job seekers और employers को connect करें.</p>
-<button class="cardAction" onclick="go('jobs')">Explore →</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🏢</div>
-<h3>Hire Worker</h3>
-<p>जिसे worker चाहिए वह requirement post करे.</p>
-<button class="cardAction" onclick="go('hire')">Hire →</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🔧</div>
-<h3>Services / सेवाएं</h3>
-<p>Electrician, plumber, carpenter, cleaner और बहुत कुछ.</p>
-<button class="cardAction" onclick="go('services')">Explore →</button>
-</div>
-
-<div class="card">
-<div class="iconBox">👨‍🏫</div>
-<h3>Teachers / शिक्षक</h3>
-<p>Teacher, student और parents का connection.</p>
-<button class="cardAction" onclick="go('teachers')">Explore →</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🎓</div>
-<h3>Education / शिक्षा</h3>
-<p>B.Sc Nursing, B.Pharm, DMLT, BMLT, B.Tech, LLB, ITI आदि.</p>
-<button class="cardAction" onclick="go('education')">Admissions →</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🛒</div>
-<h3>Shopping / खरीदारी</h3>
-<p>Buy, sell, donate और exchange.</p>
-<button class="cardAction" onclick="go('shopping')">Shop →</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🩸</div>
-<h3>Blood / रक्त</h3>
-<p>Donor और blood requirement connection.</p>
-<button class="cardAction" onclick="go('blood')">Open →</button>
-</div>
-
-<div class="card">
-<div class="iconBox">❤️</div>
-<h3>Help / मदद</h3>
-<p>जरूरतमंद और मदद करने वालों को connect करें.</p>
-<button class="cardAction" onclick="go('help')">Help →</button>
-</div>
+<div class="card"><div class="iconBox">👷</div><h3>Jobs / नौकरी</h3><p>Job seeker और employer connection.</p><button class="cardAction" onclick="openFlow('job')">Apply / Inquiry →</button></div>
+<div class="card"><div class="iconBox">🏢</div><h3>Hire Worker</h3><p>Worker की पूरी requirement submit करें.</p><button class="cardAction" onclick="openFlow('worker')">Hire →</button></div>
+<div class="card"><div class="iconBox">🔧</div><h3>Services</h3><p>Electrician, plumber, carpenter, cleaner आदि.</p><button class="cardAction" onclick="openFlow('service')">Request →</button></div>
+<div class="card"><div class="iconBox">👨‍🏫</div><h3>Teachers</h3><p>Teacher और student/parent connection.</p><button class="cardAction" onclick="openFlow('teacher')">Inquiry →</button></div>
+<div class="card"><div class="iconBox">🎓</div><h3>Education</h3><p>B.Sc Nursing, B.Pharm, DMLT, BMLT, B.Tech, LLB, ITI.</p><button class="cardAction" onclick="openFlow('admission')">Admission →</button></div>
+<div class="card"><div class="iconBox">🛒</div><h3>Shopping</h3><p>Buy, sell, donate या exchange.</p><button class="cardAction" onclick="openFlow('shopping')">Shop →</button></div>
+<div class="card"><div class="iconBox">🩸</div><h3>Blood</h3><p>Donor और requirement connection.</p><button class="cardAction" onclick="openFlow('blood')">Open →</button></div>
+<div class="card"><div class="iconBox">❤️</div><h3>Help</h3><p>जरूरतमंद और helpers को connect करें.</p><button class="cardAction" onclick="openFlow('help')">Request →</button></div>
 
 </div>
-
 </div>
-
 </section>
 
-
-<!-- WHY US -->
-
-<section style="padding-top:10px">
-
-<div class="container">
-
-<div class="featureBand">
-
-<div class="featureBandGrid">
-
-<div>
-
-<div class="mini" style="color:#72d8ff;font-size:10px;font-weight:950">
-WHY HELLOFRIENDSHELP?
-</div>
-
-<h2 style="font-size:32px;margin-top:5px">
-एक जगह, बहुत सारी जरूरतों का समाधान.
-</h2>
-
-<p style="margin-top:8px">
-हमारा उद्देश्य लोगों को सही व्यक्ति, सही काम,
-सही service और genuine support तक आसानी से पहुंचाना है.
-</p>
-
-<div class="featureList">
-
-<div>✓ Jobs & Workers</div>
-<div>✓ Education & Admission</div>
-<div>✓ Local Services</div>
-<div>✓ Blood Connection</div>
-<div>✓ Help & Community</div>
-<div>✓ Shopping Marketplace</div>
-<div>✓ Room / PG</div>
-<div>✓ All India Reach</div>
-
-</div>
-
-</div>
-
-<div style="text-align:center">
-
-<div style="font-size:75px">🤝</div>
-
-<div style="font-size:11px;color:#9fb0c8">
-CONNECT • HELP • GROW
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- SAFETY -->
 
 <section>
-
 <div class="container">
-
-<div class="sectionHead">
-
-<div class="mini">TRUST & SAFETY</div>
-
-<h2>
-पहले सुरक्षा, फिर connection.
-</h2>
-
-<p>
-Platform पर information share करते समय सावधानी रखें.
-</p>
-
+<div class="band">
+<div class="bandGrid">
+<div>
+<div class="mini" style="color:#72d8ff">WHY HELLOFRIENDSHELP?</div>
+<h2 style="font-size:31px;margin-top:4px">एक जगह, बहुत सारी जरूरतों का समाधान.</h2>
+<p style="margin-top:8px">हमारा उद्देश्य सही व्यक्ति को सही opportunity, service या support तक पहुंचाने में मदद करना है.</p>
+<div class="bandList">
+<div>✓ Jobs & Workers</div><div>✓ Education & Admission</div>
+<div>✓ Local Services</div><div>✓ Blood Connection</div>
+<div>✓ Community Help</div><div>✓ Shopping</div>
+<div>✓ Room / PG</div><div>✓ All India</div>
 </div>
-
-<div class="grid4">
-
-<div class="card">
-<div class="iconBox">📱</div>
-<h3>Mobile Verified</h3>
-<p>Verification status दिखाने की सुविधा.</p>
 </div>
-
-<div class="card">
-<div class="iconBox">🪪</div>
-<h3>ID Verification</h3>
-<p>जहां जरूरी हो verification status रखा जा सकता है.</p>
+<div style="text-align:center;font-size:75px">🤝</div>
 </div>
-
-<div class="card">
-<div class="iconBox">⭐</div>
-<h3>Ratings & Reviews</h3>
-<p>Service experience के बाद feedback.</p>
 </div>
-
-<div class="card">
-<div class="iconBox">🚨</div>
-<h3>Report</h3>
-<p>Suspicious listing या fraud report करें.</p>
 </div>
-
-</div>
-
-</div>
-
 </section>
 
 </main>
@@ -1596,280 +395,26 @@ Platform पर information share करते समय सावधानी �
 
 <main id="jobs" class="page">
 
-<div class="pageHero">
-<div class="container">
-<h1>👷 Jobs / नौकरी</h1>
-<p>Job seeker ↔ Employer connection</p>
-</div>
-</div>
+<div class="pageHero"><div class="container"><h1>👷 Jobs / नौकरी</h1><p>पहले details भरें → review करें → final query भेजें.</p></div></div>
 
 <section>
-
 <div class="container">
 
 <div class="tabs">
-
-<button class="tab active" onclick="jobTab('find',this)">
-🔎 Find Jobs / नौकरी खोजें
-</button>
-
-<button class="tab" onclick="jobTab('seek',this)">
-👤 I Need a Job / मुझे नौकरी चाहिए
-</button>
-
-<button class="tab" onclick="jobTab('hire',this)">
-🏢 I Need a Worker / मुझे कर्मचारी चाहिए
-</button>
-
+<button class="tab active" onclick="openFlow('job')">👤 मुझे नौकरी चाहिए</button>
+<button class="tab" onclick="openFlow('worker')">🏢 मुझे worker चाहिए</button>
 </div>
-
-
-<div id="findJobs">
 
 <div class="grid3">
+<div class="listing"><div class="listTop"><div class="listIcon">⚡</div><span class="verified">✓ VERIFIED</span></div><h3 style="margin-top:12px">Electrician</h3><p>Electrical work</p><div class="tags"><span class="tag">All India</span><span class="tag">Full Time</span></div><button class="btn blue" style="margin-top:12px" onclick="openFlow('job','Electrician')">Apply</button></div>
 
-<div class="listing">
-<div class="listTop">
-<div class="listIcon">⚡</div>
-<span class="verified">✓ VERIFIED</span>
-</div>
-<h3 style="margin-top:13px">Electrician</h3>
-<p>Electrical work / इलेक्ट्रिकल काम</p>
-<div class="tags">
-<span class="tag">🇮🇳 All India</span>
-<span class="tag">₹15k–20k</span>
-<span class="tag">Full Time</span>
-</div>
-<div class="listBottom">
-<span class="stars">★★★★★</span>
-<button class="btn btnBlue" onclick="whatsapp('I want to apply for Electrician job.')">Apply</button>
-</div>
-</div>
+<div class="listing"><div class="listTop"><div class="listIcon">🚗</div><span class="verified">✓ VERIFIED</span></div><h3 style="margin-top:12px">Driver</h3><p>Experienced driver</p><div class="tags"><span class="tag">All India</span><span class="tag">Full Time</span></div><button class="btn blue" style="margin-top:12px" onclick="openFlow('job','Driver')">Apply</button></div>
 
-<div class="listing">
-<div class="listTop">
-<div class="listIcon">🚗</div>
-<span class="verified">✓ VERIFIED</span>
-</div>
-<h3 style="margin-top:13px">Driver</h3>
-<p>Experienced driver / अनुभवी ड्राइवर</p>
-<div class="tags">
-<span class="tag">All India</span>
-<span class="tag">₹18k–25k</span>
-</div>
-<div class="listBottom">
-<span class="stars">★★★★★</span>
-<button class="btn btnBlue" onclick="whatsapp('I want to apply for Driver job.')">Apply</button>
-</div>
-</div>
-
-<div class="listing">
-<div class="listTop">
-<div class="listIcon">🧱</div>
-<span class="verified">✓ VERIFIED</span>
-</div>
-<h3 style="margin-top:13px">Construction Worker</h3>
-<p>Construction / निर्माण कार्य</p>
-<div class="tags">
-<span class="tag">All India</span>
-<span class="tag">Daily Wage</span>
-</div>
-<div class="listBottom">
-<span class="stars">★★★★☆</span>
-<button class="btn btnBlue" onclick="whatsapp('I want to apply for Construction Worker job.')">Apply</button>
-</div>
+<div class="listing"><div class="listTop"><div class="listIcon">🧱</div><span class="verified">✓ VERIFIED</span></div><h3 style="margin-top:12px">Construction Worker</h3><p>Construction work</p><div class="tags"><span class="tag">Daily Wage</span><span class="tag">All India</span></div><button class="btn blue" style="margin-top:12px" onclick="openFlow('job','Construction Worker')">Apply</button></div>
 </div>
 
 </div>
-
-</div>
-
-
-<div id="jobSeek" class="hidden">
-
-<div class="form">
-
-<h2>👤 मुझे नौकरी चाहिए / I Need a Job</h2>
-
-<div class="formGrid">
-
-<div>
-<label>Name / नाम *</label>
-<input id="wName">
-</div>
-
-<div>
-<label>Mobile / WhatsApp *</label>
-<input id="wPhone">
-</div>
-
-<div>
-<label>Father's Name / पिता</label>
-<input id="wFather">
-</div>
-
-<div>
-<label>Mother's Name / माता</label>
-<input id="wMother">
-</div>
-
-<div>
-<label>Education / शिक्षा</label>
-<input id="wEducation">
-</div>
-
-<div>
-<label>Experience / अनुभव</label>
-<input id="wExperience">
-</div>
-
-<div>
-<label>State / राज्य</label>
-<input id="wState" value="All India">
-</div>
-
-<div>
-<label>City / District</label>
-<input id="wCity">
-</div>
-
-<div>
-<label>Job Wanted / कौन सी नौकरी</label>
-<input id="wJob">
-</div>
-
-<div>
-<label>Expected Salary / वेतन</label>
-<input id="wSalary">
-</div>
-
-<div>
-<label>Work Type</label>
-<select id="wType">
-<option>Full Time</option>
-<option>Part Time</option>
-<option>Daily Wage</option>
-<option>Contract</option>
-<option>Work From Home</option>
-</select>
-</div>
-
-<div>
-<label>Available From</label>
-<input id="wDate" type="date">
-</div>
-
-<div>
-<label>ID Proof Type</label>
-<select id="wId">
-<option>Not Selected</option>
-<option>Aadhaar</option>
-<option>Voter ID</option>
-<option>Driving Licence</option>
-<option>Other</option>
-</select>
-</div>
-
-<div>
-<label>ID Last 4 Digits Only</label>
-<input id="wLast4" maxlength="4">
-</div>
-
-<div class="full">
-<label>Skills / कौशल</label>
-<textarea id="wSkills"></textarea>
-</div>
-
-<div class="full">
-<label>Address / पता</label>
-<textarea id="wAddress"></textarea>
-</div>
-
-</div>
-
-<button class="submit" onclick="submitWorker()">
-💬 WhatsApp पर Inquiry भेजें
-</button>
-
-</div>
-
-</div>
-
-
-<div id="jobHire" class="hidden">
-
-<div class="form">
-
-<h2>🏢 मुझे कर्मचारी चाहिए / I Need a Worker</h2>
-
-<div class="formGrid">
-
-<div><label>Name / Company</label><input id="eName"></div>
-<div><label>Mobile / WhatsApp</label><input id="ePhone"></div>
-<div><label>State / राज्य</label><input id="eState" value="All India"></div>
-<div><label>City / District</label><input id="eCity"></div>
-<div><label>Worker Type / कर्मचारी</label><input id="eWorker"></div>
-<div><label>Number Required</label><input id="eNumber" type="number"></div>
-<div><label>Salary / Budget</label><input id="eSalary"></div>
-<div><label>Experience Required</label><input id="eExperience"></div>
-
-<div>
-<label>Work Type</label>
-<select id="eType">
-<option>Full Time</option>
-<option>Part Time</option>
-<option>Daily Wage</option>
-<option>Contract</option>
-</select>
-</div>
-
-<div><label>Joining Date</label><input id="eDate" type="date"></div>
-
-<div>
-<label>Food</label>
-<select id="eFood">
-<option>Yes / हाँ</option>
-<option>No / नहीं</option>
-</select>
-</div>
-
-<div>
-<label>Accommodation</label>
-<select id="eStay">
-<option>Yes / हाँ</option>
-<option>No / नहीं</option>
-</select>
-</div>
-
-<div class="full">
-<label>मुझे किस तरह का व्यक्ति चाहिए?</label>
-<textarea id="ePerson"></textarea>
-</div>
-
-<div class="full">
-<label>Complete Work Details</label>
-<textarea id="eDetails"></textarea>
-</div>
-
-<div class="full">
-<label>Work Address</label>
-<textarea id="eAddress"></textarea>
-</div>
-
-</div>
-
-<button class="submit" onclick="submitEmployer()">
-💬 Worker Requirement भेजें
-</button>
-
-</div>
-
-</div>
-
-</div>
-
 </section>
-
 </main>
 
 
@@ -1877,56 +422,36 @@ Platform पर information share करते समय सावधानी �
 
 <main id="hire" class="page">
 
-<div class="pageHero">
-<div class="container">
-<h1>🏢 Hire Worker / कर्मचारी चाहिए</h1>
-<p>अपनी पूरी worker requirement submit करें.</p>
-</div>
-</div>
+<div class="pageHero"><div class="container"><h1>🏢 Hire Worker / कर्मचारी चाहिए</h1><p>Worker की पूरी requirement एक ही query में भेजें.</p></div></div>
 
-<section>
-
-<div class="container">
-
+<section><div class="container">
 <div class="form">
-
-<h2>Worker Requirement / कर्मचारी की जरूरत</h2>
+<h2>🏢 Employer Requirement</h2>
+<p style="color:var(--muted);font-size:12px;margin-top:5px">Complete details भरें. Submit के बाद review होगा.</p>
 
 <div class="formGrid">
-
-<div><label>Name / Company</label><input id="hName"></div>
-<div><label>Mobile / WhatsApp</label><input id="hPhone"></div>
-<div><label>State</label><input id="hState" value="All India"></div>
-<div><label>City</label><input id="hCity"></div>
-<div><label>Worker Required</label><input id="hWorker"></div>
-<div><label>Number Required</label><input id="hNumber" type="number"></div>
+<div><label>Employer / Company Name *</label><input id="hName"></div>
+<div><label>Mobile / WhatsApp *</label><input id="hPhone"></div>
+<div><label>Father / Owner Name</label><input id="hFather"></div>
+<div><label>Mother Name</label><input id="hMother"></div>
+<div><label>State *</label><input id="hState" value="All India"></div>
+<div><label>City / District *</label><input id="hCity"></div>
+<div><label>Worker / Person Required *</label><input id="hWorker"></div>
+<div><label>Number Required *</label><input id="hNumber" type="number"></div>
 <div><label>Salary / Budget</label><input id="hSalary"></div>
-<div><label>Experience</label><input id="hExperience"></div>
-<div><label>Duration</label><input id="hDuration"></div>
-<div><label>Start Date</label><input id="hDate" type="date"></div>
-
-<div class="full">
-<label>What kind of person do you need?</label>
-<textarea id="hPerson"></textarea>
+<div><label>Experience Required</label><input id="hExperience"></div>
+<div><label>Work Type</label><select id="hType"><option>Full Time</option><option>Part Time</option><option>Daily Wage</option><option>Contract</option></select></div>
+<div><label>Joining Date</label><input id="hDate" type="date"></div>
+<div><label>Food</label><select id="hFood"><option>Yes</option><option>No</option><option>Negotiable</option></select></div>
+<div><label>Accommodation</label><select id="hStay"><option>Yes</option><option>No</option><option>Negotiable</option></select></div>
+<div class="full"><label>किस तरह का व्यक्ति चाहिए? / What person do you need?</label><textarea id="hPerson"></textarea></div>
+<div class="full"><label>Complete Job Details</label><textarea id="hDetails"></textarea></div>
+<div class="full"><label>Work Address</label><textarea id="hAddress"></textarea></div>
 </div>
 
-<div class="full">
-<label>Complete Requirement</label>
-<textarea id="hDetails"></textarea>
+<button class="submit" onclick="reviewFlow('worker')">Review Details →</button>
 </div>
-
-</div>
-
-<button class="submit" onclick="submitHirePage()">
-💬 WhatsApp पर Requirement भेजें
-</button>
-
-</div>
-
-</div>
-
-</section>
-
+</div></section>
 </main>
 
 
@@ -1934,155 +459,20 @@ Platform पर information share करते समय सावधानी �
 
 <main id="services" class="page">
 
-<div class="pageHero">
-<div class="container">
-<h1>🔧 Services / सेवाएं</h1>
-<p>अपने आसपास सही service provider खोजें.</p>
-</div>
-</div>
+<div class="pageHero"><div class="container"><h1>🔧 Services / सेवाएं</h1><p>Service select करें और complete requirement भेजें.</p></div></div>
 
-<section>
-
-<div class="container">
-
+<section><div class="container">
 <div class="grid4">
-
-<div class="card">
-<div class="iconBox">⚡</div>
-<h3>Electrician</h3>
-<p>Electrical repair & installation.</p>
-<button class="cardAction" onclick="serviceRequest('Electrician')">Request</button>
+<div class="card"><div class="iconBox">⚡</div><h3>Electrician</h3><p>Electrical repair & installation</p><button class="cardAction" onclick="openFlow('service','Electrician')">Request</button></div>
+<div class="card"><div class="iconBox">🔧</div><h3>Plumber</h3><p>Plumbing work</p><button class="cardAction" onclick="openFlow('service','Plumber')">Request</button></div>
+<div class="card"><div class="iconBox">🪚</div><h3>Carpenter</h3><p>Furniture & wood work</p><button class="cardAction" onclick="openFlow('service','Carpenter')">Request</button></div>
+<div class="card"><div class="iconBox">🎨</div><h3>Painter</h3><p>Home & office painting</p><button class="cardAction" onclick="openFlow('service','Painter')">Request</button></div>
+<div class="card"><div class="iconBox">🚗</div><h3>Mechanic</h3><p>Vehicle repair</p><button class="cardAction" onclick="openFlow('service','Mechanic')">Request</button></div>
+<div class="card"><div class="iconBox">🧹</div><h3>Cleaner</h3><p>Home & office cleaning</p><button class="cardAction" onclick="openFlow('service','Cleaner')">Request</button></div>
+<div class="card"><div class="iconBox">🍳</div><h3>Cook</h3><p>Home & event cooking</p><button class="cardAction" onclick="openFlow('service','Cook')">Request</button></div>
+<div class="card"><div class="iconBox">💻</div><h3>Computer Repair</h3><p>Laptop & computer support</p><button class="cardAction" onclick="openFlow('service','Computer Repair')">Request</button></div>
 </div>
-
-<div class="card">
-<div class="iconBox">🔧</div>
-<h3>Plumber</h3>
-<p>Plumbing work.</p>
-<button class="cardAction" onclick="serviceRequest('Plumber')">Request</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🪚</div>
-<h3>Carpenter</h3>
-<p>Furniture & wood work.</p>
-<button class="cardAction" onclick="serviceRequest('Carpenter')">Request</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🎨</div>
-<h3>Painter</h3>
-<p>Home & office painting.</p>
-<button class="cardAction" onclick="serviceRequest('Painter')">Request</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🚗</div>
-<h3>Mechanic</h3>
-<p>Vehicle repair.</p>
-<button class="cardAction" onclick="serviceRequest('Mechanic')">Request</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🧹</div>
-<h3>Cleaner</h3>
-<p>Home & office cleaning.</p>
-<button class="cardAction" onclick="serviceRequest('Cleaner')">Request</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🍳</div>
-<h3>Cook</h3>
-<p>Home & event cooking.</p>
-<button class="cardAction" onclick="serviceRequest('Cook')">Request</button>
-</div>
-
-<div class="card">
-<div class="iconBox">💻</div>
-<h3>Computer Repair</h3>
-<p>Computer & laptop support.</p>
-<button class="cardAction" onclick="serviceRequest('Computer Repair')">Request</button>
-</div>
-
-</div>
-
-
-<div class="form" style="margin-top:25px">
-
-<h2>🔧 Service Provider Registration</h2>
-
-<div class="formGrid">
-
-<div><label>Name</label><input id="spName"></div>
-<div><label>Mobile</label><input id="spPhone"></div>
-<div><label>Service</label><input id="spService"></div>
-<div><label>Experience</label><input id="spExp"></div>
-<div><label>State</label><input id="spState" value="All India"></div>
-<div><label>City</label><input id="spCity"></div>
-
-<div class="full">
-<label>Skills & Details</label>
-<textarea id="spDetails"></textarea>
-</div>
-
-</div>
-
-<button class="submit" onclick="submitProvider()">
-💬 Register as Provider
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-
-<!-- ================= TEACHERS ================= -->
-
-<main id="teachers" class="page">
-
-<div class="pageHero">
-<div class="container">
-<h1>👨‍🏫 Teachers / शिक्षक</h1>
-<p>Teacher ↔ Student ↔ Parent</p>
-</div>
-</div>
-
-<section>
-
-<div class="container">
-
-<div class="grid3">
-
-<div class="card">
-<div class="iconBox">👨‍🏫</div>
-<h3>I Am a Teacher</h3>
-<p>अपनी qualification, subjects और experience share करें.</p>
-<button class="cardAction" onclick="teacherRegister()">Register</button>
-</div>
-
-<div class="card">
-<div class="iconBox">👨‍👩‍👧</div>
-<h3>I Need a Teacher</h3>
-<p>Child/student के लिए teacher requirement दें.</p>
-<button class="cardAction" onclick="teacherNeed()">Find Teacher</button>
-</div>
-
-<div class="card">
-<div class="iconBox">💻</div>
-<h3>Online Tuition</h3>
-<p>Online teaching inquiry.</p>
-<button class="cardAction" onclick="whatsapp('I need an online teacher.')">Inquiry</button>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
+</div></section>
 </main>
 
 
@@ -2090,251 +480,22 @@ Platform पर information share करते समय सावधानी �
 
 <main id="education" class="page">
 
-<div class="pageHero">
-<div class="container">
-<h1>🎓 Education / Admission</h1>
-<p>Courses • Colleges • Admission • Scholarship</p>
-</div>
-</div>
+<div class="pageHero"><div class="container"><h1>🎓 Education / Admission</h1><p>Course + student + college preference की complete inquiry.</p></div></div>
 
-<section>
-
-<div class="container">
+<section><div class="container">
 
 <div class="grid4">
-
-<div class="card">
-<div class="iconBox">🩺</div>
-<h3>B.Sc Nursing</h3>
-<p>Nursing admission inquiry.</p>
-<button class="cardAction" onclick="course('B.Sc Nursing')">Admission</button>
+<div class="card"><div class="iconBox">🩺</div><h3>B.Sc Nursing</h3><p>Nursing admission</p><button class="cardAction" onclick="openFlow('admission','B.Sc Nursing')">Apply</button></div>
+<div class="card"><div class="iconBox">💊</div><h3>B.Pharm</h3><p>Pharmacy</p><button class="cardAction" onclick="openFlow('admission','B.Pharm')">Apply</button></div>
+<div class="card"><div class="iconBox">🔬</div><h3>DMLT</h3><p>Medical Lab</p><button class="cardAction" onclick="openFlow('admission','DMLT')">Apply</button></div>
+<div class="card"><div class="iconBox">🧪</div><h3>BMLT</h3><p>Medical Laboratory Technology</p><button class="cardAction" onclick="openFlow('admission','BMLT')">Apply</button></div>
+<div class="card"><div class="iconBox">💻</div><h3>B.Tech</h3><p>Engineering</p><button class="cardAction" onclick="openFlow('admission','B.Tech')">Apply</button></div>
+<div class="card"><div class="iconBox">⚖️</div><h3>LLB</h3><p>Law</p><button class="cardAction" onclick="openFlow('admission','LLB')">Apply</button></div>
+<div class="card"><div class="iconBox">🔧</div><h3>ITI</h3><p>Technical education</p><button class="cardAction" onclick="openFlow('admission','ITI')">Apply</button></div>
+<div class="card"><div class="iconBox">💰</div><h3>Scholarship</h3><p>Scholarship inquiry</p><button class="cardAction" onclick="openFlow('admission','Scholarship')">Ask</button></div>
 </div>
 
-<div class="card">
-<div class="iconBox">💊</div>
-<h3>B.Pharm</h3>
-<p>Pharmacy course.</p>
-<button class="cardAction" onclick="course('B.Pharm')">Admission</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🔬</div>
-<h3>DMLT</h3>
-<p>Medical laboratory.</p>
-<button class="cardAction" onclick="course('DMLT')">Admission</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🧪</div>
-<h3>BMLT</h3>
-<p>Medical laboratory technology.</p>
-<button class="cardAction" onclick="course('BMLT')">Admission</button>
-</div>
-
-<div class="card">
-<div class="iconBox">💻</div>
-<h3>B.Tech</h3>
-<p>Engineering courses.</p>
-<button class="cardAction" onclick="course('B.Tech')">Admission</button>
-</div>
-
-<div class="card">
-<div class="iconBox">⚖️</div>
-<h3>LLB</h3>
-<p>Law courses.</p>
-<button class="cardAction" onclick="course('LLB')">Admission</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🔧</div>
-<h3>ITI</h3>
-<p>Technical education.</p>
-<button class="cardAction" onclick="course('ITI')">Admission</button>
-</div>
-
-<div class="card">
-<div class="iconBox">💰</div>
-<h3>Scholarship</h3>
-<p>Scholarship information inquiry.</p>
-<button class="cardAction" onclick="whatsapp('I need scholarship information.')">Ask</button>
-</div>
-
-</div>
-
-
-<div class="form" style="margin-top:25px">
-
-<h2>🎓 Admission Inquiry</h2>
-
-<div class="formGrid">
-
-<div><label>Student Name</label><input id="sName"></div>
-<div><label>Mobile</label><input id="sPhone"></div>
-<div><label>Father's Name</label><input id="sFather"></div>
-<div><label>Mother's Name</label><input id="sMother"></div>
-<div><label>Course</label><input id="sCourse"></div>
-<div><label>College Name</label><input id="sCollege"></div>
-<div><label>State</label><input id="sState" value="All India"></div>
-<div><label>City</label><input id="sCity"></div>
-<div><label>Previous Qualification</label><input id="sPrevious"></div>
-<div><label>Approx Budget</label><input id="sBudget"></div>
-
-<div class="full">
-<label>Requirement</label>
-<textarea id="sDetails"></textarea>
-</div>
-
-</div>
-
-<button class="submit" onclick="admission()">
-💬 Admission Inquiry भेजें
-</button>
-
-</div>
-
-<div class="notice">
-Admission, fees, seats और eligibility को संबंधित college/university के official source से verify करें.
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-
-<!-- ================= SHOPPING ================= -->
-
-<main id="shopping" class="page">
-
-<div class="pageHero">
-<div class="container">
-<h1>🛒 Shopping / Marketplace</h1>
-<p>Buy • Sell • Donate • Exchange</p>
-</div>
-</div>
-
-<section>
-
-<div class="container">
-
-<div class="searchCard" style="margin-bottom:25px">
-
-<div class="searchGrid">
-
-<input id="shopInput" placeholder="🔎 Product search / सामान खोजें">
-
-<select>
-<option>All Categories</option>
-<option>Books</option>
-<option>Electronics</option>
-<option>Furniture</option>
-<option>Clothes</option>
-<option>Study Material</option>
-</select>
-
-<select>
-<option>All India</option>
-<option>Punjab</option>
-<option>Bihar</option>
-<option>Delhi</option>
-</select>
-
-<button class="btn btnBlue" onclick="filterProducts()">Search</button>
-
-</div>
-
-</div>
-
-
-<div class="productGrid">
-
-<div class="product">
-<div class="productImage">📚</div>
-<div class="productBody">
-<h3>Used Books</h3>
-<div class="price">₹300</div>
-<p>Study material.</p>
-<button onclick="buy('Used Books')">Contact Seller</button>
-</div>
-</div>
-
-<div class="product">
-<div class="productImage">💻</div>
-<div class="productBody">
-<h3>Used Laptop</h3>
-<div class="price">₹15,000</div>
-<p>Pre-owned laptop.</p>
-<button onclick="buy('Used Laptop')">Contact Seller</button>
-</div>
-</div>
-
-<div class="product">
-<div class="productImage">🚲</div>
-<div class="productBody">
-<h3>Bicycle</h3>
-<div class="price">₹2,500</div>
-<p>Used bicycle.</p>
-<button onclick="buy('Bicycle')">Contact Seller</button>
-</div>
-</div>
-
-<div class="product">
-<div class="productImage">🪑</div>
-<div class="productBody">
-<h3>Furniture</h3>
-<div class="price">₹4,000</div>
-<p>Used furniture.</p>
-<button onclick="buy('Furniture')">Contact Seller</button>
-</div>
-</div>
-
-</div>
-
-
-<div class="form" style="margin-top:25px">
-
-<h2>🛍️ Sell / Donate / Exchange</h2>
-
-<div class="formGrid">
-
-<div><label>Name</label><input id="sellName"></div>
-<div><label>Mobile</label><input id="sellPhone"></div>
-<div><label>Item</label><input id="sellItem"></div>
-<div><label>Price</label><input id="sellPrice"></div>
-<div><label>Category</label><input id="sellCategory"></div>
-<div><label>State</label><input id="sellState" value="All India"></div>
-
-<div>
-<label>Type</label>
-<select id="sellType">
-<option>Sell / बेचना</option>
-<option>Donate / दान</option>
-<option>Exchange / बदलना</option>
-</select>
-</div>
-
-<div class="full">
-<label>Details</label>
-<textarea id="sellDetails"></textarea>
-</div>
-
-</div>
-
-<button class="submit" onclick="sellSubmit()">
-🛒 Submit Listing
-</button>
-
-</div>
-
-<div class="notice">
-OTP, UPI PIN, ATM PIN, password या banking credentials किसी buyer/seller के साथ share न करें.
-</div>
-
-</div>
-
-</section>
-
+</div></section>
 </main>
 
 
@@ -2342,116 +503,31 @@ OTP, UPI PIN, ATM PIN, password या banking credentials किसी buyer/se
 
 <main id="blood" class="page">
 
-<div class="pageHero">
-<div class="container">
-<h1>🩸 Blood Donation / रक्त सहायता</h1>
-<p>Donor ↔ Blood Requirement</p>
-</div>
-</div>
+<div class="pageHero"><div class="container"><h1>🩸 Blood Help</h1><p>Donor या patient requirement की complete details भेजें.</p></div></div>
 
-<section>
-
-<div class="container">
+<section><div class="container">
 
 <div class="grid2">
 
-<div class="form">
-
-<h2>🩸 मैं रक्तदान करना चाहता हूँ</h2>
-
-<div class="formGrid">
-
-<div><label>Name</label><input id="dName"></div>
-<div><label>Mobile</label><input id="dPhone"></div>
-
-<div>
-<label>Blood Group</label>
-<select id="dGroup">
-<option>Select</option>
-<option>A+</option><option>A-</option>
-<option>B+</option><option>B-</option>
-<option>AB+</option><option>AB-</option>
-<option>O+</option><option>O-</option>
-</select>
+<div class="card">
+<div class="iconBox">🩸</div>
+<h2>मैं रक्तदान करना चाहता हूँ</h2>
+<p>Donor registration करें.</p>
+<button class="btn red" style="margin-top:16px" onclick="openFlow('donor')">Register Donor</button>
 </div>
 
-<div><label>Location</label><input id="dLocation"></div>
-
-<div class="full">
-<label>Availability</label>
-<select id="dAvailable">
-<option>Available Now</option>
-<option>Available Soon</option>
-<option>Emergency Only</option>
-</select>
-</div>
-
-<div class="full">
-<label>Additional Details</label>
-<textarea id="dDetails"></textarea>
+<div class="card">
+<div class="iconBox">🆘</div>
+<h2>मुझे रक्त चाहिए</h2>
+<p>Patient requirement submit करें.</p>
+<button class="btn red" style="margin-top:16px" onclick="openFlow('blood')">Request Blood</button>
 </div>
 
 </div>
 
-<button class="submit" onclick="donorSubmit()">🩸 Register Donor</button>
+<div class="notice">Emergency में hospital/blood bank को priority दें. Blood availability guaranteed नहीं है.</div>
 
-</div>
-
-
-<div class="form">
-
-<h2>🆘 मुझे रक्त चाहिए</h2>
-
-<div class="formGrid">
-
-<div><label>Patient Name</label><input id="pName"></div>
-<div><label>Contact</label><input id="pPhone"></div>
-
-<div>
-<label>Blood Group</label>
-<select id="pGroup">
-<option>Select</option>
-<option>A+</option><option>A-</option>
-<option>B+</option><option>B-</option>
-<option>AB+</option><option>AB-</option>
-<option>O+</option><option>O-</option>
-</select>
-</div>
-
-<div><label>Units Required</label><input id="pUnits"></div>
-<div><label>Hospital</label><input id="pHospital"></div>
-<div><label>Hospital Location</label><input id="pLocation"></div>
-
-<div>
-<label>Urgency</label>
-<select id="pUrgency">
-<option>Emergency</option>
-<option>Urgent</option>
-<option>Normal</option>
-</select>
-</div>
-
-<div class="full">
-<label>Details</label>
-<textarea id="pDetails"></textarea>
-</div>
-
-</div>
-
-<button class="submit" onclick="bloodRequest()">🆘 Request Blood</button>
-
-</div>
-
-</div>
-
-<div class="notice">
-Blood availability guaranteed नहीं है. Blood group और donor information verify करें. Emergency में hospital/blood bank को priority दें.
-</div>
-
-</div>
-
-</section>
-
+</div></section>
 </main>
 
 
@@ -2459,191 +535,70 @@ Blood availability guaranteed नहीं है. Blood group और donor info
 
 <main id="help" class="page">
 
-<div class="pageHero">
-<div class="container">
-<h1>❤️ Help & Community Support</h1>
-<p>जिसे मदद चाहिए ↔ जो मदद करना चाहता है</p>
-</div>
-</div>
+<div class="pageHero"><div class="container"><h1>❤️ Help & Donation</h1><p>जिसे मदद चाहिए और जो मदद करना चाहता है—दोनों के लिए.</p></div></div>
 
-<section>
-
-<div class="container">
+<section><div class="container">
 
 <div class="grid2">
 
-<div class="helpCard need">
-
-<div class="iconBox">🆘</div>
-
-<h2>मुझे मदद चाहिए</h2>
-
-<p style="color:var(--muted);margin-top:7px">
-Education, books, food/basic support, medical support,
-clothes और genuine जरूरत के लिए request.
-</p>
-
-<button class="btn btnRed" style="margin-top:18px" onclick="helpNeed()">
-Request Help
-</button>
-
+<div class="card" style="border-top:5px solid var(--red)">
+<div class="iconBox">🆘</div><h2>मुझे मदद चाहिए</h2>
+<p>Education, food/basic support, books, medical support आदि के लिए request.</p>
+<button class="btn red" style="margin-top:16px" onclick="openFlow('help')">Request Help</button>
 </div>
 
-
-<div class="helpCard helper">
-
-<div class="iconBox">🤲</div>
-
-<h2>मैं किसी की मदद करना चाहता हूँ</h2>
-
-<p style="color:var(--muted);margin-top:7px">
-Genuine help cases को support करने के लिए register करें.
-</p>
-
-<button class="btn btnGreen" style="margin-top:18px" onclick="helpSomeone()">
-I Want to Help
-</button>
-
+<div class="card" style="border-top:5px solid var(--green)">
+<div class="iconBox">🤲</div><h2>मैं मदद करना चाहता हूँ</h2>
+<p>Genuine cases को support करने के लिए register करें.</p>
+<button class="btn green" style="margin-top:16px" onclick="openFlow('helper')">I Want to Help</button>
 </div>
 
 </div>
 
-
-<div class="donation" style="margin-top:28px">
-
-<div class="mini" style="font-size:10px;font-weight:950;color:#bfefff">
-COMMUNITY SUPPORT
+<div class="donation" style="margin-top:25px">
+<div class="mini" style="color:#bfefff">COMMUNITY SUPPORT</div>
+<h2 style="font-size:29px;margin-top:5px">❤️ आपकी छोटी मदद किसी के लिए बड़ी हो सकती है.</h2>
+<p style="margin-top:7px">Voluntary support के लिए UPI option.</p>
+<div class="upi">UPI: 7763082034@kotak</div><br>
+<a class="btn gold" href="upi://pay?pa=7763082034@kotak&pn=HelloFriendsHelp&cu=INR">💳 Pay via UPI</a>
+<p style="font-size:9px;margin-top:9px">Payment करने से पहले recipient details verify करें.</p>
 </div>
 
-<h2 style="font-size:30px;margin-top:5px">
-❤️ आपकी छोटी मदद किसी के लिए बड़ी हो सकती है.
-</h2>
-
-<p style="margin-top:8px">
-Voluntary support / community contribution के लिए UPI option.
-</p>
-
-<div class="upi">
-UPI: 7763082034@kotak
-</div>
-
-<br>
-
-<a class="btn btnGold"
-href="upi://pay?pa=7763082034@kotak&pn=HelloFriendsHelp&cu=INR">
-💳 Pay via UPI
-</a>
-
-<p style="font-size:10px;margin-top:10px;color:rgba(255,255,255,.65)">
-Payment करने से पहले UPI app में recipient details verify करें.
-</p>
-
-</div>
-
-
-<div class="notice">
-Public charitable donation activities के लिए applicable Indian legal,
-tax, registration और payment requirements लागू हो सकते हैं.
-</div>
-
-</div>
-
-</section>
-
+</div></section>
 </main>
 
 
-<!-- ================= ROOMS ================= -->
+<!-- ================= SHOPPING ================= -->
 
-<main id="rooms" class="page">
+<main id="shopping" class="page">
 
-<div class="pageHero">
-<div class="container">
-<h1>🏠 Room • PG • Hostel</h1>
-<p>Students, workers और families के लिए accommodation.</p>
-</div>
-</div>
+<div class="pageHero"><div class="container"><h1>🛒 Shopping / Marketplace</h1><p>Buy • Sell • Donate • Exchange</p></div></div>
 
-<section>
+<section><div class="container">
 
-<div class="container">
-
-<div class="grid3">
-
-<div class="listing">
-<div class="listIcon">🏠</div>
-<h3 style="margin-top:13px">Room / कमरा</h3>
-<p>Accommodation inquiry.</p>
-<div class="tags">
-<span class="tag">All India</span>
-<span class="tag">Monthly</span>
-</div>
-<button class="btn btnBlue" onclick="whatsapp('I need a room.')">Inquiry</button>
+<div class="productGrid">
+<div class="card"><div class="iconBox">📚</div><h3>Books</h3><p>Study material</p><button class="cardAction" onclick="openFlow('shopping','Books')">Buy / Sell</button></div>
+<div class="card"><div class="iconBox">💻</div><h3>Electronics</h3><p>Used/new electronics</p><button class="cardAction" onclick="openFlow('shopping','Electronics')">Buy / Sell</button></div>
+<div class="card"><div class="iconBox">🪑</div><h3>Furniture</h3><p>Home & office items</p><button class="cardAction" onclick="openFlow('shopping','Furniture')">Buy / Sell</button></div>
+<div class="card"><div class="iconBox">👕</div><h3>Clothes</h3><p>Buy / donate</p><button class="cardAction" onclick="openFlow('shopping','Clothes')">Buy / Sell</button></div>
 </div>
 
-<div class="listing">
-<div class="listIcon">🛏️</div>
-<h3 style="margin-top:13px">PG</h3>
-<p>Student / working PG.</p>
-<div class="tags">
-<span class="tag">Food</span>
-<span class="tag">Wi-Fi</span>
+</div></section>
+</main>
+
+
+<!-- ================= TEACHERS ================= -->
+
+<main id="teachers" class="page">
+
+<div class="pageHero"><div class="container"><h1>👨‍🏫 Teachers / Tuition</h1><p>Teacher, student और parents का connection.</p></div></div>
+
+<section><div class="container">
+<div class="grid2">
+<div class="card"><div class="iconBox">👨‍🏫</div><h2>I Am a Teacher</h2><p>Qualification, subject और experience share करें.</p><button class="btn blue" style="margin-top:15px" onclick="openFlow('teacher')">Register</button></div>
+<div class="card"><div class="iconBox">👨‍👩‍👧</div><h2>I Need a Teacher</h2><p>Student के लिए teacher requirement.</p><button class="btn blue" style="margin-top:15px" onclick="openFlow('teacherNeed')">Find Teacher</button></div>
 </div>
-<button class="btn btnBlue" onclick="whatsapp('I need a PG.')">Inquiry</button>
-</div>
-
-<div class="listing">
-<div class="listIcon">🎓</div>
-<h3 style="margin-top:13px">Hostel</h3>
-<p>Student accommodation.</p>
-<div class="tags">
-<span class="tag">Students</span>
-<span class="tag">Safe</span>
-</div>
-<button class="btn btnBlue" onclick="whatsapp('I need a hostel.')">Inquiry</button>
-</div>
-
-</div>
-
-
-<div class="form" style="margin-top:25px">
-
-<h2>🏠 Room / PG Listing</h2>
-
-<div class="formGrid">
-
-<div><label>Name</label><input id="rName"></div>
-<div><label>Mobile</label><input id="rPhone"></div>
-<div><label>State</label><input id="rState"></div>
-<div><label>City</label><input id="rCity"></div>
-
-<div>
-<label>Property Type</label>
-<select id="rType">
-<option>Room</option>
-<option>PG</option>
-<option>Hostel</option>
-<option>Flat</option>
-</select>
-</div>
-
-<div><label>Rent</label><input id="rRent"></div>
-
-<div class="full">
-<label>Facilities</label>
-<textarea id="rFacilities"></textarea>
-</div>
-
-</div>
-
-<button class="submit" onclick="roomSubmit()">🏠 Submit Listing</button>
-
-</div>
-
-</div>
-
-</section>
-
+</div></section>
 </main>
 
 
@@ -2651,57 +606,74 @@ tax, registration और payment requirements लागू हो सकते �
 
 <main id="health" class="page">
 
-<div class="pageHero">
-<div class="container">
-<h1>🏥 Health / स्वास्थ्य</h1>
-<p>Healthcare information and support.</p>
-</div>
-</div>
+<div class="pageHero"><div class="container"><h1>🏥 Health Support</h1><p>Health-support inquiry को complete details के साथ भेजें.</p></div></div>
 
-<section>
+<section><div class="container">
+<div class="form">
+<h2>🏥 Health Support Intake</h2>
+<p style="color:var(--muted);font-size:11px;margin-top:5px">Diagnosis के बजाय अपनी समस्या और healthcare requirement बताएं.</p>
 
-<div class="container">
-
-<div class="grid4">
-
-<div class="card">
-<div class="iconBox">🏥</div>
-<h3>Hospital</h3>
-<p>Hospital information inquiry.</p>
-<button class="cardAction" onclick="whatsapp('I need hospital information.')">Ask</button>
-</div>
-
-<div class="card">
-<div class="iconBox">👨‍⚕️</div>
-<h3>Doctor</h3>
-<p>Healthcare provider inquiry.</p>
-<button class="cardAction" onclick="whatsapp('I need doctor information.')">Ask</button>
+<div class="formGrid">
+<div><label>Patient Name *</label><input id="healthName"></div>
+<div><label>Age *</label><input id="healthAge" type="number"></div>
+<div><label>Mobile / WhatsApp *</label><input id="healthPhone"></div>
+<div><label>Gender</label><select id="healthGender"><option>Prefer not to say</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+<div><label>State</label><input id="healthState" value="All India"></div>
+<div><label>City / District</label><input id="healthCity"></div>
+<div><label>Problem / Complaint *</label><input id="healthProblem"></div>
+<div><label>Since when?</label><input id="healthSince"></div>
+<div><label>Doctor/Specialist Needed</label><input id="healthDoctor" placeholder="e.g. General Physician"></div>
+<div><label>Hospital Preference</label><input id="healthHospital"></div>
+<div><label>Urgency</label><select id="healthUrgency"><option>Normal</option><option>Urgent</option><option>Emergency</option></select></div>
+<div><label>Reports Available?</label><select id="healthReports"><option>Yes</option><option>No</option></select></div>
+<div class="full"><label>Symptoms / Complete Details</label><textarea id="healthDetails"></textarea></div>
 </div>
 
-<div class="card">
-<div class="iconBox">🚑</div>
-<h3>Emergency</h3>
-<p>Emergency resources.</p>
-<button class="cardAction" onclick="whatsapp('I need emergency healthcare information.')">Contact</button>
+<button class="submit" onclick="reviewFlow('health')">Review Health Query →</button>
 </div>
 
-<div class="card">
-<div class="iconBox">🩸</div>
-<h3>Blood</h3>
-<p>Blood donation and requirement.</p>
-<button class="cardAction" onclick="go('blood')">Open</button>
+<div class="notice">This platform does not diagnose or replace medical care. For serious emergencies, contact appropriate emergency medical services/hospital immediately.</div>
+</div></section>
+</main>
+
+
+<!-- ================= ROOMS ================= -->
+
+<main id="rooms" class="page">
+
+<div class="pageHero"><div class="container"><h1>🏠 Room • PG • Hostel</h1><p>Accommodation requirement या listing.</p></div></div>
+
+<section><div class="container">
+
+<div class="grid3">
+<div class="card"><div class="iconBox">🏠</div><h3>Room</h3><p>Monthly accommodation.</p><button class="cardAction" onclick="openFlow('room')">Inquiry</button></div>
+<div class="card"><div class="iconBox">🛏️</div><h3>PG</h3><p>Student/working PG.</p><button class="cardAction" onclick="openFlow('room')">Inquiry</button></div>
+<div class="card"><div class="iconBox">🎓</div><h3>Hostel</h3><p>Student accommodation.</p><button class="cardAction" onclick="openFlow('room')">Inquiry</button></div>
 </div>
 
+</div></section>
+</main>
+
+
+<!-- ================= RESUME ================= -->
+
+<main id="resume" class="page">
+
+<div class="pageHero"><div class="container"><h1>📄 CV / Resume</h1><p>Professional profile information submit करें.</p></div></div>
+
+<section><div class="container">
+<div class="form">
+<h2>Professional CV Details</h2>
+<div class="formGrid">
+<div><label>Name *</label><input id="cvName"></div><div><label>Mobile</label><input id="cvPhone"></div>
+<div><label>Education</label><input id="cvEducation"></div><div><label>Experience</label><input id="cvExperience"></div>
+<div><label>Skills</label><input id="cvSkills"></div><div><label>Job Preference</label><input id="cvJob"></div>
+<div><label>State</label><input id="cvState" value="All India"></div><div><label>City</label><input id="cvCity"></div>
+<div class="full"><label>Profile Summary</label><textarea id="cvSummary"></textarea></div>
 </div>
-
-<div class="notice">
-HelloFriendsHelp medical diagnosis या treatment provider नहीं है. Serious emergency में appropriate medical professional/hospital को priority दें.
+<button class="submit" onclick="reviewFlow('resume')">Review CV →</button>
 </div>
-
-</div>
-
-</section>
-
+</div></section>
 </main>
 
 
@@ -2709,133 +681,20 @@ HelloFriendsHelp medical diagnosis या treatment provider नहीं है
 
 <main id="government" class="page">
 
-<div class="pageHero">
-<div class="container">
-<h1>🏛️ Government Services</h1>
-<p>Official government resources तक easy access.</p>
-</div>
-</div>
+<div class="pageHero"><div class="container"><h1>🏛️ Government Services</h1><p>Official government resources.</p></div></div>
 
-<section>
-
-<div class="container">
-
+<section><div class="container">
 <div class="grid4">
-
-<div class="card">
-<div class="iconBox">🪪</div>
-<h3>Aadhaar</h3>
-<p>UIDAI official resources.</p>
-<button class="cardAction" onclick="official('https://uidai.gov.in/')">Official</button>
+<div class="card"><div class="iconBox">🪪</div><h3>Aadhaar</h3><p>UIDAI</p><button class="cardAction" onclick="official('https://uidai.gov.in/')">Official</button></div>
+<div class="card"><div class="iconBox">📁</div><h3>DigiLocker</h3><p>Digital documents</p><button class="cardAction" onclick="official('https://www.digilocker.gov.in/')">Official</button></div>
+<div class="card"><div class="iconBox">🗳️</div><h3>Voter Services</h3><p>Election services</p><button class="cardAction" onclick="official('https://voters.eci.gov.in/')">Official</button></div>
+<div class="card"><div class="iconBox">💼</div><h3>National Career Service</h3><p>Career resources</p><button class="cardAction" onclick="official('https://www.ncs.gov.in/')">Official</button></div>
+<div class="card"><div class="iconBox">🎓</div><h3>Scholarship</h3><p>National Scholarship</p><button class="cardAction" onclick="official('https://scholarships.gov.in/')">Official</button></div>
+<div class="card"><div class="iconBox">👷</div><h3>e-Shram</h3><p>Worker resources</p><button class="cardAction" onclick="official('https://eshram.gov.in/')">Official</button></div>
+<div class="card"><div class="iconBox">🇮🇳</div><h3>India.gov.in</h3><p>Government information</p><button class="cardAction" onclick="official('https://www.india.gov.in/')">Official</button></div>
 </div>
-
-<div class="card">
-<div class="iconBox">📁</div>
-<h3>DigiLocker</h3>
-<p>Digital documents.</p>
-<button class="cardAction" onclick="official('https://www.digilocker.gov.in/')">Official</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🗳️</div>
-<h3>Voter Services</h3>
-<p>Election services.</p>
-<button class="cardAction" onclick="official('https://voters.eci.gov.in/')">Official</button>
-</div>
-
-<div class="card">
-<div class="iconBox">💼</div>
-<h3>National Career Service</h3>
-<p>Government career resources.</p>
-<button class="cardAction" onclick="official('https://www.ncs.gov.in/')">Official</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🎓</div>
-<h3>Scholarships</h3>
-<p>National scholarship resources.</p>
-<button class="cardAction" onclick="official('https://scholarships.gov.in/')">Official</button>
-</div>
-
-<div class="card">
-<div class="iconBox">👷</div>
-<h3>e-Shram</h3>
-<p>Worker resources.</p>
-<button class="cardAction" onclick="official('https://eshram.gov.in/')">Official</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🇮🇳</div>
-<h3>India.gov.in</h3>
-<p>Government information.</p>
-<button class="cardAction" onclick="official('https://www.india.gov.in/')">Official</button>
-</div>
-
-<div class="card">
-<div class="iconBox">📜</div>
-<h3>Government Schemes</h3>
-<p>Scheme information.</p>
-<button class="cardAction" onclick="official('https://www.india.gov.in/my-government/schemes')">Official</button>
-</div>
-
-</div>
-
-<div class="notice">
-HelloFriendsHelp government department नहीं है. Official government websites पर information verify करें.
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-
-<!-- ================= CV ================= -->
-
-<main id="resume" class="page">
-
-<div class="pageHero">
-<div class="container">
-<h1>📄 CV / Resume Builder</h1>
-<p>Professional profile बनाएं.</p>
-</div>
-</div>
-
-<section>
-
-<div class="container">
-
-<div class="form">
-
-<div class="formGrid">
-
-<div><label>Name</label><input id="cvName"></div>
-<div><label>Mobile</label><input id="cvPhone"></div>
-<div><label>Education</label><input id="cvEducation"></div>
-<div><label>Experience</label><input id="cvExperience"></div>
-<div><label>Skills</label><input id="cvSkills"></div>
-<div><label>Job Preference</label><input id="cvJob"></div>
-<div><label>State</label><input id="cvState" value="All India"></div>
-<div><label>City</label><input id="cvCity"></div>
-
-<div class="full">
-<label>Profile Summary</label>
-<textarea id="cvSummary"></textarea>
-</div>
-
-</div>
-
-<button class="submit" onclick="createCV()">📄 Generate CV</button>
-
-</div>
-
-<div id="cvOutput" class="card hidden" style="margin-top:20px"></div>
-
-</div>
-
-</section>
-
+<div class="notice">HelloFriendsHelp government department नहीं है. Official websites पर information verify करें.</div>
+</div></section>
 </main>
 
 
@@ -2843,105 +702,19 @@ HelloFriendsHelp government department नहीं है. Official government 
 
 <main id="profile" class="page">
 
-<div class="pageHero">
-<div class="container">
-<h1>👤 Profile / प्रोफ़ाइल</h1>
-<p>Education • Skills • Experience • Reviews • Verification</p>
-</div>
-</div>
+<div class="pageHero"><div class="container"><h1>👤 Profile</h1><p>Professional member profile.</p></div></div>
 
-<section>
-
-<div class="container">
-
+<section><div class="container">
 <div class="card profile">
-
 <div class="avatar">👤</div>
-
 <div>
-
 <h2>HelloFriendsHelp Member</h2>
-
-<p style="color:var(--muted);margin-top:6px">
-अपनी education, skills, experience, location और service details
-के साथ professional profile बनाएं.
-</p>
-
-<div class="profileTags">
-<span>📱 Mobile</span>
-<span>🎓 Education</span>
-<span>💼 Experience</span>
-<span>📍 Location</span>
-<span>⭐ Reviews</span>
-<span>🛡️ Verification</span>
-</div>
-
-<div class="heroActions">
-
-<button class="btn btnBlue" onclick="whatsapp('I want to register my HelloFriendsHelp profile.')">
-Register Profile
-</button>
-
-<button class="btn btnDark" onclick="go('resume')">
-Create CV
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-
-<!-- ================= CONTACT ================= -->
-
-<main id="contact" class="page">
-
-<div class="pageHero">
-<div class="container">
-<h1>📞 Contact / संपर्क</h1>
-<p>Inquiry • Support • Report</p>
+<p style="color:var(--muted);font-size:12px;margin-top:5px">Education, skills, experience, location और verification status के साथ profile बनाएं.</p>
+<div class="profileTags"><span>📱 Mobile</span><span>🎓 Education</span><span>💼 Experience</span><span>📍 Location</span><span>⭐ Reviews</span><span>🛡️ Verification</span></div>
+<div class="heroActions"><button class="btn blue" onclick="whatsapp('I want to register my HelloFriendsHelp profile.')">Register</button><button class="btn dark" onclick="go('resume')">Create CV</button></div>
 </div>
 </div>
-
-<section>
-
-<div class="container">
-
-<div class="grid3">
-
-<div class="card">
-<div class="iconBox">💬</div>
-<h3>WhatsApp</h3>
-<p>Direct inquiry to platform owner.</p>
-<button class="cardAction" onclick="whatsapp('HelloFriendsHelp par mujhe inquiry karni hai.')">WhatsApp</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🚨</div>
-<h3>Report / शिकायत</h3>
-<p>Fake listing या suspicious activity report करें.</p>
-<button class="cardAction" onclick="report()">Report</button>
-</div>
-
-<div class="card">
-<div class="iconBox">🛡️</div>
-<h3>Safety</h3>
-<p>OTP, PIN और passwords share न करें.</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
+</div></section>
 </main>
 
 
@@ -2949,1465 +722,844 @@ Create CV
 
 <main id="admin" class="page">
 
-<div class="pageHero">
-<div class="container">
-<h1>🔐 Admin Dashboard</h1>
-<p>Founder & Platform Management</p>
-</div>
-</div>
+<div class="pageHero"><div class="container"><h1>🔐 Founder Dashboard</h1><p>Platform owner section.</p></div></div>
 
-<section>
-
-<div class="container">
-
+<section><div class="container">
 <div class="admin">
-
 <h2>HelloFriendsHelp Admin</h2>
-
-<p style="margin-top:5px">
-Founder & Platform Owner:
-<strong style="color:#fff">Nadeem Ahmad Khan</strong>
-</p>
-
+<p style="margin-top:5px">Founder & Platform Owner: <strong style="color:#fff">Nadeem Ahmad Khan</strong></p>
 <div class="adminGrid">
-
-<div class="adminStat">
-<strong>0</strong>
-Users
+<div class="adminStat"><strong id="adminCount">0</strong>Queries</div>
+<div class="adminStat"><strong>10%</strong>Commission</div>
+<div class="adminStat"><strong>🇮🇳</strong>All India</div>
+<div class="adminStat"><strong>24/7</strong>WhatsApp</div>
 </div>
-
-<div class="adminStat">
-<strong>0</strong>
-Jobs
+<div class="notice">यह front-end dashboard है. Real database, authentication, secure document storage, payment gateway और automated commission settlement के लिए backend आवश्यक होगा.</div>
 </div>
-
-<div class="adminStat">
-<strong>0</strong>
-Help Requests
-</div>
-
-<div class="adminStat">
-<strong>₹0</strong>
-Commission
-</div>
-
-</div>
-
-<div class="notice">
-यह front-end dashboard है. Real users, database, authentication,
-verification, payments और commission records के लिए secure backend आवश्यक होगा.
-</div>
-
-</div>
-
-</div>
-
-</section>
-
+</div></section>
 </main>
 
 
-<!-- ================= FOOTER ================= -->
-
 <footer>
-
 <div class="container footerGrid">
+<div><h3>🤝 HelloFriendsHelp</h3><p>Har Haath Ko Kaam. Har Zarurat Ko Madad.</p><p style="margin-top:6px">🇮🇳 All India Community Platform</p></div>
 
-<div>
+<div><h4>Explore</h4><a onclick="go('jobs')">👷 Jobs</a><a onclick="go('services')">🔧 Services</a><a onclick="go('education')">🎓 Education</a><a onclick="go('shopping')">🛒 Shopping</a></div>
 
-<h3>🤝 HelloFriendsHelp</h3>
+<div><h4>Community</h4><a onclick="go('blood')">🩸 Blood</a><a onclick="go('help')">❤️ Help</a><a onclick="go('rooms')">🏠 Room/PG</a><a onclick="go('health')">🏥 Health</a></div>
 
-<p>
-Har Haath Ko Kaam. Har Zarurat Ko Madad.
-</p>
-
-<p style="margin-top:7px">
-🇮🇳 All India Community Platform
-</p>
-
+<div><h4>Founder</h4><p style="color:#fff;font-size:14px;font-weight:950">Nadeem Ahmad Khan</p><p>Founder & Platform Owner</p><a href="https://wa.me/917763082034">💬 7763082034</a><p>UPI: 7763082034@kotak</p></div>
 </div>
-
-<div>
-
-<h4>Explore</h4>
-
-<a href="#jobs">👷 Jobs</a>
-<a href="#services">🔧 Services</a>
-<a href="#education">🎓 Education</a>
-<a href="#shopping">🛒 Shopping</a>
-<a href="#blood">🩸 Blood</a>
-
-</div>
-
-<div>
-
-<h4>Community</h4>
-
-<a href="#help">❤️ Help</a>
-<a href="#rooms">🏠 Room / PG</a>
-<a href="#health">🏥 Health</a>
-<a href="#government">🏛️ Government</a>
-<a href="#resume">📄 CV Builder</a>
-
-</div>
-
-<div>
-
-<h4>Founder</h4>
-
-<p style="color:#fff;font-size:15px;font-weight:950">
-Nadeem Ahmad Khan
-</p>
-
-<p>Founder & Platform Owner</p>
-
-<a href="https://wa.me/917763082034">
-💬 WhatsApp: 7763082034
-</a>
-
-<p style="margin-top:5px">
-UPI: 7763082034@kotak
-</p>
-
-</div>
-
-</div>
-
-<div class="container copyright">
-© 2026 HelloFriendsHelp • Founded by Nadeem Ahmad Khan • All Rights Reserved
-</div>
-
+<div class="container copyright">© 2026 HelloFriendsHelp • Founded by Nadeem Ahmad Khan</div>
 </footer>
 
 
-<!-- FLOATING WHATSAPP -->
-
-<a class="whatsappFloat"
-href="https://wa.me/917763082034?text=HelloFriendsHelp%20par%20mujhe%20inquiry%20karni%20hai."
-target="_blank"
-aria-label="WhatsApp">
-💬
-</a>
-
-
-<!-- MOBILE NAV -->
+<a class="whatsappFloat" href="https://wa.me/917763082034" target="_blank">💬</a>
 
 <div class="bottomNav">
-
 <button onclick="go('home')">🏠<br>Home</button>
 <button onclick="go('jobs')">🔎<br>Jobs</button>
 <button onclick="go('help')">❤️<br>Help</button>
 <button onclick="whatsapp('HelloFriendsHelp par mujhe inquiry karni hai.')">💬<br>Inquiry</button>
 <button onclick="go('profile')">👤<br>Profile</button>
-
 </div>
 
 
-<!-- MODAL -->
+<!-- ================= MODAL ================= -->
 
 <div class="modal" id="modal">
-
 <div class="modalBox">
-
-<div class="modalHead">
-
-<h3 id="modalTitle">HelloFriendsHelp</h3>
-
-<button class="close" onclick="closeModal()">×</button>
-
-</div>
-
+<div class="modalHead"><h3 id="modalTitle">HelloFriendsHelp</h3><button class="close" onclick="closeModal()">×</button></div>
 <div id="modalBody"></div>
-
 </div>
-
 </div>
 
 
 <script>
 
-/* =====================================================
-BASIC SETTINGS
-===================================================== */
+/* ==========================================================
+MAIN SETTINGS
+========================================================== */
 
 const WHATSAPP="917763082034";
 const UPI="7763082034@kotak";
 const COMMISSION=10;
+let currentFlow="";
+let currentPreset="";
 
 
-/* =====================================================
+/* ==========================================================
 NAVIGATION
-===================================================== */
+========================================================== */
 
 function go(page){
-
-document.querySelectorAll(".page").forEach(p=>{
-  p.classList.remove("active");
-});
-
-const target=document.getElementById(page);
-
-if(target){
-  target.classList.add("active");
-}
-
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+const el=document.getElementById(page);
+if(el)el.classList.add("active");
 location.hash=page;
-
-window.scrollTo({
-  top:0,
-  behavior:"smooth"
-});
-
+window.scrollTo({top:0,behavior:"smooth"});
 document.getElementById("mobileMenu").style.display="none";
-
 }
 
-function loadPage(){
-
-let page=location.hash.replace("#","")||"home";
-
-if(document.getElementById(page)){
-
-document.querySelectorAll(".page").forEach(p=>{
-  p.classList.remove("active");
+window.addEventListener("load",()=>{
+let p=location.hash.replace("#","")||"home";
+if(document.getElementById(p))go(p);
 });
 
-document.getElementById(page).classList.add("active");
-
-}
-
-}
-
-window.addEventListener("load",loadPage);
-window.addEventListener("hashchange",loadPage);
-
-
-/* =====================================================
-MOBILE MENU
-===================================================== */
+window.addEventListener("hashchange",()=>{
+let p=location.hash.replace("#","")||"home";
+if(document.getElementById(p))go(p);
+});
 
 function toggleMenu(){
-
-const menu=document.getElementById("mobileMenu");
-
-menu.style.display=
-menu.style.display==="block"
-?"none"
-:"block";
-
+let m=document.getElementById("mobileMenu");
+m.style.display=m.style.display==="block"?"none":"block";
 }
 
 
-/* =====================================================
+/* ==========================================================
 WHATSAPP
-===================================================== */
+========================================================== */
 
 function whatsapp(message){
-
-window.open(
-"https://wa.me/"+WHATSAPP+
-"?text="+encodeURIComponent(message),
-"_blank"
-);
-
+window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(message),"_blank");
 }
 
 
-/* =====================================================
+/* ==========================================================
 SEARCH
-===================================================== */
+========================================================== */
 
 function smartSearch(){
-
 let q=(document.getElementById("searchInput").value||"").toLowerCase();
-let category=(document.getElementById("searchCategory").value||"").toLowerCase();
+let c=(document.getElementById("searchCategory").value||"").toLowerCase();
 
-if(
-category.includes("job")||
-q.includes("job")||
-q.includes("नौकरी")||
-q.includes("काम")||
-q.includes("driver")||
-q.includes("labour")
-){
-go("jobs");
-return;
-}
+if(c.includes("job")||q.includes("job")||q.includes("नौकरी")||q.includes("काम"))return openFlow("job");
+if(c.includes("worker")||q.includes("worker")||q.includes("कर्मचारी")||q.includes("मजदूर"))return openFlow("worker");
+if(c.includes("service")||q.includes("service")||q.includes("सेवा"))return openFlow("service");
+if(c.includes("education")||q.includes("education")||q.includes("admission")||q.includes("college"))return openFlow("admission");
+if(c.includes("shopping")||q.includes("shopping")||q.includes("buy")||q.includes("sell"))return openFlow("shopping");
+if(c.includes("blood")||q.includes("blood")||q.includes("रक्त")||q.includes("खून"))return openFlow("blood");
+if(c.includes("health")||q.includes("health")||q.includes("doctor")||q.includes("hospital"))return openFlow("health");
+if(c.includes("help")||q.includes("help")||q.includes("मदद"))return openFlow("help");
 
-if(
-category.includes("worker")||
-q.includes("worker")||
-q.includes("कर्मचारी")||
-q.includes("मजदूर")
-){
-go("hire");
-return;
-}
-
-if(
-category.includes("service")||
-q.includes("electrician")||
-q.includes("plumber")||
-q.includes("carpenter")||
-q.includes("सेवा")
-){
-go("services");
-return;
-}
-
-if(
-category.includes("education")||
-q.includes("admission")||
-q.includes("college")||
-q.includes("nursing")||
-q.includes("शिक्षा")
-){
-go("education");
-return;
-}
-
-if(
-category.includes("shopping")||
-q.includes("shopping")||
-q.includes("खरीद")||
-q.includes("buy")||
-q.includes("sell")
-){
-go("shopping");
-return;
-}
-
-if(
-category.includes("blood")||
-q.includes("blood")||
-q.includes("रक्त")||
-q.includes("खून")
-){
-go("blood");
-return;
-}
-
-if(
-category.includes("room")||
-q.includes("room")||
-q.includes("pg")||
-q.includes("कमरा")
-){
-go("rooms");
-return;
-}
-
-if(
-category.includes("help")||
-q.includes("help")||
-q.includes("मदद")||
-q.includes("donate")
-){
-go("help");
-return;
-}
-
-alert("Please select a category / कृपया category चुनें.");
-
+alert("Category select करें / Please select a category.");
 }
 
 
-/* =====================================================
-JOB TABS
-===================================================== */
+/* ==========================================================
+OPEN FLOW
+========================================================== */
 
-function jobTab(type,button){
+function openFlow(type,preset=""){
+currentFlow=type;
+currentPreset=preset;
 
-document.querySelectorAll(".tabs .tab").forEach(t=>{
-  t.classList.remove("active");
-});
+const titles={
+job:"👷 Job Application / नौकरी के लिए आवेदन",
+worker:"🏢 Worker Requirement / कर्मचारी चाहिए",
+service:"🔧 Service Request / सेवा चाहिए",
+admission:"🎓 Admission Inquiry / एडमिशन",
+teacher:"👨‍🏫 Teacher Registration",
+teacherNeed:"👨‍👩‍👧 Teacher Requirement",
+donor:"🩸 Blood Donor Registration",
+blood:"🆘 Blood Requirement",
+health:"🏥 Health Support",
+help:"❤️ Help Request",
+helper:"🤲 I Want to Help",
+shopping:"🛒 Shopping / Buy-Sell",
+room:"🏠 Room / PG / Hostel",
+resume:"📄 CV / Resume"
+};
 
-button.classList.add("active");
+let body="";
 
-document.getElementById("findJobs")
-.classList.toggle("hidden",type!=="find");
+if(type==="job")body=jobForm();
+else if(type==="worker")body=workerForm();
+else if(type==="service")body=serviceForm();
+else if(type==="admission")body=admissionForm();
+else if(type==="teacher")body=teacherForm();
+else if(type==="teacherNeed")body=teacherNeedForm();
+else if(type==="donor")body=donorForm();
+else if(type==="blood")body=bloodForm();
+else if(type==="health")body=healthForm();
+else if(type==="help")body=helpForm();
+else if(type==="helper")body=helperForm();
+else if(type==="shopping")body=shoppingForm();
+else if(type==="room")body=roomForm();
+else if(type==="resume")body=cvForm();
 
-document.getElementById("jobSeek")
-.classList.toggle("hidden",type!=="seek");
-
-document.getElementById("jobHire")
-.classList.toggle("hidden",type!=="hire");
-
+openModal(titles[type]||"Inquiry",body);
 }
 
 
-/* =====================================================
-JOB SEEKER
-===================================================== */
-
-function submitWorker(){
-
-if(!wName.value||!wPhone.value||!wJob.value){
-
-alert("Name, Mobile और Job required हैं.");
-return;
-
-}
-
-whatsapp(`
-
-🤝 HELLOFRIENDSHELP
-👤 JOB SEEKER / नौकरी चाहिए
-
-Name:
-${wName.value}
-
-Mobile:
-${wPhone.value}
-
-Father:
-${wFather.value}
-
-Mother:
-${wMother.value}
-
-Education:
-${wEducation.value}
-
-Experience:
-${wExperience.value}
-
-State:
-${wState.value}
-
-City:
-${wCity.value}
-
-Job Wanted:
-${wJob.value}
-
-Expected Salary:
-${wSalary.value}
-
-Work Type:
-${wType.value}
-
-Available From:
-${wDate.value}
-
-ID Type:
-${wId.value}
-
-ID Last 4 Digits:
-${wLast4.value}
-
-Skills:
-${wSkills.value}
-
-Address:
-${wAddress.value}
-
-`);
-
-}
-
-
-/* =====================================================
-EMPLOYER
-===================================================== */
-
-function submitEmployer(){
-
-whatsapp(`
-
-🤝 HELLOFRIENDSHELP
-🏢 EMPLOYER / कर्मचारी चाहिए
-
-Name/Company:
-${eName.value}
-
-Mobile:
-${ePhone.value}
-
-State:
-${eState.value}
-
-City:
-${eCity.value}
-
-Worker Required:
-${eWorker.value}
-
-Number:
-${eNumber.value}
-
-Salary/Budget:
-${eSalary.value}
-
-Experience:
-${eExperience.value}
-
-Work Type:
-${eType.value}
-
-Joining Date:
-${eDate.value}
-
-Food:
-${eFood.value}
-
-Accommodation:
-${eStay.value}
-
-Person Required:
-${ePerson.value}
-
-Complete Details:
-${eDetails.value}
-
-Address:
-${eAddress.value}
-
-`);
-
-}
-
-
-/* =====================================================
-HIRE
-===================================================== */
-
-function submitHirePage(){
-
-whatsapp(`
-
-🏢 HELLOFRIENDSHELP
-WORKER REQUIREMENT
-
-Name/Company:
-${hName.value}
-
-Mobile:
-${hPhone.value}
-
-State:
-${hState.value}
-
-City:
-${hCity.value}
-
-Worker:
-${hWorker.value}
-
-Number:
-${hNumber.value}
-
-Salary:
-${hSalary.value}
-
-Experience:
-${hExperience.value}
-
-Duration:
-${hDuration.value}
-
-Start Date:
-${hDate.value}
-
-Person Required:
-${hPerson.value}
-
-Details:
-${hDetails.value}
-
-`);
-
-}
-
-
-/* =====================================================
-SERVICES
-===================================================== */
-
-function serviceRequest(service){
-
-whatsapp(`
-
-🔧 HELLOFRIENDSHELP
-SERVICE REQUEST
-
-Service:
-${service}
-
-Location:
-All India
-
-Please connect me with a suitable provider.
-
-`);
-
-}
-
-function submitProvider(){
-
-whatsapp(`
-
-🔧 SERVICE PROVIDER REGISTRATION
-
-Name:
-${spName.value}
-
-Mobile:
-${spPhone.value}
-
-Service:
-${spService.value}
-
-Experience:
-${spExp.value}
-
-State:
-${spState.value}
-
-City:
-${spCity.value}
-
-Details:
-${spDetails.value}
-
-`);
-
-}
-
-
-/* =====================================================
-TEACHERS
-===================================================== */
-
-function teacherRegister(){
-
-openModal(
-"👨‍🏫 Teacher Registration",
-
-`
-
-<div style="display:grid;gap:10px">
-
-<input id="tName" placeholder="Teacher Name / शिक्षक का नाम">
-
-<input id="tPhone" placeholder="Mobile">
-
-<input id="tEducation" placeholder="Qualification / योग्यता">
-
-<input id="tExperience" placeholder="Experience / अनुभव">
-
-<input id="tSubject" placeholder="Subject / विषय">
-
-<input id="tLocation" placeholder="State / City">
-
-<textarea id="tDetails" placeholder="Teaching Details"></textarea>
-
-<button class="submit" onclick="teacherSubmit()">
-Register / रजिस्टर करें
-</button>
-
-</div>
-
-`);
-
-}
-
-function teacherSubmit(){
-
-whatsapp(`
-
-👨‍🏫 TEACHER REGISTRATION
-
-Name:
-${tName.value}
-
-Mobile:
-${tPhone.value}
-
-Qualification:
-${tEducation.value}
-
-Experience:
-${tExperience.value}
-
-Subject:
-${tSubject.value}
-
-Location:
-${tLocation.value}
-
-Details:
-${tDetails.value}
-
-`);
-
-closeModal();
-
-}
-
-function teacherNeed(){
-
-openModal(
-"👨‍👩‍👧 Teacher Requirement",
-
-`
-
-<div style="display:grid;gap:10px">
-
-<input id="tnStudent" placeholder="Student / Child Name">
-
-<input id="tnPhone" placeholder="Parent Mobile">
-
-<input id="tnClass" placeholder="Class">
-
-<input id="tnSubject" placeholder="Subject">
-
-<input id="tnLocation" placeholder="State / City">
-
-<textarea id="tnDetails" placeholder="Teacher Requirement"></textarea>
-
-<button class="submit" onclick="teacherNeedSubmit()">
-Find Teacher
-</button>
-
-</div>
-
-`);
-
-}
-
-function teacherNeedSubmit(){
-
-whatsapp(`
-
-👨‍🎓 TEACHER REQUIREMENT
-
-Student:
-${tnStudent.value}
-
-Parent Mobile:
-${tnPhone.value}
-
-Class:
-${tnClass.value}
-
-Subject:
-${tnSubject.value}
-
-Location:
-${tnLocation.value}
-
-Details:
-${tnDetails.value}
-
-`);
-
-closeModal();
-
-}
-
-
-/* =====================================================
-EDUCATION
-===================================================== */
-
-function course(name){
-
-go("education");
-
-setTimeout(()=>{
-  document.getElementById("sCourse").value=name;
-  document.getElementById("sName").focus();
-},250);
-
-}
-
-function admission(){
-
-whatsapp(`
-
-🎓 HELLOFRIENDSHELP
-ADMISSION INQUIRY
-
-Student:
-${sName.value}
-
-Mobile:
-${sPhone.value}
-
-Father:
-${sFather.value}
-
-Mother:
-${sMother.value}
-
-Course:
-${sCourse.value}
-
-College:
-${sCollege.value}
-
-State:
-${sState.value}
-
-City:
-${sCity.value}
-
-Previous Qualification:
-${sPrevious.value}
-
-Budget:
-${sBudget.value}
-
-Requirement:
-${sDetails.value}
-
-`);
-
-}
-
-
-/* =====================================================
-SHOPPING
-===================================================== */
-
-function buy(item){
-
-whatsapp(`
-
-🛒 SHOPPING INQUIRY
-
-Product:
-${item}
-
-I want seller details.
-
-`);
-
-}
-
-function filterProducts(){
-
-let query=
-document.getElementById("shopInput").value.toLowerCase();
-
-document.querySelectorAll(".product").forEach(product=>{
-
-product.style.display=
-!query ||
-product.innerText.toLowerCase().includes(query)
-?"block"
-:"none";
-
-});
-
-}
-
-function sellSubmit(){
-
-whatsapp(`
-
-🛒 MARKETPLACE LISTING
-
-Name:
-${sellName.value}
-
-Mobile:
-${sellPhone.value}
-
-Item:
-${sellItem.value}
-
-Price:
-${sellPrice.value}
-
-Category:
-${sellCategory.value}
-
-State:
-${sellState.value}
-
-Type:
-${sellType.value}
-
-Details:
-${sellDetails.value}
-
-`);
-
-}
-
-
-/* =====================================================
-BLOOD
-===================================================== */
-
-function donorSubmit(){
-
-whatsapp(`
-
-🩸 BLOOD DONOR REGISTRATION
-
-Name:
-${dName.value}
-
-Mobile:
-${dPhone.value}
-
-Blood Group:
-${dGroup.value}
-
-Location:
-${dLocation.value}
-
-Availability:
-${dAvailable.value}
-
-Details:
-${dDetails.value}
-
-`);
-
-}
-
-function bloodRequest(){
-
-whatsapp(`
-
-🆘 BLOOD REQUIREMENT
-
-Patient:
-${pName.value}
-
-Contact:
-${pPhone.value}
-
-Blood Group:
-${pGroup.value}
-
-Units:
-${pUnits.value}
-
-Hospital:
-${pHospital.value}
-
-Location:
-${pLocation.value}
-
-Urgency:
-${pUrgency.value}
-
-Details:
-${pDetails.value}
-
-`);
-
-}
-
-
-/* =====================================================
-HELP
-===================================================== */
-
-function helpNeed(category="General Help"){
-
-openModal(
-"🆘 मुझे मदद चाहिए / I Need Help",
-
-`
-
-<div style="display:grid;gap:10px">
-
-<input id="helpName" placeholder="Name / नाम">
-
-<input id="helpPhone" placeholder="Mobile">
-
-<input id="helpLocation" placeholder="State / District / City">
-
-<input id="helpCategory" value="${category}">
-
-<input id="helpAmount" placeholder="Approximate Amount / अनुमानित राशि">
-
-<textarea id="helpDetails" placeholder="Requirement / जरूरत"></textarea>
-
-<button class="submit" onclick="submitHelp()">
-❤️ Submit Help Request
-</button>
-
-</div>
-
-`);
-
-}
-
-function submitHelp(){
-
-whatsapp(`
-
-❤️ HELP REQUEST
-
-Name:
-${helpName.value}
-
-Mobile:
-${helpPhone.value}
-
-Location:
-${helpLocation.value}
-
-Category:
-${helpCategory.value}
-
-Amount:
-${helpAmount.value}
-
-Requirement:
-${helpDetails.value}
-
-`);
-
-closeModal();
-
-}
-
-function helpSomeone(){
-
-openModal(
-"🤲 मैं मदद करना चाहता हूँ / I Want to Help",
-
-`
-
-<div style="display:grid;gap:10px">
-
-<input id="helperName" placeholder="Name / Organisation">
-
-<input id="helperPhone" placeholder="Mobile">
-
-<select id="helperType">
-
-<option>Education / शिक्षा</option>
-<option>Books / किताबें</option>
-<option>Food / भोजन</option>
-<option>Medical / चिकित्सा</option>
-<option>Clothes / कपड़े</option>
-<option>Scholarship / छात्रवृत्ति</option>
-<option>Monthly Support</option>
-<option>Any Genuine Case</option>
-
+/* ==========================================================
+COMMON ID VERIFICATION
+========================================================== */
+
+function idFields(prefix="f"){
+return `
+<div>
+<label>ID Proof Type</label>
+<select id="${prefix}IdType">
+<option>Not Selected</option>
+<option>Aadhaar</option>
+<option>PAN Card</option>
+<option>Driving Licence</option>
+<option>Voter ID</option>
+<option>Other</option>
 </select>
+</div>
+<div>
+<label>Verification Status</label>
+<select id="${prefix}IdStatus">
+<option>Not Verified</option>
+<option>Pending Verification</option>
+<option>Verified</option>
+</select>
+</div>
+<div class="full">
+<label>ID Last 4 Digits (Optional)</label>
+<input id="${prefix}IdLast4" maxlength="4" placeholder="Only last 4 digits">
+</div>`;
+}
 
-<input id="helperAmount" placeholder="Amount / Support">
 
-<textarea id="helperDetails" placeholder="How can you help?"></textarea>
+/* ==========================================================
+JOB FORM
+========================================================== */
 
-<button class="submit" onclick="submitHelper()">
-🤲 I Want to Help
-</button>
+function jobForm(){
+return `
+<div class="formGrid">
+<div><label>Full Name *</label><input id="jName"></div>
+<div><label>Mobile / WhatsApp *</label><input id="jPhone"></div>
+<div><label>Father's Name</label><input id="jFather"></div>
+<div><label>Mother's Name</label><input id="jMother"></div>
+<div><label>Education</label><input id="jEducation"></div>
+<div><label>Experience</label><input id="jExperience"></div>
+<div><label>Job Required *</label><input id="jJob" value="${currentPreset}"></div>
+<div><label>Expected Salary</label><input id="jSalary"></div>
+<div><label>State</label><input id="jState" value="All India"></div>
+<div><label>City / District</label><input id="jCity"></div>
+<div><label>Work Type</label><select id="jType"><option>Full Time</option><option>Part Time</option><option>Daily Wage</option><option>Contract</option><option>Work From Home</option></select></div>
+<div><label>Available From</label><input id="jDate" type="date"></div>
+${idFields("j")}
+<div class="full"><label>Skills</label><textarea id="jSkills"></textarea></div>
+<div class="full"><label>Complete Address</label><textarea id="jAddress"></textarea></div>
+<div class="full"><label>Additional Requirement</label><textarea id="jDetails"></textarea></div>
+</div>
+<button class="submit" onclick="reviewFlow('job')">Review Details →</button>
+`;
+}
 
+
+/* ==========================================================
+WORKER FORM
+========================================================== */
+
+function workerForm(){
+return `
+<div class="formGrid">
+<div><label>Employer / Company Name *</label><input id="wName"></div>
+<div><label>Mobile / WhatsApp *</label><input id="wPhone"></div>
+<div><label>Owner/Father Name</label><input id="wFather"></div>
+<div><label>Mother Name</label><input id="wMother"></div>
+<div><label>State *</label><input id="wState" value="All India"></div>
+<div><label>City / District *</label><input id="wCity"></div>
+<div><label>Worker Required *</label><input id="wWorker"></div>
+<div><label>Number Required *</label><input id="wNumber" type="number"></div>
+<div><label>Salary / Budget</label><input id="wSalary"></div>
+<div><label>Experience Required</label><input id="wExperience"></div>
+<div><label>Work Type</label><select id="wType"><option>Full Time</option><option>Part Time</option><option>Daily Wage</option><option>Contract</option></select></div>
+<div><label>Joining Date</label><input id="wDate" type="date"></div>
+<div><label>Food</label><select id="wFood"><option>Yes</option><option>No</option><option>Negotiable</option></select></div>
+<div><label>Accommodation</label><select id="wStay"><option>Yes</option><option>No</option><option>Negotiable</option></select></div>
+<div class="full"><label>किस तरह का व्यक्ति चाहिए?</label><textarea id="wPerson"></textarea></div>
+<div class="full"><label>Complete Job Details</label><textarea id="wDetails"></textarea></div>
+<div class="full"><label>Work Address</label><textarea id="wAddress"></textarea></div>
+</div>
+<button class="submit" onclick="reviewFlow('worker')">Review Details →</button>
+`;
+}
+
+
+/* ==========================================================
+SERVICE FORM
+========================================================== */
+
+function serviceForm(){
+return `
+<div class="formGrid">
+<div><label>Name *</label><input id="svName"></div>
+<div><label>Mobile / WhatsApp *</label><input id="svPhone"></div>
+<div><label>Service Required *</label><input id="svService" value="${currentPreset}"></div>
+<div><label>State</label><input id="svState" value="All India"></div>
+<div><label>City / District *</label><input id="svCity"></div>
+<div><label>Preferred Date</label><input id="svDate" type="date"></div>
+<div><label>Budget</label><input id="svBudget"></div>
+<div><label>Urgency</label><select id="svUrgency"><option>Normal</option><option>Urgent</option><option>Emergency</option></select></div>
+<div class="full"><label>Service Address</label><textarea id="svAddress"></textarea></div>
+<div class="full"><label>Complete Requirement</label><textarea id="svDetails"></textarea></div>
+</div>
+<button class="submit" onclick="reviewFlow('service')">Review Details →</button>
+`;
+}
+
+
+/* ==========================================================
+ADMISSION FORM
+========================================================== */
+
+function admissionForm(){
+return `
+<div class="formGrid">
+<div><label>Student Full Name *</label><input id="aName"></div>
+<div><label>Mobile / WhatsApp *</label><input id="aPhone"></div>
+<div><label>Father's Name</label><input id="aFather"></div>
+<div><label>Mother's Name</label><input id="aMother"></div>
+<div><label>Course *</label><input id="aCourse" value="${currentPreset}"></div>
+<div><label>Preferred College</label><input id="aCollege"></div>
+<div><label>Previous Qualification</label><input id="aPrevious"></div>
+<div><label>Marks / Percentage</label><input id="aMarks"></div>
+<div><label>State</label><input id="aState" value="All India"></div>
+<div><label>City / District</label><input id="aCity"></div>
+<div><label>Budget / Fee Range</label><input id="aBudget"></div>
+<div><label>Admission Session</label><input id="aSession" placeholder="e.g. 2026-27"></div>
+<div><label>Hostel Required?</label><select id="aHostel"><option>Yes</option><option>No</option><option>Maybe</option></select></div>
+<div><label>Scholarship Needed?</label><select id="aScholarship"><option>Yes</option><option>No</option></select></div>
+<div class="full"><label>Documents Available</label><textarea id="aDocuments" placeholder="10th, 12th, ID, photos etc."></textarea></div>
+<div class="full"><label>Complete Admission Requirement</label><textarea id="aDetails"></textarea></div>
+</div>
+<button class="submit" onclick="reviewFlow('admission')">Review Details →</button>
+`;
+}
+
+
+/* ==========================================================
+TEACHER
+========================================================== */
+
+function teacherForm(){
+return `
+<div class="formGrid">
+<div><label>Teacher Name *</label><input id="tName"></div>
+<div><label>Mobile *</label><input id="tPhone"></div>
+<div><label>Qualification</label><input id="tEducation"></div>
+<div><label>Experience</label><input id="tExperience"></div>
+<div><label>Subject</label><input id="tSubject"></div>
+<div><label>Class / Level</label><input id="tClass"></div>
+<div><label>State</label><input id="tState" value="All India"></div>
+<div><label>City</label><input id="tCity"></div>
+<div><label>Teaching Mode</label><select id="tMode"><option>Offline</option><option>Online</option><option>Both</option></select></div>
+<div><label>Expected Fees</label><input id="tFees"></div>
+<div class="full"><label>Teaching Details</label><textarea id="tDetails"></textarea></div>
+</div>
+<button class="submit" onclick="reviewFlow('teacher')">Review Details →</button>
+`;
+}
+
+function teacherNeedForm(){
+return `
+<div class="formGrid">
+<div><label>Parent/Guardian Name *</label><input id="tnName"></div>
+<div><label>Mobile *</label><input id="tnPhone"></div>
+<div><label>Student Name</label><input id="tnStudent"></div>
+<div><label>Class</label><input id="tnClass"></div>
+<div><label>Subject</label><input id="tnSubject"></div>
+<div><label>State</label><input id="tnState" value="All India"></div>
+<div><label>City</label><input id="tnCity"></div>
+<div><label>Teaching Mode</label><select id="tnMode"><option>Offline</option><option>Online</option><option>Both</option></select></div>
+<div><label>Budget</label><input id="tnBudget"></div>
+<div class="full"><label>Teacher Requirement</label><textarea id="tnDetails"></textarea></div>
+</div>
+<button class="submit" onclick="reviewFlow('teacherNeed')">Review Details →</button>
+`;
+}
+
+
+/* ==========================================================
+BLOOD FORMS
+========================================================== */
+
+function donorForm(){
+return `
+<div class="formGrid">
+<div><label>Name *</label><input id="dName"></div>
+<div><label>Mobile *</label><input id="dPhone"></div>
+<div><label>Blood Group *</label><select id="dGroup"><option>Select</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+<div><label>State</label><input id="dState" value="All India"></div>
+<div><label>City</label><input id="dCity"></div>
+<div><label>Availability</label><select id="dAvailability"><option>Available Now</option><option>Available Soon</option><option>Emergency Only</option></select></div>
+<div class="full"><label>Additional Details</label><textarea id="dDetails"></textarea></div>
+</div>
+<button class="submit" onclick="reviewFlow('donor')">Review Details →</button>
+`;
+}
+
+function bloodForm(){
+return `
+<div class="formGrid">
+<div><label>Patient Name *</label><input id="bPatient"></div>
+<div><label>Contact *</label><input id="bPhone"></div>
+<div><label>Blood Group *</label><select id="bGroup"><option>Select</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+<div><label>Units Required</label><input id="bUnits" type="number"></div>
+<div><label>Hospital</label><input id="bHospital"></div>
+<div><label>Hospital City</label><input id="bCity"></div>
+<div><label>Urgency</label><select id="bUrgency"><option>Emergency</option><option>Urgent</option><option>Normal</option></select></div>
+<div class="full"><label>Complete Requirement</label><textarea id="bDetails"></textarea></div>
+</div>
+<button class="submit" onclick="reviewFlow('blood')">Review Details →</button>
+`;
+}
+
+
+/* ==========================================================
+HEALTH
+========================================================== */
+
+function healthForm(){
+return `
+<div class="formGrid">
+<div><label>Patient Name *</label><input id="xName"></div>
+<div><label>Age *</label><input id="xAge" type="number"></div>
+<div><label>Mobile *</label><input id="xPhone"></div>
+<div><label>Gender</label><select id="xGender"><option>Prefer not to say</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+<div><label>State</label><input id="xState" value="All India"></div>
+<div><label>City</label><input id="xCity"></div>
+<div><label>Problem / Complaint *</label><input id="xProblem"></div>
+<div><label>Since When?</label><input id="xSince"></div>
+<div><label>Doctor/Specialist Needed</label><input id="xDoctor"></div>
+<div><label>Hospital Preference</label><input id="xHospital"></div>
+<div><label>Urgency</label><select id="xUrgency"><option>Normal</option><option>Urgent</option><option>Emergency</option></select></div>
+<div><label>Reports Available?</label><select id="xReports"><option>Yes</option><option>No</option></select></div>
+<div class="full"><label>Symptoms / Complete Details</label><textarea id="xDetails"></textarea></div>
+</div>
+<button class="submit" onclick="reviewFlow('health')">Review Details →</button>
+`;
+}
+
+
+/* ==========================================================
+HELP
+========================================================== */
+
+function helpForm(){
+return `
+<div class="formGrid">
+<div><label>Name *</label><input id="hlName"></div>
+<div><label>Mobile *</label><input id="hlPhone"></div>
+<div><label>Father's Name</label><input id="hlFather"></div>
+<div><label>Mother's Name</label><input id="hlMother"></div>
+<div><label>State</label><input id="hlState" value="All India"></div>
+<div><label>City/District</label><input id="hlCity"></div>
+<div><label>Help Category</label><select id="hlCategory"><option>Education</option><option>Food</option><option>Books</option><option>Medical Support</option><option>Clothes</option><option>Emergency Basic Support</option><option>Other</option></select></div>
+<div><label>Approximate Support Needed</label><input id="hlAmount"></div>
+<div class="full"><label>Complete Requirement</label><textarea id="hlDetails"></textarea></div>
+</div>
+<button class="submit" onclick="reviewFlow('help')">Review Details →</button>
+`;
+}
+
+function helperForm(){
+return `
+<div class="formGrid">
+<div><label>Name / Organisation *</label><input id="heName"></div>
+<div><label>Mobile *</label><input id="hePhone"></div>
+<div><label>State</label><input id="heState" value="All India"></div>
+<div><label>City</label><input id="heCity"></div>
+<div><label>Help Type</label><select id="heType"><option>Education</option><option>Food</option><option>Books</option><option>Medical Support</option><option>Clothes</option><option>Scholarship</option><option>Any Genuine Case</option></select></div>
+<div><label>Support Amount / Type</label><input id="heAmount"></div>
+<div class="full"><label>How can you help?</label><textarea id="heDetails"></textarea></div>
+</div>
+<button class="submit" onclick="reviewFlow('helper')">Review Details →</button>
+`;
+}
+
+
+/* ==========================================================
+SHOPPING
+========================================================== */
+
+function shoppingForm(){
+return `
+<div class="formGrid">
+<div><label>Name *</label><input id="shName"></div>
+<div><label>Mobile *</label><input id="shPhone"></div>
+<div><label>Buy / Sell / Donate</label><select id="shAction"><option>Buy</option><option>Sell</option><option>Donate</option><option>Exchange</option></select></div>
+<div><label>Category</label><input id="shCategory" value="${currentPreset}"></div>
+<div><label>Product Name</label><input id="shProduct"></div>
+<div><label>Expected Price</label><input id="shPrice"></div>
+<div><label>State</label><input id="shState" value="All India"></div>
+<div><label>City</label><input id="shCity"></div>
+<div class="full"><label>Product / Requirement Details</label><textarea id="shDetails"></textarea></div>
+</div>
+<button class="submit" onclick="reviewFlow('shopping')">Review Details →</button>
+`;
+}
+
+
+/* ==========================================================
+ROOM
+========================================================== */
+
+function roomForm(){
+return `
+<div class="formGrid">
+<div><label>Name *</label><input id="rName"></div>
+<div><label>Mobile *</label><input id="rPhone"></div>
+<div><label>Looking For</label><select id="rAction"><option>Room</option><option>PG</option><option>Hostel</option><option>Flat</option></select></div>
+<div><label>State</label><input id="rState" value="All India"></div>
+<div><label>City</label><input id="rCity"></div>
+<div><label>Monthly Budget</label><input id="rBudget"></div>
+<div><label>Move-in Date</label><input id="rDate" type="date"></div>
+<div><label>Food Required?</label><select id="rFood"><option>Yes</option><option>No</option></select></div>
+<div class="full"><label>Accommodation Requirement</label><textarea id="rDetails"></textarea></div>
+</div>
+<button class="submit" onclick="reviewFlow('room')">Review Details →</button>
+`;
+}
+
+
+/* ==========================================================
+CV
+========================================================== */
+
+function cvForm(){
+return `
+<div class="formGrid">
+<div><label>Name *</label><input id="cName"></div>
+<div><label>Mobile</label><input id="cPhone"></div>
+<div><label>Education</label><input id="cEducation"></div>
+<div><label>Experience</label><input id="cExperience"></div>
+<div><label>Skills</label><input id="cSkills"></div>
+<div><label>Job Preference</label><input id="cJob"></div>
+<div><label>State</label><input id="cState" value="All India"></div>
+<div><label>City</label><input id="cCity"></div>
+<div class="full"><label>Profile Summary</label><textarea id="cSummary"></textarea></div>
+</div>
+<button class="submit" onclick="reviewFlow('resume')">Review CV →</button>
+`;
+}
+
+
+/* ==========================================================
+READ HELPER
+========================================================== */
+
+function val(id){
+let e=document.getElementById(id);
+return e?e.value.trim():"";
+}
+
+
+/* ==========================================================
+REVIEW SYSTEM
+========================================================== */
+
+function reviewFlow(type){
+
+let data={};
+
+if(type==="job"){
+if(!val("jName")||!val("jPhone")||!val("jJob"))return alert("Name, Mobile और Job required हैं.");
+data={
+"Name":val("jName"),"Mobile":val("jPhone"),"Father":val("jFather"),"Mother":val("jMother"),
+"Education":val("jEducation"),"Experience":val("jExperience"),"Job":val("jJob"),
+"Expected Salary":val("jSalary"),"State":val("jState"),"City":val("jCity"),"Work Type":val("jType"),
+"Available From":val("jDate"),"ID Type":val("jIdType"),"ID Status":val("jIdStatus"),
+"ID Last 4":val("jIdLast4"),"Skills":val("jSkills"),"Address":val("jAddress"),"Requirement":val("jDetails")
+};
+}
+
+if(type==="worker"){
+if(!val("wName")||!val("wPhone")||!val("wWorker"))return alert("Employer, Mobile और Worker requirement required हैं.");
+data={
+"Employer/Company":val("wName"),"Mobile":val("wPhone"),"Owner/Father":val("wFather"),"Mother":val("wMother"),
+"State":val("wState"),"City":val("wCity"),"Worker Required":val("wWorker"),"Number":val("wNumber"),
+"Salary/Budget":val("wSalary"),"Experience":val("wExperience"),"Work Type":val("wType"),
+"Joining Date":val("wDate"),"Food":val("wFood"),"Accommodation":val("wStay"),
+"Person Required":val("wPerson"),"Details":val("wDetails"),"Address":val("wAddress")
+};
+}
+
+if(type==="service"){
+if(!val("svName")||!val("svPhone")||!val("svService"))return alert("Name, Mobile और Service required हैं.");
+data={
+"Name":val("svName"),"Mobile":val("svPhone"),"Service":val("svService"),"State":val("svState"),
+"City":val("svCity"),"Preferred Date":val("svDate"),"Budget":val("svBudget"),
+"Urgency":val("svUrgency"),"Address":val("svAddress"),"Requirement":val("svDetails")
+};
+}
+
+if(type==="admission"){
+if(!val("aName")||!val("aPhone")||!val("aCourse"))return alert("Student name, mobile और course required हैं.");
+data={
+"Student":val("aName"),"Mobile":val("aPhone"),"Father":val("aFather"),"Mother":val("aMother"),
+"Course":val("aCourse"),"College":val("aCollege"),"Previous Qualification":val("aPrevious"),
+"Marks":val("aMarks"),"State":val("aState"),"City":val("aCity"),"Budget":val("aBudget"),
+"Session":val("aSession"),"Hostel":val("aHostel"),"Scholarship":val("aScholarship"),
+"Documents Available":val("aDocuments"),"Requirement":val("aDetails")
+};
+}
+
+if(type==="teacher"){
+if(!val("tName")||!val("tPhone"))return alert("Teacher name और mobile required हैं.");
+data={"Teacher":val("tName"),"Mobile":val("tPhone"),"Qualification":val("tEducation"),
+"Experience":val("tExperience"),"Subject":val("tSubject"),"Class":val("tClass"),
+"State":val("tState"),"City":val("tCity"),"Mode":val("tMode"),"Fees":val("tFees"),"Details":val("tDetails")};
+}
+
+if(type==="teacherNeed"){
+if(!val("tnName")||!val("tnPhone"))return alert("Parent name और mobile required हैं.");
+data={"Parent":val("tnName"),"Mobile":val("tnPhone"),"Student":val("tnStudent"),"Class":val("tnClass"),
+"Subject":val("tnSubject"),"State":val("tnState"),"City":val("tnCity"),"Mode":val("tnMode"),
+"Budget":val("tnBudget"),"Requirement":val("tnDetails")};
+}
+
+if(type==="donor"){
+if(!val("dName")||!val("dPhone")||val("dGroup")==="Select")return alert("Name, mobile और blood group required हैं.");
+data={"Donor":val("dName"),"Mobile":val("dPhone"),"Blood Group":val("dGroup"),
+"State":val("dState"),"City":val("dCity"),"Availability":val("dAvailability"),"Details":val("dDetails")};
+}
+
+if(type==="blood"){
+if(!val("bPatient")||!val("bPhone")||val("bGroup")==="Select")return alert("Patient, contact और blood group required हैं.");
+data={"Patient":val("bPatient"),"Contact":val("bPhone"),"Blood Group":val("bGroup"),"Units":val("bUnits"),
+"Hospital":val("bHospital"),"City":val("bCity"),"Urgency":val("bUrgency"),"Requirement":val("bDetails")};
+}
+
+if(type==="health"){
+if(!val("xName")||!val("xAge")||!val("xPhone")||!val("xProblem"))return alert("Patient name, age, mobile और problem required हैं.");
+data={"Patient":val("xName"),"Age":val("xAge"),"Mobile":val("xPhone"),"Gender":val("xGender"),
+"State":val("xState"),"City":val("xCity"),"Problem":val("xProblem"),"Since":val("xSince"),
+"Doctor/Specialist":val("xDoctor"),"Hospital":val("xHospital"),"Urgency":val("xUrgency"),
+"Reports Available":val("xReports"),"Symptoms/Details":val("xDetails")};
+}
+
+if(type==="help"){
+if(!val("hlName")||!val("hlPhone"))return alert("Name और mobile required हैं.");
+data={"Name":val("hlName"),"Mobile":val("hlPhone"),"Father":val("hlFather"),"Mother":val("hlMother"),
+"State":val("hlState"),"City":val("hlCity"),"Help Category":val("hlCategory"),
+"Approx Support":val("hlAmount"),"Requirement":val("hlDetails")};
+}
+
+if(type==="helper"){
+if(!val("heName")||!val("hePhone"))return alert("Name और mobile required हैं.");
+data={"Name/Organisation":val("heName"),"Mobile":val("hePhone"),"State":val("heState"),"City":val("heCity"),
+"Help Type":val("heType"),"Support":val("heAmount"),"Details":val("heDetails")};
+}
+
+if(type==="shopping"){
+if(!val("shName")||!val("shPhone"))return alert("Name और mobile required हैं.");
+data={"Name":val("shName"),"Mobile":val("shPhone"),"Action":val("shAction"),"Category":val("shCategory"),
+"Product":val("shProduct"),"Price":val("shPrice"),"State":val("shState"),"City":val("shCity"),"Details":val("shDetails")};
+}
+
+if(type==="room"){
+if(!val("rName")||!val("rPhone"))return alert("Name और mobile required हैं.");
+data={"Name":val("rName"),"Mobile":val("rPhone"),"Looking For":val("rAction"),
+"State":val("rState"),"City":val("rCity"),"Budget":val("rBudget"),"Move-in":val("rDate"),
+"Food":val("rFood"),"Requirement":val("rDetails")};
+}
+
+if(type==="resume"){
+if(!val("cName"))return alert("Name required है.");
+data={"Name":val("cName"),"Mobile":val("cPhone"),"Education":val("cEducation"),
+"Experience":val("cExperience"),"Skills":val("cSkills"),"Job Preference":val("cJob"),
+"State":val("cState"),"City":val("cCity"),"Summary":val("cSummary")};
+}
+
+showReview(type,data);
+}
+
+
+/* ==========================================================
+REVIEW SCREEN
+========================================================== */
+
+let reviewData=null;
+let reviewType="";
+
+function showReview(type,data){
+
+reviewData=data;
+reviewType=type;
+
+let html=`
+<div style="background:#f5f8fd;border-radius:14px;padding:14px">
+<div style="font-size:11px;color:#667085;margin-bottom:10px">
+Please check all details before final submission.
+</div>
+`;
+
+Object.entries(data).forEach(([k,v])=>{
+if(v)html+=`
+<div style="display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid #e5eaf2;padding:8px 0;font-size:11px">
+<strong>${escapeHTML(k)}</strong>
+<span style="text-align:right">${escapeHTML(v)}</span>
+</div>`;
+});
+
+html+=`
 </div>
 
-`);
+<div style="margin-top:14px;padding:12px;border-radius:10px;background:#fff7df;font-size:10px;color:#71520a">
+⚠️ Full Aadhaar/PAN/Driving Licence number कभी WhatsApp पर नहीं भेजा जाएगा.
+केवल verification status और optional last 4 digits भेजे जाएंगे.
+</div>
 
+<div style="display:flex;gap:8px;margin-top:15px">
+<button class="btn soft" style="flex:1" onclick="openFlow('${reviewType}','${escapeAttr(currentPreset)}')">← Edit</button>
+<button class="btn green" style="flex:1" onclick="finalSubmit()">✓ Final Submit</button>
+</div>
+`;
+
+openModal("🔍 Review Your Details",html);
 }
 
-function submitHelper(){
+function escapeHTML(str){
+return String(str).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
 
-whatsapp(`
-
-🤲 HELPER / DONOR REGISTRATION
-
-Name/Organisation:
-${helperName.value}
-
-Mobile:
-${helperPhone.value}
-
-Help Type:
-${helperType.value}
-
-Amount/Support:
-${helperAmount.value}
-
-Details:
-${helperDetails.value}
-
-`);
-
-closeModal();
-
+function escapeAttr(str){
+return String(str||"").replace(/'/g,"\\'");
 }
 
 
-/* =====================================================
-ROOM
-===================================================== */
+/* ==========================================================
+FINAL SUBMIT
+========================================================== */
 
-function roomSubmit(){
+function finalSubmit(){
 
-whatsapp(`
+if(!reviewData)return;
 
-🏠 ROOM / PG LISTING
+let labels={
+job:"JOB APPLICATION",
+worker:"WORKER REQUIREMENT",
+service:"SERVICE REQUEST",
+admission:"ADMISSION INQUIRY",
+teacher:"TEACHER REGISTRATION",
+teacherNeed:"TEACHER REQUIREMENT",
+donor:"BLOOD DONOR REGISTRATION",
+blood:"BLOOD REQUIREMENT",
+health:"HEALTH SUPPORT INQUIRY",
+help:"HELP REQUEST",
+helper:"HELPER / DONOR REGISTRATION",
+shopping:"SHOPPING INQUIRY",
+room:"ROOM / PG REQUIREMENT",
+resume:"CV / RESUME INQUIRY"
+};
 
-Name:
-${rName.value}
-
-Mobile:
-${rPhone.value}
-
-State:
-${rState.value}
-
-City:
-${rCity.value}
-
-Property:
-${rType.value}
-
-Rent:
-${rRent.value}
-
-Facilities:
-${rFacilities.value}
-
-`);
-
-}
-
-
-/* =====================================================
-CV
-===================================================== */
-
-function createCV(){
-
-if(!cvName.value){
-
-alert("Name required / नाम जरूरी है.");
-return;
-
-}
-
-cvOutput.classList.remove("hidden");
-
-cvOutput.innerHTML=`
-
-<h2>${cvName.value}</h2>
-
-<p style="margin-top:7px">
-<b>Mobile:</b> ${cvPhone.value}
-</p>
-
-<hr style="margin:15px 0">
-
-<p><b>Education:</b> ${cvEducation.value}</p>
-<p><b>Experience:</b> ${cvExperience.value}</p>
-<p><b>Skills:</b> ${cvSkills.value}</p>
-<p><b>Job Preference:</b> ${cvJob.value}</p>
-<p><b>Location:</b> ${cvState.value}, ${cvCity.value}</p>
-
-<h3 style="margin-top:15px">
-Profile Summary
-</h3>
-
-<p>${cvSummary.value}</p>
+let message=
+`🔔 NEW HELLOFRIENDSHELP QUERY
+━━━━━━━━━━━━━━━━━━━━
+📌 TYPE: ${labels[reviewType]||"GENERAL INQUIRY"}
 
 `;
 
-}
+Object.entries(reviewData).forEach(([k,v])=>{
+if(v)message+=`• ${k}: ${v}\n`;
+});
 
+message+=`
+━━━━━━━━━━━━━━━━━━━━
+📍 LOCATION: ALL INDIA
+💰 PLATFORM COMMISSION: ${COMMISSION}%
+👤 FOUNDER: Nadeem Ahmad Khan
+📱 PLATFORM WHATSAPP: 7763082034
 
-/* =====================================================
-REPORT
-===================================================== */
+⚠️ Please contact the user and verify information before taking action.
+`;
 
-function report(){
+let count=Number(localStorage.getItem("hfh_query_count")||0)+1;
+localStorage.setItem("hfh_query_count",count);
 
-openModal(
-"🚨 Report / शिकायत",
-
-`
-
-<div style="display:grid;gap:10px">
-
-<input id="reportName" placeholder="Name">
-
-<input id="reportPhone" placeholder="Mobile">
-
-<select id="reportType">
-
-<option>Fake Job</option>
-<option>Fake Worker</option>
-<option>Fake Employer</option>
-<option>Fake Admission</option>
-<option>Fraud / Scam</option>
-<option>Suspicious Donation</option>
-<option>Other</option>
-
-</select>
-
-<textarea id="reportDetails" placeholder="Report Details"></textarea>
-
-<button class="submit" onclick="submitReport()">
-🚨 Send Report
-</button>
-
-</div>
-
-`);
-
-}
-
-function submitReport(){
-
-whatsapp(`
-
-🚨 HELLOFRIENDSHELP REPORT
-
-Name:
-${reportName.value}
-
-Mobile:
-${reportPhone.value}
-
-Type:
-${reportType.value}
-
-Details:
-${reportDetails.value}
-
-`);
+let admin=document.getElementById("adminCount");
+if(admin)admin.textContent=count;
 
 closeModal();
 
+setTimeout(()=>{
+whatsapp(message);
+},250);
+
+alert("✅ Query ready!\n\nअब पूरी details आपके WhatsApp पर भेजी जा रही हैं.");
 }
 
 
-/* =====================================================
+/* ==========================================================
 MODAL
-===================================================== */
+========================================================== */
 
 function openModal(title,body){
-
 document.getElementById("modalTitle").innerHTML=title;
 document.getElementById("modalBody").innerHTML=body;
 document.getElementById("modal").style.display="flex";
-
 }
 
 function closeModal(){
-
 document.getElementById("modal").style.display="none";
-
 }
 
 window.addEventListener("click",e=>{
-
-if(e.target===document.getElementById("modal")){
-  closeModal();
-}
-
+if(e.target===document.getElementById("modal"))closeModal();
 });
 
 
-/* =====================================================
+/* ==========================================================
 OFFICIAL LINKS
-===================================================== */
+========================================================== */
 
-function official(url){
-  window.open(url,"_blank");
-}
+function official(url){window.open(url,"_blank");}
 
 
-/* =====================================================
+/* ==========================================================
 LANGUAGE
-===================================================== */
+========================================================== */
 
 const translations={
-
-en:{
-Home:"Home",
-Jobs:"Jobs",
-Services:"Services",
-Education:"Education",
-Shopping:"Shopping",
-Blood:"Blood",
-Help:"Help",
-Profile:"Profile"
-},
-
-hi:{
-Home:"होम",
-Jobs:"नौकरी",
-Services:"सेवाएं",
-Education:"शिक्षा",
-Shopping:"खरीदारी",
-Blood:"रक्त",
-Help:"मदद",
-Profile:"प्रोफ़ाइल"
-},
-
-pa:{
-Home:"ਮੁੱਖ ਪੰਨਾ",
-Jobs:"ਨੌਕਰੀ",
-Services:"ਸੇਵਾਵਾਂ",
-Education:"ਸਿੱਖਿਆ",
-Shopping:"ਖਰੀਦਦਾਰੀ",
-Blood:"ਖੂਨ",
-Help:"ਮਦਦ",
-Profile:"ਪ੍ਰੋਫਾਈਲ"
-},
-
-bn:{
-Home:"হোম",
-Jobs:"চাকরি",
-Services:"পরিষেবা",
-Education:"শিক্ষা",
-Shopping:"কেনাকাটা",
-Blood:"রক্ত",
-Help:"সাহায্য",
-Profile:"প্রোফাইল"
-},
-
-mr:{
-Home:"मुख्यपृष्ठ",
-Jobs:"नोकरी",
-Services:"सेवा",
-Education:"शिक्षण",
-Shopping:"खरेदी",
-Blood:"रक्त",
-Help:"मदत",
-Profile:"प्रोफाइल"
-},
-
-gu:{
-Home:"હોમ",
-Jobs:"નોકરી",
-Services:"સેવાઓ",
-Education:"શિક્ષણ",
-Shopping:"ખરીદી",
-Blood:"રક્ત",
-Help:"મદદ",
-Profile:"પ્રોફાઇલ"
-},
-
-ta:{
-Home:"முகப்பு",
-Jobs:"வேலை",
-Services:"சேவைகள்",
-Education:"கல்வி",
-Shopping:"ஷாப்பிங்",
-Blood:"இரத்தம்",
-Help:"உதவி",
-Profile:"சுயவிவரம்"
-},
-
-te:{
-Home:"హోమ్",
-Jobs:"ఉద్యోగాలు",
-Services:"సేవలు",
-Education:"విద్య",
-Shopping:"షాపింగ్",
-Blood:"రక్తం",
-Help:"సహాయం",
-Profile:"ప్రొఫైల్"
-},
-
-kn:{
-Home:"ಮುಖಪುಟ",
-Jobs:"ಉದ್ಯೋಗಗಳು",
-Services:"ಸೇವೆಗಳು",
-Education:"ಶಿಕ್ಷಣ",
-Shopping:"ಖರೀದಿ",
-Blood:"ರಕ್ತ",
-Help:"ಸಹಾಯ",
-Profile:"ಪ್ರೊಫೈಲ್"
-},
-
-ml:{
-Home:"ഹോം",
-Jobs:"ജോലികൾ",
-Services:"സേവനങ്ങൾ",
-Education:"വിദ്യാഭ്യാസം",
-Shopping:"ഷോപ്പിംഗ്",
-Blood:"രക്തം",
-Help:"സഹായം",
-Profile:"പ്രൊഫൈൽ"
-},
-
-or:{
-Home:"ମୁଖ୍ୟ ପୃଷ୍ଠା",
-Jobs:"ଚାକିରି",
-Services:"ସେବା",
-Education:"ଶିକ୍ଷା",
-Shopping:"କିଣାକାଟା",
-Blood:"ରକ୍ତ",
-Help:"ସାହାଯ୍ୟ",
-Profile:"ପ୍ରୋଫାଇଲ୍"
-},
-
-as:{
-Home:"মুখ্য পৃষ্ঠা",
-Jobs:"চাকৰি",
-Services:"সেৱা",
-Education:"শিক্ষা",
-Shopping:"ক্ৰয়",
-Blood:"তেজ",
-Help:"সহায়",
-Profile:"প্ৰফাইল"
-},
-
-ur:{
-Home:"ہوم",
-Jobs:"ملازمتیں",
-Services:"خدمات",
-Education:"تعلیم",
-Shopping:"خریداری",
-Blood:"خون",
-Help:"مدد",
-Profile:"پروفائل"
-}
-
+en:{Home:"Home",Jobs:"Jobs",Services:"Services",Education:"Education",Shopping:"Shopping",Blood:"Blood",Help:"Help",Profile:"Profile"},
+hi:{Home:"होम",Jobs:"नौकरी",Services:"सेवाएं",Education:"शिक्षा",Shopping:"खरीदारी",Blood:"रक्त",Help:"मदद",Profile:"प्रोफ़ाइल"},
+pa:{Home:"ਮੁੱਖ ਪੰਨਾ",Jobs:"ਨੌਕਰੀ",Services:"ਸੇਵਾਵਾਂ",Education:"ਸਿੱਖਿਆ",Shopping:"ਖਰੀਦਦਾਰੀ",Blood:"ਖੂਨ",Help:"ਮਦਦ",Profile:"ਪ੍ਰੋਫਾਈਲ"},
+bn:{Home:"হোম",Jobs:"চাকরি",Services:"পরিষেবা",Education:"শিক্ষা",Shopping:"কেনাকাটা",Blood:"রক্ত",Help:"সাহায্য",Profile:"প্রোফাইল"},
+mr:{Home:"मुख्यपृष्ठ",Jobs:"नोकरी",Services:"सेवा",Education:"शिक्षण",Shopping:"खरेदी",Blood:"रक्त",Help:"मदत",Profile:"प्रोफाइल"},
+gu:{Home:"હોમ",Jobs:"નોકરી",Services:"સેવાઓ",Education:"શિક્ષણ",Shopping:"ખરીદી",Blood:"રક્ત",Help:"મદદ",Profile:"પ્રોફાઇલ"},
+ta:{Home:"முகப்பு",Jobs:"வேலை",Services:"சேவைகள்",Education:"கல்வி",Shopping:"ஷாப்பிங்",Blood:"இரத்தம்",Help:"உதவி",Profile:"சுயவிவரம்"},
+te:{Home:"హోమ్",Jobs:"ఉద్యోగాలు",Services:"సేవలు",Education:"విద్య",Shopping:"షాపింగ్",Blood:"రక్తం",Help:"సహాయం",Profile:"ప్రొఫైల్"},
+kn:{Home:"ಮುಖಪುಟ",Jobs:"ಉದ್ಯೋಗಗಳು",Services:"ಸೇವೆಗಳು",Education:"ಶಿಕ್ಷಣ",Shopping:"ಖರೀದಿ",Blood:"ರಕ್ತ",Help:"ಸಹಾಯ",Profile:"ಪ್ರೊಫೈಲ್"},
+ml:{Home:"ഹോം",Jobs:"ജോലികൾ",Services:"സേവനങ്ങൾ",Education:"വിദ്യാഭ്യാസം",Shopping:"ഷോപ്പിംഗ്",Blood:"രക്തം",Help:"സഹായം",Profile:"പ്രൊഫൈൽ"},
+or:{Home:"ମୁଖ୍ୟ ପୃଷ୍ଠା",Jobs:"ଚାକିରି",Services:"ସେବା",Education:"ଶିକ୍ଷା",Shopping:"କିଣାକାଟା",Blood:"ରକ୍ତ",Help:"ସାହାଯ୍ୟ",Profile:"ପ୍ରୋଫାଇଲ୍"},
+as:{Home:"মুখ্য পৃষ্ঠা",Jobs:"চাকৰি",Services:"সেৱা",Education:"শিক্ষা",Shopping:"ক্ৰয়",Blood:"তেজ",Help:"সহায়",Profile:"প্ৰফাইল"},
+ur:{Home:"ہوم",Jobs:"ملازمتیں",Services:"خدمات",Education:"تعلیم",Shopping:"خریداری",Blood:"خون",Help:"مدد",Profile:"پروفائل"}
 };
 
 function setLanguage(lang){
-
 localStorage.setItem("hfh_language",lang);
-
-document.documentElement.lang=lang;
-
-const dict=translations[lang]||translations.en;
-
-document.querySelectorAll(".navlinks button").forEach(button=>{
-
-let base=button.getAttribute("data-base");
-
-if(!base){
-  base=button.textContent.trim();
-  button.setAttribute("data-base",base);
-}
-
-if(dict[base]){
-  button.textContent=dict[base];
-}
-
+let dict=translations[lang]||translations.en;
+document.querySelectorAll(".navlinks button").forEach(b=>{
+let base=b.getAttribute("data-base");
+if(!base){base=b.textContent.trim();b.setAttribute("data-base",base)}
+if(dict[base])b.textContent=dict[base];
 });
-
 }
-
-
-/* =====================================================
-RESTORE LANGUAGE
-===================================================== */
 
 window.addEventListener("load",()=>{
+let l=localStorage.getItem("hfh_language")||"en";
+document.getElementById("language").value=l;
+setLanguage(l);
+});
 
-const saved=
-localStorage.getItem("hfh_language")||"en";
 
-document.getElementById("language").value=saved;
+/* ==========================================================
+QUERY COUNT
+========================================================== */
 
-setLanguage(saved);
-
+window.addEventListener("load",()=>{
+let count=localStorage.getItem("hfh_query_count")||0;
+let admin=document.getElementById("adminCount");
+if(admin)admin.textContent=count;
 });
 
 </script>
