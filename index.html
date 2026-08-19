@@ -539,3 +539,60 @@ e.target.reset();
 
 </body>
 </html>
+function submitWorker(e){
+...
+}
+function submitWorker(e){
+  e.preventDefault();
+
+  const name = document.getElementById("workerName").value.trim();
+  const phone = document.getElementById("workerPhone").value.trim();
+  const skill = document.getElementById("workerSkill").value.trim();
+  const location = document.getElementById("workerLocation").value.trim();
+
+  const message =
+`🧑‍🔧 *NEW WORKER REGISTRATION*
+
+👤 Name: ${name}
+📞 Phone: ${phone}
+🛠️ Skill: ${skill}
+📍 Location: ${location}
+
+HelloFriendsHelp — Work. Connect. Help.`;
+
+  const whatsappNumber = "917763082034";
+
+  const whatsappURL =
+    "https://wa.me/" + whatsappNumber +
+    "?text=" + encodeURIComponent(message);
+
+  window.location.href = whatsappURL;
+}
+function submitJob(e){
+  e.preventDefault();
+
+  const name = document.getElementById("jobName").value.trim();
+  const phone = document.getElementById("jobPhone").value.trim();
+  const type = document.getElementById("jobType").value.trim();
+  const location = document.getElementById("jobLocation").value.trim();
+  const details = document.getElementById("jobDetails").value.trim();
+
+  const message =
+`📋 *NEW JOB REQUIREMENT*
+
+👤 Name: ${name}
+📞 Phone: ${phone}
+🛠️ Work Type: ${type}
+📍 Location: ${location}
+📝 Requirement: ${details}
+
+HelloFriendsHelp — Work. Connect. Help.`;
+
+  const whatsappNumber = "917763082034";
+
+  const whatsappURL =
+    "https://wa.me/" + whatsappNumber +
+    "?text=" + encodeURIComponent(message);
+
+  window.location.href = whatsappURL;
+}
