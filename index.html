@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HelloFriendsHelp — Work. Connect. Help.</title>
+<title>HelloFriendsHelp — Work • Connect • Help</title>
 
 <style>
 *{box-sizing:border-box}
@@ -19,127 +19,73 @@ a{text-decoration:none;color:inherit}
 .wrap{max-width:1100px;margin:auto;padding:0 20px}
 
 nav{
-position:sticky;
-top:0;
-z-index:100;
+position:sticky;top:0;z-index:100;
 background:rgba(7,17,31,.94);
 backdrop-filter:blur(15px);
 border-bottom:1px solid #263653
 }
 .nav{
-min-height:70px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:15px
+min-height:70px;display:flex;align-items:center;
+justify-content:space-between;gap:15px
 }
-.brand{
-font-size:22px;
-font-weight:800
-}
-.links{
-display:flex;
-gap:20px;
-align-items:center
-}
-.links a{
-color:#dce5f5;
-font-weight:600
-}
+.brand{font-size:22px;font-weight:900}
+.links{display:flex;gap:20px;align-items:center}
+.links a{color:#dce5f5;font-weight:600}
 
 .btn{
-display:inline-block;
-border:0;
-border-radius:13px;
-padding:14px 21px;
-font-weight:800;
-font-size:16px;
+display:inline-block;border:0;border-radius:13px;
+padding:14px 21px;font-weight:800;font-size:16px;
 cursor:pointer
 }
 .primary{
-background:linear-gradient(135deg,#7657ff,#9b5cff);
+background:linear-gradient(135deg,#7657ff,#00a8ff);
 color:white;
 box-shadow:0 10px 25px rgba(118,87,255,.25)
 }
-.dark{
-background:#14233a;
-color:white;
-border:1px solid #30425f
-}
+.dark{background:#14233a;color:white;border:1px solid #30425f}
 
 .hero{
-padding:90px 0 80px;
-text-align:center;
-background:
-radial-gradient(circle at 50% 0%,#49236d 0%,#211b49 35%,#07111f 75%)
+padding:90px 0 80px;text-align:center;
+background:radial-gradient(circle at 50% 0%,#49236d 0%,#211b49 35%,#07111f 75%)
 }
 .hero .emoji{font-size:58px}
 .hero h1{
 font-size:clamp(42px,8vw,76px);
-line-height:1.05;
-margin:18px 0
+line-height:1.05;margin:18px 0
 }
 .hero p{
-font-size:20px;
-color:#c5d0e2;
-max-width:750px;
-margin:20px auto 32px
+font-size:20px;color:#c5d0e2;
+max-width:750px;margin:20px auto 32px
 }
 .hero-actions{
-display:flex;
-justify-content:center;
-gap:13px;
-flex-wrap:wrap
+display:flex;justify-content:center;gap:13px;flex-wrap:wrap
 }
 
 section{padding:70px 0}
-h2{
-font-size:36px;
-line-height:1.2;
-margin:0 0 12px
-}
-.sub{
-color:#aebbd0;
-margin:0 0 30px;
-font-size:17px
-}
+h2{font-size:36px;line-height:1.2;margin:0 0 12px}
+.sub{color:#aebbd0;margin:0 0 30px;font-size:17px}
 
 .grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:18px
+display:grid;grid-template-columns:repeat(3,1fr);gap:18px
 }
 .card{
 background:linear-gradient(145deg,#111f35,#0d192c);
 border:1px solid #2a3c5c;
-border-radius:20px;
-padding:25px;
+border-radius:20px;padding:25px;
 box-shadow:0 15px 40px rgba(0,0,0,.12)
 }
-.card h3{
-font-size:22px;
-margin:0 0 8px
-}
-.card p{
-color:#b9c6d8;
-margin:0
-}
+.card h3{font-size:21px;margin:0 0 8px}
+.card p{color:#b9c6d8;margin:0}
 
 .form{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:16px
+display:grid;grid-template-columns:1fr 1fr;gap:16px
 }
-.field{
-display:flex;
-flex-direction:column;
-gap:8px
-}
-.field.full{grid-column:1/-1}
-label{font-weight:700}
+.field{display:flex;flex-direction:column;gap:7px}
+.full{grid-column:1/-1}
+label{font-weight:700;font-size:14px}
+
 input,select,textarea{
-width:100%;
-padding:15px;
+width:100%;padding:14px;
 border-radius:11px;
 border:1px solid #344968;
 background:#091629;
@@ -151,59 +97,49 @@ input:focus,select:focus,textarea:focus{
 border-color:#7657ff;
 box-shadow:0 0 0 3px rgba(118,87,255,.15)
 }
-textarea{
-min-height:130px;
-resize:vertical
+textarea{min-height:120px;resize:vertical}
+
+.required{color:#ff788f}
+.small{font-size:13px;color:#91a0b7}
+
+.check{
+display:flex;
+gap:10px;
+align-items:flex-start;
+background:#0a1729;
+padding:14px;
+border-radius:12px;
+border:1px solid #263a58
 }
+.check input{width:18px;margin-top:4px}
 
 .donate{
 background:linear-gradient(135deg,#291b55,#101d32)
 }
 .upi{
-font-size:18px;
-font-weight:800;
-background:#091629;
-padding:15px;
-border-radius:11px;
-margin:18px 0;
-word-break:break-all;
-border:1px solid #2d4161
-}
-.note{
-font-size:14px;
-color:#98a8c0
+font-size:18px;font-weight:800;
+background:#091629;padding:15px;
+border-radius:11px;margin:18px 0;
+word-break:break-all;border:1px solid #2d4161
 }
 
-.contact{
-display:flex;
-gap:15px;
-flex-wrap:wrap
+.alert{
+display:none;margin-top:15px;padding:14px;
+border-radius:11px;background:#123b2b;color:#baf2d2
 }
 
 footer{
-padding:35px 0;
-border-top:1px solid #26354d;
-color:#aebbd0;
-text-align:center
-}
-
-.toast{
-display:none;
-margin-top:12px;
-padding:12px;
-border-radius:10px;
-background:#123b2b;
-color:#baf2d2
+padding:35px 0;border-top:1px solid #26354d;
+color:#aebbd0;text-align:center
 }
 
 @media(max-width:750px){
 .links{display:none}
 .grid,.form{grid-template-columns:1fr}
-.field.full{grid-column:auto}
+.full{grid-column:auto}
 section{padding:50px 0}
 h2{font-size:30px}
 .hero{padding:65px 0}
-.hero h1{font-size:46px}
 }
 </style>
 </head>
@@ -212,6 +148,7 @@ h2{font-size:30px}
 
 <nav>
 <div class="wrap nav">
+
 <a class="brand" href="#home">🤝 HelloFriendsHelp</a>
 
 <div class="links">
@@ -222,10 +159,12 @@ h2{font-size:30px}
 </div>
 
 <a class="btn primary" href="#jobs">Post a Job</a>
+
 </div>
 </nav>
 
 
+<!-- HERO -->
 <header id="home" class="hero">
 <div class="wrap">
 
@@ -246,42 +185,46 @@ Workers ko kaam se aur employers ko trusted workers se connect karne ka simple p
 </header>
 
 
+<!-- WORK CATEGORIES -->
 <section id="workers">
 <div class="wrap">
 
 <h2>👷 Find Workers</h2>
-<p class="sub">Apne area ke liye suitable worker category choose karein.</p>
+
+<p class="sub">
+Apni requirement ke according worker category choose karein.
+</p>
 
 <div class="grid">
 
 <div class="card">
 <h3>👷 Labour</h3>
-<p>Construction, loading, shifting aur daily work ke liye reliable workers.</p>
+<p>Construction, loading, shifting aur daily work.</p>
 </div>
 
 <div class="card">
 <h3>⚡ Electrician</h3>
-<p>Electrical installation, repair aur maintenance work.</p>
+<p>Electrical installation aur repair work.</p>
 </div>
 
 <div class="card">
 <h3>🔧 Plumber</h3>
-<p>Pipe, tap, bathroom aur plumbing work ke liye worker.</p>
+<p>Pipe, tap, bathroom aur plumbing work.</p>
 </div>
 
 <div class="card">
 <h3>🧹 House Help</h3>
-<p>Cleaning aur household assistance ke liye help.</p>
+<p>Cleaning aur household assistance.</p>
 </div>
 
 <div class="card">
 <h3>🎨 Painter</h3>
-<p>Home, shop aur building painting work.</p>
+<p>Home, shop aur building painting.</p>
 </div>
 
 <div class="card">
-<h3>🧰 Other Skilled Work</h3>
-<p>Apni requirement form ke through submit karein.</p>
+<h3>🚗 Driver</h3>
+<p>Personal, commercial aur delivery driving.</p>
 </div>
 
 </div>
@@ -289,53 +232,89 @@ Workers ko kaam se aur employers ko trusted workers se connect karne ka simple p
 </section>
 
 
+<!-- DETAILED JOB FORM -->
 <section id="jobs">
 <div class="wrap">
 
 <h2>📋 Post a Job</h2>
-<p class="sub">Kaam karwana hai? Apni requirement bhejiye.</p>
 
-<form class="card form" onsubmit="submitJob(event)">
+<p class="sub">
+Kaam karwana hai? Employer details aur complete requirement submit karein.
+</p>
+
+<form class="card form" onsubmit="sendJob(event)">
 
 <div class="field">
-<label>Name</label>
-<input id="jobName" required placeholder="Your name">
+<label>Full Name <span class="required">*</span></label>
+<input id="jobName" required placeholder="Your full name">
 </div>
 
 <div class="field">
-<label>Phone</label>
-<input id="jobPhone" required type="tel" placeholder="Mobile number">
+<label>Mobile Number <span class="required">*</span></label>
+<input id="jobPhone" required type="tel" placeholder="10 digit mobile number">
 </div>
 
 <div class="field">
-<label>Work Type</label>
-<select id="jobType">
+<label>Email</label>
+<input id="jobEmail" type="email" placeholder="Email address">
+</div>
+
+<div class="field">
+<label>Work Type <span class="required">*</span></label>
+<select id="jobType" required>
+<option value="">Select work</option>
 <option>Labour</option>
 <option>Electrician</option>
 <option>Plumber</option>
 <option>House Help</option>
 <option>Painter</option>
+<option>Driver</option>
 <option>Other</option>
 </select>
 </div>
 
+<div class="field full">
+<label>Complete Address <span class="required">*</span></label>
+<textarea id="jobAddress" required placeholder="House/Shop no., street, area"></textarea>
+</div>
+
 <div class="field">
-<label>Location</label>
-<input id="jobLocation" required placeholder="City / Area">
+<label>City</label>
+<input id="jobCity" placeholder="City">
+</div>
+
+<div class="field">
+<label>State</label>
+<input id="jobState" placeholder="State">
+</div>
+
+<div class="field">
+<label>PIN Code</label>
+<input id="jobPin" placeholder="PIN code">
+</div>
+
+<div class="field">
+<label>Payment Type</label>
+<select id="jobPayment">
+<option>Daily</option>
+<option>Monthly</option>
+<option>Fixed Contract</option>
+<option>To be discussed</option>
+</select>
 </div>
 
 <div class="field full">
-<label>Requirement</label>
-<textarea id="jobDetails" required placeholder="Kaunsa kaam karwana hai?"></textarea>
+<label>Work Details <span class="required">*</span></label>
+<textarea id="jobDetails" required placeholder="Kaunsa kaam hai, kitne workers chahiye, kitne din ka kaam hai etc."></textarea>
 </div>
 
 <div class="field full">
 <button class="btn primary" type="submit">
-Submit Job Requirement
+📲 Submit & Send on WhatsApp
 </button>
 
-<div id="jobToast" class="toast">
-Requirement submitted successfully.
+<div id="jobAlert" class="alert">
+WhatsApp open ho raha hai. Message check karke Send dabayein.
 </div>
 
 </div>
@@ -345,45 +324,185 @@ Requirement submitted successfully.
 </section>
 
 
+<!-- WORKER REGISTRATION -->
 <section id="register">
 <div class="wrap">
 
 <h2>🧑‍🔧 Worker Registration</h2>
 
 <p class="sub">
-Worker apni basic details submit karke registration ke liye request bhej sakta hai.
+Apni complete details submit karein. Registration request HelloFriendsHelp WhatsApp par bheji jayegi.
 </p>
 
-<form class="card form" onsubmit="submitWorker(event)">
+<form class="card form" onsubmit="sendWorker(event)">
 
 <div class="field">
-<label>Name</label>
+<label>Full Name <span class="required">*</span></label>
 <input id="workerName" required placeholder="Full name">
 </div>
 
 <div class="field">
-<label>Phone</label>
-<input id="workerPhone" required type="tel" placeholder="Mobile number">
+<label>Mobile Number <span class="required">*</span></label>
+<input id="workerPhone" required type="tel" placeholder="10 digit mobile number">
 </div>
 
 <div class="field">
-<label>Skill</label>
-<input id="workerSkill" required placeholder="e.g. Labour, Electrician">
+<label>WhatsApp Number</label>
+<input id="workerWhatsapp" type="tel" placeholder="WhatsApp number">
 </div>
 
 <div class="field">
-<label>Location</label>
-<input id="workerLocation" required placeholder="City / Area">
+<label>Email</label>
+<input id="workerEmail" type="email" placeholder="Email address">
+</div>
+
+<div class="field full">
+<label>Complete Address <span class="required">*</span></label>
+<textarea id="workerAddress" required placeholder="House no., street, village/area"></textarea>
+</div>
+
+<div class="field">
+<label>City <span class="required">*</span></label>
+<input id="workerCity" required placeholder="City">
+</div>
+
+<div class="field">
+<label>State <span class="required">*</span></label>
+<input id="workerState" required placeholder="State">
+</div>
+
+<div class="field">
+<label>PIN Code</label>
+<input id="workerPin" placeholder="PIN code">
+</div>
+
+<div class="field">
+<label>Gender</label>
+<select id="workerGender">
+<option>Prefer not to say</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="field">
+<label>Date of Birth / Age</label>
+<input id="workerAge" placeholder="Age">
+</div>
+
+<div class="field">
+<label>Work / Skill <span class="required">*</span></label>
+<select id="workerSkill" required>
+<option value="">Select skill</option>
+<option>Labour</option>
+<option>Electrician</option>
+<option>Plumber</option>
+<option>Driver</option>
+<option>House Help</option>
+<option>Painter</option>
+<option>Carpenter</option>
+<option>Mason</option>
+<option>Security Guard</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="field">
+<label>Experience</label>
+<select id="workerExperience">
+<option>Fresher</option>
+<option>Less than 1 year</option>
+<option>1–3 years</option>
+<option>3–5 years</option>
+<option>5+ years</option>
+</select>
+</div>
+
+<div class="field">
+<label>Expected Payment</label>
+<input id="workerPayment" placeholder="e.g. ₹700/day">
+</div>
+
+<div class="field">
+<label>Availability</label>
+<select id="workerAvailability">
+<option>Immediately</option>
+<option>Within a week</option>
+<option>Part-time</option>
+<option>Full-time</option>
+</select>
+</div>
+
+<div class="field">
+<label>Languages</label>
+<input id="workerLanguages" placeholder="Hindi, English, Punjabi etc.">
+</div>
+
+<div class="field">
+<label>Emergency Contact Name</label>
+<input id="emergencyName" placeholder="Emergency contact">
+</div>
+
+<div class="field">
+<label>Emergency Contact Number</label>
+<input id="emergencyPhone" type="tel" placeholder="Mobile number">
+</div>
+
+<div class="field">
+<label>ID Proof Type <span class="required">*</span></label>
+<select id="idType" required>
+<option value="">Select ID proof</option>
+<option>Aadhaar Card</option>
+<option>PAN Card</option>
+<option>Voter ID</option>
+<option>Driving Licence</option>
+<option>Passport</option>
+<option>Other Government ID</option>
+</select>
+</div>
+
+<div class="field">
+<label>Verification Status</label>
+<select id="verification">
+<option>Not verified yet</option>
+<option>Ready for verification</option>
+</select>
+</div>
+
+<div class="field full">
+<label>About Yourself</label>
+<textarea id="workerAbout" placeholder="Apne experience aur kaam ke baare mein short information"></textarea>
+</div>
+
+<div class="field full">
+
+<div class="check">
+<input type="checkbox" id="workerConsent" required>
+<label for="workerConsent">
+Main confirm karta/karti hoon ki di gayi information meri knowledge ke according sahi hai aur HelloFriendsHelp meri registration request ko verification ke liye contact kar sakta hai.
+</label>
+</div>
+
+</div>
+
+<div class="field full">
+
+<p class="small">
+🔒 Privacy: Aadhaar/PAN number, ID document image ya OTP is form me enter na karein.
+Verification zarurat ke according secure process se ki jayegi.
+</p>
+
 </div>
 
 <div class="field full">
 
 <button class="btn primary" type="submit">
-Register as Worker
+📲 Register & Send on WhatsApp
 </button>
 
-<div id="workerToast" class="toast">
-Worker registration request submitted successfully.
+<div id="workerAlert" class="alert">
+WhatsApp open ho raha hai. Message check karke Send dabayein.
 </div>
 
 </div>
@@ -393,30 +512,31 @@ Worker registration request submitted successfully.
 </section>
 
 
+<!-- PAYMENT -->
 <section id="payment">
 <div class="wrap">
 
-<h2>💳 Payment</h2>
+<h2>💳 Payment Options</h2>
 
 <p class="sub">
-Online aur cash payment options future me add kiye ja sakte hain.
+Online aur cash dono options future service agreements ke according use kiye ja sakte hain.
 </p>
 
 <div class="grid">
 
 <div class="card">
 <h3>📱 Online Payment</h3>
-<p>UPI/payment gateway integration add ki ja sakti hai.</p>
+<p>UPI/payment gateway integration ke through online payment.</p>
 </div>
 
 <div class="card">
 <h3>💵 Cash Payment</h3>
-<p>Employer aur worker mutual agreement ke according cash payment kar sakte hain.</p>
+<p>Employer aur worker mutual agreement ke according cash payment.</p>
 </div>
 
 <div class="card">
-<h3>🔒 Safety</h3>
-<p>Payment se pehle job details aur identity verify karna zaroori hai.</p>
+<h3>🔒 Safety First</h3>
+<p>Payment se pehle job details aur identity verify karein.</p>
 </div>
 
 </div>
@@ -424,6 +544,7 @@ Online aur cash payment options future me add kiye ja sakte hain.
 </section>
 
 
+<!-- DONATION -->
 <section id="donate">
 <div class="wrap">
 
@@ -441,11 +562,12 @@ UPI ID: 7763082034@kotakbank
 
 <a class="btn primary"
 href="upi://pay?pa=7763082034@kotakbank&pn=HelloFriendsHelp&cu=INR">
-Donate via UPI
+❤️ Donate via UPI
 </a>
 
-<p class="note">
-UPI app support hone par button se payment app open ho sakta hai.
+<p class="small">
+Payment karne se pehle receiver name verify karein.
+UPI PIN/OTP kabhi kisi ke saath share na karein.
 </p>
 
 </div>
@@ -453,6 +575,7 @@ UPI app support hone par button se payment app open ho sakta hai.
 </section>
 
 
+<!-- CONTACT -->
 <section id="contact">
 <div class="wrap">
 
@@ -461,21 +584,15 @@ UPI app support hone par button se payment app open ho sakta hai.
 <div class="card">
 
 <p>
-Partnership, worker verification, job support ya kisi bhi enquiry ke liye contact karein.
+Worker registration, job support, verification ya partnership ke liye contact karein.
 </p>
 
-<div class="contact">
+<br>
 
 <a class="btn primary"
 href="https://wa.me/917763082034?text=Hello%20HelloFriendsHelp,%20mujhe%20website%20ke%20baare%20mein%20jaankari%20chahiye.">
 💬 WhatsApp Us
 </a>
-
-<a class="btn dark" href="#home">
-⬆️ Back to Top
-</a>
-
-</div>
 
 </div>
 </div>
@@ -484,53 +601,142 @@ href="https://wa.me/917763082034?text=Hello%20HelloFriendsHelp,%20mujhe%20websit
 
 <footer>
 <div class="wrap">
-© 2026 HelloFriendsHelp — Work. Connect. Help.
+© 2026 HelloFriendsHelp — Work • Connect • Help.
 </div>
 </footer>
 
 
 <script>
 
-function submitJob(e){
+const ADMIN_WHATSAPP = "917763082034";
+
+
+function sendWorker(e){
 
 e.preventDefault();
 
-const data={
-name:document.getElementById("jobName").value,
-phone:document.getElementById("jobPhone").value,
-type:document.getElementById("jobType").value,
-location:document.getElementById("jobLocation").value,
-details:document.getElementById("jobDetails").value
-};
+if(!document.getElementById("workerConsent").checked){
+alert("Please accept the verification consent.");
+return;
+}
 
-localStorage.setItem(
-"hf_job_"+Date.now(),
-JSON.stringify(data)
-);
+const name=document.getElementById("workerName").value.trim();
+const phone=document.getElementById("workerPhone").value.trim();
+const whatsapp=document.getElementById("workerWhatsapp").value.trim();
+const email=document.getElementById("workerEmail").value.trim();
+const address=document.getElementById("workerAddress").value.trim();
+const city=document.getElementById("workerCity").value.trim();
+const state=document.getElementById("workerState").value.trim();
+const pin=document.getElementById("workerPin").value.trim();
+const gender=document.getElementById("workerGender").value;
+const age=document.getElementById("workerAge").value.trim();
+const skill=document.getElementById("workerSkill").value;
+const experience=document.getElementById("workerExperience").value;
+const payment=document.getElementById("workerPayment").value.trim();
+const availability=document.getElementById("workerAvailability").value;
+const languages=document.getElementById("workerLanguages").value.trim();
+const emergencyName=document.getElementById("emergencyName").value.trim();
+const emergencyPhone=document.getElementById("emergencyPhone").value.trim();
+const idType=document.getElementById("idType").value;
+const verification=document.getElementById("verification").value;
+const about=document.getElementById("workerAbout").value.trim();
 
-document.getElementById("jobToast").style.display="block";
+const message=
+`🧑‍🔧 *NEW WORKER REGISTRATION*
 
-e.target.reset();
+👤 Name: ${name}
+📞 Phone: ${phone}
+💬 WhatsApp: ${whatsapp}
+📧 Email: ${email}
+
+🏠 Address: ${address}
+📍 City: ${city}
+🗺️ State: ${state}
+📮 PIN: ${pin}
+
+⚧️ Gender: ${gender}
+🎂 Age: ${age}
+
+🛠️ Skill: ${skill}
+💼 Experience: ${experience}
+💰 Expected Payment: ${payment}
+🕐 Availability: ${availability}
+🗣️ Languages: ${languages}
+
+🚨 Emergency Contact:
+Name: ${emergencyName}
+Phone: ${emergencyPhone}
+
+🪪 ID Proof Type: ${idType}
+✅ Verification: ${verification}
+
+📝 About:
+${about}
+
+🔐 Consent: Worker agreed to verification/contact.
+
+— HelloFriendsHelp`;
+
+const url=
+"https://wa.me/"+ADMIN_WHATSAPP+
+"?text="+encodeURIComponent(message);
+
+document.getElementById("workerAlert").style.display="block";
+
+window.location.href=url;
+
 }
 
 
-function submitWorker(e){
+function sendJob(e){
 
 e.preventDefault();
 
-const data={
-name:document.getElementById("workerName").value,
-phone:document.getElementById("workerPhone").value,
-skill:document.getElementById("workerSkill").value,
-location:document.getElementById("workerLocation").value
-};
+const name=document.getElementById("jobName").value.trim();
+const phone=document.getElementById("jobPhone").value.trim();
+const email=document.getElementById("jobEmail").value.trim();
+const type=document.getElementById("jobType").value;
+const address=document.getElementById("jobAddress").value.trim();
+const city=document.getElementById("jobCity").value.trim();
+const state=document.getElementById("jobState").value.trim();
+const pin=document.getElementById("jobPin").value.trim();
+const payment=document.getElementById("jobPayment").value;
+const details=document.getElementById("jobDetails").value.trim();
 
-localStorage.setItem(
-"hf_worker_"+Date.now(),
-JSON.stringify(data)
-);
+const message=
+`📋 *NEW JOB REQUIREMENT*
 
-document.getElementById("workerToast").style.display="block";
+👤 Employer: ${name}
+📞 Phone: ${phone}
+📧 Email: ${email}
 
-e.target.reset();
+🛠️ Work Type: ${type}
+
+🏠 Address:
+${address}
+
+📍 City: ${city}
+🗺️ State: ${state}
+📮 PIN: ${pin}
+
+💰 Payment: ${payment}
+
+📝 Requirement:
+${details}
+
+— HelloFriendsHelp`;
+
+const url=
+"https://wa.me/"+ADMIN_WHATSAPP+
+"?text="+encodeURIComponent(message);
+
+document.getElementById("jobAlert").style.display="block";
+
+window.location.href=url;
+
 }
+
+</script>
+
+</body>
+</html>
