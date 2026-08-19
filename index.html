@@ -1,214 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>HelloFriendsHelp | Work • Connect • Help</title>
+🤝 HelloFriendsHelp
+Workers
+Post Job
+Register
+Donate
+Post a Job
+🤝
+Work. Connect. Help.
+Workers ko kaam se aur employers ko trusted workers se connect karne ka simple platform.
+👷 Find Workers
+📋 Post a Job
+👷 Find Workers
+Apne area ke liye suitable worker category choose karein.
+👷 Labour
+Construction, loading, shifting aur daily work.
+⚡ Electrician
+Electrical installation aur repair work.
+🔧 Plumber
+Pipe, tap, bathroom aur plumbing work.
+🧹 House Help
+Cleaning aur household assistance.
+🎨 Painter
+Home, shop aur building painting work.
+🧰 Other Skilled Work
+Apni requirement form ke through submit karein.
+📋 Post a Job
+Kaam karwana hai? Apni requirement bhejiye.
+Name
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-font-family:Arial,Helvetica,sans-serif;
-background:#07111f;
-color:#fff;
-line-height:1.6;
-}
-a{text-decoration:none;color:inherit}
-.container{width:min(1150px,92%);margin:auto}
+Phone
 
-nav{
-position:sticky;
-top:0;
-z-index:999;
-background:rgba(5,15,30,.88);
-backdrop-filter:blur(18px);
-border-bottom:1px solid rgba(255,255,255,.1);
-}
-.nav{
-height:72px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-}
-.logo{
-font-size:22px;
-font-weight:900;
-background:linear-gradient(90deg,#8b6cff,#00d4ff);
--webkit-background-clip:text;
-color:transparent;
-}
-.navlinks{
-display:flex;
-gap:25px;
-align-items:center;
-}
-.navlinks a{
-color:#cbd5e1;
-font-weight:600;
-}
-.navlinks a:hover{color:#8b7cff}
+Work Type
+LabourElectricianPlumberHouse HelpPainterOther
+Location
 
-.btn{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-gap:8px;
-padding:14px 22px;
-border-radius:14px;
-font-weight:800;
-border:0;
-cursor:pointer;
-transition:.25s;
-}
-.btn:hover{transform:translateY(-2px)}
-.primary{
-background:linear-gradient(135deg,#7657ff,#00a8ff);
-box-shadow:0 10px 30px rgba(91,72,255,.3);
-}
-.secondary{
-background:#14243b;
-border:1px solid #304766;
-}
+Requirement
+Submit Job Requirement
+🧑‍🔧 Worker Registration
+Worker apni basic details submit karke platform par registration ke liye request bhej sakta hai.
+Name
 
-.hero{
-padding:95px 0 85px;
-text-align:center;
-background:
-radial-gradient(circle at 50% 0%,#452476 0%,#17224b 35%,#07111f 75%);
-}
-.badge{
-display:inline-block;
-padding:8px 15px;
-border:1px solid #594fd0;
-background:rgba(118,87,255,.12);
-border-radius:50px;
-color:#b9b0ff;
-font-weight:700;
-margin-bottom:20px;
-}
-.hero h1{
-font-size:clamp(42px,8vw,78px);
-line-height:1.05;
-margin-bottom:20px;
-}
-.gradient{
-background:linear-gradient(90deg,#9b7cff,#20d8ff);
--webkit-background-clip:text;
-color:transparent;
-}
-.hero p{
-max-width:760px;
-margin:0 auto 32px;
-font-size:19px;
-color:#bdc9dc;
-}
-.hero-buttons{
-display:flex;
-justify-content:center;
-gap:13px;
-flex-wrap:wrap;
-}
+Phone
 
-.stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:15px;
-margin-top:55px;
-}
-.stat{
-padding:20px;
-background:rgba(255,255,255,.06);
-border:1px solid rgba(255,255,255,.1);
-border-radius:18px;
-}
-.stat b{font-size:28px;display:block}
-.stat span{color:#9eacc1}
+Skill
 
-section{padding:75px 0}
-.section-title{text-align:center;margin-bottom:40px}
-.section-title h2{font-size:38px;margin-bottom:8px}
-.section-title p{color:#9eacc1}
+Location
 
-.grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-}
-.card{
-background:linear-gradient(145deg,#101e34,#0b1729);
-border:1px solid #293d5a;
-border-radius:22px;
-padding:27px;
-transition:.25s;
-}
-.card:hover{
-transform:translateY(-5px);
-border-color:#695cff;
-box-shadow:0 15px 40px rgba(0,0,0,.2);
-}
-.icon{
-width:58px;
-height:58px;
-display:grid;
-place-items:center;
-border-radius:17px;
-background:linear-gradient(135deg,#7657ff,#00a8ff);
-font-size:28px;
-margin-bottom:18px;
-}
-.card h3{font-size:21px;margin-bottom:8px}
-.card p{color:#aebbd0}
-
-.formbox{
-max-width:850px;
-margin:auto;
-}
-form{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:17px;
-}
-.field{
-display:flex;
-flex-direction:column;
-gap:7px;
-}
-.full{grid-column:1/-1}
-label{font-weight:700}
-input,select,textarea{
-width:100%;
-padding:15px;
-background:#081526;
-border:1px solid #304663;
-border-radius:12px;
-color:white;
-font-size:16px;
-outline:none;
-}
-input:focus,select:focus,textarea:focus{
-border-color:#7864ff;
-box-shadow:0 0 0 3px rgba(118,87,255,.12);
-}
-textarea{min-height:130px;resize:vertical}
-
-.how{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-}
-.step{
-text-align:center;
-padding:30px;
-background:#0e1c30;
-border-radius:22px;
-border:1px solid #293d5a;
-}
-.number{
-width:48px;
-height:48px;
-margin:0 auto 15px;
-border-radius:50%;
-display:grid;
-place-items:center;
-font-weight:900;
+Register as Worker
+💳 Payment
+Future paid services ke liye online aur cash payment options rakhe ja sakte hain.
+📱 Online Payment
+UPI/payment gateway integration yahan add ki ja sakti hai.
+💵 Cash
+Employer aur worker mutual agreement ke according cash payment kar sakte hain.
+🔒 Safety
+Payment se pehle job details aur worker/employer identity verify karna zaroori hai.
+❤️ Help Children
+Aap apni marzi se donation karke zaruratmand bachchon ki madad mein contribute kar sakte hain.
+UPI ID: 7763082034@kotakbank
+Donate via UPI
+UPI app support hone par button se payment app open ho sakta hai.
+📞 Contact
+For partnership, worker verification, job support or other enquiries, contact HelloFriendsHelp.
+WhatsApp Us
+© 2026 HelloFriendsHelp — Work. Connect. Help.
