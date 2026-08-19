@@ -1,65 +1,541 @@
-🤝 HelloFriendsHelp
-Workers
-Post Job
-Register
-Donate
-Post a Job
-🤝
-Work. Connect. Help.
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HelloFriendsHelp — Work. Connect. Help.</title>
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+background:#07111f;
+color:#fff;
+line-height:1.6
+}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1100px;margin:auto;padding:0 20px}
+
+nav{
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(7,17,31,.94);
+backdrop-filter:blur(15px);
+border-bottom:1px solid #263653
+}
+.nav{
+min-height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px
+}
+.brand{
+font-size:22px;
+font-weight:800
+}
+.links{
+display:flex;
+gap:20px;
+align-items:center
+}
+.links a{
+color:#dce5f5;
+font-weight:600
+}
+
+.btn{
+display:inline-block;
+border:0;
+border-radius:13px;
+padding:14px 21px;
+font-weight:800;
+font-size:16px;
+cursor:pointer
+}
+.primary{
+background:linear-gradient(135deg,#7657ff,#9b5cff);
+color:white;
+box-shadow:0 10px 25px rgba(118,87,255,.25)
+}
+.dark{
+background:#14233a;
+color:white;
+border:1px solid #30425f
+}
+
+.hero{
+padding:90px 0 80px;
+text-align:center;
+background:
+radial-gradient(circle at 50% 0%,#49236d 0%,#211b49 35%,#07111f 75%)
+}
+.hero .emoji{font-size:58px}
+.hero h1{
+font-size:clamp(42px,8vw,76px);
+line-height:1.05;
+margin:18px 0
+}
+.hero p{
+font-size:20px;
+color:#c5d0e2;
+max-width:750px;
+margin:20px auto 32px
+}
+.hero-actions{
+display:flex;
+justify-content:center;
+gap:13px;
+flex-wrap:wrap
+}
+
+section{padding:70px 0}
+h2{
+font-size:36px;
+line-height:1.2;
+margin:0 0 12px
+}
+.sub{
+color:#aebbd0;
+margin:0 0 30px;
+font-size:17px
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px
+}
+.card{
+background:linear-gradient(145deg,#111f35,#0d192c);
+border:1px solid #2a3c5c;
+border-radius:20px;
+padding:25px;
+box-shadow:0 15px 40px rgba(0,0,0,.12)
+}
+.card h3{
+font-size:22px;
+margin:0 0 8px
+}
+.card p{
+color:#b9c6d8;
+margin:0
+}
+
+.form{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px
+}
+.field{
+display:flex;
+flex-direction:column;
+gap:8px
+}
+.field.full{grid-column:1/-1}
+label{font-weight:700}
+input,select,textarea{
+width:100%;
+padding:15px;
+border-radius:11px;
+border:1px solid #344968;
+background:#091629;
+color:white;
+font-size:16px;
+outline:none
+}
+input:focus,select:focus,textarea:focus{
+border-color:#7657ff;
+box-shadow:0 0 0 3px rgba(118,87,255,.15)
+}
+textarea{
+min-height:130px;
+resize:vertical
+}
+
+.donate{
+background:linear-gradient(135deg,#291b55,#101d32)
+}
+.upi{
+font-size:18px;
+font-weight:800;
+background:#091629;
+padding:15px;
+border-radius:11px;
+margin:18px 0;
+word-break:break-all;
+border:1px solid #2d4161
+}
+.note{
+font-size:14px;
+color:#98a8c0
+}
+
+.contact{
+display:flex;
+gap:15px;
+flex-wrap:wrap
+}
+
+footer{
+padding:35px 0;
+border-top:1px solid #26354d;
+color:#aebbd0;
+text-align:center
+}
+
+.toast{
+display:none;
+margin-top:12px;
+padding:12px;
+border-radius:10px;
+background:#123b2b;
+color:#baf2d2
+}
+
+@media(max-width:750px){
+.links{display:none}
+.grid,.form{grid-template-columns:1fr}
+.field.full{grid-column:auto}
+section{padding:50px 0}
+h2{font-size:30px}
+.hero{padding:65px 0}
+.hero h1{font-size:46px}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="wrap nav">
+<a class="brand" href="#home">🤝 HelloFriendsHelp</a>
+
+<div class="links">
+<a href="#workers">Workers</a>
+<a href="#jobs">Post Job</a>
+<a href="#register">Register</a>
+<a href="#donate">Donate</a>
+</div>
+
+<a class="btn primary" href="#jobs">Post a Job</a>
+</div>
+</nav>
+
+
+<header id="home" class="hero">
+<div class="wrap">
+
+<div class="emoji">🤝</div>
+
+<h1>Work. Connect. Help.</h1>
+
+<p>
 Workers ko kaam se aur employers ko trusted workers se connect karne ka simple platform.
-👷 Find Workers
-📋 Post a Job
-👷 Find Workers
-Apne area ke liye suitable worker category choose karein.
-👷 Labour
-Construction, loading, shifting aur daily work.
-⚡ Electrician
-Electrical installation aur repair work.
-🔧 Plumber
-Pipe, tap, bathroom aur plumbing work.
-🧹 House Help
-Cleaning aur household assistance.
-🎨 Painter
-Home, shop aur building painting work.
-🧰 Other Skilled Work
-Apni requirement form ke through submit karein.
-📋 Post a Job
-Kaam karwana hai? Apni requirement bhejiye.
-Name
+</p>
 
-Phone
+<div class="hero-actions">
+<a class="btn primary" href="#workers">👷 Find Workers</a>
+<a class="btn dark" href="#jobs">📋 Post a Job</a>
+</div>
 
-Work Type
-LabourElectricianPlumberHouse HelpPainterOther
-Location
+</div>
+</header>
 
-Requirement
+
+<section id="workers">
+<div class="wrap">
+
+<h2>👷 Find Workers</h2>
+<p class="sub">Apne area ke liye suitable worker category choose karein.</p>
+
+<div class="grid">
+
+<div class="card">
+<h3>👷 Labour</h3>
+<p>Construction, loading, shifting aur daily work ke liye reliable workers.</p>
+</div>
+
+<div class="card">
+<h3>⚡ Electrician</h3>
+<p>Electrical installation, repair aur maintenance work.</p>
+</div>
+
+<div class="card">
+<h3>🔧 Plumber</h3>
+<p>Pipe, tap, bathroom aur plumbing work ke liye worker.</p>
+</div>
+
+<div class="card">
+<h3>🧹 House Help</h3>
+<p>Cleaning aur household assistance ke liye help.</p>
+</div>
+
+<div class="card">
+<h3>🎨 Painter</h3>
+<p>Home, shop aur building painting work.</p>
+</div>
+
+<div class="card">
+<h3>🧰 Other Skilled Work</h3>
+<p>Apni requirement form ke through submit karein.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<section id="jobs">
+<div class="wrap">
+
+<h2>📋 Post a Job</h2>
+<p class="sub">Kaam karwana hai? Apni requirement bhejiye.</p>
+
+<form class="card form" onsubmit="submitJob(event)">
+
+<div class="field">
+<label>Name</label>
+<input id="jobName" required placeholder="Your name">
+</div>
+
+<div class="field">
+<label>Phone</label>
+<input id="jobPhone" required type="tel" placeholder="Mobile number">
+</div>
+
+<div class="field">
+<label>Work Type</label>
+<select id="jobType">
+<option>Labour</option>
+<option>Electrician</option>
+<option>Plumber</option>
+<option>House Help</option>
+<option>Painter</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="field">
+<label>Location</label>
+<input id="jobLocation" required placeholder="City / Area">
+</div>
+
+<div class="field full">
+<label>Requirement</label>
+<textarea id="jobDetails" required placeholder="Kaunsa kaam karwana hai?"></textarea>
+</div>
+
+<div class="field full">
+<button class="btn primary" type="submit">
 Submit Job Requirement
-🧑‍🔧 Worker Registration
-Worker apni basic details submit karke platform par registration ke liye request bhej sakta hai.
-Name
+</button>
 
-Phone
+<div id="jobToast" class="toast">
+Requirement submitted successfully.
+</div>
 
-Skill
+</div>
 
-Location
+</form>
+</div>
+</section>
 
+
+<section id="register">
+<div class="wrap">
+
+<h2>🧑‍🔧 Worker Registration</h2>
+
+<p class="sub">
+Worker apni basic details submit karke registration ke liye request bhej sakta hai.
+</p>
+
+<form class="card form" onsubmit="submitWorker(event)">
+
+<div class="field">
+<label>Name</label>
+<input id="workerName" required placeholder="Full name">
+</div>
+
+<div class="field">
+<label>Phone</label>
+<input id="workerPhone" required type="tel" placeholder="Mobile number">
+</div>
+
+<div class="field">
+<label>Skill</label>
+<input id="workerSkill" required placeholder="e.g. Labour, Electrician">
+</div>
+
+<div class="field">
+<label>Location</label>
+<input id="workerLocation" required placeholder="City / Area">
+</div>
+
+<div class="field full">
+
+<button class="btn primary" type="submit">
 Register as Worker
-💳 Payment
-Future paid services ke liye online aur cash payment options rakhe ja sakte hain.
-📱 Online Payment
-UPI/payment gateway integration yahan add ki ja sakti hai.
-💵 Cash
-Employer aur worker mutual agreement ke according cash payment kar sakte hain.
-🔒 Safety
-Payment se pehle job details aur worker/employer identity verify karna zaroori hai.
-❤️ Help Children
+</button>
+
+<div id="workerToast" class="toast">
+Worker registration request submitted successfully.
+</div>
+
+</div>
+
+</form>
+</div>
+</section>
+
+
+<section id="payment">
+<div class="wrap">
+
+<h2>💳 Payment</h2>
+
+<p class="sub">
+Online aur cash payment options future me add kiye ja sakte hain.
+</p>
+
+<div class="grid">
+
+<div class="card">
+<h3>📱 Online Payment</h3>
+<p>UPI/payment gateway integration add ki ja sakti hai.</p>
+</div>
+
+<div class="card">
+<h3>💵 Cash Payment</h3>
+<p>Employer aur worker mutual agreement ke according cash payment kar sakte hain.</p>
+</div>
+
+<div class="card">
+<h3>🔒 Safety</h3>
+<p>Payment se pehle job details aur identity verify karna zaroori hai.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<section id="donate">
+<div class="wrap">
+
+<div class="card donate">
+
+<h2>❤️ Help Children</h2>
+
+<p class="sub">
 Aap apni marzi se donation karke zaruratmand bachchon ki madad mein contribute kar sakte hain.
+</p>
+
+<div class="upi">
 UPI ID: 7763082034@kotakbank
+</div>
+
+<a class="btn primary"
+href="upi://pay?pa=7763082034@kotakbank&pn=HelloFriendsHelp&cu=INR">
 Donate via UPI
+</a>
+
+<p class="note">
 UPI app support hone par button se payment app open ho sakta hai.
-📞 Contact
-For partnership, worker verification, job support or other enquiries, contact HelloFriendsHelp.
-WhatsApp Us
+</p>
+
+</div>
+</div>
+</section>
+
+
+<section id="contact">
+<div class="wrap">
+
+<h2>📞 Contact HelloFriendsHelp</h2>
+
+<div class="card">
+
+<p>
+Partnership, worker verification, job support ya kisi bhi enquiry ke liye contact karein.
+</p>
+
+<div class="contact">
+
+<a class="btn primary"
+href="https://wa.me/917763082034?text=Hello%20HelloFriendsHelp,%20mujhe%20website%20ke%20baare%20mein%20jaankari%20chahiye.">
+💬 WhatsApp Us
+</a>
+
+<a class="btn dark" href="#home">
+⬆️ Back to Top
+</a>
+
+</div>
+
+</div>
+</div>
+</section>
+
+
+<footer>
+<div class="wrap">
 © 2026 HelloFriendsHelp — Work. Connect. Help.
+</div>
+</footer>
+
+
+<script>
+
+function submitJob(e){
+
+e.preventDefault();
+
+const data={
+name:document.getElementById("jobName").value,
+phone:document.getElementById("jobPhone").value,
+type:document.getElementById("jobType").value,
+location:document.getElementById("jobLocation").value,
+details:document.getElementById("jobDetails").value
+};
+
+localStorage.setItem(
+"hf_job_"+Date.now(),
+JSON.stringify(data)
+);
+
+document.getElementById("jobToast").style.display="block";
+
+e.target.reset();
+}
+
+
+function submitWorker(e){
+
+e.preventDefault();
+
+const data={
+name:document.getElementById("workerName").value,
+phone:document.getElementById("workerPhone").value,
+skill:document.getElementById("workerSkill").value,
+location:document.getElementById("workerLocation").value
+};
+
+localStorage.setItem(
+"hf_worker_"+Date.now(),
+JSON.stringify(data)
+);
+
+document.getElementById("workerToast").style.display="block";
+
+e.target.reset();
+}
+
+</script>
+
+</body>
+</html>
