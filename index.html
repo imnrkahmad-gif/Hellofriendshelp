@@ -1,15 +1,69 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="refresh" content="0;url=HelloFriendsHelp_DirectUpload.html">
 <title>HelloFriendsHelp</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#07111f;color:white}
+header{padding:20px;text-align:center;background:#101d32}
+h1{font-size:42px;margin:10px}
+p{color:#b9c5d6}
+.hero{text-align:center;padding:70px 20px;background:linear-gradient(135deg,#171c4d,#35123d)}
+button,a{display:inline-block;padding:14px 22px;margin:8px;border:0;border-radius:10px;text-decoration:none;font-weight:bold}
+.primary{background:#7657ff;color:white}
+.second{background:#17243a;color:white}
+section{padding:50px 20px;max-width:1000px;margin:auto}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.card{background:#101d32;padding:25px;border-radius:18px;border:1px solid #263754}
+@media(max-width:700px){.cards{grid-template-columns:1fr}}
+footer{text-align:center;padding:30px;background:#050b14}
+</style>
 </head>
+
 <body>
-<p>Opening HelloFriendsHelp…</p>
-<script>
-location.replace('HelloFriendsHelp_DirectUpload.html');
-</script>
+
+<header>
+<h1>HelloFriendsHelp 🤝</h1>
+<p>Work • Connect • Help</p>
+</header>
+
+<div class="hero">
+<h1>Find Work. Hire Help.</h1>
+<p>HelloFriendsHelp workers aur employers ko connect karta hai.</p>
+<a class="primary" href="#workers">Find Workers</a>
+<a class="second" href="#jobs">Post a Job</a>
+</div>
+
+<section id="workers">
+<h2>👷 Find Workers</h2>
+<div class="cards">
+<div class="card"><h3>Labour</h3><p>Daily work ke liye reliable workers.</p></div>
+<div class="card"><h3>Electrician</h3><p>Electrical work ke liye help.</p></div>
+<div class="card"><h3>Plumber</h3><p>Plumbing work ke liye worker.</p></div>
+</div>
+</section>
+
+<section id="jobs">
+<h2>📋 Post a Job</h2>
+<div class="card">
+<p>Apni requirement submit karke suitable worker se contact karein.</p>
+<button class="primary" onclick="alert('Job posting feature coming soon!')">Post Requirement</button>
+</div>
+</section>
+
+<section>
+<h2>❤️ Help Children</h2>
+<div class="card">
+<p>Aap voluntary donation ke through zaruratmand bachchon ki madad kar sakte hain.</p>
+<button class="primary" onclick="alert('Donation details will be added soon.')">Donate</button>
+</div>
+</section>
+
+<footer>
+© 2026 HelloFriendsHelp<br>
+Work. Connect. Help.
+</footer>
+
 </body>
 </html>
