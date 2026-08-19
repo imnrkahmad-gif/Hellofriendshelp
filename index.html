@@ -1,69 +1,214 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HelloFriendsHelp</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>HelloFriendsHelp | Work • Connect • Help</title>
+
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#07111f;color:white}
-header{padding:20px;text-align:center;background:#101d32}
-h1{font-size:42px;margin:10px}
-p{color:#b9c5d6}
-.hero{text-align:center;padding:70px 20px;background:linear-gradient(135deg,#171c4d,#35123d)}
-button,a{display:inline-block;padding:14px 22px;margin:8px;border:0;border-radius:10px;text-decoration:none;font-weight:bold}
-.primary{background:#7657ff;color:white}
-.second{background:#17243a;color:white}
-section{padding:50px 20px;max-width:1000px;margin:auto}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.card{background:#101d32;padding:25px;border-radius:18px;border:1px solid #263754}
-@media(max-width:700px){.cards{grid-template-columns:1fr}}
-footer{text-align:center;padding:30px;background:#050b14}
-</style>
-</head>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#07111f;
+color:#fff;
+line-height:1.6;
+}
+a{text-decoration:none;color:inherit}
+.container{width:min(1150px,92%);margin:auto}
 
-<body>
+nav{
+position:sticky;
+top:0;
+z-index:999;
+background:rgba(5,15,30,.88);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(255,255,255,.1);
+}
+.nav{
+height:72px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+.logo{
+font-size:22px;
+font-weight:900;
+background:linear-gradient(90deg,#8b6cff,#00d4ff);
+-webkit-background-clip:text;
+color:transparent;
+}
+.navlinks{
+display:flex;
+gap:25px;
+align-items:center;
+}
+.navlinks a{
+color:#cbd5e1;
+font-weight:600;
+}
+.navlinks a:hover{color:#8b7cff}
 
-<header>
-<h1>HelloFriendsHelp 🤝</h1>
-<p>Work • Connect • Help</p>
-</header>
+.btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+padding:14px 22px;
+border-radius:14px;
+font-weight:800;
+border:0;
+cursor:pointer;
+transition:.25s;
+}
+.btn:hover{transform:translateY(-2px)}
+.primary{
+background:linear-gradient(135deg,#7657ff,#00a8ff);
+box-shadow:0 10px 30px rgba(91,72,255,.3);
+}
+.secondary{
+background:#14243b;
+border:1px solid #304766;
+}
 
-<div class="hero">
-<h1>Find Work. Hire Help.</h1>
-<p>HelloFriendsHelp workers aur employers ko connect karta hai.</p>
-<a class="primary" href="#workers">Find Workers</a>
-<a class="second" href="#jobs">Post a Job</a>
-</div>
+.hero{
+padding:95px 0 85px;
+text-align:center;
+background:
+radial-gradient(circle at 50% 0%,#452476 0%,#17224b 35%,#07111f 75%);
+}
+.badge{
+display:inline-block;
+padding:8px 15px;
+border:1px solid #594fd0;
+background:rgba(118,87,255,.12);
+border-radius:50px;
+color:#b9b0ff;
+font-weight:700;
+margin-bottom:20px;
+}
+.hero h1{
+font-size:clamp(42px,8vw,78px);
+line-height:1.05;
+margin-bottom:20px;
+}
+.gradient{
+background:linear-gradient(90deg,#9b7cff,#20d8ff);
+-webkit-background-clip:text;
+color:transparent;
+}
+.hero p{
+max-width:760px;
+margin:0 auto 32px;
+font-size:19px;
+color:#bdc9dc;
+}
+.hero-buttons{
+display:flex;
+justify-content:center;
+gap:13px;
+flex-wrap:wrap;
+}
 
-<section id="workers">
-<h2>👷 Find Workers</h2>
-<div class="cards">
-<div class="card"><h3>Labour</h3><p>Daily work ke liye reliable workers.</p></div>
-<div class="card"><h3>Electrician</h3><p>Electrical work ke liye help.</p></div>
-<div class="card"><h3>Plumber</h3><p>Plumbing work ke liye worker.</p></div>
-</div>
-</section>
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-top:55px;
+}
+.stat{
+padding:20px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.1);
+border-radius:18px;
+}
+.stat b{font-size:28px;display:block}
+.stat span{color:#9eacc1}
 
-<section id="jobs">
-<h2>📋 Post a Job</h2>
-<div class="card">
-<p>Apni requirement submit karke suitable worker se contact karein.</p>
-<button class="primary" onclick="alert('Job posting feature coming soon!')">Post Requirement</button>
-</div>
-</section>
+section{padding:75px 0}
+.section-title{text-align:center;margin-bottom:40px}
+.section-title h2{font-size:38px;margin-bottom:8px}
+.section-title p{color:#9eacc1}
 
-<section>
-<h2>❤️ Help Children</h2>
-<div class="card">
-<p>Aap voluntary donation ke through zaruratmand bachchon ki madad kar sakte hain.</p>
-<button class="primary" onclick="alert('Donation details will be added soon.')">Donate</button>
-</div>
-</section>
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+.card{
+background:linear-gradient(145deg,#101e34,#0b1729);
+border:1px solid #293d5a;
+border-radius:22px;
+padding:27px;
+transition:.25s;
+}
+.card:hover{
+transform:translateY(-5px);
+border-color:#695cff;
+box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+.icon{
+width:58px;
+height:58px;
+display:grid;
+place-items:center;
+border-radius:17px;
+background:linear-gradient(135deg,#7657ff,#00a8ff);
+font-size:28px;
+margin-bottom:18px;
+}
+.card h3{font-size:21px;margin-bottom:8px}
+.card p{color:#aebbd0}
 
-<footer>
-© 2026 HelloFriendsHelp<br>
-Work. Connect. Help.
-</footer>
+.formbox{
+max-width:850px;
+margin:auto;
+}
+form{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:17px;
+}
+.field{
+display:flex;
+flex-direction:column;
+gap:7px;
+}
+.full{grid-column:1/-1}
+label{font-weight:700}
+input,select,textarea{
+width:100%;
+padding:15px;
+background:#081526;
+border:1px solid #304663;
+border-radius:12px;
+color:white;
+font-size:16px;
+outline:none;
+}
+input:focus,select:focus,textarea:focus{
+border-color:#7864ff;
+box-shadow:0 0 0 3px rgba(118,87,255,.12);
+}
+textarea{min-height:130px;resize:vertical}
 
-</body>
-</html>
+.how{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+.step{
+text-align:center;
+padding:30px;
+background:#0e1c30;
+border-radius:22px;
+border:1px solid #293d5a;
+}
+.number{
+width:48px;
+height:48px;
+margin:0 auto 15px;
+border-radius:50%;
+display:grid;
+place-items:center;
+font-weight:900;
