@@ -920,5 +920,127 @@ let old=student();
 if(old)show(old);
 
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // Enter NurseStudy button ko automatically find karega
+  const buttons = Array.from(document.querySelectorAll("button"));
+
+  const enterButton = buttons.find(btn =>
+    btn.textContent.toLowerCase().includes("enter nursestudy")
+  );
+
+  if (!enterButton) {
+    console.log("Enter NurseStudy button not found");
+    return;
+  }
+
+  enterButton.type = "button";
+
+  enterButton.onclick = function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Saare input/select fields collect karo
+    const inputs = Array.from(
+      document.querySelectorAll("input, select")
+    );
+
+    let profile = {};
+
+    inputs.forEach((el, index) => {
+      const key =
+        el.name ||
+        el.id ||
+        el.placeholder ||
+        ("field_" + index);
+
+      if (el.type === "checkbox") {
+        profile[key] = el.checked;
+      } else {
+        profile[key] = el.value;
+      }
+    });
+
+    // Required details check
+    const values = Object.values(profile).map(v =>
+      String(v).trim()
+    );
+
+    const checkboxOK = inputs.some(
+      el => el.type === "checkbox" && el.checked
+    );
+
+    // Agar checkbox nahi hai ya checked hai
+    if (!checkboxOK) {
+      alert("Please tick the agreement checkbox.");
+      return;
+    }
+
+    // Profile browser me save
+    localStorage.setItem(
+      "NurseStudyStudent",
+      JSON.stringify(profile)
+    );
+
+    localStorage.setItem(
+      "NurseStudyLoggedIn",
+      "true"
+    );
+
+    // Login screen hide
+    const loginCandidates = [
+      "#login",
+      "#loginPage",
+      "#loginSection",
+      ".loginPage",
+      ".login-section",
+      ".login-container"
+    ];
+
+    loginCandidates.forEach(selector => {
+      const el = document.querySelector(selector);
+      if (el) el.style.display = "none";
+    });
+
+    // Study screen show
+    const studyCandidates = [
+      "#study",
+      "#studyPage",
+      "#studySection",
+      ".studyPage",
+      ".study-section"
+    ];
+
+    let opened = false;
+
+    studyCandidates.forEach(selector => {
+      const el = document.querySelector(selector);
+
+      if (el) {
+        el.style.display = "block";
+        el.classList.remove("hidden");
+        opened = true;
+      }
+    });
+
+    // Agar study section mil gaya
+    if (opened) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+      return;
+    }
+
+    // Fallback: page ko study mode me reload karo
+    const url = new URL(window.location.href);
+    url.searchParams.set("study", "1");
+    window.location.href = url.toString();
+  };
+
+});
+</script>
 </body>
 </html>
