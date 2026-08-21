@@ -1,1060 +1,752 @@
-const express = require("express");
-const session = require("express-session");
-const Database = require("better-sqlite3");
+const http = require("http");
+const fs = require("fs");
 const path = require("path");
+const os = require("os");
 
-const app = express();
 const PORT = process.env.PORT || 10000;
+const HOST = "0.0.0.0";
 
-app.use(express.json({ limit: "2mb" }));
-app.use(express.urlencoded({ extended: true }));
+const DATA_FILE = path.join(os.tmpdir(), "nursestudy_students.json");
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || "NurseStudy-2026-Secret",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      secure: false,
-      maxAge: 30 * 24 * 60 * 60 * 1000
+function readStudents() {
+  try {
+    if (fs.existsSync(DATA_FILE)) {
+      return JSON.parse(fs.readFileSync(DATA_FILE, "utf8"));
     }
-  })
-);
+  } catch (e) {}
+  return [];
+}
 
-/* =========================================================
-   DATABASE
-========================================================= */
+function saveStudent(student) {
+  const students = readStudents();
+  students.push({
+    ...student,
+    id: Date.now(),
+    createdAt: new Date().toISOString()
+  });
 
-const db = new Database(
-  path.join(__dirname, "nursestudy.db")
-);
+  try {
+    fs.writeFileSync(DATA_FILE, JSON.stringify(students, null, 2));
+  } catch (e) {}
 
-db.pragma("journal_mode = WAL");
+  return true;
+}
 
-db.exec(`
-CREATE TABLE IF NOT EXISTS students (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL,
-  phone TEXT NOT NULL,
-  gender TEXT NOT NULL,
-  semester TEXT NOT NULL,
-  university TEXT NOT NULL,
-  college TEXT NOT NULL,
-  course TEXT NOT NULL,
-  created_at TEXT DEFAULT CURRENT_TIMESTAMP
-);
-`);
+const CONTENT = {
 
-/* =========================================================
-   NURSING CONTENT
-========================================================= */
-
-const SUBJECTS = {
-
-"1st Semester":[
+"1st Semester": [
 ["Fundamentals of Nursing",
- "Fundamentals of Nursing is the basic foundation of nursing practice.",
- "Nursing process, patient safety, communication, basic procedures and holistic care."],
+"Fundamentals of Nursing is the foundation of nursing practice.",
+"Simple: Nursing ki basic knowledge aur patient care ke rules ko Fundamentals of Nursing kehte hain.",
+["What is nursing?","Nursing means caring for individuals, families and communities to promote health, prevent illness and provide care."],
+["What is nursing process?","Assessment → Nursing Diagnosis → Planning → Implementation → Evaluation"],
+["What are vital signs?","Temperature, pulse, respiration, blood pressure and oxygen saturation."],
+["Why is hand washing important?","It prevents the spread of infection."],
+["What is asepsis?","Asepsis means absence or prevention of harmful microorganisms."]
+],
 
 ["Nursing Process",
- "The nursing process is a systematic method of providing individualized nursing care.",
- "Assessment, nursing diagnosis, planning, implementation and evaluation."],
+"The nursing process is a systematic method of providing individualized nursing care.",
+"Simple: Patient ki problem ko identify karke planned care dene ka systematic method nursing process hai.",
+["Name the five steps.","Assessment, Diagnosis, Planning, Implementation and Evaluation."],
+["What is assessment?","Collection of information about the patient's health condition."],
+["What is evaluation?","Checking whether the planned nursing goals were achieved."]
+],
 
 ["Vital Signs",
- "Vital signs are measurements that show important functions of the body.",
- "Temperature, pulse, respiration, blood pressure and oxygen saturation."],
+"Vital signs are measurements of important body functions.",
+"Simple: Body ke important functions ko measure karna vital signs kehlata hai.",
+["Normal adult temperature?","Approximately 36.5–37.5°C."],
+["Normal adult pulse?","Usually 60–100 beats/minute."],
+["Normal adult respiratory rate?","Usually 12–20 breaths/minute."],
+["Normal adult blood pressure?","Around 120/80 mmHg is commonly considered normal."],
+["Normal SpO2?","Usually 95–100% in a healthy adult at sea level."]
+],
 
-["Hand Hygiene",
- "Hand hygiene means cleaning the hands to remove microorganisms and prevent infection.",
- "Hand hygiene before and after patient contact is essential."],
-
-["Bed Making",
- "Bed making is preparing a clean, comfortable and safe bed for a patient.",
- "Cleanliness, comfort, privacy, safety and proper body mechanics."],
-
-["Therapeutic Communication",
- "Therapeutic communication is purposeful communication used to help patients.",
- "Listening, empathy, respect, confidentiality and non-judgmental communication."],
-
-["Patient Safety",
- "Patient safety means preventing avoidable harm during healthcare.",
- "Correct identification, fall prevention, medication safety and communication."],
+["Communication",
+"Therapeutic communication is purposeful communication used to help a patient.",
+"Simple: Patient ko samajhne aur help karne ke liye respectful communication therapeutic communication hai.",
+["What is empathy?","Understanding another person's feelings and perspective."],
+["What is active listening?","Listening carefully and responding appropriately."]
+],
 
 ["First Aid",
- "First aid is immediate basic care given to an injured or suddenly ill person.",
- "Assess danger, response, breathing and circulation and provide appropriate immediate help."]
+"First aid is immediate basic care given to an injured or suddenly ill person.",
+"Simple: Emergency me doctor/hospital care se pehle di gayi immediate basic help first aid hai.",
+["First priority in an emergency?","Ensure scene safety and assess the person's condition."],
+["What is CPR?","Cardiopulmonary resuscitation used when a person is unresponsive and not breathing normally."]
+]
 ],
 
-"2nd Semester":[
+"2nd Semester": [
 ["Microbiology",
- "Microbiology is the study of microorganisms and their relationship with health and disease.",
- "Bacteria, viruses, fungi, parasites, infection and prevention."],
+"Microbiology is the study of microorganisms.",
+"Simple: Bacteria, virus, fungus aur other microorganisms ka study microbiology hai.",
+["Name common microorganisms.","Bacteria, viruses, fungi and parasites."],
+["What is infection?","Entry and multiplication of microorganisms in a host, which may cause disease."],
+["How can infection spread be prevented?","Hand hygiene, PPE, aseptic technique, cleaning, disinfection and sterilization."]
+],
 
 ["Pharmacology",
- "Pharmacology is the study of drugs and their effects on living organisms.",
- "Indications, dose, adverse effects, contraindications and nursing responsibilities."],
+"Pharmacology is the study of drugs and their effects.",
+"Simple: Medicines/drugs aur unke body par effects ka study pharmacology hai.",
+["What is a drug?","A substance used to diagnose, prevent, treat or modify disease."],
+["What is side effect?","An unintended effect that may occur at normal therapeutic doses."]
+],
 
 ["Medication Safety",
- "Medication safety means giving medicines correctly and safely.",
- "Right patient, drug, dose, route, time, documentation and allergy checking."],
-
-["Pain Assessment",
- "Pain assessment is the systematic assessment of a patient's pain.",
- "Site, severity, quality, duration, timing and effect on activities."],
-
-["Fluid and Electrolyte Balance",
- "Fluid and electrolyte balance means maintaining appropriate water and electrolyte levels in the body.",
- "Intake, output, sodium, potassium, dehydration and fluid overload."],
+"Medication safety means giving medicines correctly and safely.",
+"Simple: Patient ko correct medicine correct dose aur correct time par dena medication safety hai.",
+["Five rights of medication?","Right patient, right drug, right dose, right route and right time."],
+["Why check allergy?","To prevent potentially serious allergic reactions."]
+],
 
 ["Nutrition",
- "Nutrition is the process by which the body obtains and uses nutrients.",
- "Carbohydrates, proteins, fats, vitamins, minerals and water."],
+"Nutrition is the process by which the body obtains and uses nutrients.",
+"Simple: Body ko energy aur growth ke liye nutrients milna nutrition hai.",
+["Main nutrients?","Carbohydrates, proteins, fats, vitamins, minerals and water."],
+["Main function of protein?","Growth, tissue repair and maintenance."]
+],
 
 ["Infection Control",
- "Infection control includes measures used to prevent the spread of infection.",
- "Hand hygiene, PPE, aseptic technique, sterilization and waste management."]
+"Infection control includes measures used to prevent the spread of infection.",
+"Simple: Infection ko ek patient se dusre tak spread hone se rokna infection control hai.",
+["Most important infection-control measure?","Hand hygiene."],
+["What is sterilization?","A process that destroys all forms of microbial life, including spores."]
+]
 ],
 
-"3rd Semester":[
+"3rd Semester": [
 ["Hypertension",
- "Hypertension is persistently elevated blood pressure.",
- "High salt intake, obesity, inactivity, tobacco, family history, age, diabetes and kidney disease."],
+"Hypertension is persistently elevated blood pressure.",
+"Simple: Jab blood pressure repeatedly normal se high rahe to hypertension kehte hain.",
+["What is systolic BP?","Pressure in arteries when the heart contracts."],
+["What is diastolic BP?","Pressure in arteries when the heart relaxes."],
+["Common risk factors?","High salt intake, obesity, inactivity, smoking, age, family history, diabetes and kidney disease."],
+["Symptoms?","It may have no symptoms; severe hypertension can cause headache, visual problems, chest symptoms or breathlessness."],
+["Nursing management?","Monitor BP, give prescribed medicines, encourage healthy diet, exercise, smoking cessation and follow-up."]
+],
 
 ["Myocardial Infarction",
- "Myocardial infarction occurs when blood supply to part of the heart muscle is severely reduced or blocked.",
- "Chest discomfort, sweating, breathlessness, nausea and pain may occur."],
+"Myocardial infarction occurs when blood supply to part of the heart muscle is severely reduced or blocked.",
+"Simple: Heart muscle ke kisi part ko blood/oxygen supply rukne se heart attack hota hai.",
+["Important symptom?","Chest pressure/discomfort, sweating, breathlessness, nausea or pain radiating to arm/jaw may occur."],
+["Nursing priority?","Rapid assessment, monitoring, oxygen when indicated, prescribed treatment and urgent medical management."]
+],
 
 ["COPD",
- "Chronic obstructive pulmonary disease is a chronic respiratory condition with persistent airflow limitation.",
- "Smoking and harmful environmental or occupational exposures are important risk factors."],
+"Chronic obstructive pulmonary disease is a chronic respiratory condition with persistent airflow limitation.",
+"Simple: COPD me lungs ki airflow permanently/long-term limited ho jati hai.",
+["Major risk factor?","Smoking is a major risk factor."],
+["Symptoms?","Chronic cough, sputum and breathlessness."],
+["Nursing care?","Monitor breathing, administer prescribed medicines, encourage smoking cessation and breathing exercises."]
+],
 
 ["Diabetes Mellitus",
- "Diabetes mellitus is a chronic metabolic disorder characterized by elevated blood glucose.",
- "Glucose monitoring, medicines, nutrition, exercise, foot care and complication prevention."],
+"Diabetes mellitus is a chronic disorder characterized by elevated blood glucose.",
+"Simple: Blood me sugar level continuously high rehna diabetes hai.",
+["Common symptoms?","Polyuria, polydipsia, polyphagia, fatigue and weight changes."],
+["Nursing management?","Blood glucose monitoring, medicines, diet, exercise, foot care and complication prevention."]
+],
 
 ["Shock",
- "Shock is a life-threatening condition in which tissue perfusion is inadequate.",
- "Hypotension, tachycardia, altered mental status, cold skin and reduced urine output."],
+"Shock is a life-threatening condition in which tissue perfusion is inadequate.",
+"Simple: Body ke tissues ko enough blood aur oxygen na milne ki dangerous condition shock hai.",
+["Common signs?","Low BP, fast pulse, altered consciousness, cold skin and reduced urine output."],
+["Nursing priority?","ABC assessment, oxygen/support as indicated, IV access/fluids or other treatment as prescribed and urgent medical care."]
+],
 
 ["Peptic Ulcer",
- "Peptic ulcer is a break in the lining of the stomach or duodenum.",
- "H. pylori infection, NSAIDs and other risk factors; pain and gastrointestinal bleeding may occur."],
+"Peptic ulcer is a break in the lining of the stomach or duodenum.",
+"Simple: Stomach ya duodenum ki lining me ulcer/ghaav ko peptic ulcer kehte hain.",
+["Important causes?","H. pylori infection and NSAID use are major causes."],
+["Complications?","Bleeding, perforation and obstruction."]
+],
 
 ["Asthma",
- "Asthma is a chronic inflammatory airway disease characterized by variable airflow obstruction.",
- "Wheezing, cough, chest tightness and breathlessness."],
+"Asthma is a chronic inflammatory airway disease with variable airflow obstruction.",
+"Simple: Airways narrow hone ki wajah se wheezing aur breathing difficulty hoti hai.",
+["Common symptoms?","Wheezing, cough, chest tightness and breathlessness."],
+["Nursing care?","Monitor breathing, administer prescribed inhaled medicines and identify triggers."]
+],
 
 ["Pneumonia",
- "Pneumonia is an infection of the lung tissue.",
- "Fever, cough, sputum, chest discomfort and breathing difficulty may occur."],
-
-["Renal Failure",
- "Renal failure is severe impairment of kidney function.",
- "Reduced urine output, edema, electrolyte imbalance and accumulation of waste products may occur."]
+"Pneumonia is an infection of lung tissue.",
+"Simple: Lungs ke tissue me infection ko pneumonia kehte hain.",
+["Symptoms?","Fever, cough, sputum, chest discomfort and breathlessness."],
+["Nursing care?","Monitor oxygenation, breathing, temperature, hydration and prescribed treatment."]
+]
 ],
 
-"4th Semester":[
+"4th Semester": [
 ["Surgical Nursing",
- "Surgical nursing provides care to patients before, during and after surgery.",
- "Preoperative, intraoperative and postoperative care."],
-
-["Wound Care",
- "Wound care is assessment and management of a wound to promote healing.",
- "Aseptic technique, wound assessment, dressing, pain and infection prevention."],
-
-["Blood Transfusion",
- "Blood transfusion is administration of blood or blood components to a patient.",
- "Correct patient and blood product identification and monitoring for reactions."],
-
-["Postoperative Care",
- "Postoperative care is nursing care provided after surgery.",
- "Airway, breathing, circulation, pain, wound, urine output and complications."],
+"Surgical nursing provides care before, during and after surgery.",
+"Simple: Operation ke before, during aur after patient ki nursing care surgical nursing hai.",
+["Phases?","Preoperative, intraoperative and postoperative."],
+["Important postoperative observations?","Airway, breathing, circulation, pain, wound, urine output and complications."]
+],
 
 ["Preoperative Care",
- "Preoperative care prepares a patient physically and psychologically for surgery.",
- "Assessment, consent verification, investigations, preparation and education."],
+"Preoperative care prepares a patient physically and psychologically for surgery.",
+"Simple: Operation se pehle patient ko physically aur mentally prepare karna.",
+["Important checks?","Patient identity, consent, investigations, allergies, fasting status and preparation."],
+["Why is consent important?","It confirms informed agreement for the procedure."]
+],
+
+["Postoperative Care",
+"Postoperative care is nursing care provided after surgery.",
+"Simple: Operation ke baad patient ki recovery ke liye di gayi care.",
+["Priority?","Airway, breathing and circulation."],
+["What should be monitored?","Vital signs, pain, wound, drainage, urine output and complications."]
+],
+
+["Wound Care",
+"Wound care aims to promote healing and prevent infection.",
+"Simple: Wound ko clean rakhna aur healing promote karna wound care hai.",
+["Important principle?","Use appropriate aseptic technique."],
+["Signs of infection?","Increasing redness, warmth, swelling, pain, pus or fever."]
+],
+
+["Blood Transfusion",
+"Blood transfusion is administration of blood or blood components.",
+"Simple: Patient ko blood ya blood component dena blood transfusion hai.",
+["Important safety step?","Correctly identify the patient and blood product."],
+["Signs of transfusion reaction?","Fever, chills, rash, breathlessness, back/chest pain or hypotension may occur."]
+],
 
 ["Fracture",
- "A fracture is a break or disruption in the continuity of a bone.",
- "Pain, swelling, deformity and impaired movement may occur."],
+"A fracture is a break in the continuity of a bone.",
+"Simple: Bone ka tootna fracture kehlata hai.",
+["Symptoms?","Pain, swelling, deformity and limited movement."],
+["First aid principle?","Immobilize the injured part and avoid unnecessary movement."]
+],
 
 ["Burns",
- "A burn is tissue injury caused by heat, chemicals, electricity, radiation or friction.",
- "Airway, breathing, circulation, burn assessment, fluid management and infection prevention."],
+"A burn is tissue injury caused by heat, chemicals, electricity, radiation or friction.",
+"Simple: Heat, chemical, electricity etc. se tissue damage burn hai.",
+["Priority in major burn?","Assess airway, breathing and circulation."],
+["Complications?","Fluid loss, infection, hypothermia and scarring."]
+],
 
 ["Cancer",
- "Cancer is uncontrolled abnormal growth of cells that may invade or spread.",
- "Early detection, treatment, nutrition, pain management and psychosocial support."]
+"Cancer is uncontrolled abnormal cell growth that may invade or spread.",
+"Simple: Body cells ka uncontrolled abnormal growth cancer hai.",
+["Treatment types?","Surgery, chemotherapy, radiotherapy, targeted/immunotherapy depending on cancer."],
+["Nursing care?","Pain control, nutrition, infection prevention, treatment support and psychological care."]
+]
 ],
 
-"5th Semester":[
+"5th Semester": [
 ["Community Health Nursing",
- "Community health nursing combines nursing and public health principles to improve community health.",
- "Health promotion, prevention, assessment, education and follow-up."],
+"Community health nursing combines nursing and public health principles.",
+"Simple: Community ke health ko improve karne ke liye nursing aur public health ka use.",
+["Main aim?","Health promotion, disease prevention and community wellbeing."],
+["Important activities?","Assessment, health education, prevention, referral and follow-up."]
+],
 
 ["Primary Health Care",
- "Primary health care is essential healthcare that is accessible to individuals and communities.",
- "Accessibility, participation, health education, appropriate technology and intersectoral coordination."],
+"Primary health care is essential healthcare that is accessible to individuals and communities.",
+"Simple: Sabko easily available basic healthcare dena primary health care hai.",
+["Important principles?","Accessibility, community participation, intersectoral coordination and appropriate technology."],
+["Examples?","Health education, immunization, maternal-child care and basic treatment."]
+],
 
 ["Health Education",
- "Health education helps people gain knowledge and skills to improve health.",
- "Assessment, planning, implementation and evaluation."],
-
-["National Health Programmes",
- "National health programmes are organized programmes for prevention and control of important health problems.",
- "Prevention, treatment, health promotion and strengthening health services."],
+"Health education helps people gain knowledge and skills to improve health.",
+"Simple: Health ke baare me knowledge aur healthy behaviour develop karna health education hai.",
+["Steps?","Assessment, planning, implementation and evaluation."],
+["Methods?","Individual, group and mass methods."]
+],
 
 ["Epidemiology",
- "Epidemiology studies the distribution and determinants of health-related events in populations.",
- "Person, place, time, incidence, prevalence and prevention."],
+"Epidemiology studies the distribution and determinants of health-related events in populations.",
+"Simple: Population me disease kahan, kab aur kin logon me ho rahi hai iska study epidemiology hai.",
+["What is incidence?","Number of new cases occurring in a population during a specified period."],
+["What is prevalence?","Total existing cases in a population at a given time/period."]
+],
 
 ["Family Health Nursing",
- "Family health nursing provides nursing care to families according to their health needs.",
- "Family assessment, education, prevention and follow-up."],
+"Family health nursing provides care according to family health needs.",
+"Simple: Puri family ki health needs assess karke care dena.",
+["Important activities?","Family assessment, health education, prevention, referral and follow-up."]
+],
 
 ["School Health Nursing",
- "School health nursing promotes and protects the health of school children.",
- "Screening, health education, immunization support and referral."],
+"School health nursing promotes and protects the health of school children.",
+"Simple: School children ki health protect aur improve karna.",
+["Activities?","Screening, health education, first aid, referral and health promotion."]
+],
 
 ["Occupational Health",
- "Occupational health protects workers from health hazards related to work.",
- "Hazard identification, prevention, safety education and health surveillance."]
+"Occupational health protects workers from work-related hazards.",
+"Simple: Job ki wajah se hone wale health hazards se workers ko protect karna.",
+["Examples of hazards?","Physical, chemical, biological, ergonomic and psychological hazards."]
+]
 ],
 
-"6th Semester":[
-["Child Health Nursing",
- "Child health nursing focuses on promoting, maintaining and restoring child health.",
- "Growth, development, nutrition, immunization, illness prevention and family-centred care."],
-
+"6th Semester": [
 ["Protein Energy Malnutrition",
- "Protein energy malnutrition occurs due to inadequate energy and protein intake.",
- "Poor growth, wasting, weakness and increased susceptibility to infection."],
+"Protein energy malnutrition occurs due to inadequate energy and protein intake.",
+"Simple: Body ko enough calories aur protein na milne se PEM hota hai.",
+["Types?","Marasmus and kwashiorkor are classic forms."],
+["Signs?","Poor growth, wasting, weakness, edema in some cases and increased infection risk."],
+["Nursing management?","Assess nutrition, provide appropriate feeding, prevent infection and monitor growth."]
+],
 
 ["Acute Respiratory Infection",
- "Acute respiratory infection is an infection of the respiratory tract with relatively sudden onset.",
- "Cough, fever, fast breathing and difficulty in breathing."],
-
-["Diarrhea and Dehydration",
- "Diarrhea is frequent passage of loose or watery stools and may cause dehydration.",
- "Fluid loss, electrolyte loss, reduced urine, thirst and altered consciousness."],
-
-["Neonatal Jaundice",
- "Neonatal jaundice is yellow discoloration of the skin and sclera due to increased bilirubin.",
- "Assess onset, feeding, activity and bilirubin when clinically indicated."],
-
-["Low Birth Weight Baby",
- "A low birth weight baby weighs less than 2500 grams at birth.",
- "Temperature maintenance, feeding, infection prevention and monitoring are important."],
-
-["Prematurity",
- "A preterm baby is born before completion of 37 weeks of gestation.",
- "Warmth, respiratory support when needed, feeding, infection prevention and monitoring."],
-
-["Kangaroo Mother Care",
- "Kangaroo Mother Care uses prolonged skin-to-skin contact for small or preterm babies.",
- "Warmth, breastfeeding, bonding and physiological stability."],
-
-["Congenital Heart Disease",
- "Congenital heart disease refers to structural abnormalities of the heart present from birth.",
- "ASD, VSD, PDA, TOF and other defects may occur."],
-
-["Tetralogy of Fallot",
- "Tetralogy of Fallot is a congenital heart defect involving four major abnormalities.",
- "Cyanosis, breathing difficulty and hypoxic episodes may occur."],
-
-["Cleft Lip and Palate",
- "Cleft lip and palate are congenital openings or gaps in the lip and/or palate.",
- "Feeding difficulty, aspiration risk, speech problems and psychosocial concerns."],
-
-["Hydrocephalus",
- "Hydrocephalus is abnormal accumulation of cerebrospinal fluid in the ventricular system.",
- "Increasing head circumference, vomiting, irritability and neurological signs may occur."],
-
-["Spina Bifida",
- "Spina bifida is a neural tube defect caused by incomplete closure of the spinal column.",
- "Neurological deficits, weakness, bladder/bowel problems and hydrocephalus may occur."],
-
-["Meningitis",
- "Meningitis is inflammation of the membranes covering the brain and spinal cord.",
- "Fever, headache, vomiting, neck stiffness and altered consciousness may occur."],
-
-["Febrile Convulsion",
- "A febrile convulsion is a seizure associated with fever in a young child without another identified cause.",
- "Protect the child from injury, maintain airway and manage fever as appropriate."],
-
-["Cerebral Palsy",
- "Cerebral palsy is a group of permanent disorders affecting movement and posture due to disturbance in the developing brain.",
- "Abnormal muscle tone, posture and motor difficulties may occur."],
-
-["Nephrotic Syndrome",
- "Nephrotic syndrome is characterized by heavy protein loss in urine and associated edema.",
- "Edema, proteinuria, hypoalbuminemia and increased infection risk."],
-
-["Acute Glomerulonephritis",
- "Acute glomerulonephritis is inflammation of the kidney glomeruli.",
- "Hematuria, edema, hypertension and reduced urine may occur."],
-
-["Leukemia",
- "Leukemia is a malignant disorder of blood-forming tissues.",
- "Anemia, infections, bleeding and weakness may occur."],
-
-["Hemophilia",
- "Hemophilia is an inherited bleeding disorder caused by deficiency of certain clotting factors.",
- "Prolonged bleeding and joint or muscle bleeding may occur."],
-
-["Thalassemia",
- "Thalassemia is an inherited disorder affecting hemoglobin production.",
- "Anemia, pallor, fatigue and complications from repeated transfusions may occur."],
-
-["Iron Deficiency Anemia",
- "Iron deficiency anemia occurs when the body does not have enough iron to produce adequate hemoglobin.",
- "Pallor, weakness, fatigue and poor concentration may occur."],
-
-["Immunization",
- "Immunization protects individuals against vaccine-preventable diseases.",
- "Correct vaccine, dose, route, timing, storage and documentation are important."],
-
-["IMNCI",
- "Integrated Management of Neonatal and Childhood Illness is an integrated approach to managing common childhood illnesses.",
- "Assessment, classification, treatment, counselling, referral and follow-up."]
+"Acute respiratory infection is an infection of the respiratory tract with relatively sudden onset.",
+"Simple: Respiratory tract ka suddenly hone wala infection ARI hai.",
+["Danger signs?","Difficulty breathing, inability to drink, cyanosis or altered consciousness require urgent assessment."],
+["Nursing care?","Monitor breathing, temperature, hydration and oxygenation; provide prescribed treatment."]
 ],
 
-"7th Semester":[
+["Diarrhea and Dehydration",
+"Diarrhea is frequent passage of loose or watery stools and may cause dehydration.",
+"Simple: Baar-baar loose motion hone se body ka water aur electrolytes kam ho sakte hain.",
+["Main treatment principle?","Prevent/treat dehydration with appropriate oral or IV fluids as clinically indicated."],
+["Signs of dehydration?","Thirst, dry mouth, reduced urine, lethargy and sunken eyes may occur."]
+],
+
+["Neonatal Jaundice",
+"Neonatal jaundice is yellow discoloration caused by increased bilirubin.",
+"Simple: Newborn ke body/eyes yellow hone ko jaundice kehte hain.",
+["What should be assessed?","Age at onset, feeding, activity and bilirubin level when indicated."],
+["Treatment?","Depends on cause and bilirubin level; phototherapy may be used when indicated."]
+],
+
+["Low Birth Weight Baby",
+"A low birth weight baby weighs less than 2500 g at birth.",
+"Simple: Birth ke time baby ka weight 2500 gram se kam ho to LBW.",
+["Important care?","Warmth, feeding, infection prevention and monitoring."],
+["Main danger?","Hypothermia, hypoglycemia, infection and feeding problems."]
+],
+
+["Prematurity",
+"A preterm baby is born before 37 completed weeks of gestation.",
+"Simple: 37 weeks se pehle born baby preterm hota hai.",
+["Important care?","Warmth, breathing support when required, feeding and infection prevention."]
+],
+
+["Kangaroo Mother Care",
+"Kangaroo Mother Care uses prolonged skin-to-skin contact for small or preterm babies.",
+"Simple: Maa aur baby ka skin-to-skin contact KMC hai.",
+["Benefits?","Warmth, breastfeeding, bonding and physiological stability."],
+["Who can provide it?","Mother or another suitable caregiver when appropriate."]
+],
+
+["Congenital Heart Disease",
+"Congenital heart disease refers to structural heart abnormalities present from birth.",
+"Simple: Birth se heart me structural problem hona congenital heart disease hai.",
+["Examples?","ASD, VSD, PDA and Tetralogy of Fallot."],
+["Possible signs?","Cyanosis, poor feeding, breathlessness, poor growth or recurrent respiratory infections."]
+],
+
+["Tetralogy of Fallot",
+"TOF is a congenital heart defect involving four major abnormalities.",
+"Simple: TOF me heart ki 4 major structural abnormalities hoti hain.",
+["Four defects?","VSD, pulmonary stenosis/right ventricular outflow obstruction, overriding aorta and right ventricular hypertrophy."],
+["Important sign?","Cyanosis and hypoxic spells may occur."]
+],
+
+["Cleft Lip and Palate",
+"Cleft lip and palate are congenital gaps in the lip and/or palate.",
+"Simple: Birth se lip ya mouth ke roof me gap hona cleft lip/palate hai.",
+["Main problem?","Feeding difficulty and aspiration risk."],
+["Nursing care?","Safe feeding, positioning, nutrition, surgical preparation and family support."]
+],
+
+["Hydrocephalus",
+"Hydrocephalus is abnormal accumulation of cerebrospinal fluid in the brain ventricles.",
+"Simple: Brain me CSF zyada collect hone ki condition hydrocephalus hai.",
+["Signs?","Increasing head circumference, vomiting, irritability and neurological changes."],
+["Treatment?","Depends on cause; shunt surgery may be required."]
+],
+
+["Spina Bifida",
+"Spina bifida is a neural tube defect caused by incomplete closure of the spinal column.",
+"Simple: Spine properly close na hone se spina bifida hota hai.",
+["Problems?","Weakness, sensory problems, bladder/bowel problems and hydrocephalus may occur."],
+["Nursing care?","Protect lesion, prevent infection and pressure injury and monitor neurological function."]
+],
+
+["Meningitis",
+"Meningitis is inflammation of the membranes covering the brain and spinal cord.",
+"Simple: Brain aur spinal cord ko cover karne wali membranes me inflammation meningitis hai.",
+["Symptoms?","Fever, headache, vomiting, neck stiffness and altered consciousness."],
+["Nursing priority?","Urgent assessment, prescribed treatment, monitoring and infection precautions when indicated."]
+],
+
+["Febrile Convulsion",
+"A febrile seizure is a seizure associated with fever in a young child.",
+"Simple: Fever ke saath young child ko seizure/fit aana febrile convulsion ho sakta hai.",
+["During seizure?","Protect child from injury, place safely, maintain airway and do not put anything in the mouth."],
+["After seizure?","Assess breathing, consciousness and fever; seek medical assessment."]
+],
+
+["Cerebral Palsy",
+"Cerebral palsy is a group of permanent disorders affecting movement and posture due to disturbance in the developing brain.",
+"Simple: Developing brain ki injury/disturbance se movement aur posture affected hona.",
+["Signs?","Abnormal tone, posture and delayed motor development."],
+["Management?","Physiotherapy, occupational/speech therapy, medical care and family support."]
+],
+
+["Nephrotic Syndrome",
+"Nephrotic syndrome is characterized by heavy protein loss in urine and edema.",
+"Simple: Urine me bahut protein loss hone aur swelling/edema wali condition.",
+["Main features?","Proteinuria, hypoalbuminemia, edema and hyperlipidemia."],
+["Nursing care?","Monitor edema, weight, urine, nutrition, infection and prescribed medicines."]
+],
+
+["Acute Glomerulonephritis",
+"Acute glomerulonephritis is inflammation of the kidney glomeruli.",
+"Simple: Kidney ke filtering units me inflammation.",
+["Symptoms?","Hematuria, edema, hypertension and reduced urine."],
+["Nursing care?","Monitor BP, urine output, edema, fluid balance and prescribed treatment."]
+],
+
+["Leukemia",
+"Leukemia is a malignant disorder of blood-forming tissues.",
+"Simple: Blood-forming cells ka cancer leukemia hai.",
+["Symptoms?","Anemia, infections, bleeding, fever, weakness and pallor may occur."],
+["Nursing care?","Infection prevention, bleeding precautions, nutrition and treatment support."]
+],
+
+["Hemophilia",
+"Hemophilia is an inherited bleeding disorder caused by deficiency of clotting factors.",
+"Simple: Blood clotting factor ki deficiency se bleeding zyada hone wali inherited disease.",
+["Main problem?","Prolonged bleeding, including joint or muscle bleeding."],
+["Nursing care?","Prevent injury, monitor bleeding and give prescribed factor replacement."]
+],
+
+["Thalassemia",
+"Thalassemia is an inherited disorder affecting hemoglobin production.",
+"Simple: Hemoglobin banne ki inherited problem se anemia hota hai.",
+["Symptoms?","Pallor, fatigue, weakness and growth problems may occur."],
+["Treatment?","Depends on type; transfusions and chelation may be required."]
+],
+
+["Iron Deficiency Anemia",
+"Iron deficiency anemia occurs when the body lacks enough iron to produce adequate hemoglobin.",
+"Simple: Iron ki kami se hemoglobin kam ho jata hai.",
+["Symptoms?","Pallor, weakness, fatigue and poor concentration."],
+["Prevention?","Iron-rich diet and prescribed iron supplementation."]
+],
+
+["Immunization",
+"Immunization protects people against vaccine-preventable diseases.",
+"Simple: Vaccine dekar diseases se protection develop karna.",
+["Nursing responsibility?","Correct vaccine, dose, route, schedule, storage and documentation."],
+["Why important?","It reduces illness, complications and deaths from vaccine-preventable diseases."]
+],
+
+["IMNCI",
+"IMNCI is an integrated approach for management of common neonatal and childhood illnesses.",
+"Simple: Bachchon ki common diseases ko ek integrated system se assess, classify aur treat karna.",
+["Main steps?","Assess, classify, treat/counsel, refer when needed and follow up."],
+["Purpose?","Reduce childhood illness and deaths and improve quality of care."]
+]
+],
+
+"7th Semester": [
 ["Nursing Research",
- "Nursing research is systematic investigation that generates knowledge relevant to nursing practice.",
- "Problem, literature review, objectives, design, sampling, data collection, analysis and reporting."],
+"Nursing research is systematic investigation that generates knowledge relevant to nursing.",
+"Simple: Nursing problems ka scientific study research kehlata hai.",
+["Steps?","Problem, literature review, objectives, design, sampling, data collection, analysis and report."],
+["Why research?","To improve nursing knowledge, care quality and evidence-based practice."]
+],
 
 ["Research Problem",
- "A research problem is a clear and focused issue that can be investigated systematically.",
- "It should be relevant, feasible and researchable."],
+"A research problem is a clear issue that can be investigated systematically.",
+"Simple: Aisi clear problem jisko scientific method se study kiya ja sake.",
+["Characteristics?","Relevant, clear, feasible and researchable."],
+["Example?","Effect of health education on knowledge regarding hypertension."]
+],
 
 ["Research Design",
- "Research design is the overall plan used to conduct a research study.",
- "Quantitative, qualitative, experimental and non-experimental approaches."],
+"Research design is the overall plan used to conduct a study.",
+"Simple: Research ka complete plan research design hai.",
+["Types?","Experimental and non-experimental designs; quantitative and qualitative approaches."]
+],
 
 ["Sampling",
- "Sampling is selecting participants from a defined population for a study.",
- "Probability and non-probability sampling."],
+"Sampling is selecting participants from a population for a study.",
+"Simple: Puri population me se study ke liye kuch participants select karna.",
+["Types?","Probability and non-probability sampling."],
+["What is sample?","A selected group of people representing the study population."]
+],
 
 ["Data Collection",
- "Data collection is systematic gathering of information required for research.",
- "Questionnaires, interviews, observations and checklists."],
+"Data collection is systematic gathering of information for research.",
+"Simple: Research ke liye required information collect karna.",
+["Methods?","Questionnaire, interview, observation and checklist."],
+["What is primary data?","Data collected directly by the researcher from the source."]
+],
 
 ["Nursing Management",
- "Nursing management coordinates people and resources to achieve safe and effective nursing care.",
- "Planning, organizing, staffing, directing, coordination and evaluation."],
+"Nursing management coordinates people and resources to provide safe and effective nursing care.",
+"Simple: Nursing staff aur resources ko properly manage karke patient care improve karna.",
+["Functions?","Planning, organizing, staffing, directing, coordinating and controlling/evaluation."],
+["Why delegation?","To distribute appropriate tasks safely according to competence."]
+],
 
 ["Leadership",
- "Leadership is influencing and guiding people toward a common goal.",
- "Communication, delegation, motivation, supervision and decision-making."],
+"Leadership is influencing and guiding people toward a common goal.",
+"Simple: Team ko guide aur motivate karke common goal achieve karna.",
+["Qualities?","Communication, confidence, decision-making, responsibility and motivation."],
+["Good leader?","A good leader communicates clearly, supports staff and makes responsible decisions."]
+],
 
 ["Professional Nursing",
- "Professional nursing involves safe, ethical, competent and evidence-based care.",
- "Ethics, accountability, confidentiality, communication and continuous learning."],
+"Professional nursing involves safe, ethical, competent and evidence-based care.",
+"Simple: Nursing ko ethics, knowledge aur professional responsibility ke saath practice karna.",
+["Important values?","Confidentiality, accountability, respect, safety and ethical practice."],
+["What is confidentiality?","Protecting a patient's private information from unauthorized disclosure."]
+],
 
 ["Budgeting",
- "Budgeting is the process of planning and controlling financial resources.",
- "Income, expenditure, planning, control and evaluation."],
+"Budgeting is planning and controlling financial resources.",
+"Simple: Paisa/resources ko pehle se plan aur control karna budgeting hai.",
+["Purpose?","Efficient use and control of resources."],
+["Components?","Expected income/resources and planned expenditure."]
+],
 
 ["Planning",
- "Planning is deciding in advance what should be done, how, when and by whom.",
- "Goals, objectives, priorities, resources, implementation and evaluation."]
+"Planning is deciding in advance what should be done, how, when and by whom.",
+"Simple: Kaam pehle se decide karna ki kya, kab, kaise aur kaun karega.",
+["Steps?","Set goals, assess resources, choose actions, implement and evaluate."],
+["Why important?","It provides direction and helps use resources efficiently."]
 ]
-
+]
 };
-
-/* =========================================================
-   UNIVERSITIES / COLLEGES
-========================================================= */
 
 const UNIVERSITIES = [
 "Baba Farid University of Health Sciences",
-"AIIMS New Delhi",
-"Punjab University",
-"Punjabi University",
-"Guru Nanak Dev University",
 "Rajiv Gandhi University of Health Sciences",
-"Indian Nursing Council",
+"Guru Nanak Dev University",
+"Punjabi University",
+"Punjab University",
+"Delhi University",
+"AIIMS New Delhi",
 "Other University"
 ];
 
 const COLLEGES = [
 "Guru Arjun Dev College of Nursing",
 "Government College of Nursing",
-"AIIMS College/Institute of Nursing",
-"Other College"
+"AIIMS College of Nursing",
+"Other Nursing College"
 ];
 
-/* =========================================================
-   HELPER FUNCTIONS
-========================================================= */
-
-function esc(v){
-  return String(v ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+function esc(value) {
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
 
-function allTopics(){
-  const arr=[];
-  Object.keys(SUBJECTS).forEach(sem=>{
-    SUBJECTS[sem].forEach(t=>{
-      arr.push({
-        semester:sem,
-        topic:t[0],
-        definition:t[1],
-        key:t[2]
-      });
-    });
+function json(res, data, status=200) {
+  const body = JSON.stringify(data);
+  res.writeHead(status, {
+    "Content-Type":"application/json; charset=utf-8",
+    "Access-Control-Allow-Origin":"*"
   });
-  return arr;
+  res.end(body);
 }
 
-/* =========================================================
-   API - REGISTER
-========================================================= */
-
-app.post("/api/register",(req,res)=>{
-  try{
-    const {
-      name,
-      phone,
-      gender,
-      semester,
-      university,
-      college,
-      course
-    }=req.body;
-
-    if(!name || !phone || !gender || !semester ||
-       !university || !college || !course){
-      return res.status(400).json({
-        success:false,
-        message:"Please fill all details."
-      });
-    }
-
-    const cleanPhone=String(phone).replace(/\D/g,"");
-
-    if(cleanPhone.length!==10){
-      return res.status(400).json({
-        success:false,
-        message:"Please enter a valid 10 digit mobile number."
-      });
-    }
-
-    const result=db.prepare(`
-      INSERT INTO students
-      (name,phone,gender,semester,university,college,course)
-      VALUES (?,?,?,?,?,?,?)
-    `).run(
-      String(name).trim(),
-      cleanPhone,
-      String(gender),
-      String(semester),
-      String(university),
-      String(college),
-      String(course)
-    );
-
-    req.session.studentId=result.lastInsertRowid;
-
-    const student=db.prepare(`
-      SELECT * FROM students WHERE id=?
-    `).get(result.lastInsertRowid);
-
-    res.json({
-      success:true,
-      student
-    });
-
-  }catch(e){
-    console.error(e);
-    res.status(500).json({
-      success:false,
-      message:"Server error."
-    });
-  }
-});
-
-/* =========================================================
-   API - LOGIN BY PHONE
-========================================================= */
-
-app.post("/api/login",(req,res)=>{
-  try{
-    const phone=String(req.body.phone||"").replace(/\D/g,"");
-
-    if(phone.length!==10){
-      return res.status(400).json({
-        success:false,
-        message:"Enter valid mobile number."
-      });
-    }
-
-    const student=db.prepare(`
-      SELECT * FROM students
-      WHERE phone=?
-      ORDER BY id DESC
-      LIMIT 1
-    `).get(phone);
-
-    if(!student){
-      return res.status(404).json({
-        success:false,
-        message:"Student not found. Please register first."
-      });
-    }
-
-    req.session.studentId=student.id;
-
-    res.json({
-      success:true,
-      student
-    });
-
-  }catch(e){
-    res.status(500).json({
-      success:false,
-      message:"Login error."
-    });
-  }
-});
-
-/* =========================================================
-   API - CURRENT STUDENT
-========================================================= */
-
-app.get("/api/me",(req,res)=>{
-  if(!req.session.studentId){
-    return res.json({
-      success:false,
-      loggedIn:false
-    });
-  }
-
-  const student=db.prepare(`
-    SELECT * FROM students WHERE id=?
-  `).get(req.session.studentId);
-
-  if(!student){
-    req.session.destroy(()=>{});
-    return res.json({
-      success:false,
-      loggedIn:false
-    });
-  }
-
-  res.json({
-    success:true,
-    loggedIn:true,
-    student
-  });
-});
-
-/* =========================================================
-   API - LOGOUT
-========================================================= */
-
-app.post("/api/logout",(req,res)=>{
-  req.session.destroy(()=>{
-    res.json({success:true});
-  });
-});
-
-/* =========================================================
-   ADMIN
-========================================================= */
-
-function adminOnly(req,res,next){
-  if(req.session.isAdmin){
-    return next();
-  }
-
-  res.status(401).json({
-    success:false,
-    message:"Admin login required."
-  });
+function page(res) {
+  res.writeHead(200, {"Content-Type":"text/html; charset=utf-8"});
+  res.end(HTML);
 }
 
-app.post("/api/admin/login",(req,res)=>{
-  const password=String(req.body.password||"");
-
-  const correct=
-    process.env.ADMIN_PASSWORD ||
-    "NurseStudyAdmin2026";
-
-  if(password===correct){
-    req.session.isAdmin=true;
-    return res.json({success:true});
-  }
-
-  res.status(401).json({
-    success:false,
-    message:"Wrong password."
-  });
-});
-
-app.get("/api/admin/students",adminOnly,(req,res)=>{
-  const students=db.prepare(`
-    SELECT id,name,phone,gender,semester,
-           university,college,course,created_at
-    FROM students
-    ORDER BY id DESC
-  `).all();
-
-  res.json({
-    success:true,
-    students
-  });
-});
-
-app.get("/api/student-count",(req,res)=>{
-  const row=db.prepare(`
-    SELECT COUNT(*) AS total FROM students
-  `).get();
-
-  res.json({
-    success:true,
-    total:row.total
-  });
-});
-
-/* =========================================================
-   MAIN WEBSITE
-========================================================= */
-
-const HTML=String.raw`<!DOCTYPE html>
+const HTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0f766e">
-<title>NurseStudy - Learn Nursing</title>
+<title>NurseStudy - B.Sc. Nursing Study Platform</title>
 
 <style>
 *{box-sizing:border-box}
-
-:root{
---p:#0f766e;
---p2:#14b8a6;
---dark:#102a43;
---text:#243b53;
---muted:#627d98;
---bg:#f4f9fa;
---white:#fff;
---border:#d9e2ec;
-}
-
 body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-background:var(--bg);
-color:var(--text);
+ margin:0;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+ background:#f4f9fa;
+ color:#243b53;
 }
+button,input,select{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.container{width:min(1100px,92%);margin:auto}
 
 header{
-position:sticky;
-top:0;
-z-index:50;
-background:#fff;
-border-bottom:1px solid var(--border);
+ position:sticky;top:0;z-index:100;
+ background:#fff;border-bottom:1px solid #d9e2ec
 }
-
 .nav{
-width:min(1100px,94%);
-margin:auto;
-height:68px;
-display:flex;
-align-items:center;
-justify-content:space-between;
+ min-height:70px;display:flex;align-items:center;
+ justify-content:space-between
 }
-
 .logo{
-font-size:23px;
-font-weight:900;
-color:var(--dark);
-display:flex;
-align-items:center;
-gap:10px;
+ display:flex;align-items:center;gap:10px;
+ font-size:24px;font-weight:900;color:#102a43
 }
-
 .logoIcon{
-width:44px;
-height:44px;
-border-radius:14px;
-display:grid;
-place-items:center;
-background:linear-gradient(135deg,var(--p),var(--p2));
-font-size:22px;
+ width:45px;height:45px;border-radius:14px;
+ display:grid;place-items:center;
+ background:linear-gradient(135deg,#0f766e,#14b8a6);
+ font-size:24px
 }
-
 .menuBtn{
-border:0;
-background:#e8f8f5;
-color:var(--p);
-font-size:24px;
-border-radius:13px;
-padding:10px 14px;
-}
-
-.container{
-width:min(1100px,94%);
-margin:auto;
+ border:0;background:#e8f8f5;border-radius:13px;
+ padding:11px 15px;font-size:22px;color:#0f766e
 }
 
 .hero{
-padding:45px 0;
-background:linear-gradient(180deg,#e7faf7,#f4f9fa);
+ padding:35px 0;
+ background:linear-gradient(180deg,#e8fbf8,#f4f9fa)
 }
-
 .badge{
-display:inline-block;
-padding:9px 14px;
-border-radius:50px;
-background:#d9f5f0;
-color:#08645e;
-font-weight:800;
+ display:inline-block;background:#ddf6f2;color:#08645e;
+ padding:8px 13px;border-radius:50px;font-size:13px;font-weight:800
 }
-
 h1{
-font-size:clamp(42px,8vw,70px);
-line-height:1;
-letter-spacing:-3px;
-margin:18px 0;
-color:var(--dark);
+ font-size:clamp(38px,7vw,65px);
+ line-height:1.03;letter-spacing:-2px;
+ color:#102a43;margin:18px 0
 }
-
-.hero p{
-font-size:18px;
-line-height:1.7;
-color:var(--muted);
-}
+.hero p{font-size:18px;line-height:1.7;color:#627d98}
 
 .search{
-display:flex;
-gap:8px;
-background:#fff;
-border:1px solid var(--border);
-padding:7px;
-border-radius:16px;
-margin-top:22px;
+ display:flex;gap:8px;background:white;padding:7px;
+ border:1px solid #d9e2ec;border-radius:16px;margin-top:22px
 }
-
 .search input{
-flex:1;
-border:0;
-outline:0;
-padding:13px;
-font-size:16px;
-min-width:0;
+ flex:1;border:0;outline:0;padding:14px;min-width:0
 }
-
-button{
-cursor:pointer;
-}
-
 .btn{
-border:0;
-background:var(--p);
-color:white;
-font-weight:800;
-padding:13px 18px;
-border-radius:11px;
+ border:0;border-radius:12px;padding:13px 18px;
+ background:#0f766e;color:white;font-weight:800
 }
 
-section{
-padding:38px 0;
+section{padding:40px 0}
+h2{color:#102a43}
+.card,.topic,.bookCard{
+ background:#fff;border:1px solid #d9e2ec;
+ border-radius:18px;padding:20px;margin:14px 0;
+ box-shadow:0 5px 20px rgba(16,42,67,.05)
 }
+.topic h3{margin:0 0 8px;color:#102a43}
+.topic p{line-height:1.7;color:#627d98}
 
-.title h2{
-margin:0;
-font-size:30px;
-color:var(--dark);
-}
-
-.title p{
-color:var(--muted);
-line-height:1.6;
-}
-
-.tabs{
-display:flex;
-gap:8px;
-overflow-x:auto;
-padding:12px 0;
-}
-
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
 .tab{
-white-space:nowrap;
-border:1px solid var(--border);
-background:#fff;
-color:#1668bd;
-padding:11px 16px;
-border-radius:11px;
-font-weight:800;
+ border:1px solid #d9e2ec;background:white;
+ padding:11px 14px;border-radius:11px;
+ font-weight:800;color:#0f766e
 }
+.tab.active{background:#0f766e;color:white}
 
-.tab.active{
-background:var(--p);
-color:white;
-border-color:var(--p);
-}
-
-.card{
-background:white;
-border:1px solid var(--border);
-border-radius:18px;
-padding:20px;
-margin:14px 0;
-box-shadow:0 5px 20px rgba(16,42,67,.05);
-}
-
-.topic h3{
-color:var(--dark);
-margin-top:0;
-font-size:21px;
-}
-
-.topic p{
-line-height:1.7;
-color:var(--muted);
-}
-
-.actions{
-display:flex;
-gap:8px;
-flex-wrap:wrap;
-}
-
+.actions{display:flex;gap:8px;flex-wrap:wrap}
 .actions button{
-border:1px solid var(--border);
-background:#fff;
-color:var(--p);
-padding:10px 12px;
-border-radius:10px;
-font-weight:800;
+ border:1px solid #d9e2ec;background:white;
+ padding:10px 13px;border-radius:10px;
+ font-weight:800;color:#0f766e
 }
 
-.actions button:hover{
-background:#e8f8f5;
+.modalBg{
+ position:fixed;inset:0;background:rgba(16,42,67,.72);
+ display:flex;align-items:center;justify-content:center;
+ padding:14px;z-index:1000
 }
-
 .modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.65);
-z-index:100;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:12px;
+ width:min(850px,100%);max-height:92vh;overflow:auto;
+ background:white;border-radius:22px
 }
-
-.modalBox{
-background:white;
-width:min(850px,100%);
-max-height:92vh;
-overflow:auto;
-border-radius:20px;
-}
-
 .modalHead{
-position:sticky;
-top:0;
-z-index:2;
-background:var(--p);
-color:white;
-padding:16px;
-display:flex;
-justify-content:space-between;
-align-items:center;
+ background:#0f766e;color:white;padding:17px;
+ display:flex;justify-content:space-between;
+ position:sticky;top:0;z-index:2
 }
-
-.close{
-border:0;
-background:transparent;
-color:white;
-font-size:24px;
+.modalHead button{
+ border:0;background:transparent;color:white;font-size:23px
 }
-
-.modalBody{
-padding:18px;
+.modalBody{padding:18px}
+.answerBox{
+ background:#f0faf8;border:1px solid #cceee8;
+ border-radius:15px;padding:16px;margin:12px 0;line-height:1.75
 }
-
-.answer{
-background:#effaf8;
-border:1px solid #cceee8;
-border-radius:15px;
-padding:16px;
-margin:12px 0;
-line-height:1.75;
+.simple{
+ background:#fff8e8;border:1px solid #f1d49a;
+ border-radius:15px;padding:16px;line-height:1.75;margin:12px 0
 }
-
-.answer h3{
-margin-top:0;
-color:#08645e;
-}
-
 .mcq{
-background:#fff;
-border:1px solid var(--border);
-border-radius:15px;
-padding:16px;
-margin:12px 0;
-line-height:1.7;
+ border:1px solid #d9e2ec;border-radius:15px;
+ padding:16px;margin:12px 0;line-height:1.7
 }
+.correct{font-weight:900;color:#0f766e}
 
-.correct{
-color:#087f5b;
-font-weight:900;
+.formCard{
+ max-width:700px;margin:30px auto;background:white;
+ border:1px solid #d9e2ec;border-radius:24px;
+ padding:24px;box-shadow:0 10px 35px rgba(16,42,67,.08)
 }
-
-.loginBox{
-max-width:720px;
-margin:auto;
-background:white;
-padding:22px;
-border-radius:22px;
-border:1px solid var(--border);
-box-shadow:0 8px 30px rgba(16,42,67,.08);
+.field{margin:15px 0}
+.field label{display:block;font-weight:800;margin-bottom:7px;color:#102a43}
+.field input,.field select{
+ width:100%;padding:14px;border:1px solid #d9e2ec;
+ border-radius:12px;outline:none;background:white
 }
-
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:13px;
-}
-
-.field{
-display:flex;
-flex-direction:column;
-gap:7px;
-}
-
-.field label{
-font-weight:800;
-color:var(--dark);
-}
-
-.field input,
-.field select{
-width:100%;
-padding:14px;
-border:1px solid var(--border);
-border-radius:12px;
-font-size:16px;
-background:white;
-}
-
-.full{
-grid-column:1/-1;
-}
-
-.check{
-display:flex;
-gap:10px;
-align-items:flex-start;
-color:var(--muted);
-line-height:1.5;
+.check{display:flex;gap:10px;align-items:flex-start;margin:17px 0;color:#627d98}
+.check input{width:20px;height:20px}
+.fullBtn{
+ width:100%;padding:16px;border:0;border-radius:14px;
+ background:linear-gradient(135deg,#0f766e,#14b8a6);
+ color:white;font-size:18px;font-weight:900
 }
 
 .profile{
-background:linear-gradient(135deg,#0f766e,#14b8a6);
-color:white;
-border-radius:18px;
-padding:18px;
-margin-bottom:20px;
+ background:linear-gradient(135deg,#0f766e,#115e59);
+ color:white;border-radius:20px;padding:20px;margin-bottom:20px
 }
+.profile strong{font-size:22px}
 
-.profile button{
-background:white;
-color:var(--p);
-border:0;
-padding:10px 14px;
-border-radius:10px;
-font-weight:800;
+.menuPanel{
+ position:fixed;top:70px;right:12px;
+ width:min(330px,90%);background:white;
+ border:1px solid #d9e2ec;border-radius:18px;
+ padding:14px;box-shadow:0 15px 40px rgba(0,0,0,.18);
+ z-index:500
 }
+.menuPanel button{
+ width:100%;text-align:left;border:0;background:white;
+ padding:14px;border-radius:11px;font-weight:800;color:#102a43
+}
+.menuPanel button:hover{background:#e8f8f5}
 
-.sideMenu{
-position:fixed;
-right:15px;
-top:75px;
-z-index:80;
-background:white;
-width:270px;
-border-radius:18px;
-box-shadow:0 10px 35px rgba(0,0,0,.18);
-padding:10px;
-border:1px solid var(--border);
+.donation{
+ background:linear-gradient(135deg,#ecfdf5,#dff8f3);
+ border:1px solid #bce9df;border-radius:20px;padding:22px
 }
-
-.sideMenu button{
-display:block;
-width:100%;
-text-align:left;
-border:0;
-background:white;
-padding:14px;
-border-radius:10px;
-font-weight:800;
-color:var(--dark);
+.upi{
+ background:white;padding:15px;border-radius:12px;
+ font-weight:900;font-size:18px;word-break:break-all
 }
-
-.sideMenu button:hover{
-background:#e8f8f5;
+.bookGrid{
+ display:grid;grid-template-columns:repeat(2,1fr);gap:15px
 }
-
-.hidden{
-display:none!important;
-}
-
-.notice{
-background:#fff8e8;
-border:1px solid #efd59c;
-padding:17px;
-border-radius:15px;
-line-height:1.7;
-}
-
-footer{
-background:#102a43;
-color:#c7d5e2;
-padding:40px 0;
-}
-
-footer h2{
-color:white;
-}
+footer{background:#102a43;color:#c7d5e2;padding:35px 0}
+footer h3{color:white}
+.small{font-size:13px;color:#627d98}
 
 @media(max-width:650px){
-.grid{
-grid-template-columns:1fr;
-}
-
-.full{
-grid-column:auto;
-}
-
-.search{
-flex-direction:column;
-}
-
-.search .btn{
-width:100%;
-}
-
-.actions button{
-width:100%;
-}
-
-h1{
-letter-spacing:-2px;
-}
+ .search{flex-direction:column}
+ .search .btn{width:100%}
+ .actions button{width:100%}
+ .bookGrid{grid-template-columns:1fr}
+ .formCard{padding:18px}
 }
 </style>
 </head>
@@ -1062,1182 +754,848 @@ letter-spacing:-2px;
 <body>
 
 <header>
-<div class="nav">
-
+<div class="container nav">
 <div class="logo">
-<div class="logoIcon">🩺</div>
+<span class="logoIcon">🩺</span>
 NurseStudy
 </div>
-
 <button class="menuBtn" onclick="toggleMenu()">☰</button>
-
 </div>
 </header>
 
-<div id="menu" class="sideMenu hidden">
-
-<button onclick="go('study')">📚 Study Centre</button>
-<button onclick="go('books')">📚 Books Give / Take</button>
-<button onclick="go('donate')">❤️ Donate</button>
-<button onclick="go('about')">👨‍⚕️ Founder</button>
+<div id="menuPanel" class="menuPanel hidden">
+<button onclick="goTo('study')">📚 Study Centre</button>
+<button onclick="goTo('donation')">❤️ Donation</button>
+<button onclick="goTo('books')">📚 Books Give / Take</button>
+<button onclick="goTo('founder')">👨‍💼 Founder</button>
 <button onclick="logout()">🚪 Logout</button>
-
 </div>
 
-<section id="loginSection">
-
+<section id="loginPage">
 <div class="container">
+<div class="formCard">
 
-<div class="loginBox">
+<div style="text-align:center;font-size:55px">🩺</div>
 
-<div class="badge">🎓 B.Sc. Nursing • Semester 1–7</div>
+<h2 style="text-align:center">Welcome to NurseStudy</h2>
 
-<h1 style="font-size:42px;letter-spacing:-2px">
-Welcome to NurseStudy
-</h1>
-
-<p>
-Pehle apni basic details bhar do. Uske baad tum directly
-NurseStudy ke Notes, Viva, MCQ aur Important Questions padh sakte ho.
+<p style="text-align:center;color:#627d98;line-height:1.6">
+Free B.Sc. Nursing Study Platform<br>
+Apni details bharo aur turant website use karo.
 </p>
-
-<form id="registerForm">
-
-<div class="grid">
 
 <div class="field">
 <label>👤 Full Name *</label>
-<input id="name" required placeholder="Enter your name">
+<input id="studentName" type="text" placeholder="Enter your full name">
 </div>
 
 <div class="field">
 <label>📱 Mobile Number *</label>
-<input id="phone" required inputmode="numeric"
-maxlength="10" placeholder="10 digit mobile">
+<input id="studentPhone" type="tel" inputmode="numeric"
+maxlength="10" placeholder="10 digit mobile number">
 </div>
 
 <div class="field">
 <label>⚧ Gender *</label>
-<select id="gender" required>
-<option value="">Select gender</option>
+<select id="studentGender">
+<option value="">Select Gender</option>
 <option>Male</option>
 <option>Female</option>
 <option>Other</option>
+<option>Prefer not to say</option>
 </select>
 </div>
 
 <div class="field">
 <label>🎓 Semester *</label>
-<select id="semester" required>
-<option value="">Select semester</option>
-${Object.keys(SUBJECTS).map(s=>`<option>${s}</option>`).join("")}
+<select id="studentSemester">
+<option value="">Select Semester</option>
+<option>1st Semester</option>
+<option>2nd Semester</option>
+<option>3rd Semester</option>
+<option>4th Semester</option>
+<option>5th Semester</option>
+<option>6th Semester</option>
+<option>7th Semester</option>
 </select>
 </div>
 
-<div class="field full">
+<div class="field">
 <label>🏛️ University *</label>
-<select id="university" required>
-<option value="">Select university</option>
-${UNIVERSITIES.map(x=>`<option>${esc(x)}</option>`).join("")}
+<select id="studentUniversity">
+<option value="">Select University</option>
+${UNIVERSITIES.map(x=>`<option>${x}</option>`).join("")}
 </select>
 </div>
 
-<div class="field full">
+<div class="field">
 <label>🏫 College *</label>
-<select id="college" required>
-<option value="">Select college</option>
-${COLLEGES.map(x=>`<option>${esc(x)}</option>`).join("")}
+<select id="studentCollege">
+<option value="">Select College</option>
+${COLLEGES.map(x=>`<option>${x}</option>`).join("")}
 </select>
 </div>
 
-<div class="field full">
-<label>📚 Course</label>
-<select id="course">
+<div class="field">
+<label>📖 Course</label>
+<select id="studentCourse">
 <option>B.Sc. Nursing</option>
-<option>GNM Nursing</option>
-<option>ANM</option>
-<option>Other</option>
+<option>Other Nursing Course</option>
 </select>
 </div>
 
+<div class="check">
+<input id="agree" type="checkbox">
+<span>I agree to use these details for NurseStudy student services.</span>
 </div>
 
-<br>
-
-<label class="check">
-<input type="checkbox" id="agree" required>
-<span>
-I agree that the details entered above may be used for
-NurseStudy student services.
-</span>
-</label>
-
-<br>
-
-<button class="btn" style="width:100%;font-size:17px">
+<button class="fullBtn" onclick="enterNurseStudy()">
 🚀 Enter NurseStudy
 </button>
 
-</form>
-
-<hr style="border:0;border-top:1px solid #d9e2ec;margin:25px 0">
-
-<h3>Already registered?</h3>
-
-<div class="field">
-<label>📱 Mobile Number</label>
-<input id="loginPhone" inputmode="numeric"
-maxlength="10" placeholder="Enter registered mobile">
-</div>
-
-<br>
-
-<button class="btn" onclick="login()" style="width:100%">
-🔐 Login
-</button>
-
-<p id="loginMsg"></p>
+<p class="small" style="text-align:center;margin-top:15px">
+Aapki details secure student service ke liye use hongi.
+</p>
 
 </div>
-
 </div>
-
 </section>
 
-<main id="app" class="hidden">
+<div id="mainSite" class="hidden">
 
 <section class="hero">
-
 <div class="container">
 
-<div id="profile"></div>
+<div class="profile">
+<div>👋 Welcome to NurseStudy</div>
+<strong id="welcomeName"></strong>
+<div id="welcomeDetails" style="margin-top:8px"></div>
+</div>
 
-<span class="badge">📖 Nursing Education Platform</span>
+<span class="badge">🎓 B.Sc. Nursing • Semester 1–7</span>
 
 <h1>
 Learn Nursing.<br>
-<span style="color:var(--p)">Help Each Other.</span>
+<span style="color:#0f766e">Understand Nursing.</span>
 </h1>
 
 <p>
-Notes + Viva + MCQs + Important Questions.
-Har answer ko simple English aur normal Hindi/Hinglish
-language mein samjhaya gaya hai.
+Notes, Viva Answers, MCQs, Important Questions,
+Simple English + Apni Bhasha explanation.
 </p>
 
 <div class="search">
-
-<input id="search"
-placeholder="Search Hypertension, COPD, KMC, Research...">
-
-<button class="btn" onclick="searchTopics()">Search</button>
-
+<input id="searchInput"
+placeholder="Search Hypertension, COPD, KMC..."
+onkeydown="if(event.key==='Enter')searchSite()">
+<button class="btn" onclick="searchSite()">🔎 Search</button>
 </div>
 
 <div id="searchResults"></div>
 
 </div>
-
 </section>
 
 <section id="study">
-
 <div class="container">
 
-<div class="title">
 <h2>📚 Nursing Study Centre</h2>
-<p>
-Semester choose karo aur topic ke Notes, Viva, MCQ ya Important Answer kholo.
+<p style="color:#627d98">
+Semester select karo aur kisi bhi topic me Notes, Viva, MCQ aur Important Questions dekho.
 </p>
-</div>
 
 <div id="tabs" class="tabs"></div>
-
-<div id="topics"></div>
+<div id="content"></div>
 
 </div>
+</section>
 
+<section id="donation">
+<div class="container">
+<div class="donation">
+
+<h2>❤️ Help a Student</h2>
+
+<p>
+Aapki chhoti si help kisi nursing student ki books,
+study material ya education mein madad kar sakti hai.
+</p>
+
+<div class="upi">UPI: 7763082034@kotak</div>
+
+<br>
+
+<button class="btn" onclick="copyUPI()">
+📋 Copy UPI ID
+</button>
+
+</div>
+</div>
 </section>
 
 <section id="books">
-
 <div class="container">
 
-<div class="title">
 <h2>📚 Books Give / Take</h2>
-<p>Students apni nursing books dusre students ke saath share kar sakte hain.</p>
+
+<div class="bookGrid">
+
+<div class="bookCard">
+<h3>📤 Book Give</h3>
+<p>Apni extra nursing books kisi student ko dene ke liye details share karein.</p>
+<button class="btn" onclick="bookForm('Give')">Add Book</button>
 </div>
 
-<div class="card">
-
-<h3>📖 Book Exchange</h3>
-
-<p>
-Agar tumhare paas extra nursing book hai to kisi junior/student
-ko de sakte ho. Agar book chahiye to yahan request bhej sakte ho.
-</p>
-
-<div class="actions">
-
-<button onclick="bookAction('Give')">📚 I Want To Give Book</button>
-
-<button onclick="bookAction('Need')">🔎 I Need A Book</button>
-
+<div class="bookCard">
+<h3>📥 Book Need</h3>
+<p>Agar aapko nursing book chahiye to apni requirement submit karein.</p>
+<button class="btn" onclick="bookForm('Need')">Request Book</button>
 </div>
 
 </div>
 
-</div>
+<div id="bookMessage"></div>
 
+</div>
 </section>
 
-<section id="donate">
-
+<section id="founder">
 <div class="container">
 
 <div class="card">
-
-<h2>❤️ Support NurseStudy</h2>
-
+<h2>👨‍💼 Founder</h2>
+<h3 style="font-size:26px">Nadeem</h3>
 <p>
-Agar aap NurseStudy ke educational work ko support karna chahte hain,
-to voluntary donation kar sakte hain.
+Founder of <b>NurseStudy</b>
 </p>
-
-<div class="answer">
-
-<h3>UPI ID</h3>
-
-<strong style="font-size:20px">
-7763082034@kotak
-</strong>
-
-<br><br>
-
-<button class="btn"
-onclick="navigator.clipboard.writeText('7763082034@kotak');alert('UPI ID copied!')">
-Copy UPI
-</button>
-
-</div>
-
-<p>
-Donation completely voluntary hai.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="about">
-
-<div class="container">
-
-<div class="card">
-
-<h2>👨‍⚕️ Founder</h2>
-
-<h3>Nadeem</h3>
-
-<p>
-NurseStudy ka aim nursing students ko easy language mein
+<p style="line-height:1.7;color:#627d98">
+NurseStudy ka purpose nursing students ko easy language me
 study material, viva preparation, MCQs aur important questions
-provide karna hai.
+available karwana hai.
 </p>
-
-<p>
-<strong>Learn Nursing • Help Each Other ❤️</strong>
-</p>
-
 </div>
 
 </div>
-
 </section>
-
-</main>
 
 <footer>
-
 <div class="container">
-
-<h2>🩺 NurseStudy</h2>
-
-<p>
-B.Sc. Nursing study platform — Notes, Viva, MCQs and Important Questions.
-</p>
-
-<p>
-Founder: <strong>Nadeem</strong>
-</p>
-
+<h3>🩺 NurseStudy</h3>
+<p>Learn Nursing • Understand Nursing • Help Each Other</p>
+<p>Founder: <b>Nadeem</b></p>
 </div>
-
 </footer>
 
-<div id="modal" class="modal hidden" onclick="if(event.target===this)closeModal()">
-
-<div class="modalBox">
-
-<div class="modalHead">
-<strong id="modalTitle">NurseStudy</strong>
-<button class="close" onclick="closeModal()">✕</button>
 </div>
 
-<div id="modalBody" class="modalBody"></div>
-
-</div>
-
-</div>
+<div id="modalRoot"></div>
 
 <script>
 
-let currentStudent=null;
-let activeSemester="1st Semester";
+const CONTENT = ${JSON.stringify(CONTENT)};
 
-const DATA=${JSON.stringify(allTopics())};
+let profile = null;
+let activeSemester = "1st Semester";
+
+function $(id){
+ return document.getElementById(id);
+}
 
 function toggleMenu(){
-document.getElementById("menu").classList.toggle("hidden");
+ $("menuPanel").classList.toggle("hidden");
 }
 
-function go(id){
-document.getElementById("menu").classList.add("hidden");
-document.getElementById(id)?.scrollIntoView({behavior:"smooth"});
+function goTo(id){
+ $("menuPanel").classList.add("hidden");
+ const el = $(id);
+ if(el) el.scrollIntoView({behavior:"smooth"});
 }
 
-function esc2(v){
-return String(v??"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+function enterNurseStudy(){
+
+ const name = $("studentName").value.trim();
+ const phone = $("studentPhone").value.trim();
+ const gender = $("studentGender").value;
+ const semester = $("studentSemester").value;
+ const university = $("studentUniversity").value;
+ const college = $("studentCollege").value;
+ const course = $("studentCourse").value;
+
+ if(!name){
+   alert("Please enter your full name.");
+   return;
+ }
+
+ if(!/^[0-9]{10}$/.test(phone)){
+   alert("Please enter a valid 10 digit mobile number.");
+   return;
+ }
+
+ if(!gender || !semester || !university || !college){
+   alert("Please fill all required details.");
+   return;
+ }
+
+ if(!$("agree").checked){
+   alert("Please tick the agreement box.");
+   return;
+ }
+
+ profile = {
+   name, phone, gender, semester,
+   university, college, course
+ };
+
+ localStorage.setItem("nurseStudyProfile",JSON.stringify(profile));
+
+ $("loginPage").classList.add("hidden");
+ $("mainSite").classList.remove("hidden");
+
+ $("welcomeName").textContent = name;
+
+ $("welcomeDetails").textContent =
+ semester + " • " + university + " • " + college;
+
+ buildTabs();
+ showSemester(semester);
+
+ fetch("/api/student",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify(profile)
+ }).catch(()=>{});
+
+ window.scrollTo(0,0);
 }
 
-/* =========================================================
-   REGISTER
-========================================================= */
+function loadProfile(){
 
-document.getElementById("registerForm").addEventListener("submit",async(e)=>{
-e.preventDefault();
+ try{
+   const saved = localStorage.getItem("nurseStudyProfile");
 
-const data={
-name:document.getElementById("name").value,
-phone:document.getElementById("phone").value,
-gender:document.getElementById("gender").value,
-semester:document.getElementById("semester").value,
-university:document.getElementById("university").value,
-college:document.getElementById("college").value,
-course:document.getElementById("course").value
-};
+   if(saved){
+     profile = JSON.parse(saved);
 
-try{
+     $("loginPage").classList.add("hidden");
+     $("mainSite").classList.remove("hidden");
 
-const r=await fetch("/api/register",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify(data)
-});
+     $("welcomeName").textContent = profile.name;
 
-const result=await r.json();
+     $("welcomeDetails").textContent =
+       profile.semester + " • " +
+       profile.university + " • " +
+       profile.college;
 
-if(!result.success){
-alert(result.message||"Registration failed.");
-return;
+     buildTabs();
+     showSemester(profile.semester || "1st Semester");
+   }
+ }catch(e){}
 }
 
-currentStudent=result.student;
-openApp();
+function logout(){
 
-}catch(error){
-alert("Server se connection nahi ho raha. Please refresh karke try karo.");
+ localStorage.removeItem("nurseStudyProfile");
+ profile = null;
+
+ $("mainSite").classList.add("hidden");
+ $("loginPage").classList.remove("hidden");
+
+ $("menuPanel").classList.add("hidden");
+
+ window.scrollTo(0,0);
 }
 
-});
+function buildTabs(){
 
-/* =========================================================
-   LOGIN
-========================================================= */
+ $("tabs").innerHTML =
+ Object.keys(CONTENT).map(semester => {
 
-async function login(){
+   const active =
+     semester === activeSemester ? "active" : "";
 
-const phone=document.getElementById("loginPhone").value;
+   return \`
+   <button class="tab \${active}"
+   onclick="showSemester('\${semester}')">
+   \${semester.replace(" Semester","")} Semester
+   </button>
+   \`;
 
-if(!/^[0-9]{10}$/.test(phone)){
-document.getElementById("loginMsg").textContent=
-"Please enter 10 digit mobile number.";
-return;
+ }).join("");
 }
 
-try{
+function showSemester(semester){
 
-const r=await fetch("/api/login",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({phone})
-});
+ activeSemester = semester;
 
-const result=await r.json();
+ buildTabs();
 
-if(!result.success){
-document.getElementById("loginMsg").textContent=
-result.message;
-return;
-}
+ const topics = CONTENT[semester] || [];
 
-currentStudent=result.student;
-openApp();
+ $("content").innerHTML = \`
+ <div class="card">
+ <h2>📖 \${semester}</h2>
+ <p style="color:#627d98">
+ Total important topics: <b>\${topics.length}</b>
+ </p>
+ </div>
 
-}catch(e){
-alert("Server connection error.");
-}
+ \${topics.map((topic,index)=>\`
+ <div class="topic">
+   <h3>\${index+1}. \${topic[0]}</h3>
+   <p><b>Definition:</b> \${topic[1]}</p>
+   <p><b>Apni Bhasha:</b> \${topic[2]}</p>
 
-}
+   <div class="actions">
+     <button onclick="openTopic('\${semester}',\${index},'notes')">
+       📘 Notes
+     </button>
 
-/* =========================================================
-   OPEN APP
-========================================================= */
+     <button onclick="openTopic('\${semester}',\${index},'viva')">
+       🎤 Viva
+     </button>
 
-function openApp(){
+     <button onclick="openTopic('\${semester}',\${index},'mcq')">
+       📝 MCQ
+     </button>
 
-document.getElementById("loginSection").classList.add("hidden");
-document.getElementById("app").classList.remove("hidden");
-
-document.getElementById("profile").innerHTML=`
-
-<div class="profile">
-
-<h2>Welcome, ${esc2(currentStudent.name)} 👋</h2>
-
-<p>
-🎓 ${esc2(currentStudent.semester)}
-<br>
-🏫 ${esc2(currentStudent.college)}
-<br>
-🏛️ ${esc2(currentStudent.university)}
-</p>
-
-<button onclick="logout()">Logout</button>
-
-</div>
-`;
-
-renderTabs();
-renderTopics(activeSemester);
-
-window.scrollTo({top:0,behavior:"smooth"});
-}
-
-/* =========================================================
-   TABS
-========================================================= */
-
-function renderTabs(){
-
-const tabs=document.getElementById("tabs");
-
-tabs.innerHTML="";
-
-Object.keys(${JSON.stringify(SUBJECTS)}).forEach(semester=>{
-
-const b=document.createElement("button");
-
-b.className="tab";
-
-if(semester===activeSemester)b.classList.add("active");
-
-b.textContent=semester;
-
-b.onclick=()=>{
-activeSemester=semester;
-renderTabs();
-renderTopics(semester);
-};
-
-tabs.appendChild(b);
-
-});
-
-}
-
-/* =========================================================
-   TOPICS
-========================================================= */
-
-function renderTopics(semester){
-
-const list=DATA.filter(x=>x.semester===semester);
-
-document.getElementById("topics").innerHTML=list.map((x,i)=>`
-
-<div class="card topic">
-
-<h3>${i+1}. ${esc2(x.topic)}</h3>
-
-<p>
-<strong>Simple English:</strong><br>
-${esc2(x.definition)}
-</p>
-
-<p>
-<strong>Easy Samajh:</strong><br>
-${easyExplain(x)}
-</p>
-
-<p>
-<strong>Important points:</strong><br>
-${esc2(x.key)}
-</p>
-
-<div class="actions">
-
-<button onclick='showNotes(${JSON.stringify(x.topic)})'>
-📖 Notes + Answer
-</button>
-
-<button onclick='showViva(${JSON.stringify(x.topic)})'>
-🎤 Viva + Answer
-</button>
-
-<button onclick='showMCQ(${JSON.stringify(x.topic)})'>
-🧠 MCQ + Answer
-</button>
-
-<button onclick='showImportant(${JSON.stringify(x.topic)})'>
-🎯 Important Q + Answer
-</button>
-
-</div>
-
-</div>
-
-`).join("");
+     <button onclick="openTopic('\${semester}',\${index},'important')">
+       ⭐ Important Questions
+     </button>
+   </div>
+ </div>
+ \`).join("")}
+ \`;
 
 }
 
-/* =========================================================
-   EASY EXPLANATION
-========================================================= */
+function openTopic(semester,index,type){
 
-function easyExplain(x){
+ const topic = CONTENT[semester][index];
 
-return `
-<strong>${esc2(x.topic)}</strong> ko simple language mein
-aise samjho: ye nursing ka important topic hai jisme nurse ko
-patient ki condition samajhni, important signs observe karne,
-safe care deni, complications ko jaldi identify karna aur
-patient/family ko proper education deni hoti hai.
-<br><br>
-<strong>Yaad rakhne ka easy point:</strong>
-Definition → Causes → Symptoms → Investigation →
-Treatment → Nursing Management → Complications → Health Education.
-`;
+ const name = topic[0];
+ const definition = topic[1];
+ const hindi = topic[2];
+ const qa = topic.slice(3);
+
+ let body = "";
+
+ if(type === "notes"){
+
+   body = \`
+   <div class="answerBox">
+   <h4>📘 Definition</h4>
+   \${definition}
+   </div>
+
+   <div class="simple">
+   <b>🗣️ Apni Bhasha:</b><br>
+   \${hindi}
+   </div>
+
+   <div class="answerBox">
+   <h4>📚 Short Notes</h4>
+   <p><b>Meaning:</b> \${definition}</p>
+   <p><b>Exam Point:</b> Definition ke baad causes/risk factors,
+   signs & symptoms, investigations, management aur nursing care
+   likhna useful hota hai.</p>
+   </div>
+   \`;
+
+ }
+
+ if(type === "viva"){
+
+   body = qa.map((x,i)=>\`
+   <div class="answerBox">
+   <h4>🎤 Viva Q\${i+1}. \${x[0]}</h4>
+   <b>Answer:</b> \${x[1]}
+   </div>
+   \`).join("");
+
+ }
+
+ if(type === "mcq"){
+
+   const mcqs = makeMCQs(name,qa);
+
+   body = mcqs.map((q,i)=>\`
+   <div class="mcq">
+   <b>Q\${i+1}. \${q.q}</b>
+   <p>A) \${q.a}</p>
+   <p>B) \${q.b}</p>
+   <p>C) \${q.c}</p>
+   <p>D) \${q.d}</p>
+   <div class="correct">✅ Correct Answer: \${q.correct}</div>
+   </div>
+   \`).join("");
+
+ }
+
+ if(type === "important"){
+
+   body = \`
+   <div class="answerBox">
+   <h4>⭐ Very Important Questions</h4>
+
+   <ol>
+   <li>Define \${name}.</li>
+   <li>Write causes/risk factors of \${name}.</li>
+   <li>Write signs and symptoms of \${name}.</li>
+   <li>Write investigations of \${name}.</li>
+   <li>Write medical management of \${name}.</li>
+   <li>Write nursing management of \${name}.</li>
+   <li>Write complications of \${name}.</li>
+   </ol>
+   </div>
+
+   <div class="simple">
+   <b>Exam Writing Tip:</b><br>
+   15 marks ke answer me Definition →
+   Causes → Signs/Symptoms → Investigations →
+   Management → Nursing Management → Complications
+   ke headings use karo.
+   </div>
+   \`;
+
+ }
+
+ $("modalRoot").innerHTML = \`
+ <div class="modalBg" onclick="if(event.target===this)closeModal()">
+   <div class="modal">
+
+     <div class="modalHead">
+       <b>\${name}</b>
+       <button onclick="closeModal()">✕</button>
+     </div>
+
+     <div class="modalBody">
+       \${body}
+     </div>
+
+   </div>
+ </div>
+ \`;
+}
+
+function makeMCQs(name,qa){
+
+ const first = qa[0] ? qa[0][1] : "See notes.";
+
+ return [
+ {
+   q:"Which statement is most appropriate about " + name + "?",
+   a:first,
+   b:"It is unrelated to nursing care.",
+   c:"It has no clinical importance.",
+   d:"None of these.",
+   correct:"A"
+ },
+ {
+   q:"Which is important for nursing students studying " + name + "?",
+   a:"Ignore patient assessment.",
+   b:"Understand definition and nursing care.",
+   c:"Avoid documentation.",
+   d:"Do not monitor the patient.",
+   correct:"B"
+ },
+ {
+   q:"The best approach to answer a long question is:",
+   a:"Write only one line.",
+   b:"Write without headings.",
+   c:"Use clear headings and points.",
+   d:"Leave the question blank.",
+   correct:"C"
+ },
+ {
+   q:"For viva preparation, the student should:",
+   a:"Memorize without understanding.",
+   b:"Know definition and key points.",
+   c:"Avoid important questions.",
+   d:"Only read MCQs.",
+   correct:"B"
+ }
+ ];
 
 }
 
-/* =========================================================
-   MODAL
-========================================================= */
+function searchSite(){
 
-function openModal(title,html){
+ const query = $("searchInput").value.trim().toLowerCase();
 
-document.getElementById("modalTitle").textContent=title;
-document.getElementById("modalBody").innerHTML=html;
-document.getElementById("modal").classList.remove("hidden");
+ if(!query){
+   $("searchResults").innerHTML = "";
+   return;
+ }
 
+ const results = [];
+
+ for(const semester of Object.keys(CONTENT)){
+
+   CONTENT[semester].forEach((topic,index)=>{
+
+     const text =
+       (topic[0]+" "+topic[1]+" "+topic[2]).toLowerCase();
+
+     if(text.includes(query)){
+       results.push({semester,index,topic});
+     }
+
+   });
+
+ }
+
+ if(!results.length){
+
+   $("searchResults").innerHTML = \`
+   <div class="card">
+   ❌ No exact topic found.<br>
+   Try: <b>Hypertension</b>, <b>Diabetes</b>,
+   <b>KMC</b>, <b>IMNCI</b>, <b>Research</b>.
+   </div>
+   \`;
+
+   return;
+ }
+
+ $("searchResults").innerHTML = \`
+ <div class="card">
+ <h3>🔎 Search Results</h3>
+
+ \${results.map(x=>\`
+ <div class="topic">
+ <small>\${x.semester}</small>
+ <h3>\${x.topic[0]}</h3>
+ <p>\${x.topic[1]}</p>
+ <button class="btn"
+ onclick="showSemester('\${x.semester}');setTimeout(()=>openTopic('\${x.semester}',\${x.index},'notes'),100)">
+ Open Topic
+ </button>
+ </div>
+ \`).join("")}
+
+ </div>
+ \`;
 }
 
 function closeModal(){
-document.getElementById("modal").classList.add("hidden");
+ $("modalRoot").innerHTML = "";
 }
 
-/* =========================================================
-   NOTES
-========================================================= */
+function copyUPI(){
 
-function getTopic(name){
-return DATA.find(x=>x.topic===name);
+ navigator.clipboard?.writeText("7763082034@kotak")
+ .then(()=>alert("UPI ID copied: 7763082034@kotak"))
+ .catch(()=>alert("UPI ID: 7763082034@kotak"));
 }
 
-function showNotes(name){
+function bookForm(type){
 
-const x=getTopic(name);
-if(!x)return;
+ $("bookMessage").innerHTML = \`
+ <div class="card">
+ <h3>\${type === "Give" ? "📤 Give a Book" : "📥 Need a Book"}</h3>
 
-openModal(
-"📖 Notes — "+x.topic,
-`
+ <div class="field">
+ <label>Name</label>
+ <input id="bookName" placeholder="Your name">
+ </div>
 
-<div class="answer">
+ <div class="field">
+ <label>Mobile</label>
+ <input id="bookPhone" placeholder="10 digit mobile">
+ </div>
 
-<h3>1. Definition</h3>
+ <div class="field">
+ <label>Book Name</label>
+ <input id="bookTitle" placeholder="Example: Child Health Nursing">
+ </div>
 
-<p>
-${esc2(x.definition)}
-</p>
+ <div class="field">
+ <label>Semester</label>
+ <select id="bookSemester">
+ ${Object.keys(CONTENT).map(s=>\`<option>\${s}</option>\`).join("")}
+ </select>
+ </div>
 
-<p>
-<strong>Easy Samajh:</strong>
-<br>
-${easyExplain(x)}
-</p>
-
-</div>
-
-<div class="answer">
-
-<h3>2. Causes / Risk Factors</h3>
-
-<p>${esc2(x.key)}</p>
-
-<p>
-Risk factors ka matlab hai wo cheezein jo disease/problem
-hone ka chance badha sakti hain.
-</p>
-
-</div>
-
-<div class="answer">
-
-<h3>3. Signs and Symptoms</h3>
-
-<p>
-Patient ki complaints, vital signs aur condition-specific
-physical findings assess karein.
-</p>
-
-<ul>
-<li>Patient history</li>
-<li>Vital signs</li>
-<li>Physical assessment</li>
-<li>Condition-specific symptoms</li>
-<li>Changes in patient's condition</li>
-</ul>
-
-</div>
-
-<div class="answer">
-
-<h3>4. Investigations</h3>
-
-<p>
-Condition ke according doctor ke order par laboratory tests,
-imaging, monitoring aur other investigations ki ja sakti hain.
-</p>
-
-</div>
-
-<div class="answer">
-
-<h3>5. Treatment / Management</h3>
-
-<p>
-Treatment disease aur patient ki condition par depend karta hai.
-Prescribed medicines, supportive treatment, monitoring aur
-underlying cause ka management important hai.
-</p>
-
-</div>
-
-<div class="answer">
-
-<h3>6. Nursing Management</h3>
-
-<ul>
-<li>Patient ki condition assess karein.</li>
-<li>Vital signs monitor karein.</li>
-<li>Prescribed medicines safely administer karein.</li>
-<li>Comfort aur safety maintain karein.</li>
-<li>Nutrition aur hydration ka dhyan rakhein.</li>
-<li>Complications observe karein.</li>
-<li>Patient aur family ko simple language mein samjhayein.</li>
-<li>Accurate documentation karein.</li>
-</ul>
-
-<p>
-<strong>Easy Samajh:</strong>
-Nurse ka main kaam patient ko safely monitor karna,
-treatment dena, problem ko jaldi identify karna aur patient
-ko care ke baare mein samjhana hai.
-</p>
-
-</div>
-
-<div class="answer">
-
-<h3>7. Complications</h3>
-
-<p>
-Disease-specific complications ke signs observe karein aur
-patient ki condition worsen hone par timely reporting karein.
-</p>
-
-</div>
-
-<div class="answer">
-
-<h3>8. Health Education</h3>
-
-<ul>
-<li>Medicine correctly lena.</li>
-<li>Diet aur lifestyle instructions follow karna.</li>
-<li>Warning signs samajhna.</li>
-<li>Follow-up par jana.</li>
-<li>Complications prevent karna.</li>
-</ul>
-
-</div>
-
-<div class="answer">
-
-<h3>Exam Conclusion</h3>
-
-<p>
-Early assessment, correct treatment aur effective nursing care
-patient outcome improve karne mein help karti hai.
-</p>
-
-</div>
-`
-);
-
+ <button class="btn" onclick="submitBook('\${type}')">
+ Submit
+ </button>
+ </div>
+ \`;
 }
 
-/* =========================================================
-   VIVA
-========================================================= */
+function submitBook(type){
 
-function showViva(name){
+ const name = $("bookName").value.trim();
+ const phone = $("bookPhone").value.trim();
+ const title = $("bookTitle").value.trim();
+ const semester = $("bookSemester").value;
 
-const x=getTopic(name);
-if(!x)return;
+ if(!name || !phone || !title){
+   alert("Please fill all details.");
+   return;
+ }
 
-const qs=[
+ fetch("/api/book",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({
+     type,name,phone,title,semester
+   })
+ }).catch(()=>{});
 
-[
-"What is "+x.topic+"?",
-x.definition
-],
-
-[
-"Why is "+x.topic+" important?",
-x.key
-],
-
-[
-"What should a nurse assess?",
-"Patient history, signs and symptoms, vital signs and relevant physical findings."
-],
-
-[
-"What are important nursing responsibilities?",
-"Assessment, monitoring, safe treatment, comfort, safety, education and documentation."
-],
-
-[
-"What should the nurse teach the patient?",
-"Medicines, diet/lifestyle, warning signs, prevention and follow-up according to the condition."
-],
-
-[
-"What is the easiest way to remember this topic?",
-"Definition → Causes → Symptoms → Investigation → Treatment → Nursing Management → Complications → Health Education."
-]
-
-];
-
-openModal(
-"🎤 Viva — "+x.topic,
-qs.map((q,i)=>`
-
-<div class="answer">
-
-<h3>Q${i+1}. ${esc2(q[0])}</h3>
-
-<p>
-<strong>Answer:</strong><br>
-${esc2(q[1])}
-</p>
-
-<p>
-<strong>Simple language:</strong><br>
-Iska simple matlab hai ki nurse ko patient ki condition
-samajhkar safe care aur proper education deni hoti hai.
-</p>
-
-</div>
-
-`).join("")
-);
-
+ $("bookMessage").innerHTML = \`
+ <div class="card">
+ <h3>✅ Request Submitted</h3>
+ <p>
+ Thank you <b>\${name}</b>.<br>
+ Your book \${type.toLowerCase()} request has been recorded.
+ </p>
+ </div>
+ \`;
 }
 
-/* =========================================================
-   MCQ
-========================================================= */
-
-function showMCQ(name){
-
-const x=getTopic(name);
-
-const questions=[
-
-{
-q:"Which statement best describes "+x.topic+"?",
-o:[
-x.definition,
-"It has no relation to patient care.",
-"It never requires assessment.",
-"It is only a laboratory test."
-],
-a:"A",
-e:"Option A is correct because it gives the appropriate definition."
-},
-
-{
-q:"Which is an important point regarding "+x.topic+"?",
-o:[
-x.key,
-"Patient assessment should be avoided.",
-"Documentation is unnecessary.",
-"Patient education has no role."
-],
-a:"A",
-e:"Option A is correct because it represents an important point."
-},
-
-{
-q:"Which nursing action is most appropriate?",
-o:[
-"Assess the patient, provide safe care, monitor the response and document.",
-"Ignore changes in vital signs.",
-"Give treatment without assessment.",
-"Do not educate the patient."
-],
-a:"A",
-e:"Assessment, safe care, monitoring and documentation are basic nursing responsibilities."
-},
-
-{
-q:"What should a nurse do when the patient's condition worsens?",
-o:[
-"Recognize the change and report it promptly according to protocol.",
-"Ignore it.",
-"Stop all observations.",
-"Hide the information."
-],
-a:"A",
-e:"Early recognition and timely reporting can prevent complications."
-},
-
-{
-q:"Which is important for patient care?",
-o:[
-"Patient education and prevention of complications.",
-"Ignoring patient concerns.",
-"Avoiding documentation.",
-"Stopping monitoring."
-],
-a:"A",
-e:"Education and prevention are important parts of nursing care."
-}
-
-];
-
-openModal(
-"🧠 MCQ — "+x.topic+" — Answers Included",
-questions.map((q,i)=>`
-
-<div class="mcq">
-
-<h3>Q${i+1}. ${esc2(q.q)}</h3>
-
-<p>A. ${esc2(q.o[0])}</p>
-<p>B. ${esc2(q.o[1])}</p>
-<p>C. ${esc2(q.o[2])}</p>
-<p>D. ${esc2(q.o[3])}</p>
-
-<p class="correct">
-✅ Correct Answer: ${q.a}
-</p>
-
-<p>
-<strong>Explanation:</strong>
-${esc2(q.e)}
-</p>
-
-</div>
-
-`).join("")
-);
-
-}
-
-/* =========================================================
-   IMPORTANT QUESTION
-========================================================= */
-
-function showImportant(name){
-
-const x=getTopic(name);
-
-openModal(
-"🎯 Important Question + Complete Answer",
-`
-
-<div class="answer">
-
-<h3>Important Question</h3>
-
-<p>
-<strong>Write a detailed answer on: ${esc2(x.topic)}</strong>
-</p>
-
-</div>
-
-<div class="answer">
-
-<h3>Model Answer</h3>
-
-<h4>1. Definition</h4>
-<p>${esc2(x.definition)}</p>
-
-<h4>2. Causes / Risk Factors</h4>
-<p>${esc2(x.key)}</p>
-
-<h4>3. Types / Classification</h4>
-<p>
-Write the major types or classification applicable to
-this condition/topic.
-</p>
-
-<h4>4. Signs and Symptoms</h4>
-<p>
-Assess the patient's complaints, vital signs and
-condition-specific clinical findings.
-</p>
-
-<h4>5. Investigations</h4>
-<p>
-Relevant laboratory investigations, imaging and other
-tests may be performed according to the condition and
-medical advice.
-</p>
-
-<h4>6. Treatment / Management</h4>
-<p>
-Treatment depends on the condition. Prescribed medicines,
-supportive care, monitoring and treatment of the underlying
-problem are important.
-</p>
-
-<h4>7. Nursing Management</h4>
-
-<ul>
-<li>Assess patient.</li>
-<li>Monitor vital signs.</li>
-<li>Administer prescribed treatment safely.</li>
-<li>Maintain comfort and safety.</li>
-<li>Maintain nutrition/hydration as appropriate.</li>
-<li>Observe for complications.</li>
-<li>Provide psychological support.</li>
-<li>Educate patient and family.</li>
-<li>Document nursing care.</li>
-</ul>
-
-<h4>8. Complications</h4>
-<p>
-Observe for complications specific to the condition and
-report deterioration promptly.
-</p>
-
-<h4>9. Health Education</h4>
-<p>
-Explain medicines, diet, lifestyle, warning signs,
-prevention and follow-up in simple language.
-</p>
-
-<h4>10. Conclusion</h4>
-<p>
-Early assessment, appropriate treatment and effective
-nursing care help improve patient outcomes.
-</p>
-
-<hr>
-
-<h3>🗣️ Bachhe ko simple language mein kaise samjhayen?</h3>
-
-<p>
-Is topic ko ratne ki jagah pehle iska simple meaning samjho.
-Patient ko kya problem hai, problem kyu hoti hai, patient mein
-kya signs aate hain, doctor kya treatment dega aur nurse ko
-patient ke liye kya karna hai — bas isi sequence mein answer yaad karo.
-</p>
-
-</div>
-`
-);
-
-}
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-function searchTopics(){
-
-const q=document.getElementById("search").value.toLowerCase().trim();
-
-if(!q){
-document.getElementById("searchResults").innerHTML="";
-return;
-}
-
-const found=DATA.filter(x=>
-(x.topic+" "+x.definition+" "+x.key)
-.toLowerCase()
-.includes(q)
-);
-
-if(!found.length){
-document.getElementById("searchResults").innerHTML=`
-<div class="card">
-<h3>❌ No result found</h3>
-<p>
-Try Hypertension, COPD, Diabetes, KMC, IMNCI,
-Nursing Research, Sampling, Leadership etc.
-</p>
-</div>
-`;
-return;
-}
-
-document.getElementById("searchResults").innerHTML=
-found.map(x=>`
-
-<div class="card">
-
-<span class="badge">${esc2(x.semester)}</span>
-
-<h3>${esc2(x.topic)}</h3>
-
-<p>${esc2(x.definition)}</p>
-
-<div class="actions">
-
-<button onclick='showNotes(${JSON.stringify(x.topic)})'>📖 Notes</button>
-
-<button onclick='showViva(${JSON.stringify(x.topic)})'>🎤 Viva</button>
-
-<button onclick='showMCQ(${JSON.stringify(x.topic)})'>🧠 MCQ</button>
-
-<button onclick='showImportant(${JSON.stringify(x.topic)})'>🎯 Important</button>
-
-</div>
-
-</div>
-
-`).join("");
-
-}
-
-/* =========================================================
-   BOOKS
-========================================================= */
-
-function bookAction(type){
-
-if(!currentStudent){
-alert("Please login first.");
-return;
-}
-
-const message=
-type==="Give"
-? "Book dena hai. Apni book ka naam aur contact details apne college/community group mein share karein."
-: "Book chahiye. Apni required book ka naam aur semester community/group mein share karein.";
-
-alert(message);
-
-}
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-async function logout(){
-
-await fetch("/api/logout",{
-method:"POST"
-});
-
-location.reload();
-
-}
-
-/* =========================================================
-   AUTO LOGIN CHECK
-========================================================= */
-
-(async function(){
-
-try{
-
-const r=await fetch("/api/me");
-const data=await r.json();
-
-if(data.loggedIn){
-currentStudent=data.student;
-openApp();
-}
-
-}catch(e){
-
-console.log("Session check failed");
-
-}
-
-})();
+window.addEventListener("load",loadProfile);
 
 </script>
 
 </body>
 </html>`;
 
-/* =========================================================
-   SERVE WEBSITE
-========================================================= */
+const server = http.createServer((req,res)=>{
 
-app.get("/",(req,res)=>{
-  res.setHeader("Content-Type","text/html; charset=utf-8");
-  res.send(HTML);
+  if(req.method === "GET" && req.url === "/"){
+    return page(res);
+  }
+
+  if(req.method === "GET" && req.url === "/health"){
+    return json(res,{
+      ok:true,
+      app:"NurseStudy",
+      message:"NurseStudy server is running"
+    });
+  }
+
+  if(req.method === "POST" && req.url === "/api/student"){
+
+    let body = "";
+
+    req.on("data",chunk=>{
+      body += chunk.toString();
+
+      if(body.length > 100000){
+        req.destroy();
+      }
+    });
+
+    req.on("end",()=>{
+
+      try{
+
+        const student = JSON.parse(body);
+
+        if(
+          !student.name ||
+          !student.phone ||
+          !student.gender ||
+          !student.semester ||
+          !student.university ||
+          !student.college
+        ){
+          return json(res,{
+            ok:false,
+            message:"Required details missing"
+          },400);
+        }
+
+        saveStudent(student);
+
+        return json(res,{
+          ok:true,
+          message:"Student registered successfully"
+        });
+
+      }catch(e){
+
+        return json(res,{
+          ok:false,
+          message:"Invalid request"
+        },400);
+
+      }
+
+    });
+
+    return;
+  }
+
+  if(req.method === "POST" && req.url === "/api/book"){
+
+    let body = "";
+
+    req.on("data",chunk=>{
+      body += chunk.toString();
+    });
+
+    req.on("end",()=>{
+
+      try{
+
+        const data = JSON.parse(body);
+
+        const file = path.join(
+          os.tmpdir(),
+          "nursestudy_books.json"
+        );
+
+        let books = [];
+
+        try{
+          if(fs.existsSync(file)){
+            books = JSON.parse(
+              fs.readFileSync(file,"utf8")
+            );
+          }
+        }catch(e){}
+
+        books.push({
+          ...data,
+          createdAt:new Date().toISOString()
+        });
+
+        try{
+          fs.writeFileSync(
+            file,
+            JSON.stringify(books,null,2)
+          );
+        }catch(e){}
+
+        return json(res,{
+          ok:true,
+          message:"Book request saved"
+        });
+
+      }catch(e){
+
+        return json(res,{
+          ok:false
+        },400);
+
+      }
+
+    });
+
+    return;
+  }
+
+  res.writeHead(404,{"Content-Type":"text/plain"});
+  res.end("NurseStudy - Page Not Found");
+
 });
 
-app.get("/health",(req,res)=>{
-  res.json({
-    status:"ok",
-    app:"NurseStudy"
-  });
-});
-
-/* =========================================================
-   404
-========================================================= */
-
-app.use((req,res)=>{
-  res.status(404).send("NurseStudy: Page not found");
-});
-
-/* =========================================================
-   START SERVER
-========================================================= */
-
-app.listen(PORT,"0.0.0.0",()=>{
+server.listen(PORT,HOST,()=>{
   console.log("=================================");
-  console.log("NurseStudy is running");
+  console.log("NurseStudy server is running");
   console.log("PORT:",PORT);
+  console.log("URL ready for Render");
   console.log("=================================");
 });
