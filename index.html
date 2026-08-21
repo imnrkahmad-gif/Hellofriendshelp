@@ -2,607 +2,636 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#0f766e">
 
-<title>NurseStudy — Nursing Education Platform</title>
+<title>NurseStudy - Nursing Education Platform</title>
 
 <style>
 :root{
-  --primary:#0f766e;
-  --primary2:#14b8a6;
-  --dark:#102a43;
-  --text:#243b53;
-  --muted:#627d98;
-  --bg:#f5f9fb;
-  --card:#ffffff;
-  --line:#d9e2ec;
-  --shadow:0 12px 35px rgba(16,42,67,.09);
-  --radius:20px;
+--primary:#0f766e;
+--secondary:#14b8a6;
+--dark:#102a43;
+--text:#243b53;
+--muted:#627d98;
+--bg:#f4f9fa;
+--white:#fff;
+--border:#d9e2ec;
+--shadow:0 10px 30px rgba(16,42,67,.09);
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  color:var(--text);
-  background:var(--bg);
-}
-
-button,
-input{
-  font:inherit;
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+background:var(--bg);
+color:var(--text);
 }
 
 a{
-  text-decoration:none;
-  color:inherit;
+text-decoration:none;
+color:inherit;
+}
+
+button,input,select,textarea{
+font:inherit;
+}
+
+button{
+cursor:pointer;
 }
 
 .container{
-  width:min(1120px,92%);
-  margin:auto;
+width:min(1150px,92%);
+margin:auto;
 }
 
 /* HEADER */
 
 header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(255,255,255,.94);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(255,255,255,.96);
+backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);
 }
 
 .nav{
-  height:70px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
+height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
 .logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:800;
-  color:var(--dark);
-  font-size:20px;
+display:flex;
+align-items:center;
+gap:10px;
+font-size:21px;
+font-weight:900;
+color:var(--dark);
 }
 
-.logoMark{
-  width:42px;
-  height:42px;
-  border-radius:13px;
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  color:white;
-  display:grid;
-  place-items:center;
-  font-size:22px;
-  box-shadow:0 7px 18px rgba(15,118,110,.25);
+.logoIcon{
+width:43px;
+height:43px;
+display:grid;
+place-items:center;
+border-radius:13px;
+color:white;
+font-size:22px;
+background:linear-gradient(135deg,var(--primary),var(--secondary));
 }
 
-.navlinks{
-  display:flex;
-  gap:8px;
-  align-items:center;
+.navLinks{
+display:flex;
+gap:7px;
 }
 
-.navlinks a{
-  padding:10px 13px;
-  border-radius:11px;
-  font-weight:650;
-  font-size:14px;
+.navLinks a{
+padding:9px 12px;
+border-radius:10px;
+font-size:13px;
+font-weight:700;
 }
 
-.navlinks a:hover{
-  background:#e8f7f5;
-  color:var(--primary);
+.navLinks a:hover{
+background:#e8f8f5;
+color:var(--primary);
 }
 
 .menu{
-  display:none;
-  border:0;
-  background:#eef7f6;
-  border-radius:12px;
-  padding:10px 12px;
-  cursor:pointer;
-}
-
-.mobileNav{
-  display:none;
+display:none;
+border:0;
+background:#e8f8f5;
+padding:10px;
+border-radius:10px;
 }
 
 /* HERO */
 
 .hero{
-  padding:55px 0 35px;
-  background:linear-gradient(180deg,#effcfb 0,#f5f9fb 100%);
+padding:60px 0;
+background:linear-gradient(180deg,#e8fbf8,#f4f9fa);
 }
 
 .heroGrid{
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:35px;
-  align-items:center;
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:35px;
+align-items:center;
 }
 
 .badge{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  background:#dff7f3;
-  color:#08645e;
-  padding:8px 12px;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:750;
+display:inline-block;
+background:#ddf6f2;
+color:#08645e;
+padding:8px 12px;
+border-radius:50px;
+font-size:12px;
+font-weight:800;
 }
 
 h1{
-  font-size:clamp(36px,6vw,62px);
-  line-height:1.02;
-  margin:18px 0 15px;
-  color:var(--dark);
-  letter-spacing:-1.8px;
+font-size:clamp(38px,6vw,62px);
+line-height:1.02;
+letter-spacing:-2px;
+color:var(--dark);
+margin:17px 0;
 }
 
-.hero p{
-  font-size:18px;
-  line-height:1.65;
-  color:var(--muted);
-  max-width:650px;
+.heroText{
+font-size:17px;
+line-height:1.7;
+color:var(--muted);
 }
 
 .search{
-  display:flex;
-  gap:10px;
-  background:white;
-  padding:9px;
-  border:1px solid var(--line);
-  border-radius:16px;
-  box-shadow:var(--shadow);
-  margin-top:25px;
-  max-width:680px;
+display:flex;
+gap:8px;
+background:white;
+padding:7px;
+border:1px solid var(--border);
+border-radius:16px;
+box-shadow:var(--shadow);
+margin-top:23px;
 }
 
 .search input{
-  flex:1;
-  border:0;
-  outline:0;
-  padding:13px;
-  font-size:16px;
-  min-width:0;
+flex:1;
+border:0;
+outline:0;
+padding:13px;
+min-width:0;
 }
 
 .btn{
-  border:0;
-  border-radius:12px;
-  padding:12px 17px;
-  background:var(--primary);
-  color:#fff;
-  font-weight:750;
-  cursor:pointer;
+border:0;
+border-radius:11px;
+padding:11px 16px;
+background:var(--primary);
+color:white;
+font-weight:800;
 }
 
 .btn:hover{
-  background:#0b625c;
+background:#0b625c;
+}
+
+.btn.light{
+background:#e8f8f5;
+color:#08645e;
 }
 
 .heroCard{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:28px;
-  padding:25px;
-  box-shadow:var(--shadow);
+background:white;
+border:1px solid var(--border);
+border-radius:25px;
+padding:25px;
+box-shadow:var(--shadow);
 }
 
-.heroCardTop{
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
-
-.docIcon{
-  width:58px;
-  height:58px;
-  border-radius:17px;
-  background:#e6fffb;
-  display:grid;
-  place-items:center;
-  font-size:28px;
-}
-
-.heroCard h3{
-  margin:0 0 5px;
-  color:var(--dark);
-}
-
-.heroCard p{
-  font-size:14px;
-  margin:0;
-}
-
-.progress{
-  height:9px;
-  background:#edf2f7;
-  border-radius:20px;
-  overflow:hidden;
-  margin:22px 0 10px;
-}
-
-.progress span{
-  display:block;
-  height:100%;
-  width:72%;
-  background:linear-gradient(90deg,var(--primary),var(--primary2));
+.heroEmoji{
+font-size:50px;
 }
 
 .stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-top:15px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:20px;
 }
 
 .stat{
-  padding:14px;
-  background:#f8fbfc;
-  border-radius:14px;
-  text-align:center;
+background:#f7fafb;
+border-radius:13px;
+padding:13px;
+text-align:center;
 }
 
-.stat b{
-  display:block;
-  font-size:20px;
-  color:var(--dark);
+.stat strong{
+display:block;
+font-size:21px;
+color:var(--dark);
 }
 
 .stat small{
-  color:var(--muted);
+color:var(--muted);
 }
 
 /* SECTIONS */
 
 section{
-  padding:55px 0;
+padding:50px 0;
 }
 
-.sectionHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  gap:20px;
-  margin-bottom:22px;
+.sectionTitle{
+margin-bottom:22px;
 }
 
-.sectionHead h2{
-  margin:0;
-  color:var(--dark);
-  font-size:30px;
+.sectionTitle h2{
+margin:0;
+font-size:30px;
+color:var(--dark);
 }
 
-.sectionHead p{
-  margin:6px 0 0;
-  color:var(--muted);
+.sectionTitle p{
+color:var(--muted);
 }
 
 /* CARDS */
 
 .grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
 }
 
 .card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:20px;
-  box-shadow:0 7px 24px rgba(16,42,67,.05);
-  transition:.2s;
+background:white;
+border:1px solid var(--border);
+border-radius:18px;
+padding:19px;
+box-shadow:0 5px 20px rgba(16,42,67,.05);
+transition:.2s;
 }
 
 .card:hover{
-  transform:translateY(-3px);
-  box-shadow:var(--shadow);
+transform:translateY(-3px);
+box-shadow:var(--shadow);
 }
 
-.cardIcon{
-  width:46px;
-  height:46px;
-  border-radius:14px;
-  background:#e9f8f6;
-  display:grid;
-  place-items:center;
-  font-size:22px;
-  margin-bottom:14px;
+.icon{
+width:46px;
+height:46px;
+display:grid;
+place-items:center;
+background:#e8f8f5;
+border-radius:13px;
+font-size:22px;
 }
 
 .card h3{
-  font-size:17px;
-  margin:0 0 7px;
-  color:var(--dark);
+color:var(--dark);
+margin:9px 0;
 }
 
 .card p{
-  font-size:13px;
-  line-height:1.55;
-  color:var(--muted);
-  margin:0;
+font-size:13px;
+line-height:1.6;
+color:var(--muted);
 }
 
-.semester{
-  position:relative;
-  overflow:hidden;
+.tag{
+display:inline-block;
+background:#e5f7f4;
+color:#08645e;
+padding:6px 9px;
+border-radius:8px;
+font-size:11px;
+font-weight:800;
 }
 
-.semester span{
-  display:inline-block;
-  font-size:12px;
-  font-weight:800;
-  color:var(--primary);
-  background:#e7f8f5;
-  padding:6px 9px;
-  border-radius:8px;
-  margin-bottom:12px;
+/* SEMESTER */
+
+.tabs{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-bottom:18px;
 }
 
-/* SUBJECTS */
+.tab{
+border:1px solid var(--border);
+background:white;
+padding:9px 12px;
+border-radius:10px;
+font-size:13px;
+font-weight:750;
+}
 
-.subjectGrid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
+.tab.active,
+.tab:hover{
+background:var(--primary);
+color:white;
+border-color:var(--primary);
+}
+
+.subjects{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
 }
 
 .subject{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:17px;
-  padding:18px;
-  display:flex;
-  align-items:center;
-  gap:13px;
-  cursor:pointer;
-  transition:.2s;
+background:white;
+border:1px solid var(--border);
+border-radius:15px;
+padding:15px;
+cursor:pointer;
 }
 
 .subject:hover{
-  transform:translateY(-2px);
-  box-shadow:var(--shadow);
-}
-
-.subject .icon{
-  width:44px;
-  height:44px;
-  border-radius:12px;
-  background:#f0f7fb;
-  display:grid;
-  place-items:center;
-  font-size:21px;
+box-shadow:var(--shadow);
 }
 
 .subject strong{
-  display:block;
-  color:var(--dark);
-  font-size:15px;
+display:block;
+color:var(--dark);
 }
 
 .subject small{
-  color:var(--muted);
+color:var(--muted);
 }
 
-/* FEATURES */
+/* TOPICS */
 
-.features{
-  background:#fff;
+.topic{
+background:white;
+border:1px solid var(--border);
+border-radius:15px;
+padding:17px;
+margin:10px 0;
 }
 
-.featureGrid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
+.topic h3{
+margin:0 0 7px;
+color:var(--dark);
 }
 
-.feature{
-  padding:22px;
-  border:1px solid var(--line);
-  border-radius:18px;
-  background:#fff;
-  transition:.2s;
+.topic p{
+color:var(--muted);
+font-size:13px;
+line-height:1.65;
 }
 
-.feature:hover{
-  transform:translateY(-2px);
-  box-shadow:var(--shadow);
+.actions{
+display:flex;
+gap:7px;
+flex-wrap:wrap;
 }
 
-.feature b{
-  color:var(--dark);
-  display:block;
-  margin-bottom:7px;
+.actions button{
+border:1px solid var(--border);
+background:white;
+color:var(--primary);
+padding:7px 10px;
+border-radius:8px;
+font-size:12px;
+font-weight:750;
 }
 
-.feature span{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.55;
+/* HELP */
+
+.helpGrid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
 }
 
-/* SEARCH */
-
-.searchResults{
-  display:none;
-  margin-top:18px;
+.formCard{
+background:white;
+border:1px solid var(--border);
+border-radius:18px;
+padding:20px;
 }
 
-.result{
-  padding:16px;
-  background:white;
-  border:1px solid var(--line);
-  border-radius:14px;
-  margin:9px 0;
+.formCard input,
+.formCard select,
+.formCard textarea{
+width:100%;
+border:1px solid var(--border);
+border-radius:10px;
+padding:11px;
+margin:5px 0 9px;
+outline:none;
 }
 
-.result b{
-  color:var(--dark);
+.formCard textarea{
+min-height:100px;
+resize:vertical;
 }
 
-.result p{
-  margin:5px 0 0;
-  color:var(--muted);
-  font-size:13px;
+.notice{
+background:#fff8e8;
+border:1px solid #f1d49a;
+border-radius:13px;
+padding:14px;
+font-size:13px;
+line-height:1.6;
+color:#765000;
 }
 
-.empty{
-  padding:18px;
-  background:#fff;
-  border:1px dashed var(--line);
-  border-radius:14px;
-  color:var(--muted);
+/* COMMUNITY */
+
+.post{
+padding:13px 0;
+border-bottom:1px solid var(--border);
+}
+
+.post:last-child{
+border-bottom:0;
 }
 
 /* FOOTER */
 
 footer{
-  background:#102a43;
-  color:#d9e2ec;
-  padding:38px 0;
-  margin-top:20px;
+background:var(--dark);
+color:#c7d5e2;
+padding:40px 0;
 }
 
 .footerGrid{
-  display:grid;
-  grid-template-columns:1.5fr 1fr 1fr;
-  gap:25px;
+display:grid;
+grid-template-columns:1.5fr 1fr 1fr;
+gap:25px;
 }
 
 footer h3{
-  color:white;
-  margin-top:0;
+color:white;
 }
 
 footer p,
 footer a{
-  font-size:13px;
-  line-height:1.7;
-  color:#b8c7d6;
+font-size:13px;
+line-height:1.7;
+color:#b8c7d6;
 }
 
-.disclaimer{
-  border-top:1px solid rgba(255,255,255,.12);
-  margin-top:25px;
-  padding-top:18px;
-  font-size:12px;
-  color:#9fb3c8;
+.founder{
+font-size:18px;
+font-weight:900;
+color:white;
+}
+
+/* MODAL */
+
+.modalBg{
+position:fixed;
+inset:0;
+background:rgba(16,42,67,.65);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:18px;
+z-index:1000;
+}
+
+.modal{
+width:min(480px,100%);
+background:white;
+border-radius:23px;
+padding:25px;
+box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.modal h2{
+color:var(--dark);
+margin-top:0;
+}
+
+.modal p{
+color:var(--muted);
+font-size:13px;
+line-height:1.6;
+}
+
+.modal input,
+.modal select{
+width:100%;
+padding:12px;
+border:1px solid var(--border);
+border-radius:10px;
+margin:5px 0 9px;
+outline:none;
+}
+
+.modal button{
+width:100%;
+}
+
+.hidden{
+display:none!important;
+}
+
+/* CHAT */
+
+.chat{
+position:fixed;
+right:20px;
+bottom:20px;
+width:min(390px,calc(100% - 40px));
+background:white;
+border-radius:20px;
+box-shadow:0 20px 60px rgba(0,0,0,.2);
+z-index:900;
+border:1px solid var(--border);
+overflow:hidden;
+}
+
+.chatHeader{
+background:var(--primary);
+color:white;
+padding:14px;
+display:flex;
+justify-content:space-between;
+}
+
+.chatBody{
+height:270px;
+padding:12px;
+overflow:auto;
+background:#f5f9fa;
+}
+
+.message{
+background:#e3f7f4;
+padding:9px 11px;
+border-radius:12px;
+margin:7px 0;
+max-width:85%;
+font-size:13px;
+}
+
+.message.me{
+margin-left:auto;
+background:#e9eef5;
+}
+
+.chatInput{
+display:flex;
+gap:7px;
+padding:10px;
+border-top:1px solid var(--border);
+}
+
+.chatInput input{
+flex:1;
+border:1px solid var(--border);
+border-radius:9px;
+padding:9px;
+outline:none;
 }
 
 /* MOBILE */
 
-@media(max-width:850px){
+@media(max-width:900px){
 
-  .heroGrid{
-    grid-template-columns:1fr;
-  }
-
-  .heroCard{
-    display:none;
-  }
-
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .subjectGrid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .featureGrid{
-    grid-template-columns:1fr;
-  }
-
-  .navlinks{
-    display:none;
-  }
-
-  .menu{
-    display:block;
-  }
-
-  .mobileNav{
-    position:absolute;
-    top:70px;
-    left:0;
-    right:0;
-    background:white;
-    border-bottom:1px solid var(--line);
-    padding:10px 4%;
-    box-shadow:var(--shadow);
-  }
-
-  .mobileNav a{
-    display:block;
-    padding:13px;
-    border-radius:10px;
-  }
-
-  .mobileNav a:hover{
-    background:#eef8f7;
-  }
+.heroGrid{
+grid-template-columns:1fr;
 }
 
-@media(max-width:520px){
+.heroCard{
+display:none;
+}
 
-  .hero{
-    padding-top:35px;
-  }
+.grid{
+grid-template-columns:repeat(2,1fr);
+}
 
-  .grid{
-    grid-template-columns:1fr;
-  }
+.navLinks{
+display:none;
+}
 
-  .subjectGrid{
-    grid-template-columns:1fr;
-  }
+.menu{
+display:block;
+}
 
-  .hero p{
-    font-size:16px;
-  }
+.subjects{
+grid-template-columns:repeat(2,1fr);
+}
 
-  .search{
-    padding:6px;
-  }
+}
 
-  .search .btn{
-    padding:10px 12px;
-  }
+@media(max-width:600px){
 
-  section{
-    padding:42px 0;
-  }
+.grid,
+.subjects,
+.helpGrid,
+.footerGrid{
+grid-template-columns:1fr;
+}
 
-  .sectionHead{
-    display:block;
-  }
+.hero{
+padding:40px 0;
+}
 
-  .sectionHead h2{
-    font-size:26px;
-  }
+.search{
+padding:5px;
+}
 
-  .footerGrid{
-    grid-template-columns:1fr;
-  }
+.search .btn{
+padding:10px 12px;
+}
+
+.sectionTitle h2{
+font-size:25px;
+}
+
 }
 </style>
 </head>
@@ -616,19 +645,16 @@ footer a{
 <div class="container nav">
 
 <a class="logo" href="#home">
-<span class="logoMark">🩺</span>
-<span>NurseStudy</span>
+<span class="logoIcon">🩺</span>
+NurseStudy
 </a>
 
-<nav class="navlinks">
+<nav class="navLinks">
 
-<a href="#semesters">Semesters</a>
-
-<a href="#subjects">Subjects</a>
-
-<a href="#resources">Resources</a>
-
-<a href="#about">About</a>
+<a href="#study">Study</a>
+<a href="#books">Books</a>
+<a href="#donate">Donate</a>
+<a href="#community">Community</a>
 
 </nav>
 
@@ -636,57 +662,41 @@ footer a{
 
 </div>
 
-<div id="mobileNav" class="mobileNav">
-
-<a href="#semesters" onclick="closeMenu()">Semesters</a>
-
-<a href="#subjects" onclick="closeMenu()">Subjects</a>
-
-<a href="#resources" onclick="closeMenu()">Resources</a>
-
-<a href="#about" onclick="closeMenu()">About</a>
-
-</div>
-
 </header>
-
-
-<!-- MAIN -->
-
-<main id="home">
 
 
 <!-- HERO -->
 
-<section class="hero">
+<section class="hero" id="home">
 
 <div class="container heroGrid">
 
 <div>
 
 <span class="badge">
-🎓 B.Sc. Nursing • 1st–7th Semester
+🎓 B.Sc. Nursing • Semester 1–7
 </span>
 
 <h1>
 Learn Nursing.<br>
 <span style="color:var(--primary)">
-Understand Better.
+Help Each Other.
 </span>
 </h1>
 
-<p>
-A simple nursing education platform for notes,
-important questions, viva preparation, MCQs,
-practical knowledge and disease-wise nursing care.
-</p>
+<p class="heroText">
 
+Notes, study material, exam preparation,
+viva, MCQs, practical learning and a
+student-help community — all in one place.
+
+</p>
 
 <div class="search">
 
 <input
 id="searchInput"
-placeholder="Search: Hypertension, COPD, Viva, KMC..."
+placeholder="Search Hypertension, COPD, KMC, Viva..."
 onkeydown="if(event.key==='Enter')searchSite()"
 >
 
@@ -696,56 +706,41 @@ Search
 
 </div>
 
-<div id="searchResults" class="searchResults"></div>
+<div id="searchResults"></div>
 
 </div>
 
 
 <div class="heroCard">
 
-<div class="heroCardTop">
+<div class="heroEmoji">📚</div>
 
-<div class="docIcon">
-📚
-</div>
+<h2 style="color:var(--dark)">
+Your Nursing Study Hub
+</h2>
 
-<div>
-
-<h3>Your Nursing Study Hub</h3>
-
-<p>
-Study by semester or search any topic.
+<p style="color:var(--muted)">
+Register once, choose your semester and
+start studying.
 </p>
-
-</div>
-
-</div>
-
-<div class="progress">
-<span></span>
-</div>
-
-<small style="color:var(--muted)">
-Platform starter content
-</small>
 
 <div class="stats">
 
 <div class="stat">
-<b>7</b>
+<strong>7</strong>
 <small>Semesters</small>
 </div>
 
 <div class="stat">
-<b>24/7</b>
-<small>Access</small>
-</div>
-
-<div class="stat">
-<b>∞</b>
+<strong>50+</strong>
 <small>Topics</small>
 </div>
 
+<div class="stat">
+<strong>24/7</strong>
+<small>Access</small>
+</div>
+
 </div>
 
 </div>
@@ -755,342 +750,311 @@ Platform starter content
 </section>
 
 
-<!-- SEMESTERS -->
+<!-- STUDY -->
 
-<section id="semesters">
+<section id="study">
 
 <div class="container">
 
-<div class="sectionHead">
+<div class="sectionTitle">
 
-<div>
-
-<h2>📚 Explore by Semester</h2>
+<h2>📚 Nursing Study Centre</h2>
 
 <p>
-Choose your semester and start studying.
+Choose your semester.
 </p>
 
 </div>
 
+<div id="semesterTabs" class="tabs"></div>
+
+<div id="semesterContent"></div>
+
 </div>
 
+</section>
+
+
+<!-- FEATURES -->
+
+<section style="background:white">
+
+<div class="container">
+
+<div class="sectionTitle">
+
+<h2>🚀 Everything for Nursing Students</h2>
+
+<p>
+Study resources in one place.
+</p>
+
+</div>
 
 <div class="grid">
 
-
-<div class="card semester">
-
-<span>SEMESTER 1</span>
-
-<h3>Foundation & Basics</h3>
-
-<p>
-Basic nursing concepts, anatomy,
-physiology and communication.
-</p>
-
+<div class="card">
+<div class="icon">📄</div>
+<h3>Notes</h3>
+<p>Simple topic-wise nursing study material.</p>
 </div>
 
-
-<div class="card semester">
-
-<span>SEMESTER 2</span>
-
-<h3>Core Nursing</h3>
-
-<p>
-Nutrition, pharmacology,
-microbiology and foundational care.
-</p>
-
+<div class="card">
+<div class="icon">🎯</div>
+<h3>Important Questions</h3>
+<p>Exam-focused short and long questions.</p>
 </div>
 
-
-<div class="card semester">
-
-<span>SEMESTER 3</span>
-
-<h3>Adult & Child Health</h3>
-
-<p>
-Adult health, child health and
-clinical nursing concepts.
-</p>
-
+<div class="card">
+<div class="icon">🎤</div>
+<h3>Viva</h3>
+<p>Practical viva preparation.</p>
 </div>
 
-
-<div class="card semester">
-
-<span>SEMESTER 4</span>
-
-<h3>Mental & Community</h3>
-
-<p>
-Mental health and community-focused
-nursing resources.
-</p>
-
-</div>
-
-
-<div class="card semester">
-
-<span>SEMESTER 5</span>
-
-<h3>Advanced Nursing</h3>
-
-<p>
-Advanced clinical topics,
-important questions and practical preparation.
-</p>
-
-</div>
-
-
-<div class="card semester">
-
-<span>SEMESTER 6</span>
-
-<h3>Clinical Preparation</h3>
-
-<p>
-Clinical skills, procedures,
-case-based learning and revision.
-</p>
-
-</div>
-
-
-<div class="card semester">
-
-<span>SEMESTER 7</span>
-
-<h3>Research & Management</h3>
-
-<p>
-Nursing research, management,
-leadership and exam preparation.
-</p>
-
-</div>
-
-
-<div class="card semester">
-
-<span>ALL</span>
-
-<h3>Complete Nursing</h3>
-
-<p>
-Search across semesters
-for any nursing topic.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- SUBJECTS -->
-
-<section id="subjects" class="features">
-
-<div class="container">
-
-<div class="sectionHead">
-
-<div>
-
-<h2>🩺 Popular Nursing Subjects</h2>
-
-<p>
-Quick access to the areas students study most.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="subjectGrid">
-
-
-<div class="subject">
-
-<div class="icon">🫀</div>
-
-<div>
-
-<strong>
-Adult Health Nursing
-</strong>
-
-<small>
-Diseases • Nursing care • Procedures
-</small>
-
-</div>
-
-</div>
-
-
-<div class="subject">
-
-<div class="icon">👶</div>
-
-<div>
-
-<strong>
-Child Health Nursing
-</strong>
-
-<small>
-Growth • Disorders • KMC • IMNCI
-</small>
-
-</div>
-
-</div>
-
-
-<div class="subject">
-
-<div class="icon">🤰</div>
-
-<div>
-
-<strong>
-Midwifery
-</strong>
-
-<small>
-Pregnancy • Labour • Newborn
-</small>
-
-</div>
-
-</div>
-
-
-<div class="subject">
-
+<div class="card">
 <div class="icon">🧠</div>
-
-<div>
-
-<strong>
-Mental Health Nursing
-</strong>
-
-<small>
-Psychiatric disorders • MSE • Care
-</small>
-
+<h3>MCQs</h3>
+<p>Quick revision and practice questions.</p>
 </div>
 
+<div class="card">
+<div class="icon">🏥</div>
+<h3>Clinical</h3>
+<p>Clinical procedures and practical learning.</p>
 </div>
 
-
-<div class="subject">
-
-<div class="icon">🌍</div>
-
-<div>
-
-<strong>
-Community Health Nursing
-</strong>
-
-<small>
-Programs • Prevention • Health education
-</small>
-
-</div>
-
-</div>
-
-
-<div class="subject">
-
-<div class="icon">🔬</div>
-
-<div>
-
-<strong>
-Nursing Research
-</strong>
-
-<small>
-Research process • Statistics • Projects
-</small>
-
-</div>
-
-</div>
-
-
-<div class="subject">
-
-<div class="icon">👩‍💼</div>
-
-<div>
-
-<strong>
-Nursing Management
-</strong>
-
-<small>
-Planning • Leadership • Administration
-</small>
-
-</div>
-
-</div>
-
-
-<div class="subject">
-
+<div class="card">
 <div class="icon">💊</div>
+<h3>Drugs</h3>
+<p>Drug classes and nursing responsibilities.</p>
+</div>
 
-<div>
+<div class="card">
+<div class="icon">📑</div>
+<h3>Previous Papers</h3>
+<p>University-wise previous questions.</p>
+</div>
 
-<strong>
-Pharmacology
+<div class="card">
+<div class="icon">🌍</div>
+<h3>University Content</h3>
+<p>Organise material according to university.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- BOOK HELP -->
+
+<section id="books">
+
+<div class="container">
+
+<div class="sectionTitle">
+
+<h2>📚 Nursing Book Help</h2>
+
+<p>
+Need a book or want to give a book to another student?
+</p>
+
+</div>
+
+<div class="helpGrid">
+
+<div class="formCard">
+
+<h3 style="color:var(--dark)">
+I Need a Book
+</h3>
+
+<form onsubmit="requestBook(event)">
+
+<input
+id="bookName"
+required
+placeholder="Book name"
+>
+
+<input
+id="studentName"
+required
+placeholder="Your name"
+>
+
+<input
+id="studentContact"
+required
+placeholder="Phone / Email"
+>
+
+<select id="bookSemester" required>
+
+<option value="">
+Select Semester
+</option>
+
+<option>1st Semester</option>
+<option>2nd Semester</option>
+<option>3rd Semester</option>
+<option>4th Semester</option>
+<option>5th Semester</option>
+<option>6th Semester</option>
+<option>7th Semester</option>
+
+</select>
+
+<textarea
+id="bookMessage"
+placeholder="Additional details"
+></textarea>
+
+<button class="btn">
+📚 Request Book
+</button>
+
+</form>
+
+</div>
+
+
+<div class="formCard">
+
+<h3 style="color:var(--dark)">
+🎁 Give a Free Book
+</h3>
+
+<form onsubmit="offerBook(event)">
+
+<input
+id="offerBookName"
+required
+placeholder="Book name"
+>
+
+<input
+id="offerStudentName"
+required
+placeholder="Your name"
+>
+
+<input
+id="offerContact"
+required
+placeholder="Contact"
+>
+
+<select id="offerSemester" required>
+
+<option value="">
+Select Semester
+</option>
+
+<option>1st Semester</option>
+<option>2nd Semester</option>
+<option>3rd Semester</option>
+<option>4th Semester</option>
+<option>5th Semester</option>
+<option>6th Semester</option>
+<option>7th Semester</option>
+
+</select>
+
+<textarea
+id="offerMessage"
+placeholder="Book condition / details"
+></textarea>
+
+<button class="btn">
+🎁 Offer Book Free
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- DONATION -->
+
+<section id="donate" style="background:#eefaf8">
+
+<div class="container">
+
+<div class="sectionTitle">
+
+<h2>❤️ Help a Nursing Student</h2>
+
+<p>
+If you want, you can support students who need books or study material.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+💰 Donation / Student Support
+</h3>
+
+<p>
+You can support the NurseStudy student-help initiative
+through the UPI ID below.
+</p>
+
+<div style="
+background:#e8f8f5;
+padding:18px;
+border-radius:14px;
+margin:15px 0;
+">
+
+<strong style="
+display:block;
+font-size:20px;
+color:#08645e;
+">
+7763082034@kotak
 </strong>
 
-<small>
-Drug classes • Uses • Precautions
+<small style="color:#627d98">
+NurseStudy Support UPI
 </small>
 
 </div>
 
-</div>
+<button
+class="btn"
+onclick="copyUPI()"
+>
+📋 Copy UPI ID
+</button>
 
+<button
+class="btn light"
+onclick="openUPI()"
+style="margin-left:7px"
+>
+💳 Open UPI
+</button>
 
-<div class="subject">
-
-<div class="icon">🧬</div>
-
-<div>
-
-<strong>
-Anatomy & Physiology
-</strong>
-
-<small>
-Systems • Functions • Revision
-</small>
-
-</div>
-
-</div>
-
+<div
+id="upiMessage"
+style="
+margin-top:12px;
+color:#08645e;
+font-size:13px;
+"
+></div>
 
 </div>
 
@@ -1099,113 +1063,78 @@ Systems • Functions • Revision
 </section>
 
 
-<!-- RESOURCES -->
+<!-- COMMUNITY -->
 
-<section id="resources">
+<section id="community">
 
 <div class="container">
 
-<div class="sectionHead">
+<div class="sectionTitle">
 
-<div>
-
-<h2>🚀 Study Resources</h2>
+<h2>💬 Nursing Student Community</h2>
 
 <p>
-Everything a nursing student needs in one place.
+Students can ask questions and connect with other students.
 </p>
 
 </div>
 
-</div>
+<div class="helpGrid">
 
+<div class="formCard">
 
-<div class="featureGrid">
+<h3 style="color:var(--dark)">
+Create a Post
+</h3>
 
+<form onsubmit="createPost(event)">
 
-<div class="feature">
+<input
+id="postName"
+required
+placeholder="Your name"
+>
 
-<b>
-📄 Notes & PDFs
-</b>
+<select id="postSemester" required>
 
-<span>
-Topic-wise notes and downloadable study
-material can be added here.
-</span>
+<option value="">
+Semester
+</option>
 
-</div>
+<option>1st Semester</option>
+<option>2nd Semester</option>
+<option>3rd Semester</option>
+<option>4th Semester</option>
+<option>5th Semester</option>
+<option>6th Semester</option>
+<option>7th Semester</option>
 
+</select>
 
-<div class="feature">
+<textarea
+id="postText"
+required
+placeholder="Example: I need help with AHN1 notes..."
+></textarea>
 
-<b>
-🎯 Important Questions
-</b>
+<button class="btn">
+Post
+</button>
 
-<span>
-Short, long and exam-focused questions
-with simple answers.
-</span>
-
-</div>
-
-
-<div class="feature">
-
-<b>
-🎤 Viva Preparation
-</b>
-
-<span>
-Quick viva questions and answers
-for practical examinations.
-</span>
-
-</div>
-
-
-<div class="feature">
-
-<b>
-🧠 MCQs & Quiz
-</b>
-
-<span>
-Practice questions for revision
-and self-assessment.
-</span>
+</form>
 
 </div>
 
 
-<div class="feature">
+<div class="formCard">
 
-<b>
-🏥 Practical & Clinical
-</b>
+<h3 style="color:var(--dark)">
+Student Posts
+</h3>
 
-<span>
-Nursing procedures, equipment,
-case studies and clinical tips.
-</span>
+<div id="posts"></div>
 
 </div>
-
-
-<div class="feature">
-
-<b>
-🩺 Disease-wise Care
-</b>
-
-<span>
-Definition, causes, signs, diagnosis,
-treatment and nursing management.
-</span>
-
-</div>
-
 
 </div>
 
@@ -1214,154 +1143,31 @@ treatment and nursing management.
 </section>
 
 
-<!-- SEARCH TOPICS -->
+<!-- SAFETY -->
 
-<section style="background:#eefaf8">
+<section>
 
 <div class="container">
 
-<div class="sectionHead">
+<div class="notice">
 
-<div>
+<strong>🛡️ Safety & Privacy</strong>
 
-<h2>🔎 Try the Search</h2>
+<br><br>
 
-<p>
-Search the starter topics below.
-</p>
+Never share passwords, OTPs, bank PINs,
+Aadhaar numbers or other sensitive information
+in public posts.
 
-</div>
-
-</div>
-
-
-<div class="grid">
-
-
-<div class="card" onclick="quickSearch('Hypertension')">
-
-<div class="cardIcon">
-❤️
-</div>
-
-<h3>
-Hypertension
-</h3>
-
-<p>
-Definition, causes, symptoms
-and nursing management.
-</p>
-
-</div>
-
-
-<div class="card" onclick="quickSearch('COPD')">
-
-<div class="cardIcon">
-🫁
-</div>
-
-<h3>
-COPD
-</h3>
-
-<p>
-Important concepts and
-nursing care topics.
-</p>
-
-</div>
-
-
-<div class="card" onclick="quickSearch('Kangaroo Mother Care')">
-
-<div class="cardIcon">
-👶
-</div>
-
-<h3>
-KMC
-</h3>
-
-<p>
-Quick child-health
-revision topic.
-</p>
-
-</div>
-
-
-<div class="card" onclick="quickSearch('Viva')">
-
-<div class="cardIcon">
-🎤
-</div>
-
-<h3>
-Viva Questions
-</h3>
-
-<p>
-Prepare fast for
-practical viva.
-</p>
-
-</div>
-
+For real student-to-student messaging across
+different phones, the website will need a secure
+login and online database.
 
 </div>
 
 </div>
 
 </section>
-
-
-<!-- ABOUT -->
-
-<section id="about">
-
-<div class="container">
-
-<div class="card" style="padding:28px">
-
-<h2 style="margin-top:0;color:var(--dark)">
-About NurseStudy
-</h2>
-
-<p style="color:var(--muted);line-height:1.7">
-
-This platform is designed to make nursing
-study material easier to find and understand.
-Content can be organised semester-wise,
-subject-wise and topic-wise.
-
-The next stage can add a secure admin panel
-so you can upload and manage notes, PDFs,
-questions and other resources without changing
-the website code.
-
-</p>
-
-
-<p style="color:var(--muted);line-height:1.7;margin-bottom:0">
-
-<b>Important:</b>
-
-Educational content should be verified against
-your university syllabus and current clinical
-guidelines. This website is for education and
-does not replace professional medical advice.
-
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-</main>
 
 
 <!-- FOOTER -->
@@ -1370,7 +1176,6 @@ does not replace professional medical advice.
 
 <div class="container footerGrid">
 
-
 <div>
 
 <h3>
@@ -1378,8 +1183,8 @@ does not replace professional medical advice.
 </h3>
 
 <p>
-Your simple nursing education hub for semester
-study, exam preparation and clinical learning.
+A nursing education and student-help platform
+for learning, sharing and supporting each other.
 </p>
 
 </div>
@@ -1393,21 +1198,13 @@ Quick Links
 
 <p>
 
-<a href="#semesters">
-Semesters
-</a>
+<a href="#study">Study</a><br>
 
-<br>
+<a href="#books">Book Help</a><br>
 
-<a href="#subjects">
-Subjects
-</a>
+<a href="#donate">Donate</a><br>
 
-<br>
-
-<a href="#resources">
-Resources
-</a>
+<a href="#community">Community</a>
 
 </p>
 
@@ -1417,203 +1214,1252 @@ Resources
 <div>
 
 <h3>
-Coming Next
+Founder
 </h3>
 
+<p class="founder">
+Nadeem
+</p>
+
 <p>
-Admin upload • PDF library • MCQ quiz •
-User accounts • University-wise content
+Founder, NurseStudy
 </p>
 
 </div>
 
-
 </div>
 
 
-<div class="container disclaimer">
+<div class="container"
+style="
+border-top:1px solid rgba(255,255,255,.12);
+margin-top:25px;
+padding-top:18px;
+font-size:12px;
+color:#9fb3c8;
+">
 
 © 2026 NurseStudy.
 Educational platform.
-Content should be checked with your official
-curriculum and current clinical guidance.
+Always verify academic and clinical information
+with official sources and current guidelines.
 
 </div>
 
 </footer>
 
 
+<!-- REGISTRATION MODAL -->
+
+<div
+id="registration"
+class="modalBg"
+>
+
+<div class="modal">
+
+<h2>
+👩‍⚕️ Welcome to NurseStudy
+</h2>
+
+<p>
+Student details enter karo aur apna semester
+select karo.
+</p>
+
+<form onsubmit="registerStudent(event)">
+
+<input
+id="regName"
+required
+placeholder="Full Name"
+>
+
+<input
+id="regMobile"
+required
+placeholder="Mobile Number"
+inputmode="tel"
+>
+
+<input
+id="regEmail"
+type="email"
+placeholder="Email (optional)"
+>
+
+<select id="regSemester" required>
+
+<option value="">
+Select Semester
+</option>
+
+<option>1st Semester</option>
+<option>2nd Semester</option>
+<option>3rd Semester</option>
+<option>4th Semester</option>
+<option>5th Semester</option>
+<option>6th Semester</option>
+<option>7th Semester</option>
+
+</select>
+
+<input
+id="regUniversity"
+required
+placeholder="University / College"
+>
+
+<button class="btn">
+Open My Study Dashboard →
+</button>
+
+</form>
+
+<p style="font-size:11px">
+Demo version: details are stored only on this device.
+Real online accounts/database can be connected later.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- CHAT -->
+
+<div
+id="chat"
+class="chat hidden"
+>
+
+<div class="chatHeader">
+
+<strong>
+💬 Student Message
+</strong>
+
+<button
+onclick="closeChat()"
+style="
+background:transparent;
+border:0;
+color:white;
+font-size:18px;
+"
+>
+✕
+</button>
+
+</div>
+
+<div
+id="chatBody"
+class="chatBody"
+></div>
+
+<div class="chatInput">
+
+<input
+id="chatInput"
+placeholder="Type message..."
+onkeydown="if(event.key==='Enter')sendMessage()"
+>
+
+<button
+class="btn"
+onclick="sendMessage()"
+>
+Send
+</button>
+
+</div>
+
+</div>
+
+
 <script>
 
-const topics = [
+/* =========================
+   NURSING CONTENT
+========================= */
 
-{
-name:"Hypertension",
-text:"Adult Health Nursing — definition, causes, signs and symptoms, investigations, treatment and nursing management."
+const nursingData={
+
+"1st Semester":{
+
+subjects:[
+"Anatomy & Physiology",
+"Nursing Foundations",
+"Nutrition",
+"Psychology",
+"Communication"
+],
+
+topics:[
+
+[
+"Nursing Process",
+"Assessment → Nursing Diagnosis → Planning → Implementation → Evaluation. It helps nurses provide organised and individualised care."
+],
+
+[
+"Vital Signs",
+"Temperature, pulse, respiration and blood pressure are basic observations. Record values accurately and report important changes."
+],
+
+[
+"Hand Hygiene",
+"Hand hygiene is one of the most important methods of reducing infection transmission. Follow current infection-control guidance."
+],
+
+[
+"Bed Making",
+"Maintain cleanliness, comfort, privacy and safety while using correct body mechanics."
+],
+
+[
+"Therapeutic Communication",
+"Use active listening, empathy, privacy and simple non-judgmental language."
+],
+
+[
+"Nutrition Basics",
+"Assess food intake, appetite, swallowing, weight and hydration."
+],
+
+[
+"Patient Safety",
+"Correct identification, fall prevention, safe environment and clear communication are important."
+],
+
+[
+"Documentation",
+"Documentation should be accurate, objective, timely and confidential."
+]
+
+]
+
 },
 
-{
-name:"COPD",
-text:"Adult Health Nursing — chronic respiratory disease, symptoms, assessment and nursing care."
+"2nd Semester":{
+
+subjects:[
+"Microbiology",
+"Biochemistry",
+"Pharmacology",
+"Pathology",
+"Adult Health Nursing"
+],
+
+topics:[
+
+[
+"Microbiology",
+"Study bacteria, viruses, fungi and parasites with emphasis on transmission and prevention."
+],
+
+[
+"Pharmacology",
+"Learn drug classes, indications, adverse effects, contraindications and nursing responsibilities."
+],
+
+[
+"Medication Safety",
+"Check the correct patient, medicine, dose, route, time, allergies and documentation according to policy."
+],
+
+[
+"Pain Assessment",
+"Assess location, severity, quality, timing and effect on activities using an appropriate pain scale."
+],
+
+[
+"Fluid Balance",
+"Monitor intake, output, hydration, edema, urine output and relevant investigations."
+],
+
+[
+"Respiratory Assessment",
+"Assess respiratory rate, effort, oxygenation, colour and breath sounds."
+]
+
+]
+
 },
 
-{
-name:"Kangaroo Mother Care",
-text:"Child Health Nursing — skin-to-skin care, benefits, indications and procedure."
+"3rd Semester":{
+
+subjects:[
+"Adult Health Nursing I",
+"Child Health Nursing I",
+"Pharmacology",
+"Pathology",
+"Community Health Nursing"
+],
+
+topics:[
+
+[
+"Hypertension",
+"High blood pressure is often asymptomatic. WHO defines hypertension as BP of 140/90 mmHg or higher when measured on two different days. Nursing care includes accurate BP measurement, lifestyle education and treatment adherence."
+],
+
+[
+"Myocardial Infarction",
+"Acute interruption of coronary blood flow causes myocardial injury. Suspected acute coronary syndrome requires emergency assessment."
+],
+
+[
+"COPD",
+"Chronic respiratory disease with persistent airflow limitation. Nursing care includes respiratory assessment, prescribed treatment, positioning and patient education."
+],
+
+[
+"Diabetes Mellitus",
+"Chronic disorder involving raised blood glucose. Nursing care includes glucose monitoring, medication safety, nutrition and foot care."
+],
+
+[
+"Diarrhea & Dehydration",
+"Assess stool pattern, hydration, mental status, urine output and vital signs. Severe dehydration requires urgent management."
+],
+
+[
+"Protein Energy Malnutrition",
+"Assess growth, weight and nutritional intake. Provide feeding support and monitor progress."
+],
+
+[
+"Kangaroo Mother Care",
+"Skin-to-skin care supports small or preterm newborns. Monitor temperature, breathing, feeding and stability."
+],
+
+[
+"Congenital Heart Disease",
+"Structural heart defects can affect oxygenation, feeding and growth. Nursing care focuses on assessment and family education."
+]
+
+]
+
 },
 
-{
-name:"Viva",
-text:"Practical preparation — quick nursing viva questions and answers can be organised here."
+"4th Semester":{
+
+subjects:[
+"Mental Health Nursing",
+"Community Health Nursing",
+"Adult Health Nursing II",
+"Child Health Nursing II"
+],
+
+topics:[
+
+[
+"Mental Status Examination",
+"Assess appearance, behaviour, speech, mood, affect, thought, perception, cognition, insight and judgement."
+],
+
+[
+"Schizophrenia",
+"A serious mental disorder affecting thinking, perception and behaviour. Nursing care includes therapeutic communication, safety and medication adherence support."
+],
+
+[
+"Depression",
+"Assess mood, interest, functioning and safety. Suicide/self-harm risk requires immediate clinical attention."
+],
+
+[
+"Anxiety",
+"Assess severity, triggers, physical symptoms and coping. Provide calm communication and prescribed support."
+],
+
+[
+"Levels of Prevention",
+"Primary prevention prevents disease, secondary supports early detection and tertiary reduces disability and complications."
+],
+
+[
+"Health Education",
+"Assess learning needs, set objectives, use simple language and evaluate understanding."
+]
+
+]
+
 },
 
-{
-name:"IMNCI",
-text:"Child Health / Community Health — integrated management approach for common childhood illnesses."
+"5th Semester":{
+
+subjects:[
+"Adult Health Nursing III",
+"Midwifery I",
+"Child Health Nursing III",
+"Community Health Nursing",
+"Nursing Research"
+],
+
+topics:[
+
+[
+"Shock",
+"Shock involves inadequate tissue perfusion. Prioritise airway, breathing and circulation and follow emergency protocols."
+],
+
+[
+"Heart Failure",
+"Assess breathlessness, edema, weight, fluid balance and activity tolerance."
+],
+
+[
+"Stroke",
+"Sudden neurological deficit requires emergency assessment. Recognise warning signs and note onset time."
+],
+
+[
+"Chronic Kidney Disease",
+"Monitor blood pressure, fluid status, medications, nutrition and laboratory results."
+],
+
+[
+"Perioperative Nursing",
+"Includes preoperative preparation, surgical safety, infection prevention, postoperative monitoring and pain management."
+],
+
+[
+"Nursing Research",
+"Research follows a systematic process from problem identification through literature review, design, data collection, analysis and reporting."
+]
+
+]
+
 },
 
-{
-name:"Spina Bifida",
-text:"Child Health Nursing — congenital neural tube defect and nursing care."
+"6th Semester":{
+
+subjects:[
+"Midwifery II",
+"Child Health Nursing IV",
+"Community Health Nursing IV",
+"Adult Health Nursing IV",
+"Statistics"
+],
+
+topics:[
+
+[
+"Antenatal Care",
+"Supports maternal and fetal health through assessment, screening, nutrition, education and danger-sign recognition."
+],
+
+[
+"Stages of Labour",
+"Study stages, maternal/fetal observations, supportive care and escalation according to current protocols."
+],
+
+[
+"Postnatal Care",
+"Assess bleeding, pain, infection, blood pressure, breastfeeding and emotional wellbeing."
+],
+
+[
+"APGAR Score",
+"A rapid newborn assessment commonly recorded at 1 and 5 minutes using appearance, pulse, grimace, activity and respiration."
+],
+
+[
+"IMNCI",
+"Integrated approach to common childhood illnesses involving assessment, classification, treatment, counselling and referral."
+],
+
+[
+"Neonatal Jaundice",
+"Early or severe jaundice needs assessment. Monitor feeding and prescribed treatment when indicated."
+],
+
+[
+"Prematurity",
+"Preterm babies need thermal care, feeding support, infection prevention and close monitoring."
+]
+
+]
+
 },
 
-{
-name:"Nursing Management",
-text:"Planning, organising, staffing, directing, leadership, supervision and evaluation."
-},
+"7th Semester":{
 
-{
-name:"Mental Health",
-text:"Psychiatric nursing — assessment, mental status examination and nursing management."
+subjects:[
+"Midwifery III",
+"Community Health Nursing V",
+"Nursing Management",
+"Nursing Research",
+"Professional Nursing"
+],
+
+topics:[
+
+[
+"Nursing Research",
+"Systematic investigation using planned methods: problem, literature review, objectives, variables, design, sampling, data collection, analysis and reporting."
+],
+
+[
+"Research Problem",
+"A good research problem is clear, focused, feasible and relevant."
+],
+
+[
+"Sampling",
+"Sampling selects participants from a population. Learn probability and non-probability sampling."
+],
+
+[
+"Data Collection",
+"Questionnaires, interviews, observation schedules and checklists are common data-collection tools."
+],
+
+[
+"Nursing Management",
+"Important functions include planning, organising, staffing, directing, coordination and evaluation."
+],
+
+[
+"Leadership",
+"Study leadership styles, communication, delegation, supervision and accountability."
+],
+
+[
+"Professional Ethics",
+"Respect autonomy, privacy, confidentiality, informed consent, dignity and professional boundaries."
+],
+
+[
+"Patient Safety",
+"Use correct identification, safe communication, medication safety, infection prevention and incident reporting."
+]
+
+]
+
 }
 
-];
+};
 
+
+/* =========================
+   REGISTRATION
+========================= */
+
+let student=null;
+
+function registerStudent(event){
+
+event.preventDefault();
+
+student={
+
+name:document.getElementById("regName").value.trim(),
+
+mobile:document.getElementById("regMobile").value.trim(),
+
+email:document.getElementById("regEmail").value.trim(),
+
+semester:document.getElementById("regSemester").value,
+
+university:document.getElementById("regUniversity").value.trim()
+
+};
+
+localStorage.setItem(
+"nurseStudyStudent",
+JSON.stringify(student)
+);
+
+document
+.getElementById("registration")
+.classList.add("hidden");
+
+renderSemester(student.semester);
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================
+   SEMESTERS
+========================= */
+
+function renderSemesterTabs(){
+
+const tabs=document.getElementById(
+"semesterTabs"
+);
+
+tabs.innerHTML="";
+
+Object.keys(nursingData).forEach(
+semester=>{
+
+const button=document.createElement(
+"button"
+);
+
+button.className="tab";
+
+button.innerText=semester;
+
+button.onclick=()=>{
+
+renderSemester(semester);
+
+};
+
+tabs.appendChild(button);
+
+});
+
+}
+
+
+function renderSemester(semester){
+
+const data=nursingData[semester];
+
+const content=document.getElementById(
+"semesterContent"
+);
+
+document
+.querySelectorAll(".tab")
+.forEach(
+button=>{
+
+button.classList.toggle(
+"active",
+button.innerText===semester
+);
+
+});
+
+
+content.innerHTML=`
+
+<div class="card">
+
+<span class="tag">
+${semester}
+</span>
+
+<h3>
+Nursing Subjects
+</h3>
+
+<p>
+${data.subjects.join(" • ")}
+</p>
+
+</div>
+
+<div style="margin-top:15px">
+
+${data.topics.map(
+(topic,index)=>`
+
+<div class="topic">
+
+<h3>
+${index+1}. ${topic[0]}
+</h3>
+
+<p>
+${topic[1]}
+</p>
+
+<div class="actions">
+
+<button onclick="readNotes('${topic[0]}')">
+📖 Read Notes
+</button>
+
+<button onclick="showViva('${topic[0]}')">
+🎤 Viva
+</button>
+
+<button onclick="showMCQ('${topic[0]}')">
+🧠 MCQ
+</button>
+
+<button onclick="importantQuestion('${topic[0]}')">
+🎯 Important Question
+</button>
+
+</div>
+
+</div>
+
+`
+).join("")}
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
 
 function searchSite(){
 
-const q =
-document.getElementById("searchInput")
+const query=document
+.getElementById("searchInput")
 .value
-.trim()
-.toLowerCase();
+.toLowerCase()
+.trim();
 
-const box =
-document.getElementById("searchResults");
+const results=document
+.getElementById("searchResults");
 
-box.style.display="block";
+if(!query){
 
-
-if(!q){
-
-box.innerHTML =
-'<div class="empty">Type a nursing topic to search.</div>';
+results.innerHTML="";
 
 return;
 
 }
 
+let found=[];
 
-const found =
-topics.filter(x =>
-(x.name+" "+x.text)
+Object.keys(nursingData).forEach(
+semester=>{
+
+nursingData[semester].topics.forEach(
+topic=>{
+
+if(
+(topic[0]+" "+topic[1])
 .toLowerCase()
-.includes(q)
-);
+.includes(query)
+){
+
+found.push({
+semester:semester,
+title:topic[0],
+text:topic[1]
+});
+
+}
+
+});
+
+});
 
 
 if(!found.length){
 
-box.innerHTML =
-'<div class="empty">No starter result found for <b>'
-+
-escapeHtml(q)
-+
-'</b>. Add this topic later through the admin/content system.</div>';
+results.innerHTML=`
+
+<div class="topic">
+
+<h3>No result found</h3>
+
+<p>
+This topic can be added to the NurseStudy
+content library later.
+</p>
+
+</div>
+
+`;
 
 return;
 
 }
 
+results.innerHTML=found.map(
+item=>`
 
-box.innerHTML =
-found.map(x =>
+<div class="topic">
 
-'<div class="result">' +
+<span class="tag">
+${item.semester}
+</span>
 
-'<b>' +
-escapeHtml(x.name) +
-'</b>' +
+<h3>
+${item.title}
+</h3>
 
-'<p>' +
-escapeHtml(x.text) +
-'</p>' +
+<p>
+${item.text}
+</p>
 
-'</div>'
+</div>
 
+`
 ).join("");
 
 }
 
 
-function quickSearch(q){
+/* =========================
+   NOTES / VIVA / MCQ
+========================= */
 
-document.getElementById("searchInput").value=q;
+function openChat(title,messages){
 
 document
-.getElementById("home")
-.scrollIntoView({
-behavior:"smooth"
-});
+.getElementById("chat")
+.classList.remove("hidden");
 
-setTimeout(searchSite,250);
+const body=document
+.getElementById("chatBody");
+
+body.innerHTML="";
+
+messages.forEach(
+message=>{
+
+const div=document.createElement(
+"div"
+);
+
+div.className="message";
+
+div.innerHTML=
+"<strong>"+
+title+
+"</strong><br>"+
+message;
+
+body.appendChild(div);
+
+});
 
 }
 
 
-function escapeHtml(s){
+function readNotes(topic){
 
-return s.replace(
+let found=null;
 
-/[&<>"']/g,
+Object.values(nursingData)
+.forEach(
+semester=>{
 
-m => ({
+semester.topics.forEach(
+item=>{
 
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
+if(item[0]===topic){
+found=item;
+}
 
-}[m])
+});
 
+});
+
+if(!found)return;
+
+openChat(
+"📖 "+topic,
+[
+found[1],
+"Exam answer pattern: Definition → Causes/Risk factors → Types → Signs & Symptoms → Investigations → Management → Nursing Management → Complications → Health Education."
+]
 );
 
 }
 
 
+function showViva(topic){
+
+openChat(
+"🎤 Viva - "+topic,
+[
+"What is "+topic+"?",
+"What are the important causes or risk factors?",
+"What signs and symptoms should a nurse assess?",
+"What investigations may be relevant?",
+"What are the important nursing responsibilities?"
+]
+);
+
+}
+
+
+function showMCQ(topic){
+
+openChat(
+"🧠 MCQ - "+topic,
+[
+"Which approach is best for nursing exam preparation?",
+"A. Learn only definition",
+"B. Learn definition, key points, nursing management and complications",
+"C. Skip nursing management",
+"D. Skip assessment",
+"Correct Answer: B"
+]
+);
+
+}
+
+
+function importantQuestion(topic){
+
+openChat(
+"🎯 Important Question",
+[
+"Write a long answer on "+topic+".",
+"Use this structure:",
+"Definition → Causes → Types → Signs & Symptoms → Investigations → Treatment → Nursing Management → Complications → Health Education."
+]
+);
+
+}
+
+
+/* =========================
+   BOOK REQUEST
+========================= */
+
+function requestBook(event){
+
+event.preventDefault();
+
+const request={
+
+book:bookName.value,
+
+name:studentName.value,
+
+contact:studentContact.value,
+
+semester:bookSemester.value,
+
+message:bookMessage.value,
+
+date:new Date().toLocaleString()
+
+};
+
+let requests=
+JSON.parse(
+localStorage.getItem("bookRequests")||"[]"
+);
+
+requests.unshift(request);
+
+localStorage.setItem(
+"bookRequests",
+JSON.stringify(requests)
+);
+
+event.target.reset();
+
+alert(
+"Book request submitted successfully."
+);
+
+}
+
+
+function offerBook(event){
+
+event.preventDefault();
+
+const offer={
+
+book:offerBookName.value,
+
+name:offerStudentName.value,
+
+contact:offerContact.value,
+
+semester:offerSemester.value,
+
+message:offerMessage.value,
+
+date:new Date().toLocaleString()
+
+};
+
+let offers=
+JSON.parse(
+localStorage.getItem("bookOffers")||"[]"
+);
+
+offers.unshift(offer);
+
+localStorage.setItem(
+"bookOffers",
+JSON.stringify(offers)
+);
+
+event.target.reset();
+
+alert(
+"Thank you for offering a free book."
+);
+
+}
+
+
+/* =========================
+   DONATION
+========================= */
+
+const UPI_ID=
+"7763082034@kotak";
+
+
+function copyUPI(){
+
+navigator.clipboard
+.writeText(UPI_ID)
+.then(()=>{
+
+document
+.getElementById("upiMessage")
+.innerText=
+"UPI ID copied successfully.";
+
+})
+.catch(()=>{
+
+alert(
+"UPI ID: "+UPI_ID
+);
+
+});
+
+}
+
+
+function openUPI(){
+
+window.location.href=
+"upi://pay?pa="+
+encodeURIComponent(UPI_ID)+
+"&pn="+
+encodeURIComponent("NurseStudy")+
+"&cu=INR";
+
+}
+
+
+/* =========================
+   COMMUNITY
+========================= */
+
+function createPost(event){
+
+event.preventDefault();
+
+const post={
+
+name:postName.value,
+
+semester:postSemester.value,
+
+text:postText.value,
+
+date:new Date().toLocaleString()
+
+};
+
+let posts=
+JSON.parse(
+localStorage.getItem("nurseStudyPosts")||"[]"
+);
+
+posts.unshift(post);
+
+localStorage.setItem(
+"nurseStudyPosts",
+JSON.stringify(posts)
+);
+
+event.target.reset();
+
+renderPosts();
+
+alert(
+"Your post has been published."
+);
+
+}
+
+
+function renderPosts(){
+
+const box=
+document.getElementById("posts");
+
+const posts=
+JSON.parse(
+localStorage.getItem(
+"nurseStudyPosts"
+)||"[]"
+);
+
+if(!posts.length){
+
+box.innerHTML=`
+
+<div class="card">
+
+<p>
+No community posts yet.
+Be the first student to ask something.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+box.innerHTML=posts
+.slice(0,20)
+.map(
+(post,index)=>`
+
+<div class="post">
+
+<strong style="color:var(--dark)">
+${post.name}
+</strong>
+
+<span class="tag">
+${post.semester}
+</span>
+
+<p>
+${post.text}
+</p>
+
+<button
+class="btn light"
+onclick="messageStudent('${post.name}')"
+>
+💬 Message
+</button>
+
+</div>
+
+`
+)
+.join("");
+
+}
+
+
+function messageStudent(name){
+
+openChat(
+"💬 Message "+name,
+[
+"Hello! You can type your message below.",
+"Remember: never share passwords, OTPs, bank PINs or sensitive personal information."
+]
+);
+
+}
+
+
+/* =========================
+   CHAT
+========================= */
+
+function sendMessage(){
+
+const input=
+document.getElementById("chatInput");
+
+const text=
+input.value.trim();
+
+if(!text)return;
+
+const body=
+document.getElementById("chatBody");
+
+const div=
+document.createElement("div");
+
+div.className="message me";
+
+div.innerText=text;
+
+body.appendChild(div);
+
+input.value="";
+
+body.scrollTop=
+body.scrollHeight;
+
+}
+
+
+function closeChat(){
+
+document
+.getElementById("chat")
+.classList.add("hidden");
+
+}
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+
 function toggleMenu(){
 
-const n =
-document.getElementById("mobileNav");
-
-if(n.style.display==="block"){
-
-n.style.display="none";
-
-}else{
-
-n.style.display="block";
-
-}
+alert(
+"Use the Study, Books, Donate and Community sections below."
+);
 
 }
 
 
-function closeMenu(){
+/* =========================
+   LOAD STUDENT
+========================= */
 
-document.getElementById("mobileNav")
-.style.display="none";
+try{
+
+student=
+JSON.parse(
+localStorage.getItem(
+"nurseStudyStudent"
+)||"null"
+);
+
+}
+catch(error){
+
+student=null;
+
+}
+
+renderSemesterTabs();
+
+renderPosts();
+
+if(student){
+
+document
+.getElementById("registration")
+.classList.add("hidden");
+
+renderSemester(student.semester);
 
 }
 
