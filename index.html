@@ -4,552 +4,268 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0f766e">
-<title>NurseStudy — B.Sc Nursing Study Platform</title>
-
+<title>NurseStudy | B.Sc Nursing Question Bank</title>
 <style>
-:root{
- --p:#0f766e;--p2:#14b8a6;--dark:#102a43;--text:#243b53;
- --muted:#627d98;--bg:#f4f9fa;--white:#fff;--border:#d9e2ec;
- --soft:#e8f8f5;--danger:#b42318;--gold:#fff8e8;
-}
-*{box-sizing:border-box}
-body{
- margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
- background:var(--bg);color:var(--text)
-}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
-.container{width:min(1100px,92%);margin:auto}
-
-header{
- position:sticky;top:0;z-index:100;background:#fff;
- border-bottom:1px solid var(--border)
-}
-.nav{
- min-height:70px;display:flex;align-items:center;
- justify-content:space-between
-}
-.logo{
- display:flex;align-items:center;gap:10px;font-size:22px;
- font-weight:900;color:var(--dark)
-}
-.logoIcon{
- width:44px;height:44px;border-radius:14px;display:grid;
- place-items:center;background:linear-gradient(135deg,var(--p),var(--p2));
- font-size:22px
-}
-.menu{
- border:0;background:var(--soft);border-radius:12px;
- padding:11px 15px;font-size:20px
-}
-
-.hero{
- padding:48px 0;
- background:linear-gradient(180deg,#e8fbf8,#f4f9fa)
-}
-.badge,.tag{
- display:inline-block;background:#ddf6f2;color:#08645e;
- padding:7px 11px;border-radius:50px;font-size:13px;font-weight:800
-}
-h1{
- font-size:clamp(40px,8vw,68px);line-height:1;
- letter-spacing:-2px;color:var(--dark);margin:18px 0
-}
-.hero p{font-size:18px;line-height:1.7;color:var(--muted)}
-
-.search{
- display:flex;gap:8px;background:#fff;padding:7px;
- border:1px solid var(--border);border-radius:16px;margin-top:22px
-}
-.search input{
- flex:1;border:0;outline:0;padding:13px;min-width:0
-}
-.btn,.primary{
- border:0;background:var(--p);color:#fff;font-weight:800;
- padding:12px 17px;border-radius:11px
-}
-.secondary{
- border:1px solid var(--border);background:#fff;
- color:var(--p);font-weight:800;padding:11px 15px;border-radius:10px
-}
-
-section{padding:40px 0}
-.card,.topic,.feature{
- background:#fff;border:1px solid var(--border);border-radius:18px;
- padding:20px;margin:13px 0;box-shadow:0 5px 20px rgba(16,42,67,.05)
-}
-.grid{
- display:grid;grid-template-columns:repeat(3,1fr);gap:15px
-}
-.topic h3{margin:8px 0;color:var(--dark)}
-.topic p{line-height:1.7;color:var(--muted)}
-
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
-.tab{
- border:1px solid var(--border);background:#fff;
- padding:10px 14px;border-radius:10px;font-weight:800;color:#2476e8
-}
-.tab.active{background:var(--p);color:#fff;border-color:var(--p)}
-
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
-.actions button{
- border:1px solid var(--border);background:#fff;color:var(--p);
- padding:10px 13px;border-radius:10px;font-weight:800
-}
-.actions button:hover{background:var(--soft)}
-
-.formBox{
- width:min(650px,100%);margin:25px auto;background:#fff;
- border:1px solid var(--border);border-radius:22px;padding:25px;
- box-shadow:0 10px 35px rgba(16,42,67,.08)
-}
-.formBox h2{text-align:center;color:var(--dark)}
-.field{margin:13px 0}
-.field label{
- display:block;font-weight:800;margin-bottom:6px;color:var(--dark)
-}
-.field input,.field select,.field textarea{
- width:100%;padding:13px;border:1px solid var(--border);
- border-radius:11px;outline:none;background:#fff
-}
-.field input:focus,.field select:focus{
- border-color:var(--p);box-shadow:0 0 0 3px #dff6f2
-}
-.full{width:100%}
-.check{
- display:flex;gap:9px;align-items:flex-start;
- font-size:13px;color:var(--muted);line-height:1.5;margin:15px 0
-}
-.check input{margin-top:3px}
-
-.profile{
- display:flex;align-items:center;justify-content:space-between;
- gap:15px;flex-wrap:wrap
-}
-.profileInfo strong{font-size:20px;color:var(--dark)}
-.profileInfo small{display:block;color:var(--muted);margin-top:5px}
-
-.modalBg{
- position:fixed;inset:0;background:rgba(16,42,67,.72);
- z-index:500;display:flex;align-items:center;
- justify-content:center;padding:12px
-}
-.modal{
- width:min(850px,100%);max-height:92vh;overflow:auto;
- background:#fff;border-radius:20px
-}
-.modalHead{
- position:sticky;top:0;z-index:2;background:var(--p);color:#fff;
- padding:17px;display:flex;justify-content:space-between;align-items:center
-}
-.close{
- border:0;background:transparent;color:#fff;font-size:23px
-}
-.modalBody{padding:18px}
-.answer{
- background:#effaf8;border:1px solid #cceee8;
- border-radius:14px;padding:16px;margin:12px 0;line-height:1.75
-}
-.simple{
- background:#fffbea;border:1px solid #f0dfa0;
- border-radius:14px;padding:16px;margin:12px 0;line-height:1.75
-}
-.mcq{
- border:1px solid var(--border);border-radius:14px;
- padding:16px;margin:12px 0;line-height:1.75
-}
-.correct{font-weight:900;color:var(--p)}
-
-.drawerBg{
- position:fixed;inset:0;background:rgba(0,0,0,.45);
- z-index:600
-}
-.drawer{
- width:min(350px,88%);height:100%;background:#fff;
- padding:20px;overflow:auto
-}
-.drawer button{
- width:100%;text-align:left;padding:14px;margin:6px 0;
- border:1px solid var(--border);background:#fff;
- border-radius:11px;font-weight:800
-}
-
-.notice{
- background:var(--gold);border:1px solid #efd49a;
- border-radius:15px;padding:16px;line-height:1.7;color:#765000
-}
-footer{background:#102a43;color:#c7d5e2;padding:35px 0}
-footer h3{color:#fff}
-
-@media(max-width:700px){
- .grid{grid-template-columns:1fr}
- .search{flex-direction:column}
- .search button{width:100%}
- .actions{display:grid;grid-template-columns:1fr}
- .actions button{width:100%}
-}
+:root{--p:#0f766e;--p2:#14b8a6;--d:#102a43;--t:#243b53;--m:#627d98;--bg:#f4f9fa;--w:#fff;--b:#d9e2ec;--s:#e8f8f5;--g:#fff8e8}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--t)}
+button,input,select{font:inherit}button{cursor:pointer}.hide{display:none!important}.c{width:min(1100px,92%);margin:auto}
+header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--b)}
+.nav{height:68px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:22px;font-weight:900;color:var(--d);display:flex;align-items:center;gap:9px}
+.logo i{font-style:normal;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:10px;border-radius:13px}
+.menu{border:0;background:var(--s);padding:10px 14px;border-radius:11px;font-size:20px}
+.hero{padding:45px 0;background:linear-gradient(#e7fbf8,#f4f9fa)}
+.badge,.tag{display:inline-block;background:#ddf6f2;color:#08645e;padding:7px 11px;border-radius:50px;font-size:13px;font-weight:800}
+h1{font-size:clamp(38px,8vw,66px);line-height:1;letter-spacing:-2px;color:var(--d);margin:18px 0}
+.hero p{font-size:17px;line-height:1.7;color:var(--m)}
+.search{display:flex;background:#fff;padding:7px;border:1px solid var(--b);border-radius:15px;gap:7px}
+.search input{flex:1;border:0;outline:0;padding:13px}
+.btn,.primary{border:0;background:var(--p);color:#fff;padding:12px 17px;border-radius:10px;font-weight:800}
+.secondary{border:1px solid var(--b);background:#fff;color:var(--p);padding:11px 15px;border-radius:10px;font-weight:800}
+section{padding:38px 0}.card,.topic,.feature{background:#fff;border:1px solid var(--b);border-radius:18px;padding:19px;margin:13px 0;box-shadow:0 5px 20px #102a430d}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:17px 0}
+.tab{border:1px solid var(--b);background:#fff;padding:10px 13px;border-radius:10px;font-weight:800;color:#2476e8}
+.tab.on{background:var(--p);color:#fff;border-color:var(--p)}
+.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}.actions button{border:1px solid var(--b);background:#fff;color:var(--p);padding:9px 12px;border-radius:9px;font-weight:800}
+.actions button:hover{background:var(--s)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.form{width:min(650px,100%);margin:20px auto;background:#fff;border:1px solid var(--b);border-radius:20px;padding:23px}
+.field{margin:12px 0}.field label{display:block;font-weight:800;margin-bottom:5px}.field input,.field select{width:100%;padding:12px;border:1px solid var(--b);border-radius:10px;background:#fff}
+.full{width:100%}.check{display:flex;gap:8px;font-size:13px;color:var(--m);line-height:1.5;margin:15px 0}
+.answer{background:#effaf8;border:1px solid #cceee8;border-radius:13px;padding:15px;margin:11px 0;line-height:1.75}
+.simple{background:var(--g);border:1px solid #efd49a;border-radius:13px;padding:15px;margin:11px 0;line-height:1.75}
+.mcq{border:1px solid var(--b);border-radius:13px;padding:15px;margin:11px 0;line-height:1.7}.correct{color:var(--p);font-weight:900}
+.notice{background:var(--g);border:1px solid #efd49a;border-radius:14px;padding:15px;line-height:1.7;color:#765000}
+.modalbg{position:fixed;inset:0;background:#102a43b8;z-index:200;display:flex;align-items:center;justify-content:center;padding:12px}
+.modal{width:min(850px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:19px}
+.mhead{position:sticky;top:0;background:var(--p);color:#fff;padding:16px;display:flex;justify-content:space-between;z-index:2}.close{border:0;background:none;color:#fff;font-size:22px}
+.mbody{padding:17px}.drawerbg{position:fixed;inset:0;background:#0007;z-index:300}.drawer{width:min(350px,88%);height:100%;background:#fff;padding:20px}.drawer button{width:100%;padding:13px;margin:5px 0;text-align:left;border:1px solid var(--b);background:#fff;border-radius:10px;font-weight:800}
+footer{background:#102a43;color:#c7d5e2;padding:35px 0}footer h3{color:#fff}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.search{flex-direction:column}.search .btn{width:100%}.actions{display:grid;grid-template-columns:1fr}.actions button{width:100%}}
 </style>
 </head>
-
 <body>
 
-<!-- ================= HEADER ================= -->
-
 <header>
-<div class="container nav">
- <div class="logo">
-  <span class="logoIcon">🩺</span>
-  NurseStudy
- </div>
- <button class="menu" id="menuBtn">☰</button>
+<div class="c nav">
+<div class="logo"><i>🩺</i> NurseStudy</div>
+<button class="menu" id="menu">☰</button>
 </div>
 </header>
 
+<!-- REGISTRATION -->
+<section id="register">
+<div class="c">
+<div class="form">
+<div style="text-align:center;font-size:48px">👨‍🎓</div>
+<h2 style="text-align:center;color:var(--d)">Welcome to NurseStudy</h2>
+<p style="text-align:center;color:var(--m)">Pehle apni basic details fill karo.</p>
 
-<!-- ================= REGISTRATION ================= -->
+<div class="field"><label>👤 Full Name *</label><input id="name" placeholder="Full name"></div>
+<div class="field"><label>📱 Mobile Number *</label><input id="phone" maxlength="10" placeholder="10 digit mobile number"></div>
 
-<section id="registration">
+<div class="field"><label>⚧ Gender *</label>
+<select id="gender"><option value="">Select Gender</option><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select></div>
 
-<div class="container">
-
-<div class="formBox">
-
-<div style="text-align:center;font-size:50px">👨‍🎓</div>
-
-<h2>Welcome to NurseStudy</h2>
-
-<p style="text-align:center;color:var(--muted);line-height:1.6">
-Pehle apni basic details fill karo. Uske baad
-Nursing Study Centre open hoga.
-</p>
-
-<div class="field">
-<label>👤 Full Name *</label>
-<input id="studentName" type="text" placeholder="Enter your full name">
-</div>
-
-<div class="field">
-<label>📱 Mobile Number *</label>
-<input id="studentPhone" type="tel" maxlength="10"
-placeholder="10 digit mobile number">
-</div>
-
-<div class="field">
-<label>⚧ Gender *</label>
-<select id="studentGender">
-<option value="">Select Gender</option>
-<option>Male</option>
-<option>Female</option>
-<option>Other</option>
-<option>Prefer not to say</option>
-</select>
-</div>
-
-<div class="field">
-<label>🎓 Semester *</label>
-<select id="studentSemester">
+<div class="field"><label>🎓 Semester *</label>
+<select id="sem">
 <option value="">Select Semester</option>
-<option>1st Semester</option>
-<option>2nd Semester</option>
-<option>3rd Semester</option>
-<option>4th Semester</option>
-<option>5th Semester</option>
-<option>6th Semester</option>
-<option>7th Semester</option>
-</select>
-</div>
+<option>1st Semester</option><option>2nd Semester</option><option>3rd Semester</option>
+<option>4th Semester</option><option>5th Semester</option><option>6th Semester</option><option>7th Semester</option>
+</select></div>
 
-<div class="field">
-<label>📚 Course *</label>
-<select id="studentCourse">
-<option>B.Sc. Nursing</option>
-<option>GNM</option>
-<option>ANM</option>
-<option>Other</option>
-</select>
-</div>
-
-<div class="field">
-<label>🏛️ University *</label>
-<select id="studentUniversity">
+<div class="field"><label>🏛️ University *</label>
+<select id="uni">
 <option value="">Select University</option>
 <option>Baba Farid University of Health Sciences</option>
 <option>Other University</option>
-</select>
+</select></div>
+
+<div class="field"><label>🏫 College *</label>
+<select id="college"><option>Select University First</option></select></div>
+
+<div id="other" class="hide">
+<div class="field"><label>🏛️ Other University</label><input id="ouni"></div>
+<div class="field"><label>🏫 Other College</label><input id="ocollege"></div>
 </div>
 
-<div class="field">
-<label>🏫 College *</label>
-<select id="studentCollege">
-<option value="">First select university</option>
-</select>
-</div>
+<div class="field"><label>📚 Course</label>
+<select id="course"><option>B.Sc. Nursing</option><option>GNM</option><option>ANM</option><option>Other</option></select></div>
 
-<div id="otherUniversityBox" class="field hidden">
-<label>🏛️ University Name</label>
-<input id="otherUniversity" placeholder="Enter university name">
-</div>
+<label class="check"><input type="checkbox" id="consent">
+<span>I agree to use these details for NurseStudy student services.</span></label>
 
-<div id="otherCollegeBox" class="field hidden">
-<label>🏫 College Name</label>
-<input id="otherCollege" placeholder="Enter college name">
-</div>
+<button class="primary full" id="enter">🚀 Enter NurseStudy</button>
 
-<label class="check">
-<input type="checkbox" id="consent">
-<span>
-I agree that the information entered here may be used for
-NurseStudy student services and study-platform purposes.
-</span>
-</label>
-
-<button class="primary full" id="registerBtn">
-🚀 Enter NurseStudy
-</button>
-
-<p style="font-size:12px;color:var(--muted);margin-top:14px">
-Privacy: Registration information is stored in this browser in
-this version. Permanent central storage/admin dashboard requires
-a secure backend/database.
+<p style="font-size:12px;color:var(--m)">
+Current single-file version saves the profile in this browser.
+Central admin database requires a secure backend/database.
 </p>
-
 </div>
 </div>
 </section>
 
-
-<!-- ================= MAIN SITE ================= -->
-
-<div id="mainSite" class="hidden">
+<!-- MAIN -->
+<div id="app" class="hide">
 
 <section class="hero">
-<div class="container">
-
+<div class="c">
 <span class="badge">🎓 B.Sc Nursing • Semester 1–7</span>
-
-<h1>
-Learn Nursing.<br>
-<span style="color:var(--p)">Understand Easily.</span>
-</h1>
-
-<p>
-📖 Notes • 🎤 Viva + Answers • 🧠 MCQs •
-🎯 Important Questions • 🇬🇧 Easy English • 🗣️ Aasan Bhasha
-</p>
+<h1>Learn Nursing.<br><span style="color:var(--p)">Understand Easily.</span></h1>
+<p>📖 Notes • 🎤 Viva • 🧠 MCQ • 📝 Subjective • 🎯 Important Questions</p>
 
 <div class="card">
-<div class="profile">
-<div class="profileInfo">
-<strong id="welcomeName"></strong>
-<small id="welcomeDetails"></small>
-</div>
-<button class="secondary" id="changeProfile">
-✏️ Edit Profile
-</button>
-</div>
+<strong id="hello"></strong>
+<div id="details" style="color:var(--m);margin-top:5px"></div>
+<button class="secondary" id="edit" style="margin-top:10px">✏️ Edit Profile</button>
 </div>
 
 <div class="search">
-<input id="searchInput"
-placeholder="Search Hypertension, COPD, KMC, Research...">
+<input id="search" placeholder="Search Hypertension, COPD, KMC, Research...">
 <button class="btn" id="searchBtn">Search</button>
 </div>
-
-<div id="searchResults"></div>
-
+<div id="results"></div>
 </div>
 </section>
-
-
-<!-- ================= STUDY ================= -->
 
 <section id="study">
-<div class="container">
-
-<h2>📚 Nursing Study Centre</h2>
-
-<p style="color:var(--muted)">
-Semester choose karo aur topic ke andar Notes,
-Viva, MCQ aur Important Answers kholo.
+<div class="c">
+<h2>📚 Complete Nursing Question Bank</h2>
+<p style="color:var(--m)">
+Har topic me Notes, Easy English, Aasan Bhasha, Viva, MCQ aur Subjective answer.
 </p>
-
 <div id="tabs" class="tabs"></div>
-
-<div id="content"></div>
-
+<div id="topics"></div>
 </div>
 </section>
 
-
-<!-- ================= FEATURES ================= -->
-
 <section>
-<div class="container">
-
+<div class="c">
 <h2>🤝 Student Help Centre</h2>
-
 <div class="grid">
 
 <div class="feature">
-<div style="font-size:40px">💰</div>
-<h3>Donation / Support</h3>
-<p>Education support ke liye UPI.</p>
-<button class="primary full" data-open="donation">
-💰 Donation
-</button>
+<h3>💰 Donation</h3>
+<p>Student education support ke liye UPI.</p>
+<button class="primary full" data-open="donation">Open Donation</button>
 </div>
 
 <div class="feature">
-<div style="font-size:40px">📚</div>
-<h3>Book Lend / Borrow</h3>
-<p>Nursing books lend, borrow ya donate.</p>
-<button class="primary full" data-open="books">
-📚 Book Exchange
-</button>
+<h3>📚 Book Exchange</h3>
+<p>Books lend, borrow ya donate.</p>
+<button class="primary full" data-open="books">Book Lend/Borrow</button>
 </div>
 
 <div class="feature">
-<div style="font-size:40px">🤝</div>
-<h3>Student Help</h3>
-<p>Study aur exam preparation support.</p>
-<button class="primary full" data-open="help">
-🤝 Student Help
-</button>
+<h3>👤 My Profile</h3>
+<p>Apni registration details dekho.</p>
+<button class="primary full" data-open="profile">My Profile</button>
 </div>
 
 </div>
 </div>
 </section>
-
 
 <section>
-<div class="container">
+<div class="c">
 <div class="notice">
-
-<strong>📌 Exam Formula</strong><br><br>
-
-Definition → Causes/Risk Factors → Types →
-Signs & Symptoms → Investigations → Treatment →
-Nursing Management → Complications →
-Health Education → Conclusion.
-
+<strong>📌 Exam Answer Formula</strong><br><br>
+Definition → Causes/Risk Factors → Types → Signs & Symptoms →
+Investigations → Treatment → Nursing Management →
+Complications → Health Education → Conclusion.
 <br><br>
-
-<strong>🧑‍🎓 Easy Study Method:</strong><br>
-Pehle Aasan Bhasha me samjho → Easy English padho →
-Viva practice karo → MCQ solve karo →
-Important answer likhne ki practice karo.
-
+<strong>🗣️ Study Method:</strong>
+Pehle Aasan Bhasha samjho → Easy English padho →
+Viva practice → MCQ practice → Subjective answer writing.
 </div>
 </div>
 </section>
 
 </div>
 
-
-<!-- ================= FOOTER ================= -->
-
 <footer>
-<div class="container">
+<div class="c">
 <h3>🩺 NurseStudy</h3>
-<p>B.Sc Nursing students ke liye simple study platform.</p>
+<p>B.Sc Nursing students ke liye simple nursing education platform.</p>
+<hr style="border-color:#ffffff22">
+<h3>👨‍💻 Founder</h3>
+<p><strong>Nadeem</strong></p>
+<p>Making Nursing Education Simple & Accessible.</p>
 </div>
 </footer>
 
-
-<!-- ================= MODAL ================= -->
-
-<div id="modal" class="modalBg hidden">
-
+<!-- MODAL -->
+<div id="modal" class="modalbg hide">
 <div class="modal">
-
-<div class="modalHead">
-<strong id="modalTitle">NurseStudy</strong>
-<button class="close" id="closeModal">✕</button>
-</div>
-
-<div class="modalBody" id="modalBody"></div>
-
+<div class="mhead"><strong id="mtitle">NurseStudy</strong><button class="close" id="x">✕</button></div>
+<div class="mbody" id="mbody"></div>
 </div>
 </div>
 
-
-<!-- ================= DRAWER ================= -->
-
-<div id="drawer" class="drawerBg hidden">
-
+<!-- DRAWER -->
+<div id="drawer" class="drawerbg hide">
 <div class="drawer">
-
 <h2>☰ Menu</h2>
-
-<button id="drawerStudy">📚 Nursing Study</button>
-
+<button id="studyBtn">📚 Nursing Study</button>
 <button data-open="profile">👤 My Profile</button>
-
 <button data-open="donation">💰 Donation</button>
-
-<button data-open="books">📚 Book Lend / Borrow</button>
-
-<button data-open="help">🤝 Student Help</button>
-
+<button data-open="books">📚 Book Lend/Borrow</button>
 <button data-open="about">ℹ️ About</button>
-
 </div>
 </div>
-
 
 <script>
 
-/* ==========================================================
-   COLLEGE LIST
-   ========================================================== */
+/* =========================================================
+   COLLEGES
+   ========================================================= */
 
-const BFUHS_COLLEGES=[
-
+const COLLEGES=[
 "Guru Arjun Dev College of Nursing",
-"Adesh Institute of Medical Sciences & Research",
-"Adesh University College of Nursing",
-"Amritsar College of Nursing",
-"Baba Farid College of Nursing",
+"Adesh Institute / College of Nursing",
 "Christian Medical College College of Nursing",
 "Dayanand Medical College College of Nursing",
 "Desh Bhagat University College of Nursing",
 "Doaba College of Nursing",
-"Guru Gobind Singh Medical College related Nursing College",
 "Mai Bhago College of Nursing",
 "Malwa College of Nursing",
 "Punjab Institute of Medical Sciences College of Nursing",
 "Rayat Bahra College of Nursing",
 "Sri Guru Ram Das Institute of Medical Sciences & Research",
-"Other BFUHS Affiliated Nursing College"
+"Other BFUHS Affiliated College"
 ];
 
 
-/* ==========================================================
-   STUDY DATA
-   ========================================================== */
+/* =========================================================
+   QUESTION BANK
+   type:
+   n = notes
+   simple = aasan explanation
+   points = important points
+   ========================================================= */
 
 const DATA=[
 
+/* SEMESTER 1 */
+
 ["1st Semester","Nursing Process",
 "The nursing process is a systematic method used by nurses to provide individualized patient care.",
-"Nursing process nurse ke kaam karne ka step-by-step method hai. Pehle patient ko assess karte hain, problem identify karte hain, plan banate hain, care dete hain aur result check karte hain.",
+"Nursing process nurse ke kaam karne ka step-by-step method hai.",
 "Assessment, nursing diagnosis, planning, implementation and evaluation."],
 
 ["1st Semester","Vital Signs",
 "Vital signs are measurements that indicate important physiological functions of the body.",
-"Temperature, pulse, respiration aur blood pressure body ki basic condition batate hain.",
+"Temperature, pulse, respiration aur BP patient ki basic condition batate hain.",
 "Temperature, pulse, respiration, blood pressure and oxygen saturation when indicated."],
 
 ["1st Semester","Hand Hygiene",
 "Hand hygiene is cleaning the hands to remove microorganisms and prevent infection transmission.",
 "Haath clean karne se germs aur infection spread hone ka risk kam hota hai.",
-"Hand hygiene is an important infection-control measure."],
+"Hand hygiene before and after patient contact is important."],
 
 ["1st Semester","Therapeutic Communication",
 "Therapeutic communication is purposeful communication used by nurses to support patients.",
-"Nurse patient ki baat dhyan se sunti hai, empathy dikhati hai aur trust build karti hai.",
+"Patient ki baat dhyan se sunna, empathy dikhana aur trust banana therapeutic communication hai.",
 "Active listening, empathy, confidentiality and respect."],
 
 ["1st Semester","Patient Safety",
@@ -557,9 +273,16 @@ const DATA=[
 "Patient ko treatment ke dauran unnecessary harm se bachana patient safety hai.",
 "Correct identification, fall prevention, medication safety and communication."],
 
+["1st Semester","Bed Making",
+"Bed making is the process of preparing a clean, comfortable and safe bed for a patient.",
+"Patient ke liye clean, comfortable aur safe bed prepare karna bed making hai.",
+"Cleanliness, comfort, privacy and safety."],
+
+/* SEMESTER 2 */
+
 ["2nd Semester","Nursing Foundation",
 "Nursing foundation provides basic knowledge and skills required for safe nursing care.",
-"Nursing Foundation nursing ki basic foundation hai jisme basic patient care aur nursing procedures seekhte hain.",
+"Nursing Foundation nursing ki basic foundation hai.",
 "Basic nursing skills, hygiene, safety, communication and documentation."],
 
 ["2nd Semester","Nutrition and Dietetics",
@@ -569,42 +292,49 @@ const DATA=[
 
 ["2nd Semester","Applied Psychology",
 "Psychology is the scientific study of behaviour and mental processes.",
-"Insaan ka behaviour, thinking, emotions aur mental processes psychology me study hote hain.",
+"Insaan ka behaviour, emotions aur thinking psychology me study hote hain.",
 "Behaviour, emotions, learning, personality and motivation."],
 
 ["2nd Semester","Applied Sociology",
 "Sociology is the study of society, social relationships and social behaviour.",
-"Society aur social relationships health ko kaise affect karte hain, ye sociology me samjha jata hai.",
-"Society, family, culture, social groups and relationships."],
+"Society aur social relationships health ko kaise affect karte hain, ye sociology hai.",
+"Society, family, culture, groups and relationships."],
 
 ["2nd Semester","Applied Biochemistry",
 "Biochemistry is the study of chemical substances and processes occurring in living organisms.",
-"Body ke andar proteins, carbohydrates, fats aur enzymes kaise kaam karte hain, ye biochemistry me study hota hai.",
+"Body me proteins, carbohydrates, fats aur enzymes kaise kaam karte hain, ye biochemistry hai.",
 "Carbohydrates, proteins, fats, enzymes and metabolism."],
+
+["2nd Semester","Medication Safety",
+"Medication safety means administering medicines correctly and safely.",
+"Medicine dete waqt correct patient, medicine, dose, route aur time check karna important hai.",
+"Right patient, drug, dose, route, time and documentation."],
+
+/* SEMESTER 3 */
 
 ["3rd Semester","Adult Health Nursing I",
 "Adult health nursing focuses on care of adults with health problems and diseases.",
-"Adult patient ki disease ko assess karna, treatment support karna aur complications prevent karna important hai.",
+"Adult patient ki disease ko assess, manage aur complications prevent karna important hai.",
 "Assessment, treatment, monitoring, nursing care and education."],
 
 ["3rd Semester","Hypertension",
 "Hypertension is persistently elevated blood pressure.",
 "Jab BP baar-baar normal se zyada rehta hai to hypertension kehte hain.",
-"High salt intake, obesity, inactivity, tobacco, age, family history, diabetes and kidney disease."],
+"High salt, obesity, inactivity, tobacco, age, family history, diabetes and kidney disease."],
 
 ["3rd Semester","Myocardial Infarction",
 "Myocardial infarction occurs when blood supply to part of the heart muscle is severely reduced or blocked.",
-"Heart ke kisi part ko blood aur oxygen ki supply block hone se heart muscle damage ho sakta hai.",
+"Heart ke kisi part ki blood supply block hone se heart muscle damage ho sakta hai.",
 "Chest discomfort, sweating, breathlessness, nausea and weakness."],
 
 ["3rd Semester","COPD",
-"Chronic obstructive pulmonary disease is a chronic respiratory disease associated with persistent airflow limitation.",
+"COPD is a chronic respiratory disease associated with persistent airflow limitation.",
 "COPD lungs ki long-term disease hai jisme cough aur breathing difficulty ho sakti hai.",
-"Smoking and harmful occupational/environmental exposures are important risks."],
+"Smoking and harmful occupational/environmental exposure."],
 
 ["3rd Semester","Diabetes Mellitus",
 "Diabetes mellitus is a chronic metabolic disorder characterized by elevated blood glucose.",
-"Diabetes me blood sugar high rehne lagti hai aur long-term complications ho sakte hain.",
+"Diabetes me blood sugar high rehne lagti hai.",
 "Glucose monitoring, medicines, nutrition, exercise and foot care."],
 
 ["3rd Semester","Shock",
@@ -612,19 +342,21 @@ const DATA=[
 "Shock emergency condition hai jisme tissues ko enough blood aur oxygen nahi milti.",
 "Hypotension, tachycardia, altered mental status and reduced urine output."],
 
-["3rd Semester","Applied Microbiology",
-"Microbiology is the study of microorganisms.",
-"Bacteria, viruses, fungi aur parasites jaise microorganisms ko microbiology me study karte hain.",
-"Microorganisms, transmission and infection prevention."],
+["3rd Semester","Pain Assessment",
+"Pain assessment is systematic assessment of pain experienced by a patient.",
+"Pain kaha hai, kitna hai, kaisa hai aur kab se hai ye assess karna pain assessment hai.",
+"Location, severity, quality, duration and timing."],
 
 ["3rd Semester","Infection Control",
 "Infection control includes measures used to prevent and control infections.",
 "Hospital me infection spread na ho isliye hand hygiene, PPE aur aseptic technique use hoti hai.",
 "Hand hygiene, PPE, aseptic technique and sterilization."],
 
+/* SEMESTER 4 */
+
 ["4th Semester","Adult Health Nursing II",
 "Adult health nursing II focuses on advanced care of adults with complex health conditions.",
-"Complex adult patient ki condition ko manage karna aur complications prevent karna important hai.",
+"Complex adult patients ki care aur complications prevention important hai.",
 "Assessment, monitoring, treatment, emergency care and rehabilitation."],
 
 ["4th Semester","Surgical Nursing",
@@ -634,7 +366,7 @@ const DATA=[
 
 ["4th Semester","Wound Care",
 "Wound care is assessment and management of tissue injury to promote healing.",
-"Wound ko clean rakhna, dressing karna aur infection ke signs dekhna wound care hai.",
+"Wound ko clean rakhna, dressing aur infection signs monitor karna wound care hai.",
 "Wound assessment, aseptic technique, dressing and infection monitoring."],
 
 ["4th Semester","Blood Transfusion",
@@ -642,15 +374,22 @@ const DATA=[
 "Patient ko blood ya blood component dena blood transfusion hai.",
 "Correct patient/product verification and reaction monitoring."],
 
+["4th Semester","Fluid and Electrolyte Imbalance",
+"Fluid and electrolyte imbalance occurs when body water or electrolyte levels are outside normal balance.",
+"Body me water ya salts ka balance bigadne ko fluid-electrolyte imbalance kehte hain.",
+"Monitor intake-output, weight, urine, vital signs and laboratory findings."],
+
+/* SEMESTER 5 */
+
 ["5th Semester","Community Health Nursing",
 "Community health nursing combines nursing and public health principles to improve community health.",
 "Community nurse individuals, families aur community ki health improve karne ke liye kaam karti hai.",
 "Health promotion, disease prevention, education and follow-up."],
 
 ["5th Semester","Primary Health Care",
-"Primary health care is essential healthcare that is accessible to individuals and communities.",
-"Basic healthcare jo community ko easily available honi chahiye primary health care hai.",
-"Accessibility, community participation and health education."],
+"Primary health care is essential healthcare accessible to individuals and communities.",
+"Basic healthcare jo community ko accessible honi chahiye primary health care hai.",
+"Accessibility, participation, health education and appropriate technology."],
 
 ["5th Semester","Health Education",
 "Health education helps people gain knowledge and skills to improve health.",
@@ -662,6 +401,13 @@ const DATA=[
 "Government important health problems ko control karne ke liye programmes chalati hai.",
 "Prevention, treatment, health promotion and health services."],
 
+["5th Semester","Epidemiology",
+"Epidemiology is the study of distribution and determinants of health-related events in populations.",
+"Community me disease kitni hai, kahan hai aur kis group me zyada hai, ye epidemiology se samajhte hain.",
+"Distribution, determinants, incidence, prevalence, prevention and control."],
+
+/* SEMESTER 6 */
+
 ["6th Semester","Child Health Nursing",
 "Child health nursing focuses on promoting, maintaining and restoring children's health.",
 "Children ki growth, development, nutrition, vaccination aur illness par focus hota hai.",
@@ -670,21 +416,21 @@ const DATA=[
 ["6th Semester","Protein Energy Malnutrition",
 "Protein energy malnutrition is caused by inadequate intake or utilization of energy and protein.",
 "Bachche ko enough energy aur protein na milne se growth aur health affect ho sakti hai.",
-"Poor growth, wasting, weakness and increased infection risk."],
+"Poor growth, wasting, weakness and infection risk."],
 
 ["6th Semester","Acute Respiratory Infection",
 "Acute respiratory infection is an infection of the respiratory tract with relatively sudden onset.",
-"ARI me respiratory tract me infection hoti hai aur cough, fever ya breathing difficulty ho sakti hai.",
+"ARI me respiratory tract infection hoti hai aur cough, fever ya breathing difficulty ho sakti hai.",
 "Cough, fever, fast breathing and difficulty in breathing."],
 
 ["6th Semester","Diarrhea and Dehydration",
 "Diarrhea is frequent loose or watery stool and may cause loss of water and electrolytes.",
-"Loose motion me body se water aur salts nikalte hain, jisse dehydration ho sakta hai.",
+"Loose motion me water aur salts lose hote hain aur dehydration ho sakta hai.",
 "Assess hydration, stool frequency, urine output and mental status."],
 
 ["6th Semester","Neonatal Jaundice",
 "Neonatal jaundice is yellow discoloration caused by elevated bilirubin in a newborn.",
-"Newborn baby ki skin ya eyes yellow ho sakti hain jab bilirubin badh jata hai.",
+"Newborn ki skin ya eyes yellow ho sakti hain jab bilirubin badh jata hai.",
 "Assess onset, severity, feeding and bilirubin when clinically indicated."],
 
 ["6th Semester","Kangaroo Mother Care",
@@ -695,41 +441,43 @@ const DATA=[
 ["6th Semester","Hydrocephalus",
 "Hydrocephalus is abnormal accumulation of cerebrospinal fluid within the brain's ventricular system.",
 "Brain me CSF fluid abnormal amount me collect hone ki condition hydrocephalus hai.",
-"Increasing head circumference, vomiting and neurological signs may occur."],
+"Increasing head circumference, vomiting and neurological signs."],
 
 ["6th Semester","Spina Bifida",
 "Spina bifida is a neural tube defect caused by incomplete closure of the spinal column.",
-"Baby ke development me spinal column properly close na hone ki condition spina bifida hai.",
+"Spinal column development ke time properly close na ho to spina bifida ho sakta hai.",
 "Neurological deficits, weakness and bladder/bowel problems."],
 
 ["6th Semester","Cerebral Palsy",
 "Cerebral palsy is a group of permanent disorders affecting movement and posture.",
-"Brain development ki problem ki wajah se movement, posture aur muscle control affect ho sakta hai.",
+"Developing brain ki problem ki wajah se movement, posture aur muscle control affect ho sakta hai.",
 "Motor impairment, abnormal tone and posture problems."],
 
 ["6th Semester","Congenital Heart Disease",
 "Congenital heart disease refers to structural heart problems present from birth.",
-"Baby ke heart me birth se structural problem ho to congenital heart disease kehte hain.",
-"Examples include ASD, VSD, PDA and Tetralogy of Fallot."],
+"Birth se heart me structural problem ho to congenital heart disease kehte hain.",
+"ASD, VSD, PDA and Tetralogy of Fallot are examples."],
+
+/* SEMESTER 7 */
 
 ["7th Semester","Nursing Research",
-"Nursing research is a systematic investigation using planned methods to improve nursing knowledge and practice.",
-"Nursing se related problem ko scientific method se study karke evidence find karna nursing research hai.",
+"Nursing research is systematic investigation using planned methods to improve nursing knowledge and practice.",
+"Nursing problem ko scientific method se study karke evidence find karna nursing research hai.",
 "Problem, literature review, objectives, design, sampling, data collection and analysis."],
 
 ["7th Semester","Research Problem",
 "A research problem is a clear, focused, feasible and relevant issue that can be investigated.",
-"Research problem wo clear problem hai jiska answer researcher scientific method se find karta hai.",
+"Research problem wo clear problem hai jiska answer scientific method se find karte hain.",
 "Clear, relevant, feasible and researchable."],
 
 ["7th Semester","Sampling",
 "Sampling is the process of selecting participants from a defined population.",
-"Puri population me se research ke liye kuch participants select karna sampling hai.",
+"Puri population me se research ke liye participants select karna sampling hai.",
 "Probability and non-probability sampling."],
 
 ["7th Semester","Data Collection",
 "Data collection is systematic gathering of information required for research.",
-"Research ke liye questionnaire, interview, observation ya checklist se information collect karna data collection hai.",
+"Questionnaire, interview, observation ya checklist se research information collect karna data collection hai.",
 "Questionnaire, interview, observation and checklist."],
 
 ["7th Semester","Nursing Management",
@@ -743,1189 +491,434 @@ const DATA=[
 "Communication, delegation, motivation, supervision and decision-making."],
 
 ["7th Semester","Professional Nursing",
-"Professional nursing involves providing safe, ethical, competent and evidence-based nursing care.",
+"Professional nursing involves safe, ethical, competent and evidence-based nursing care.",
 "Knowledge, skills, ethics aur responsibility ke according safe patient care dena professional nursing hai.",
 "Ethics, accountability, confidentiality, communication and continuous learning."]
 ];
 
 
-/* ==========================================================
-   STATE
-   ========================================================== */
+/* =========================================================
+   STATE + HELPERS
+   ========================================================= */
 
-let activeSemester="1st Semester";
+let active="1st Semester";
 
-
-/* ==========================================================
-   SAFE TEXT
-   ========================================================== */
-
-function esc(text){
- return String(text).replace(/[&<>"']/g,function(m){
-  return {
-   "&":"&amp;",
-   "<":"&lt;",
-   ">":"&gt;",
-   '"':"&quot;",
-   "'":"&#39;"
-  }[m];
- });
+function esc(x){
+return String(x).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 }
+function topic(n){return DATA.find(x=>x[1]===n)}
+function student(){try{return JSON.parse(localStorage.getItem("nsStudent")||"null")}catch(e){return null}}
+function save(s){localStorage.setItem("nsStudent",JSON.stringify(s))}
 
 
-/* ==========================================================
+/* =========================================================
    REGISTRATION
-   ========================================================== */
+   ========================================================= */
 
-function loadColleges(){
+uni.onchange=function(){
+let u=uni.value;
+college.innerHTML=u==="Baba Farid University of Health Sciences"
+?'<option value="">Select College</option>'+COLLEGES.map(x=>`<option>${esc(x)}</option>`).join("")
+:'<option>Other College</option>';
+other.classList.toggle("hide",u!=="Other University");
+};
 
- const uni=document.getElementById("studentUniversity");
- const college=document.getElementById("studentCollege");
+enter.onclick=function(){
 
- college.innerHTML="";
+let n=name.value.trim(),p=phone.value.trim(),g=gender.value,s=sem.value,u=uni.value,co=college.value;
 
- if(uni.value==="Baba Farid University of Health Sciences"){
-
-  college.innerHTML=
-  '<option value="">Select College</option>'+
-  BFUHS_COLLEGES.map(c=>
-   `<option value="${esc(c)}">${esc(c)}</option>`
-  ).join("");
-
- }else if(uni.value==="Other University"){
-
-  college.innerHTML=
-  '<option value="Other College">Other / Enter College</option>';
-
- }else{
-
-  college.innerHTML=
-  '<option value="">First select university</option>';
-
- }
-
- document.getElementById("otherUniversityBox")
- .classList.toggle("hidden",uni.value!=="Other University");
-
- document.getElementById("otherCollegeBox")
- .classList.toggle("hidden",uni.value==="Baba Farid University of Health Sciences"||!uni.value);
+if(!n||!/^\d{10}$/.test(p)||!g||!s||!u||!consent.checked){
+alert("Please fill all required details correctly.");
+return;
 }
 
-
-document.getElementById("studentUniversity").onchange=loadColleges;
-
-
-function getStudent(){
-
- try{
-  return JSON.parse(localStorage.getItem("nurseStudyStudent")||"null");
- }catch(e){
-  return null;
- }
+if(u==="Other University"){
+u=ouni.value.trim();co=ocollege.value.trim();
+if(!u||!co){alert("Please enter university and college.");return}
 }
 
+if(!co){alert("Please select college.");return}
 
-function saveStudent(student){
+let st={
+name:n,phone:p,gender:g,semester:s,
+course:course.value,university:u,college:co,
+date:new Date().toISOString()
+};
 
- localStorage.setItem(
-  "nurseStudyStudent",
-  JSON.stringify(student)
- );
+save(st);show(st);
+};
+
+function show(st){
+register.classList.add("hide");
+app.classList.remove("hide");
+hello.textContent="Hello, "+st.name+" 👋";
+details.textContent=st.course+" • "+st.semester+" • "+st.college;
+active=st.semester;tabs();render();
+window.scrollTo(0,0);
 }
 
-
-function enterSite(){
-
- const name=document.getElementById("studentName").value.trim();
- const phone=document.getElementById("studentPhone").value.trim();
- const gender=document.getElementById("studentGender").value;
- const semester=document.getElementById("studentSemester").value;
- const course=document.getElementById("studentCourse").value;
- const university=document.getElementById("studentUniversity").value;
-
- let college=document.getElementById("studentCollege").value;
-
- if(!name||!phone||!gender||!semester||!course||!university){
-  alert("Please fill all required details.");
-  return;
- }
-
- if(!/^[0-9]{10}$/.test(phone)){
-  alert("Please enter a valid 10 digit mobile number.");
-  return;
- }
-
- if(!document.getElementById("consent").checked){
-  alert("Please accept the consent.");
-  return;
- }
-
- let finalUniversity=university;
-
- if(university==="Other University"){
-  finalUniversity=document.getElementById("otherUniversity").value.trim();
-  college=document.getElementById("otherCollege").value.trim();
-
-  if(!finalUniversity||!college){
-   alert("Please enter university and college name.");
-   return;
-  }
- }
-
- if(!college){
-  alert("Please select your college.");
-  return;
- }
-
- const student={
-  name,
-  phone,
-  gender,
-  semester,
-  course,
-  university:finalUniversity,
-  college,
-  registeredAt:new Date().toISOString()
- };
-
- saveStudent(student);
-
- showMain(student);
+edit.onclick=function(){
+let s=student();if(!s)return;
+app.classList.add("hide");register.classList.remove("hide");
+name.value=s.name;phone.value=s.phone;gender.value=s.gender;sem.value=s.semester;course.value=s.course;
+if(s.university==="Baba Farid University of Health Sciences"){
+uni.value=s.university;uni.onchange();college.value=s.college;
+}else{
+uni.value="Other University";uni.onchange();ouni.value=s.university;ocollege.value=s.college;
 }
-
-
-document.getElementById("registerBtn").onclick=enterSite;
-
-
-/* ==========================================================
-   MAIN
-   ========================================================== */
-
-function showMain(student){
-
- document.getElementById("registration")
- .classList.add("hidden");
-
- document.getElementById("mainSite")
- .classList.remove("hidden");
-
- document.getElementById("welcomeName").textContent=
- "Hello, "+student.name+" 👋";
-
- document.getElementById("welcomeDetails").textContent=
- student.course+" • "+student.semester+
- " • "+student.college;
-
- activeSemester=student.semester;
-
- renderTabs();
- renderTopics();
-
- window.scrollTo(0,0);
-}
-
-
-function editProfile(){
-
- const s=getStudent();
-
- if(!s)return;
-
- document.getElementById("mainSite").classList.add("hidden");
- document.getElementById("registration").classList.remove("hidden");
-
- document.getElementById("studentName").value=s.name;
- document.getElementById("studentPhone").value=s.phone;
- document.getElementById("studentGender").value=s.gender;
- document.getElementById("studentSemester").value=s.semester;
- document.getElementById("studentCourse").value=s.course;
- document.getElementById("studentUniversity").value=
-  s.university==="Baba Farid University of Health Sciences"
-  ?"Baba Farid University of Health Sciences":"Other University";
-
- loadColleges();
-
- if(document.getElementById("studentUniversity").value==="Other University"){
-  document.getElementById("otherUniversity").value=s.university;
-  document.getElementById("otherCollege").value=s.college;
- }else{
-  document.getElementById("studentCollege").value=s.college;
- }
-
- document.getElementById("consent").checked=true;
-
- window.scrollTo(0,0);
-}
-
-
-document.getElementById("changeProfile").onclick=editProfile;
-
-
-/* ==========================================================
-   TABS
-   ========================================================== */
-
-function renderTabs(){
-
- const semesters=[...new Set(DATA.map(x=>x[0]))];
-
- document.getElementById("tabs").innerHTML=
- semesters.map(s=>`
- <button class="tab ${s===activeSemester?"active":""}"
- data-semester="${esc(s)}">${esc(s)}</button>
- `).join("");
-}
-
-
-function renderTopics(){
-
- const list=DATA.filter(x=>x[0]===activeSemester);
-
- document.getElementById("content").innerHTML=`
-
- <div class="card">
-  <span class="tag">${esc(activeSemester)}</span>
-  <h2>📚 Important Topics</h2>
-  <p style="color:var(--muted)">
-  Topic kholo aur Notes, Viva, MCQ ya Important Question choose karo.
-  </p>
- </div>
-
- ${list.map((x,i)=>`
-
- <div class="topic" data-topic="${esc(x[1])}">
-
-  <span class="tag">${esc(x[0])}</span>
-
-  <h3>${i+1}. ${esc(x[1])}</h3>
-
-  <p>
-   ${esc(x[2])}
-   <br><br>
-   <strong>Key:</strong> ${esc(x[4])}
-  </p>
-
-  <div class="actions">
-
-   <button data-action="notes">
-    📖 Notes + Answer
-   </button>
-
-   <button data-action="viva">
-    🎤 Viva + Answer
-   </button>
-
-   <button data-action="mcq">
-    🧠 MCQ + Answer
-   </button>
-
-   <button data-action="important">
-    🎯 Important + Answer
-   </button>
-
-  </div>
-
- </div>
- `).join("")}
- `;
-}
-
-
-/* ==========================================================
-   TOPIC FIND
-   ========================================================== */
-
-function findTopic(name){
- return DATA.find(x=>x[1]===name);
-}
-
-
-/* ==========================================================
-   MODAL
-   ========================================================== */
-
-function openModal(title,body){
-
- document.getElementById("modalTitle").textContent=title;
- document.getElementById("modalBody").innerHTML=body;
- document.getElementById("modal").classList.remove("hidden");
-}
-
-
-function closeModal(){
- document.getElementById("modal").classList.add("hidden");
-}
-
-document.getElementById("closeModal").onclick=closeModal;
-
-document.getElementById("modal").onclick=function(e){
- if(e.target===this)closeModal();
+consent.checked=true;window.scrollTo(0,0);
 };
 
 
-/* ==========================================================
+/* =========================================================
+   SEMESTER + TOPICS
+   ========================================================= */
+
+function tabs(){
+let ss=[...new Set(DATA.map(x=>x[0]))];
+document.getElementById("tabs").innerHTML=ss.map(x=>
+`<button class="tab ${x===active?"on":""}" data-sem="${esc(x)}">${esc(x)}</button>`).join("");
+}
+
+function render(){
+let list=DATA.filter(x=>x[0]===active);
+topics.innerHTML=`
+<div class="card"><span class="tag">${esc(active)}</span>
+<h2>📚 Important Question Bank</h2>
+<p style="color:#627d98">Notes + Viva + MCQ + Subjective answers.</p></div>
+${list.map((x,i)=>`
+<div class="topic" data-topic="${esc(x[1])}">
+<span class="tag">${esc(x[0])}</span>
+<h3>${i+1}. ${esc(x[1])}</h3>
+<p>${esc(x[2])}<br><br><b>Key:</b> ${esc(x[4])}</p>
+<div class="actions">
+<button data-a="notes">📖 Notes</button>
+<button data-a="viva">🎤 Viva</button>
+<button data-a="mcq">🧠 MCQ</button>
+<button data-a="subjective">📝 Subjective</button>
+<button data-a="important">🎯 Important</button>
+</div></div>`).join("")}`;
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+function modal(title,body){
+mtitle.textContent=title;mbody.innerHTML=body;document.getElementById("modal").classList.remove("hide");
+}
+x.onclick=()=>document.getElementById("modal").classList.add("hide");
+modal.onclick=e=>{if(e.target===modal)modal.classList.add("hide")};
+
+
+/* =========================================================
    NOTES
-   ========================================================== */
+   ========================================================= */
 
-function showNotes(name){
-
- const x=findTopic(name);
-
- if(!x)return;
-
- openModal(
- "📖 Notes — "+x[1],
-
- `
- <div class="answer">
-  <h3>🇬🇧 Easy English</h3>
-  <strong>Definition:</strong><br>
-  ${esc(x[2])}
- </div>
-
- <div class="simple">
-  <strong>🗣️ Apni Bhasha Me Samjho</strong><br><br>
-  ${esc(x[3])}
- </div>
-
- <div class="answer">
-  <h3>⭐ Important Points</h3>
-  ${esc(x[4])}
- </div>
-
- <div class="answer">
-  <h3>👩‍⚕️ Nursing Responsibilities</h3>
-  Assess the patient, monitor relevant signs,
-  provide prescribed care safely, maintain comfort and safety,
-  educate patient/family and document care.
- </div>
-
- <div class="simple">
-  <strong>🧠 Yaad Rakho:</strong><br><br>
-  Definition → Causes → Types → Symptoms →
-  Investigations → Treatment → Nursing Management →
-  Complications → Health Education.
- </div>
- `
- );
+function notes(n){
+let x=topic(n);if(!x)return;
+modal("📖 Notes — "+n,`
+<div class="answer"><h3>🇬🇧 Easy English</h3><b>Definition:</b><br>${esc(x[2])}</div>
+<div class="simple"><b>🗣️ Apni Bhasha:</b><br><br>${esc(x[3])}</div>
+<div class="answer"><h3>⭐ Key Points</h3>${esc(x[4])}</div>
+<div class="answer"><h3>👩‍⚕️ Nursing Care</h3>
+Assess patient, monitor vital signs and relevant findings,
+give prescribed treatment safely, maintain comfort and safety,
+educate patient/family and document care.</div>
+<div class="simple"><b>🧠 Yaad Karne Ka Formula:</b><br><br>
+Definition → Causes → Types → Symptoms → Investigations →
+Treatment → Nursing Management → Complications → Health Education.</div>`);
 }
 
 
-/* ==========================================================
+/* =========================================================
    VIVA
-   ========================================================== */
+   ========================================================= */
 
-function showViva(name){
-
- const x=findTopic(name);
-
- if(!x)return;
-
- const qs=[
-  ["What is "+x[1]+"?",x[2]],
-  ["What are its important points?",x[4]],
-  ["What should a nurse assess?","Patient history, signs and symptoms, vital signs and relevant clinical findings."],
-  ["What are the nursing responsibilities?","Assessment, monitoring, safe care, patient education, prevention of complications and documentation."],
-  ["Why is this topic important?","It helps nurses understand patient problems and provide safe and effective nursing care."]
- ];
-
- let html="";
-
- qs.forEach((q,i)=>{
-
-  html+=`
-
-  <div class="answer">
-   <h3>🎤 Q${i+1}. ${esc(q[0])}</h3>
-   <strong>🇬🇧 Answer:</strong><br>
-   ${esc(q[1])}
-  </div>
-
-  <div class="simple">
-   <strong>🗣️ Aasan Bhasha:</strong><br><br>
-   ${i===0?esc(x[3]):
-   "Simple words me: "+esc(q[1])}
-  </div>
-
-  `;
-
- });
-
- openModal("🎤 Viva — "+x[1],html);
+function viva(n){
+let x=topic(n);if(!x)return;
+let q=[
+["What is "+n+"?",x[2]],
+["What are important points?",x[4]],
+["What should a nurse assess?","History, signs and symptoms, vital signs and relevant clinical findings."],
+["What are nursing responsibilities?","Assessment, monitoring, safe care, patient education and documentation."],
+["Why is it important?","It helps nurses understand the patient's problem and provide safe nursing care."]
+];
+modal("🎤 Viva — "+n,q.map((a,i)=>`
+<div class="answer"><h3>Q${i+1}. ${esc(a[0])}</h3><b>🇬🇧 Answer:</b><br>${esc(a[1])}</div>
+<div class="simple"><b>🗣️ Aasan Bhasha:</b><br><br>${i===0?esc(x[3]):"Simple words me: "+esc(a[1])}</div>`).join(""));
 }
 
 
-/* ==========================================================
+/* =========================================================
    MCQ
-   ========================================================== */
+   ========================================================= */
 
-function showMCQ(name){
-
- const x=findTopic(name);
-
- if(!x)return;
-
- const qs=[
-  {
-   q:"Which statement best describes "+x[1]+"?",
-   a:x[2],b:"It is only a laboratory test.",
-   c:"It has no relation to nursing.",d:"It never requires assessment."
-  },
-  {
-   q:"Which is an important point about "+x[1]+"?",
-   a:x[4],b:"Assessment is unnecessary.",
-   c:"Documentation is never needed.",d:"Education has no role."
-  },
-  {
-   q:"Which nursing action is appropriate?",
-   a:"Assess the patient, provide safe care, monitor response and document.",
-   b:"Ignore changes in condition.",
-   c:"Give treatment without assessment.",
-   d:"Avoid patient education."
-  },
-  {
-   q:"Which is important in nursing care?",
-   a:"Patient education and prevention of complications.",
-   b:"Ignore patient concerns.",
-   c:"Stop monitoring.",
-   d:"Avoid documentation."
-  }
- ];
-
- let html="";
-
- qs.forEach((q,i)=>{
-
-  html+=`
-
-  <div class="mcq">
-
-   <strong>Q${i+1}. ${esc(q.q)}</strong>
-
-   <br><br>
-
-   A. ${esc(q.a)}<br>
-   B. ${esc(q.b)}<br>
-   C. ${esc(q.c)}<br>
-   D. ${esc(q.d)}
-
-   <p class="correct">
-    ✅ Correct Answer: A
-   </p>
-
-   <div class="simple">
-    <strong>💡 Explanation:</strong><br>
-    Option A is correct because it is the appropriate
-    statement related to the topic.
-   </div>
-
-  </div>
-
-  `;
-
- });
-
- openModal("🧠 MCQ — "+x[1],html);
+function mcq(n){
+let x=topic(n);
+let q=[
+["Which statement best describes "+n+"?",x[2]],
+["Which is an important point?",x[4]],
+["Which nursing action is appropriate?","Assess the patient, provide safe care, monitor response and document."],
+["Which is important in nursing care?","Patient education and prevention of complications."]
+];
+modal("🧠 MCQ — "+n,q.map((a,i)=>`
+<div class="mcq">
+<b>Q${i+1}. ${esc(a[0])}</b><br><br>
+A. ${esc(a[1])}<br>
+B. It is not related to nursing.<br>
+C. Assessment is unnecessary.<br>
+D. Documentation is never needed.
+<p class="correct">✅ Correct Answer: A</p>
+<div class="simple"><b>💡 Explanation:</b><br>Option A is the correct answer because it is directly related to the topic.</div>
+</div>`).join(""));
 }
 
 
-/* ==========================================================
-   IMPORTANT QUESTION
-   ========================================================== */
-
-function showImportant(name){
-
- const x=findTopic(name);
-
- if(!x)return;
-
- openModal(
-
- "🎯 Important Question — "+x[1],
-
- `
-
- <div class="answer">
-
- <h3>🎯 Question</h3>
-
- Write a detailed answer on
- <strong>${esc(x[1])}</strong>.
-
- </div>
-
-
- <div class="simple">
-
- <strong>🗣️ Pehle Aasan Bhasha Me Samjho</strong><br><br>
-
- ${esc(x[3])}
-
- </div>
-
-
- <div class="answer">
-
- <h3>1. Definition</h3>
-
- ${esc(x[2])}
-
- </div>
-
-
- <div class="answer">
-
- <h3>2. Causes / Risk Factors / Important Points</h3>
-
- ${esc(x[4])}
-
- </div>
-
-
- <div class="answer">
-
- <h3>3. Types / Classification</h3>
-
- Write the major types or classification applicable to the topic.
-
- </div>
-
-
- <div class="answer">
-
- <h3>4. Signs and Symptoms</h3>
-
- Write common symptoms and important clinical findings
- according to the condition.
-
- </div>
-
-
- <div class="answer">
-
- <h3>5. Investigations</h3>
-
- Appropriate laboratory tests, imaging, monitoring and
- condition-specific investigations may be done as prescribed.
-
- </div>
-
-
- <div class="answer">
-
- <h3>6. Treatment / Management</h3>
-
- Treatment depends on the condition and may include
- prescribed medicines, supportive care, monitoring and
- treatment of the underlying cause.
-
- </div>
-
-
- <div class="answer">
-
- <h3>7. Nursing Management</h3>
-
- • Assess the patient.<br>
- • Monitor vital signs and relevant observations.<br>
- • Administer prescribed medicines safely.<br>
- • Maintain comfort and safety.<br>
- • Maintain nutrition and hydration when appropriate.<br>
- • Observe for complications.<br>
- • Provide psychological support.<br>
- • Educate patient and family.<br>
- • Maintain documentation.
-
- </div>
-
-
- <div class="answer">
-
- <h3>8. Complications</h3>
-
- Observe for complications specific to the condition
- and report deterioration promptly.
-
- </div>
-
-
- <div class="answer">
-
- <h3>9. Health Education</h3>
-
- Explain medicines, diet, lifestyle, warning signs,
- follow-up and prevention.
-
- </div>
-
-
- <div class="simple">
-
- <strong>🗣️ Simple Meaning:</strong><br><br>
-
- Patient ki problem samjho → observe karo →
- treatment safely do → complications se bachao →
- patient aur family ko samjhao.
-
- </div>
-
-
- <div class="answer">
-
- <h3>10. Conclusion</h3>
-
- Early assessment, appropriate treatment and effective
- nursing care help improve patient outcomes.
-
- </div>
-
- `
- );
+/* =========================================================
+   SUBJECTIVE
+   ========================================================= */
+
+function subjective(n){
+let x=topic(n);
+modal("📝 Subjective Answer — "+n,`
+<div class="answer"><h3>2 Marks</h3>
+<b>Definition:</b><br>${esc(x[2])}</div>
+
+<div class="answer"><h3>5 Marks</h3>
+<b>Definition</b><br>${esc(x[2])}<br><br>
+<b>Important Points</b><br>${esc(x[4])}<br><br>
+<b>Nursing Role</b><br>
+Assessment, monitoring, safe care and patient education.</div>
+
+<div class="answer"><h3>10 Marks</h3>
+<b>1. Definition</b><br>${esc(x[2])}<br><br>
+<b>2. Causes/Risk Factors</b><br>${esc(x[4])}<br><br>
+<b>3. Signs & Symptoms</b><br>Write the important clinical signs and symptoms of the condition.<br><br>
+<b>4. Investigations</b><br>Write relevant laboratory, imaging or monitoring investigations.<br><br>
+<b>5. Treatment</b><br>Write prescribed medical and supportive management.<br><br>
+<b>6. Nursing Management</b><br>
+Assess → Monitor → Give prescribed treatment → Maintain comfort → Prevent complications → Educate → Document.</div>
+
+<div class="answer"><h3>15 Marks</h3>
+<b>Definition</b><br>${esc(x[2])}<br><br>
+<b>Causes / Risk Factors</b><br>${esc(x[4])}<br><br>
+<b>Types / Classification</b><br>Write major applicable types.<br><br>
+<b>Pathophysiology</b><br>Explain the basic disease process in simple sequence.<br><br>
+<b>Signs & Symptoms</b><br>Write common and important findings.<br><br>
+<b>Investigations</b><br>Write relevant investigations.<br><br>
+<b>Medical Management</b><br>Medicines, supportive care and treatment of cause as prescribed.<br><br>
+<b>Nursing Management</b><br>
+Assessment, monitoring, medicines, nutrition/hydration where appropriate,
+comfort, safety, psychological support, complication prevention,
+patient education and documentation.<br><br>
+<b>Complications</b><br>Write important condition-specific complications.<br><br>
+<b>Health Education</b><br>Medicines, diet, lifestyle, warning signs and follow-up.<br><br>
+<b>Conclusion</b><br>Early assessment and effective nursing care improve patient outcomes.</div>
+
+<div class="simple"><b>🗣️ Aasan Bhasha:</b><br><br>
+Pehle disease/topic ka meaning samjho, phir causes aur symptoms,
+uske baad tests aur treatment, aur sabse last me nursing care
+aur health education likho.</div>
+`);
 }
 
 
-/* ==========================================================
-   SEARCH
-   ========================================================== */
+/* =========================================================
+   IMPORTANT
+   ========================================================= */
 
-function searchSite(){
-
- const q=document.getElementById("searchInput")
- .value.toLowerCase().trim();
-
- const out=document.getElementById("searchResults");
-
- if(!q){
-  out.innerHTML="";
-  return;
- }
-
- const found=DATA.filter(x=>
-  (x[0]+" "+x[1]+" "+x[2]+" "+x[3]+" "+x[4])
-  .toLowerCase().includes(q)
- );
-
- if(!found.length){
-
-  out.innerHTML=`
-  <div class="topic">
-   <h3>❌ No Result Found</h3>
-   <p>
-   Try Hypertension, COPD, Diabetes, KMC,
-   Hydrocephalus, Nursing Research etc.
-   </p>
-  </div>
-  `;
-
-  return;
- }
-
- out.innerHTML=`
-
- <div class="card">
-  🔎 Found ${found.length} result(s)
- </div>
-
- ${found.map(x=>`
-
- <div class="topic" data-topic="${esc(x[1])}">
-
-  <span class="tag">${esc(x[0])}</span>
-
-  <h3>${esc(x[1])}</h3>
-
-  <p>${esc(x[2])}</p>
-
-  <div class="actions">
-
-   <button data-action="notes">📖 Notes</button>
-   <button data-action="viva">🎤 Viva</button>
-   <button data-action="mcq">🧠 MCQ</button>
-   <button data-action="important">🎯 Important</button>
-
-  </div>
-
- </div>
-
- `).join("")}
-
- `;
+function important(n){
+let x=topic(n);
+modal("🎯 Most Important — "+n,`
+<div class="answer"><h3>🔥 Important Questions</h3>
+1. Define ${esc(n)}.<br>
+2. Write causes/risk factors of ${esc(n)}.<br>
+3. Explain signs and symptoms.<br>
+4. Write investigations.<br>
+5. Explain treatment/management.<br>
+6. Explain nursing management.<br>
+7. Write complications.<br>
+8. Write health education.</div>
+<div class="simple"><b>Exam Tip:</b><br><br>
+Is topic ko Definition → Causes → Symptoms → Investigations →
+Treatment → Nursing Management → Complications → Health Education
+sequence me prepare karo.</div>`);
 }
 
-document.getElementById("searchBtn").onclick=searchSite;
 
-document.getElementById("searchInput")
-.addEventListener("keydown",function(e){
- if(e.key==="Enter")searchSite();
+/* =========================================================
+   TOPIC BUTTONS
+   ========================================================= */
+
+document.addEventListener("click",e=>{
+let b=e.target.closest("[data-a]");
+if(b){
+let n=b.closest("[data-topic]").dataset.topic;
+if(b.dataset.a==="notes")notes(n);
+if(b.dataset.a==="viva")viva(n);
+if(b.dataset.a==="mcq")mcq(n);
+if(b.dataset.a==="subjective")subjective(n);
+if(b.dataset.a==="important")important(n);
+}
+let s=e.target.closest("[data-sem]");
+if(s){active=s.dataset.sem;tabs();render();}
 });
 
 
-/* ==========================================================
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+searchBtn.onclick=function(){
+let q=search.value.toLowerCase().trim();
+if(!q){results.innerHTML="";return}
+let f=DATA.filter(x=>(x[0]+" "+x[1]+" "+x[2]+" "+x[3]+" "+x[4]).toLowerCase().includes(q));
+results.innerHTML=f.length?`
+<div class="card"><b>🔎 ${f.length} result(s)</b></div>
+${f.map(x=>`
+<div class="topic" data-topic="${esc(x[1])}">
+<span class="tag">${esc(x[0])}</span><h3>${esc(x[1])}</h3>
+<p>${esc(x[2])}</p>
+<div class="actions">
+<button data-a="notes">📖 Notes</button>
+<button data-a="viva">🎤 Viva</button>
+<button data-a="mcq">🧠 MCQ</button>
+<button data-a="subjective">📝 Subjective</button>
+</div></div>`).join("")}`:
+`<div class="topic"><h3>❌ No Result</h3><p>Try Hypertension, COPD, KMC, Research, Diabetes etc.</p></div>`;
+};
+search.onkeydown=e=>{if(e.key==="Enter")searchBtn.click()};
+
+
+/* =========================================================
+   MENU
+   ========================================================= */
+
+menu.onclick=()=>drawer.classList.remove("hide");
+drawer.onclick=e=>{if(e.target===drawer)drawer.classList.add("hide")};
+studyBtn.onclick=()=>{drawer.classList.add("hide");study.scrollIntoView({behavior:"smooth"})};
+
+document.addEventListener("click",e=>{
+let b=e.target.closest("[data-open]");
+if(!b)return;
+drawer.classList.add("hide");
+let v=b.dataset.open;
+if(v==="donation")donation();
+if(v==="books")books();
+if(v==="profile")profile();
+if(v==="about")about();
+});
+
+
+/* =========================================================
    DONATION
-   ========================================================== */
+   ========================================================= */
 
 function donation(){
-
- openModal(
-
- "💰 Donation / Support",
-
- `
-
- <div class="simple" style="text-align:center">
-
- <div style="font-size:55px">❤️</div>
-
- <h2>Support NurseStudy</h2>
-
- <p>
- Agar aap student education ko support karna chahte hain,
- UPI se contribution kar sakte hain.
- </p>
-
- <div style="font-size:21px;font-weight:900;color:#0f766e">
- 7763082034@kotak
- </div>
-
- <br>
-
- <button class="primary" id="copyUPI">
- 📋 Copy UPI ID
- </button>
-
- <br><br>
-
- <a href="upi://pay?pa=7763082034@kotak&pn=NurseStudy&cu=INR">
- <button class="primary">
- 💳 Open UPI App
- </button>
- </a>
-
- </div>
-
- `
-
- );
-
- setTimeout(function(){
-
-  const b=document.getElementById("copyUPI");
-
-  if(b){
-
-   b.onclick=async function(){
-
-    try{
-
-     await navigator.clipboard
-     .writeText("7763082034@kotak");
-
-     b.textContent="✅ Copied";
-
-    }catch(e){
-
-     alert("UPI ID: 7763082034@kotak");
-
-    }
-
-   };
-
-  }
-
- },50);
+modal("💰 Donation / Support",`
+<div class="simple" style="text-align:center">
+<div style="font-size:55px">❤️</div>
+<h2>Support NurseStudy</h2>
+<p>Student education support ke liye UPI.</p>
+<div style="font-size:22px;font-weight:900;color:#0f766e">7763082034@kotak</div>
+<br>
+<button class="primary" id="copy">📋 Copy UPI</button>
+<br><br>
+<a href="upi://pay?pa=7763082034@kotak&pn=NurseStudy&cu=INR">
+<button class="primary">💳 Open UPI App</button></a>
+</div>`);
+setTimeout(()=>{
+if(copy)copy.onclick=async()=>{
+try{await navigator.clipboard.writeText("7763082034@kotak");copy.textContent="✅ Copied"}
+catch(e){alert("UPI ID: 7763082034@kotak")}
+};
+},50);
 }
 
 
-/* ==========================================================
-   BOOK EXCHANGE
-   ========================================================== */
+/* =========================================================
+   BOOKS
+   ========================================================= */
 
 function books(){
-
- openModal(
-
- "📚 Book Lend / Borrow",
-
- `
-
- <div class="answer">
-
- <h3>📚 Book Exchange</h3>
-
- Students apni nursing books lend, borrow ya donate
- karne ke liye request prepare kar sakte hain.
-
- </div>
-
-
- <div class="field">
-
- <label>Your Name</label>
-
- <input id="bookName" placeholder="Name">
-
- </div>
-
-
- <div class="field">
-
- <label>Book Name</label>
-
- <input id="bookTitle" placeholder="Example: Adult Health Nursing">
-
- </div>
-
-
- <div class="field">
-
- <label>Requirement</label>
-
- <select id="bookType">
-
- <option value="">Select</option>
-
- <option>Want to Borrow</option>
-
- <option>Want to Lend</option>
-
- <option>Want to Donate</option>
-
- </select>
-
- </div>
-
-
- <div class="field">
-
- <label>Contact</label>
-
- <input id="bookContact" placeholder="WhatsApp / Mobile">
-
- </div>
-
-
- <button class="primary full" id="bookSubmit">
-
- 📤 Prepare Request
-
- </button>
-
-
- <div id="bookOutput"></div>
-
- `
-
- );
-
-
- setTimeout(function(){
-
-  document.getElementById("bookSubmit").onclick=function(){
-
-   const n=document.getElementById("bookName").value.trim();
-   const b=document.getElementById("bookTitle").value.trim();
-   const t=document.getElementById("bookType").value;
-   const c=document.getElementById("bookContact").value.trim();
-
-   if(!n||!b||!t||!c){
-
-    alert("Please fill all details.");
-
-    return;
-
-   }
-
-   document.getElementById("bookOutput").innerHTML=`
-
-   <div class="simple">
-
-   <strong>✅ Request Ready</strong><br><br>
-
-   Name: ${esc(n)}<br>
-   Book: ${esc(b)}<br>
-   Requirement: ${esc(t)}<br>
-   Contact: ${esc(c)}
-
-   <br><br>
-
-   <small>
-   Online student matching ke liye backend/database
-   connect karna hoga.
-   </small>
-
-   </div>
-
-   `;
-
-  };
-
- },50);
+modal("📚 Book Lend / Borrow",`
+<div class="answer">
+Students nursing books lend, borrow ya donate karne ke liye request bana sakte hain.
+</div>
+<div class="field"><label>Name</label><input id="bn" placeholder="Name"></div>
+<div class="field"><label>Book</label><input id="bt" placeholder="Book name"></div>
+<div class="field"><label>Requirement</label>
+<select id="btype"><option>Want to Borrow</option><option>Want to Lend</option><option>Want to Donate</option></select></div>
+<div class="field"><label>Contact</label><input id="bc" placeholder="WhatsApp / Mobile"></div>
+<button class="primary full" id="bs">Prepare Request</button>
+<div id="bo"></div>`);
+setTimeout(()=>bs.onclick=()=>{
+if(!bn.value||!bt.value||!bc.value){alert("Please fill details");return}
+bo.innerHTML=`<div class="simple"><b>✅ Request Ready</b><br><br>
+Name: ${esc(bn.value)}<br>Book: ${esc(bt.value)}<br>
+Requirement: ${esc(btype.value)}<br>Contact: ${esc(bc.value)}
+<br><br><small>Central matching/database ke liye backend required hai.</small></div>`;
+},50);
 }
 
 
-/* ==========================================================
-   HELP
-   ========================================================== */
-
-function help(){
-
- openModal(
-
- "🤝 Student Help",
-
- `
-
- <div class="answer">
-
- <h3>🧑‍🎓 Study Help</h3>
-
- NurseStudy ka purpose nursing students ko
- difficult topics ko easy language me samajhne
- aur exam preparation me help karna hai.
-
- </div>
-
- <div class="simple">
-
- <strong>📌 Student Rules</strong><br><br>
-
- • Respect everyone.<br>
- • Fake medical information share na karein.<br>
- • Patient ki private information share na karein.<br>
- • Study-related information share karein.<br>
- • Juniors aur classmates ki help karein.
-
- </div>
-
- `
-
- );
-}
-
-
-/* ==========================================================
-   ABOUT
-   ========================================================== */
-
-function about(){
-
- openModal(
-
- "ℹ️ About NurseStudy",
-
- `
-
- <div class="answer">
-
- <h2>🩺 NurseStudy</h2>
-
- B.Sc Nursing students ke liye easy study platform.
-
- </div>
-
- <div class="simple">
-
- 📖 Notes + Answers<br>
- 🎤 Viva + Answers<br>
- 🧠 MCQs + Answers<br>
- 🎯 Important Questions<br>
- 🇬🇧 Easy English<br>
- 🗣️ Aasan Bhasha<br>
- 📚 Book Exchange<br>
- 💰 Student Support
-
- </div>
-
- `
-
- );
-}
-
-
-/* ==========================================================
-   PROFILE MODAL
-   ========================================================== */
+/* =========================================================
+   PROFILE
+   ========================================================= */
 
 function profile(){
-
- const s=getStudent();
-
- if(!s)return;
-
- openModal(
-
- "👤 My Profile",
-
- `
-
- <div class="answer">
-
- <h3>${esc(s.name)}</h3>
-
- <strong>📱 Mobile:</strong> ${esc(s.phone)}<br>
- <strong>⚧ Gender:</strong> ${esc(s.gender)}<br>
- <strong>🎓 Semester:</strong> ${esc(s.semester)}<br>
- <strong>📚 Course:</strong> ${esc(s.course)}<br>
- <strong>🏛️ University:</strong> ${esc(s.university)}<br>
- <strong>🏫 College:</strong> ${esc(s.college)}
-
- </div>
-
- <button class="primary full" id="editFromProfile">
- ✏️ Edit My Details
- </button>
-
- <button class="secondary full" style="margin-top:8px"
- id="logoutBtn">
- 🚪 Logout
- </button>
-
- `
-
- );
-
- setTimeout(function(){
-
-  document.getElementById("editFromProfile").onclick=function(){
-   closeModal();
-   editProfile();
-  };
-
-  document.getElementById("logoutBtn").onclick=function(){
-
-   if(confirm("Logout from this device?")){
-
-    localStorage.removeItem("nurseStudyStudent");
-
-    location.reload();
-
-   }
-
-  };
-
- },50);
+let s=student();if(!s)return;
+modal("👤 My Profile",`
+<div class="answer">
+<b>👤 Name:</b> ${esc(s.name)}<br>
+<b>📱 Mobile:</b> ${esc(s.phone)}<br>
+<b>⚧ Gender:</b> ${esc(s.gender)}<br>
+<b>🎓 Semester:</b> ${esc(s.semester)}<br>
+<b>📚 Course:</b> ${esc(s.course)}<br>
+<b>🏛️ University:</b> ${esc(s.university)}<br>
+<b>🏫 College:</b> ${esc(s.college)}
+</div>
+<button class="primary full" id="edit2">✏️ Edit Details</button>
+<button class="secondary full" id="logout" style="margin-top:8px">🚪 Logout</button>`);
+setTimeout(()=>{
+edit2.onclick=()=>{modal.classList.add("hide");edit.click()};
+logout.onclick=()=>{if(confirm("Logout?")){localStorage.removeItem("nsStudent");location.reload()}};
+},40);
 }
 
 
-/* ==========================================================
-   MENU
-   ========================================================== */
+/* =========================================================
+   ABOUT
+   ========================================================= */
 
-document.getElementById("menuBtn").onclick=function(){
-
- document.getElementById("drawer")
- .classList.remove("hidden");
-
-};
-
-document.getElementById("drawer").onclick=function(e){
-
- if(e.target===this){
-
-  this.classList.add("hidden");
-
- }
-
-};
-
-document.getElementById("drawerStudy").onclick=function(){
-
- document.getElementById("drawer")
- .classList.add("hidden");
-
- document.getElementById("study")
- .scrollIntoView({behavior:"smooth"});
-
-};
-
-
-/* ==========================================================
-   DRAWER ACTIONS
-   ========================================================== */
-
-document.addEventListener("click",function(e){
-
- const b=e.target.closest("[data-open]");
-
- if(!b)return;
-
- document.getElementById("drawer")
- .classList.add("hidden");
-
- const type=b.dataset.open;
-
- if(type==="donation")donation();
- if(type==="books")books();
- if(type==="help")help();
- if(type==="about")about();
- if(type==="profile")profile();
-
-});
-
-
-/* ==========================================================
-   SEMESTER CLICK
-   ========================================================== */
-
-document.getElementById("tabs").onclick=function(e){
-
- const b=e.target.closest("[data-semester]");
-
- if(!b)return;
-
- activeSemester=b.dataset.semester;
-
- renderTabs();
- renderTopics();
-
-};
-
-
-/* ==========================================================
-   TOPIC BUTTON CLICK
-   ========================================================== */
-
-document.addEventListener("click",function(e){
-
- const b=e.target.closest("[data-action]");
-
- if(!b)return;
-
- const box=b.closest("[data-topic]");
-
- if(!box)return;
-
- const topic=box.dataset.topic;
-
- if(b.dataset.action==="notes")showNotes(topic);
-
- if(b.dataset.action==="viva")showViva(topic);
-
- if(b.dataset.action==="mcq")showMCQ(topic);
-
- if(b.dataset.action==="important")showImportant(topic);
-
-});
-
-
-/* ==========================================================
-   AUTO LOGIN
-   ========================================================== */
-
-const saved=getStudent();
-
-if(saved){
-
- showMain(saved);
-
-}else{
-
- document.getElementById("registration")
- .classList.remove("hidden");
-
+function about(){
+modal("ℹ️ About NurseStudy",`
+<div class="answer"><h2>🩺 NurseStudy</h2>
+A simple nursing education platform for students.</div>
+<div class="simple">
+📖 Notes + Answers<br>
+🎤 Viva + Answers<br>
+🧠 MCQ + Explanation<br>
+📝 2/5/10/15 Mark Subjective<br>
+🎯 Important Questions<br>
+🗣️ Aasan Bhasha<br>
+📚 Book Exchange<br>
+💰 Student Support
+</div>
+<div class="answer"><h3>👨‍💻 Founder</h3><b>Nadeem</b><br>
+Making Nursing Education Simple & Accessible.</div>`);
 }
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+let old=student();
+if(old)show(old);
 
 </script>
-
 </body>
 </html>
