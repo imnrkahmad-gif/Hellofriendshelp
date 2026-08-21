@@ -1663,7 +1663,43 @@ results.innerHTML=html;
 renderTabs();
 
 renderSemester(activeSemester);
+/* ===== FIX FOR NOTES / VIVA / MCQ / IMPORTANT BUTTONS ===== */
 
+document.addEventListener("click", function(e) {
+
+  const button = e.target.closest(".actions button");
+
+  if (!button) return;
+
+  const topicBox = button.closest(".topic");
+
+  if (!topicBox) return;
+
+  const heading = topicBox.querySelector("h3");
+
+  if (!heading) return;
+
+  const topic = heading.textContent
+    .replace(/^\s*\d+\.\s*/, "")
+    .trim();
+
+  if (button.textContent.includes("Read Notes")) {
+    showNotes(topic);
+  }
+
+  else if (button.textContent.includes("Viva")) {
+    showViva(topic);
+  }
+
+  else if (button.textContent.includes("MCQ")) {
+    showMCQ(topic);
+  }
+
+  else if (button.textContent.includes("Important")) {
+    showImportant(topic);
+  }
+
+});
 </script>
 
 </body>
