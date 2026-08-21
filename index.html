@@ -1,681 +1,342 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0f766e">
-
 <title>NurseStudy - Nursing Education Platform</title>
 
 <style>
 :root{
---primary:#0f766e;
---secondary:#14b8a6;
---dark:#102a43;
---text:#243b53;
---muted:#627d98;
---bg:#f4f9fa;
---white:#fff;
---border:#d9e2ec;
---shadow:0 10px 30px rgba(16,42,67,.09);
+  --primary:#0f766e;
+  --primary2:#14b8a6;
+  --dark:#102a43;
+  --text:#243b53;
+  --muted:#627d98;
+  --bg:#f4f9fa;
+  --white:#fff;
+  --border:#d9e2ec;
 }
 
 *{box-sizing:border-box}
 
-html{scroll-behavior:smooth}
-
 body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-background:var(--bg);
-color:var(--text);
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 
-a{
-text-decoration:none;
-color:inherit;
-}
-
-button,input,select,textarea{
-font:inherit;
-}
-
-button{
-cursor:pointer;
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#fff;
+  border-bottom:1px solid var(--border);
 }
 
 .container{
-width:min(1150px,92%);
-margin:auto;
-}
-
-/* HEADER */
-
-header{
-position:sticky;
-top:0;
-z-index:100;
-background:rgba(255,255,255,.96);
-backdrop-filter:blur(12px);
-border-bottom:1px solid var(--border);
+  width:min(1100px,92%);
+  margin:auto;
 }
 
 .nav{
-height:70px;
-display:flex;
-align-items:center;
-justify-content:space-between;
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
 .logo{
-display:flex;
-align-items:center;
-gap:10px;
-font-size:21px;
-font-weight:900;
-color:var(--dark);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:23px;
+  font-weight:900;
+  color:var(--dark);
 }
 
 .logoIcon{
-width:43px;
-height:43px;
-display:grid;
-place-items:center;
-border-radius:13px;
-color:white;
-font-size:22px;
-background:linear-gradient(135deg,var(--primary),var(--secondary));
-}
-
-.navLinks{
-display:flex;
-gap:7px;
-}
-
-.navLinks a{
-padding:9px 12px;
-border-radius:10px;
-font-size:13px;
-font-weight:700;
-}
-
-.navLinks a:hover{
-background:#e8f8f5;
-color:var(--primary);
+  width:45px;
+  height:45px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  font-size:23px;
 }
 
 .menu{
-display:none;
-border:0;
-background:#e8f8f5;
-padding:10px;
-border-radius:10px;
+  border:0;
+  background:#e8f8f5;
+  border-radius:12px;
+  padding:11px;
+  font-size:20px;
 }
-
-/* HERO */
 
 .hero{
-padding:60px 0;
-background:linear-gradient(180deg,#e8fbf8,#f4f9fa);
+  padding:50px 0;
+  background:linear-gradient(180deg,#e8fbf8,#f4f9fa);
 }
 
-.heroGrid{
-display:grid;
-grid-template-columns:1.2fr .8fr;
-gap:35px;
-align-items:center;
-}
-
-.badge{
-display:inline-block;
-background:#ddf6f2;
-color:#08645e;
-padding:8px 12px;
-border-radius:50px;
-font-size:12px;
-font-weight:800;
+.badge,.tag{
+  display:inline-block;
+  background:#ddf6f2;
+  color:#08645e;
+  padding:8px 12px;
+  border-radius:50px;
+  font-size:13px;
+  font-weight:800;
 }
 
 h1{
-font-size:clamp(38px,6vw,62px);
-line-height:1.02;
-letter-spacing:-2px;
-color:var(--dark);
-margin:17px 0;
+  font-size:clamp(40px,7vw,65px);
+  line-height:1.02;
+  letter-spacing:-2px;
+  color:var(--dark);
+  margin:18px 0;
 }
 
-.heroText{
-font-size:17px;
-line-height:1.7;
-color:var(--muted);
+.hero p{
+  font-size:18px;
+  line-height:1.7;
+  color:var(--muted);
 }
 
 .search{
-display:flex;
-gap:8px;
-background:white;
-padding:7px;
-border:1px solid var(--border);
-border-radius:16px;
-box-shadow:var(--shadow);
-margin-top:23px;
+  display:flex;
+  gap:8px;
+  background:#fff;
+  padding:7px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  margin-top:22px;
 }
 
 .search input{
-flex:1;
-border:0;
-outline:0;
-padding:13px;
-min-width:0;
+  flex:1;
+  border:0;
+  outline:0;
+  padding:14px;
+  min-width:0;
+  font-size:16px;
 }
 
 .btn{
-border:0;
-border-radius:11px;
-padding:11px 16px;
-background:var(--primary);
-color:white;
-font-weight:800;
+  border:0;
+  border-radius:11px;
+  padding:12px 18px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:800;
 }
-
-.btn:hover{
-background:#0b625c;
-}
-
-.btn.light{
-background:#e8f8f5;
-color:#08645e;
-}
-
-.heroCard{
-background:white;
-border:1px solid var(--border);
-border-radius:25px;
-padding:25px;
-box-shadow:var(--shadow);
-}
-
-.heroEmoji{
-font-size:50px;
-}
-
-.stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px;
-margin-top:20px;
-}
-
-.stat{
-background:#f7fafb;
-border-radius:13px;
-padding:13px;
-text-align:center;
-}
-
-.stat strong{
-display:block;
-font-size:21px;
-color:var(--dark);
-}
-
-.stat small{
-color:var(--muted);
-}
-
-/* SECTIONS */
 
 section{
-padding:50px 0;
-}
-
-.sectionTitle{
-margin-bottom:22px;
+  padding:45px 0;
 }
 
 .sectionTitle h2{
-margin:0;
-font-size:30px;
-color:var(--dark);
+  margin:0;
+  color:var(--dark);
+  font-size:30px;
 }
 
 .sectionTitle p{
-color:var(--muted);
+  color:var(--muted);
 }
-
-/* CARDS */
-
-.grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
-}
-
-.card{
-background:white;
-border:1px solid var(--border);
-border-radius:18px;
-padding:19px;
-box-shadow:0 5px 20px rgba(16,42,67,.05);
-transition:.2s;
-}
-
-.card:hover{
-transform:translateY(-3px);
-box-shadow:var(--shadow);
-}
-
-.icon{
-width:46px;
-height:46px;
-display:grid;
-place-items:center;
-background:#e8f8f5;
-border-radius:13px;
-font-size:22px;
-}
-
-.card h3{
-color:var(--dark);
-margin:9px 0;
-}
-
-.card p{
-font-size:13px;
-line-height:1.6;
-color:var(--muted);
-}
-
-.tag{
-display:inline-block;
-background:#e5f7f4;
-color:#08645e;
-padding:6px 9px;
-border-radius:8px;
-font-size:11px;
-font-weight:800;
-}
-
-/* SEMESTER */
 
 .tabs{
-display:flex;
-gap:8px;
-flex-wrap:wrap;
-margin-bottom:18px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:18px 0;
 }
 
 .tab{
-border:1px solid var(--border);
-background:white;
-padding:9px 12px;
-border-radius:10px;
-font-size:13px;
-font-weight:750;
+  border:1px solid var(--border);
+  background:#fff;
+  padding:11px 15px;
+  border-radius:10px;
+  font-weight:800;
+  color:#2476e8;
 }
 
-.tab.active,
-.tab:hover{
-background:var(--primary);
-color:white;
-border-color:var(--primary);
+.tab.active{
+  background:var(--primary);
+  color:#fff;
+  border-color:var(--primary);
 }
 
-.subjects{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-}
-
-.subject{
-background:white;
-border:1px solid var(--border);
-border-radius:15px;
-padding:15px;
-cursor:pointer;
-}
-
-.subject:hover{
-box-shadow:var(--shadow);
-}
-
-.subject strong{
-display:block;
-color:var(--dark);
-}
-
-.subject small{
-color:var(--muted);
-}
-
-/* TOPICS */
-
-.topic{
-background:white;
-border:1px solid var(--border);
-border-radius:15px;
-padding:17px;
-margin:10px 0;
+.card,.topic{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 5px 20px rgba(16,42,67,.05);
+  margin:13px 0;
 }
 
 .topic h3{
-margin:0 0 7px;
-color:var(--dark);
+  margin:0 0 10px;
+  color:var(--dark);
 }
 
 .topic p{
-color:var(--muted);
-font-size:13px;
-line-height:1.65;
+  line-height:1.7;
+  color:var(--muted);
 }
 
 .actions{
-display:flex;
-gap:7px;
-flex-wrap:wrap;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
 }
 
 .actions button{
-border:1px solid var(--border);
-background:white;
-color:var(--primary);
-padding:7px 10px;
-border-radius:8px;
-font-size:12px;
-font-weight:750;
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--primary);
+  padding:10px 13px;
+  border-radius:10px;
+  font-weight:800;
 }
 
-/* HELP */
-
-.helpGrid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:18px;
+.actions button:hover{
+  background:#e8f8f5;
 }
-
-.formCard{
-background:white;
-border:1px solid var(--border);
-border-radius:18px;
-padding:20px;
-}
-
-.formCard input,
-.formCard select,
-.formCard textarea{
-width:100%;
-border:1px solid var(--border);
-border-radius:10px;
-padding:11px;
-margin:5px 0 9px;
-outline:none;
-}
-
-.formCard textarea{
-min-height:100px;
-resize:vertical;
-}
-
-.notice{
-background:#fff8e8;
-border:1px solid #f1d49a;
-border-radius:13px;
-padding:14px;
-font-size:13px;
-line-height:1.6;
-color:#765000;
-}
-
-/* COMMUNITY */
-
-.post{
-padding:13px 0;
-border-bottom:1px solid var(--border);
-}
-
-.post:last-child{
-border-bottom:0;
-}
-
-/* FOOTER */
-
-footer{
-background:var(--dark);
-color:#c7d5e2;
-padding:40px 0;
-}
-
-.footerGrid{
-display:grid;
-grid-template-columns:1.5fr 1fr 1fr;
-gap:25px;
-}
-
-footer h3{
-color:white;
-}
-
-footer p,
-footer a{
-font-size:13px;
-line-height:1.7;
-color:#b8c7d6;
-}
-
-.founder{
-font-size:18px;
-font-weight:900;
-color:white;
-}
-
-/* MODAL */
 
 .modalBg{
-position:fixed;
-inset:0;
-background:rgba(16,42,67,.65);
-display:flex;
-align-items:center;
-justify-content:center;
-padding:18px;
-z-index:1000;
+  position:fixed;
+  inset:0;
+  background:rgba(16,42,67,.65);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+  z-index:1000;
 }
 
 .modal{
-width:min(480px,100%);
-background:white;
-border-radius:23px;
-padding:25px;
-box-shadow:0 25px 70px rgba(0,0,0,.25);
+  width:min(780px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:22px;
 }
 
-.modal h2{
-color:var(--dark);
-margin-top:0;
+.modalHead{
+  background:var(--primary);
+  color:#fff;
+  padding:17px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:2;
 }
 
-.modal p{
-color:var(--muted);
-font-size:13px;
-line-height:1.6;
+.modalHead button{
+  border:0;
+  background:transparent;
+  color:#fff;
+  font-size:22px;
 }
 
-.modal input,
-.modal select{
-width:100%;
-padding:12px;
-border:1px solid var(--border);
-border-radius:10px;
-margin:5px 0 9px;
-outline:none;
+.modalBody{
+  padding:18px;
 }
 
-.modal button{
-width:100%;
+.answerBox{
+  background:#f0faf8;
+  border:1px solid #cceee8;
+  border-radius:14px;
+  padding:15px;
+  margin:11px 0;
+  line-height:1.7;
+}
+
+.answerBox h4{
+  margin:0 0 7px;
+  color:#08645e;
+  font-size:18px;
+}
+
+.mcq{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:15px;
+  margin:10px 0;
+  line-height:1.65;
+}
+
+.correct{
+  font-weight:900;
+  color:#0f766e;
 }
 
 .hidden{
-display:none!important;
+  display:none!important;
 }
 
-/* CHAT */
-
-.chat{
-position:fixed;
-right:20px;
-bottom:20px;
-width:min(390px,calc(100% - 40px));
-background:white;
-border-radius:20px;
-box-shadow:0 20px 60px rgba(0,0,0,.2);
-z-index:900;
-border:1px solid var(--border);
-overflow:hidden;
+.notice{
+  background:#fff8e8;
+  border:1px solid #f1d49a;
+  border-radius:13px;
+  padding:15px;
+  color:#765000;
+  line-height:1.6;
 }
 
-.chatHeader{
-background:var(--primary);
-color:white;
-padding:14px;
-display:flex;
-justify-content:space-between;
+footer{
+  background:#102a43;
+  color:#c7d5e2;
+  padding:35px 0;
 }
 
-.chatBody{
-height:270px;
-padding:12px;
-overflow:auto;
-background:#f5f9fa;
-}
-
-.message{
-background:#e3f7f4;
-padding:9px 11px;
-border-radius:12px;
-margin:7px 0;
-max-width:85%;
-font-size:13px;
-}
-
-.message.me{
-margin-left:auto;
-background:#e9eef5;
-}
-
-.chatInput{
-display:flex;
-gap:7px;
-padding:10px;
-border-top:1px solid var(--border);
-}
-
-.chatInput input{
-flex:1;
-border:1px solid var(--border);
-border-radius:9px;
-padding:9px;
-outline:none;
-}
-
-/* MOBILE */
-
-@media(max-width:900px){
-
-.heroGrid{
-grid-template-columns:1fr;
-}
-
-.heroCard{
-display:none;
-}
-
-.grid{
-grid-template-columns:repeat(2,1fr);
-}
-
-.navLinks{
-display:none;
-}
-
-.menu{
-display:block;
-}
-
-.subjects{
-grid-template-columns:repeat(2,1fr);
-}
-
+footer h3{
+  color:#fff;
 }
 
 @media(max-width:600px){
+  .search{
+    flex-direction:column;
+  }
 
-.grid,
-.subjects,
-.helpGrid,
-.footerGrid{
-grid-template-columns:1fr;
-}
+  .search .btn{
+    width:100%;
+  }
 
-.hero{
-padding:40px 0;
-}
+  .actions button{
+    width:100%;
+  }
 
-.search{
-padding:5px;
-}
-
-.search .btn{
-padding:10px 12px;
-}
-
-.sectionTitle h2{
-font-size:25px;
-}
-
+  .hero p{
+    font-size:16px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-
 <header>
+  <div class="container nav">
+    <div class="logo">
+      <span class="logoIcon">🩺</span>
+      NurseStudy
+    </div>
 
-<div class="container nav">
-
-<a class="logo" href="#home">
-<span class="logoIcon">🩺</span>
-NurseStudy
-</a>
-
-<nav class="navLinks">
-
-<a href="#study">Study</a>
-<a href="#books">Books</a>
-<a href="#donate">Donate</a>
-<a href="#community">Community</a>
-
-</nav>
-
-<button class="menu" onclick="toggleMenu()">☰</button>
-
-</div>
-
+    <button class="menu" onclick="goStudy()">☰</button>
+  </div>
 </header>
 
 
-<!-- HERO -->
+<section class="hero">
 
-<section class="hero" id="home">
+<div class="container">
 
-<div class="container heroGrid">
-
-<div>
-
-<span class="badge">
-🎓 B.Sc. Nursing • Semester 1–7
-</span>
+<span class="badge">🎓 B.Sc. Nursing • Semester 1–7</span>
 
 <h1>
 Learn Nursing.<br>
@@ -684,21 +345,17 @@ Help Each Other.
 </span>
 </h1>
 
-<p class="heroText">
-
-Notes, study material, exam preparation,
-viva, MCQs, practical learning and a
-student-help community — all in one place.
-
+<p>
+Notes, detailed answers, viva with answers, MCQs with answers
+and important long questions — all in one place.
 </p>
 
 <div class="search">
 
 <input
 id="searchInput"
-placeholder="Search Hypertension, COPD, KMC, Viva..."
-onkeydown="if(event.key==='Enter')searchSite()"
->
+placeholder="Search Hypertension, COPD, Nursing Research..."
+onkeydown="if(event.key==='Enter') searchSite()">
 
 <button class="btn" onclick="searchSite()">
 Search
@@ -709,441 +366,49 @@ Search
 <div id="searchResults"></div>
 
 </div>
-
-
-<div class="heroCard">
-
-<div class="heroEmoji">📚</div>
-
-<h2 style="color:var(--dark)">
-Your Nursing Study Hub
-</h2>
-
-<p style="color:var(--muted)">
-Register once, choose your semester and
-start studying.
-</p>
-
-<div class="stats">
-
-<div class="stat">
-<strong>7</strong>
-<small>Semesters</small>
-</div>
-
-<div class="stat">
-<strong>50+</strong>
-<small>Topics</small>
-</div>
-
-<div class="stat">
-<strong>24/7</strong>
-<small>Access</small>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 </section>
 
-
-<!-- STUDY -->
 
 <section id="study">
 
 <div class="container">
 
 <div class="sectionTitle">
-
 <h2>📚 Nursing Study Centre</h2>
-
 <p>
-Choose your semester.
+Choose your semester and open Notes, Viva, MCQ or Important Questions.
 </p>
-
 </div>
 
-<div id="semesterTabs" class="tabs"></div>
+<div id="tabs" class="tabs"></div>
 
-<div id="semesterContent"></div>
+<div id="content"></div>
 
 </div>
 
 </section>
 
 
-<!-- FEATURES -->
+<div id="modal" class="modalBg hidden">
 
-<section style="background:white">
+<div class="modal">
 
-<div class="container">
+<div class="modalHead">
 
-<div class="sectionTitle">
-
-<h2>🚀 Everything for Nursing Students</h2>
-
-<p>
-Study resources in one place.
-</p>
-
-</div>
-
-<div class="grid">
-
-<div class="card">
-<div class="icon">📄</div>
-<h3>Notes</h3>
-<p>Simple topic-wise nursing study material.</p>
-</div>
-
-<div class="card">
-<div class="icon">🎯</div>
-<h3>Important Questions</h3>
-<p>Exam-focused short and long questions.</p>
-</div>
-
-<div class="card">
-<div class="icon">🎤</div>
-<h3>Viva</h3>
-<p>Practical viva preparation.</p>
-</div>
-
-<div class="card">
-<div class="icon">🧠</div>
-<h3>MCQs</h3>
-<p>Quick revision and practice questions.</p>
-</div>
-
-<div class="card">
-<div class="icon">🏥</div>
-<h3>Clinical</h3>
-<p>Clinical procedures and practical learning.</p>
-</div>
-
-<div class="card">
-<div class="icon">💊</div>
-<h3>Drugs</h3>
-<p>Drug classes and nursing responsibilities.</p>
-</div>
-
-<div class="card">
-<div class="icon">📑</div>
-<h3>Previous Papers</h3>
-<p>University-wise previous questions.</p>
-</div>
-
-<div class="card">
-<div class="icon">🌍</div>
-<h3>University Content</h3>
-<p>Organise material according to university.</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- BOOK HELP -->
-
-<section id="books">
-
-<div class="container">
-
-<div class="sectionTitle">
-
-<h2>📚 Nursing Book Help</h2>
-
-<p>
-Need a book or want to give a book to another student?
-</p>
-
-</div>
-
-<div class="helpGrid">
-
-<div class="formCard">
-
-<h3 style="color:var(--dark)">
-I Need a Book
-</h3>
-
-<form onsubmit="requestBook(event)">
-
-<input
-id="bookName"
-required
-placeholder="Book name"
->
-
-<input
-id="studentName"
-required
-placeholder="Your name"
->
-
-<input
-id="studentContact"
-required
-placeholder="Phone / Email"
->
-
-<select id="bookSemester" required>
-
-<option value="">
-Select Semester
-</option>
-
-<option>1st Semester</option>
-<option>2nd Semester</option>
-<option>3rd Semester</option>
-<option>4th Semester</option>
-<option>5th Semester</option>
-<option>6th Semester</option>
-<option>7th Semester</option>
-
-</select>
-
-<textarea
-id="bookMessage"
-placeholder="Additional details"
-></textarea>
-
-<button class="btn">
-📚 Request Book
-</button>
-
-</form>
-
-</div>
-
-
-<div class="formCard">
-
-<h3 style="color:var(--dark)">
-🎁 Give a Free Book
-</h3>
-
-<form onsubmit="offerBook(event)">
-
-<input
-id="offerBookName"
-required
-placeholder="Book name"
->
-
-<input
-id="offerStudentName"
-required
-placeholder="Your name"
->
-
-<input
-id="offerContact"
-required
-placeholder="Contact"
->
-
-<select id="offerSemester" required>
-
-<option value="">
-Select Semester
-</option>
-
-<option>1st Semester</option>
-<option>2nd Semester</option>
-<option>3rd Semester</option>
-<option>4th Semester</option>
-<option>5th Semester</option>
-<option>6th Semester</option>
-<option>7th Semester</option>
-
-</select>
-
-<textarea
-id="offerMessage"
-placeholder="Book condition / details"
-></textarea>
-
-<button class="btn">
-🎁 Offer Book Free
-</button>
-
-</form>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- DONATION -->
-
-<section id="donate" style="background:#eefaf8">
-
-<div class="container">
-
-<div class="sectionTitle">
-
-<h2>❤️ Help a Nursing Student</h2>
-
-<p>
-If you want, you can support students who need books or study material.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>
-💰 Donation / Student Support
-</h3>
-
-<p>
-You can support the NurseStudy student-help initiative
-through the UPI ID below.
-</p>
-
-<div style="
-background:#e8f8f5;
-padding:18px;
-border-radius:14px;
-margin:15px 0;
-">
-
-<strong style="
-display:block;
-font-size:20px;
-color:#08645e;
-">
-7763082034@kotak
+<strong id="modalTitle">
+NurseStudy
 </strong>
 
-<small style="color:#627d98">
-NurseStudy Support UPI
-</small>
+<button onclick="closeModal()">✕</button>
 
 </div>
 
-<button
-class="btn"
-onclick="copyUPI()"
->
-📋 Copy UPI ID
-</button>
-
-<button
-class="btn light"
-onclick="openUPI()"
-style="margin-left:7px"
->
-💳 Open UPI
-</button>
-
-<div
-id="upiMessage"
-style="
-margin-top:12px;
-color:#08645e;
-font-size:13px;
-"
-></div>
+<div id="modalBody" class="modalBody"></div>
 
 </div>
 
 </div>
 
-</section>
-
-
-<!-- COMMUNITY -->
-
-<section id="community">
-
-<div class="container">
-
-<div class="sectionTitle">
-
-<h2>💬 Nursing Student Community</h2>
-
-<p>
-Students can ask questions and connect with other students.
-</p>
-
-</div>
-
-<div class="helpGrid">
-
-<div class="formCard">
-
-<h3 style="color:var(--dark)">
-Create a Post
-</h3>
-
-<form onsubmit="createPost(event)">
-
-<input
-id="postName"
-required
-placeholder="Your name"
->
-
-<select id="postSemester" required>
-
-<option value="">
-Semester
-</option>
-
-<option>1st Semester</option>
-<option>2nd Semester</option>
-<option>3rd Semester</option>
-<option>4th Semester</option>
-<option>5th Semester</option>
-<option>6th Semester</option>
-<option>7th Semester</option>
-
-</select>
-
-<textarea
-id="postText"
-required
-placeholder="Example: I need help with AHN1 notes..."
-></textarea>
-
-<button class="btn">
-Post
-</button>
-
-</form>
-
-</div>
-
-
-<div class="formCard">
-
-<h3 style="color:var(--dark)">
-Student Posts
-</h3>
-
-<div id="posts"></div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- SAFETY -->
 
 <section>
 
@@ -1151,17 +416,14 @@ Student Posts
 
 <div class="notice">
 
-<strong>🛡️ Safety & Privacy</strong>
+<strong>📌 Exam Tip:</strong>
 
-<br><br>
+For long answers, write:
 
-Never share passwords, OTPs, bank PINs,
-Aadhaar numbers or other sensitive information
-in public posts.
-
-For real student-to-student messaging across
-different phones, the website will need a secure
-login and online database.
+Definition → Causes/Risk Factors → Types →
+Signs & Symptoms → Investigations →
+Treatment/Management → Nursing Management →
+Complications → Health Education → Conclusion.
 
 </div>
 
@@ -1170,648 +432,431 @@ login and online database.
 </section>
 
 
-<!-- FOOTER -->
-
 <footer>
 
-<div class="container footerGrid">
+<div class="container">
 
-<div>
-
-<h3>
-🩺 NurseStudy
-</h3>
+<h3>🩺 NurseStudy</h3>
 
 <p>
-A nursing education and student-help platform
-for learning, sharing and supporting each other.
+B.Sc. Nursing study material, viva, MCQs and important questions.
 </p>
-
-</div>
-
-
-<div>
-
-<h3>
-Quick Links
-</h3>
-
-<p>
-
-<a href="#study">Study</a><br>
-
-<a href="#books">Book Help</a><br>
-
-<a href="#donate">Donate</a><br>
-
-<a href="#community">Community</a>
-
-</p>
-
-</div>
-
-
-<div>
-
-<h3>
-Founder
-</h3>
-
-<p class="founder">
-Nadeem
-</p>
-
-<p>
-Founder, NurseStudy
-</p>
-
-</div>
-
-</div>
-
-
-<div class="container"
-style="
-border-top:1px solid rgba(255,255,255,.12);
-margin-top:25px;
-padding-top:18px;
-font-size:12px;
-color:#9fb3c8;
-">
-
-© 2026 NurseStudy.
-Educational platform.
-Always verify academic and clinical information
-with official sources and current guidelines.
 
 </div>
 
 </footer>
 
 
-<!-- REGISTRATION MODAL -->
-
-<div
-id="registration"
-class="modalBg"
->
-
-<div class="modal">
-
-<h2>
-👩‍⚕️ Welcome to NurseStudy
-</h2>
-
-<p>
-Student details enter karo aur apna semester
-select karo.
-</p>
-
-<form onsubmit="registerStudent(event)">
-
-<input
-id="regName"
-required
-placeholder="Full Name"
->
-
-<input
-id="regMobile"
-required
-placeholder="Mobile Number"
-inputmode="tel"
->
-
-<input
-id="regEmail"
-type="email"
-placeholder="Email (optional)"
->
-
-<select id="regSemester" required>
-
-<option value="">
-Select Semester
-</option>
-
-<option>1st Semester</option>
-<option>2nd Semester</option>
-<option>3rd Semester</option>
-<option>4th Semester</option>
-<option>5th Semester</option>
-<option>6th Semester</option>
-<option>7th Semester</option>
-
-</select>
-
-<input
-id="regUniversity"
-required
-placeholder="University / College"
->
-
-<button class="btn">
-Open My Study Dashboard →
-</button>
-
-</form>
-
-<p style="font-size:11px">
-Demo version: details are stored only on this device.
-Real online accounts/database can be connected later.
-</p>
-
-</div>
-
-</div>
-
-
-<!-- CHAT -->
-
-<div
-id="chat"
-class="chat hidden"
->
-
-<div class="chatHeader">
-
-<strong>
-💬 Student Message
-</strong>
-
-<button
-onclick="closeChat()"
-style="
-background:transparent;
-border:0;
-color:white;
-font-size:18px;
-"
->
-✕
-</button>
-
-</div>
-
-<div
-id="chatBody"
-class="chatBody"
-></div>
-
-<div class="chatInput">
-
-<input
-id="chatInput"
-placeholder="Type message..."
-onkeydown="if(event.key==='Enter')sendMessage()"
->
-
-<button
-class="btn"
-onclick="sendMessage()"
->
-Send
-</button>
-
-</div>
-
-</div>
-
-
 <script>
 
-/* =========================
-   NURSING CONTENT
-========================= */
+/* =========================================================
+   NURSING DATA
+========================================================= */
 
-const nursingData={
+const DATA = [
 
-"1st Semester":{
+/* ================= 1ST SEMESTER ================= */
 
-subjects:[
-"Anatomy & Physiology",
-"Nursing Foundations",
-"Nutrition",
-"Psychology",
-"Communication"
-],
-
-topics:[
-
-[
-"Nursing Process",
-"Assessment → Nursing Diagnosis → Planning → Implementation → Evaluation. It helps nurses provide organised and individualised care."
-],
-
-[
-"Vital Signs",
-"Temperature, pulse, respiration and blood pressure are basic observations. Record values accurately and report important changes."
-],
-
-[
-"Hand Hygiene",
-"Hand hygiene is one of the most important methods of reducing infection transmission. Follow current infection-control guidance."
-],
-
-[
-"Bed Making",
-"Maintain cleanliness, comfort, privacy and safety while using correct body mechanics."
-],
-
-[
-"Therapeutic Communication",
-"Use active listening, empathy, privacy and simple non-judgmental language."
-],
-
-[
-"Nutrition Basics",
-"Assess food intake, appetite, swallowing, weight and hydration."
-],
-
-[
-"Patient Safety",
-"Correct identification, fall prevention, safe environment and clear communication are important."
-],
-
-[
-"Documentation",
-"Documentation should be accurate, objective, timely and confidential."
-]
-
-]
-
+{
+semester:"1st Semester",
+topic:"Nursing Process",
+definition:"The nursing process is a systematic method used by nurses to provide individualized and effective patient care.",
+key:"Assessment, nursing diagnosis, planning, implementation and evaluation."
 },
 
-"2nd Semester":{
-
-subjects:[
-"Microbiology",
-"Biochemistry",
-"Pharmacology",
-"Pathology",
-"Adult Health Nursing"
-],
-
-topics:[
-
-[
-"Microbiology",
-"Study bacteria, viruses, fungi and parasites with emphasis on transmission and prevention."
-],
-
-[
-"Pharmacology",
-"Learn drug classes, indications, adverse effects, contraindications and nursing responsibilities."
-],
-
-[
-"Medication Safety",
-"Check the correct patient, medicine, dose, route, time, allergies and documentation according to policy."
-],
-
-[
-"Pain Assessment",
-"Assess location, severity, quality, timing and effect on activities using an appropriate pain scale."
-],
-
-[
-"Fluid Balance",
-"Monitor intake, output, hydration, edema, urine output and relevant investigations."
-],
-
-[
-"Respiratory Assessment",
-"Assess respiratory rate, effort, oxygenation, colour and breath sounds."
-]
-
-]
-
+{
+semester:"1st Semester",
+topic:"Vital Signs",
+definition:"Vital signs are basic measurements that show the body's essential physiological functions.",
+key:"Temperature, pulse, respiration, blood pressure and oxygen saturation when indicated."
 },
 
-"3rd Semester":{
-
-subjects:[
-"Adult Health Nursing I",
-"Child Health Nursing I",
-"Pharmacology",
-"Pathology",
-"Community Health Nursing"
-],
-
-topics:[
-
-[
-"Hypertension",
-"High blood pressure is often asymptomatic. WHO defines hypertension as BP of 140/90 mmHg or higher when measured on two different days. Nursing care includes accurate BP measurement, lifestyle education and treatment adherence."
-],
-
-[
-"Myocardial Infarction",
-"Acute interruption of coronary blood flow causes myocardial injury. Suspected acute coronary syndrome requires emergency assessment."
-],
-
-[
-"COPD",
-"Chronic respiratory disease with persistent airflow limitation. Nursing care includes respiratory assessment, prescribed treatment, positioning and patient education."
-],
-
-[
-"Diabetes Mellitus",
-"Chronic disorder involving raised blood glucose. Nursing care includes glucose monitoring, medication safety, nutrition and foot care."
-],
-
-[
-"Diarrhea & Dehydration",
-"Assess stool pattern, hydration, mental status, urine output and vital signs. Severe dehydration requires urgent management."
-],
-
-[
-"Protein Energy Malnutrition",
-"Assess growth, weight and nutritional intake. Provide feeding support and monitor progress."
-],
-
-[
-"Kangaroo Mother Care",
-"Skin-to-skin care supports small or preterm newborns. Monitor temperature, breathing, feeding and stability."
-],
-
-[
-"Congenital Heart Disease",
-"Structural heart defects can affect oxygenation, feeding and growth. Nursing care focuses on assessment and family education."
-]
-
-]
-
+{
+semester:"1st Semester",
+topic:"Hand Hygiene",
+definition:"Hand hygiene is the cleaning of hands to remove microorganisms and prevent infection transmission.",
+key:"Hand washing before and after patient contact is one of the most important infection-control measures."
 },
 
-"4th Semester":{
-
-subjects:[
-"Mental Health Nursing",
-"Community Health Nursing",
-"Adult Health Nursing II",
-"Child Health Nursing II"
-],
-
-topics:[
-
-[
-"Mental Status Examination",
-"Assess appearance, behaviour, speech, mood, affect, thought, perception, cognition, insight and judgement."
-],
-
-[
-"Schizophrenia",
-"A serious mental disorder affecting thinking, perception and behaviour. Nursing care includes therapeutic communication, safety and medication adherence support."
-],
-
-[
-"Depression",
-"Assess mood, interest, functioning and safety. Suicide/self-harm risk requires immediate clinical attention."
-],
-
-[
-"Anxiety",
-"Assess severity, triggers, physical symptoms and coping. Provide calm communication and prescribed support."
-],
-
-[
-"Levels of Prevention",
-"Primary prevention prevents disease, secondary supports early detection and tertiary reduces disability and complications."
-],
-
-[
-"Health Education",
-"Assess learning needs, set objectives, use simple language and evaluate understanding."
-]
-
-]
-
+{
+semester:"1st Semester",
+topic:"Bed Making",
+definition:"Bed making is the process of preparing a clean, comfortable and safe bed for the patient.",
+key:"Maintain cleanliness, comfort, privacy, safety and proper body mechanics."
 },
 
-"5th Semester":{
-
-subjects:[
-"Adult Health Nursing III",
-"Midwifery I",
-"Child Health Nursing III",
-"Community Health Nursing",
-"Nursing Research"
-],
-
-topics:[
-
-[
-"Shock",
-"Shock involves inadequate tissue perfusion. Prioritise airway, breathing and circulation and follow emergency protocols."
-],
-
-[
-"Heart Failure",
-"Assess breathlessness, edema, weight, fluid balance and activity tolerance."
-],
-
-[
-"Stroke",
-"Sudden neurological deficit requires emergency assessment. Recognise warning signs and note onset time."
-],
-
-[
-"Chronic Kidney Disease",
-"Monitor blood pressure, fluid status, medications, nutrition and laboratory results."
-],
-
-[
-"Perioperative Nursing",
-"Includes preoperative preparation, surgical safety, infection prevention, postoperative monitoring and pain management."
-],
-
-[
-"Nursing Research",
-"Research follows a systematic process from problem identification through literature review, design, data collection, analysis and reporting."
-]
-
-]
-
+{
+semester:"1st Semester",
+topic:"Therapeutic Communication",
+definition:"Therapeutic communication is purposeful communication used by nurses to build trust and support patients.",
+key:"Active listening, empathy, confidentiality, respect and non-judgmental communication."
 },
 
-"6th Semester":{
-
-subjects:[
-"Midwifery II",
-"Child Health Nursing IV",
-"Community Health Nursing IV",
-"Adult Health Nursing IV",
-"Statistics"
-],
-
-topics:[
-
-[
-"Antenatal Care",
-"Supports maternal and fetal health through assessment, screening, nutrition, education and danger-sign recognition."
-],
-
-[
-"Stages of Labour",
-"Study stages, maternal/fetal observations, supportive care and escalation according to current protocols."
-],
-
-[
-"Postnatal Care",
-"Assess bleeding, pain, infection, blood pressure, breastfeeding and emotional wellbeing."
-],
-
-[
-"APGAR Score",
-"A rapid newborn assessment commonly recorded at 1 and 5 minutes using appearance, pulse, grimace, activity and respiration."
-],
-
-[
-"IMNCI",
-"Integrated approach to common childhood illnesses involving assessment, classification, treatment, counselling and referral."
-],
-
-[
-"Neonatal Jaundice",
-"Early or severe jaundice needs assessment. Monitor feeding and prescribed treatment when indicated."
-],
-
-[
-"Prematurity",
-"Preterm babies need thermal care, feeding support, infection prevention and close monitoring."
-]
-
-]
-
+{
+semester:"1st Semester",
+topic:"Patient Safety",
+definition:"Patient safety means preventing avoidable harm during healthcare.",
+key:"Correct patient identification, fall prevention, medication safety and effective communication."
 },
 
-"7th Semester":{
 
-subjects:[
-"Midwifery III",
-"Community Health Nursing V",
-"Nursing Management",
-"Nursing Research",
-"Professional Nursing"
-],
+/* ================= 2ND SEMESTER ================= */
 
-topics:[
+{
+semester:"2nd Semester",
+topic:"Microbiology",
+definition:"Microbiology is the study of microorganisms and their relationship with health and disease.",
+key:"Bacteria, viruses, fungi and parasites; transmission and prevention."
+},
 
-[
-"Nursing Research",
-"Systematic investigation using planned methods: problem, literature review, objectives, variables, design, sampling, data collection, analysis and reporting."
-],
+{
+semester:"2nd Semester",
+topic:"Pharmacology",
+definition:"Pharmacology is the study of drugs and their effects on living organisms.",
+key:"Indications, adverse effects, contraindications, drug interactions and nursing responsibilities."
+},
 
-[
-"Research Problem",
-"A good research problem is clear, focused, feasible and relevant."
-],
+{
+semester:"2nd Semester",
+topic:"Medication Safety",
+definition:"Medication safety means preparing and administering medicines correctly and safely.",
+key:"Right patient, right drug, right dose, right route, right time, allergies and documentation."
+},
 
-[
-"Sampling",
-"Sampling selects participants from a population. Learn probability and non-probability sampling."
-],
+{
+semester:"2nd Semester",
+topic:"Pain Assessment",
+definition:"Pain assessment is the systematic assessment of pain experienced by a patient.",
+key:"Location, severity, quality, duration, timing and effect on daily activities."
+},
 
-[
-"Data Collection",
-"Questionnaires, interviews, observation schedules and checklists are common data-collection tools."
-],
+{
+semester:"2nd Semester",
+topic:"Fluid Balance",
+definition:"Fluid balance means maintaining an appropriate balance between fluid intake and fluid output.",
+key:"Monitor intake, output, edema, urine output, weight and relevant investigations."
+},
 
-[
-"Nursing Management",
-"Important functions include planning, organising, staffing, directing, coordination and evaluation."
-],
 
-[
-"Leadership",
-"Study leadership styles, communication, delegation, supervision and accountability."
-],
+/* ================= 3RD SEMESTER ================= */
 
-[
-"Professional Ethics",
-"Respect autonomy, privacy, confidentiality, informed consent, dignity and professional boundaries."
-],
+{
+semester:"3rd Semester",
+topic:"Hypertension",
+definition:"Hypertension is persistently elevated blood pressure.",
+key:"Risk factors include high salt intake, obesity, physical inactivity, tobacco use, family history, increasing age, diabetes and kidney disease."
+},
 
-[
-"Patient Safety",
-"Use correct identification, safe communication, medication safety, infection prevention and incident reporting."
-]
+{
+semester:"3rd Semester",
+topic:"Myocardial Infarction",
+definition:"Myocardial infarction occurs when blood supply to part of the heart muscle is severely reduced or blocked, causing myocardial injury.",
+key:"Chest discomfort, sweating, breathlessness, nausea, weakness and pain radiating to the arm or jaw may occur."
+},
 
-]
+{
+semester:"3rd Semester",
+topic:"COPD",
+definition:"Chronic obstructive pulmonary disease is a chronic respiratory disease associated with persistent airflow limitation.",
+key:"Smoking and harmful occupational/environmental exposures are important risk factors. Cough and breathlessness are common."
+},
+
+{
+semester:"3rd Semester",
+topic:"Diabetes Mellitus",
+definition:"Diabetes mellitus is a chronic metabolic disorder characterized by elevated blood glucose levels.",
+key:"Blood glucose monitoring, medicines, nutrition, exercise, foot care and prevention of complications are important."
+},
+
+{
+semester:"3rd Semester",
+topic:"Diarrhea and Dehydration",
+definition:"Diarrhea is passage of frequent loose or watery stools and may result in loss of water and electrolytes.",
+key:"Assess hydration, stool frequency, urine output, mental status, pulse, blood pressure and skin/mucosal condition."
+},
+
+{
+semester:"3rd Semester",
+topic:"Protein Energy Malnutrition",
+definition:"Protein energy malnutrition is a condition caused by inadequate intake or utilization of energy and protein.",
+key:"Assess weight, height/length, nutritional history, MUAC where appropriate and clinical signs."
+},
+
+{
+semester:"3rd Semester",
+topic:"Shock",
+definition:"Shock is a life-threatening state in which tissue perfusion is inadequate to meet cellular oxygen and metabolic needs.",
+key:"Hypotension, tachycardia, altered mental status, cold skin and reduced urine output may occur."
+},
+
+
+/* ================= 4TH SEMESTER ================= */
+
+{
+semester:"4th Semester",
+topic:"Surgical Nursing",
+definition:"Surgical nursing involves nursing care provided to patients before, during and after surgery.",
+key:"Preoperative preparation, intraoperative safety and postoperative monitoring are important."
+},
+
+{
+semester:"4th Semester",
+topic:"Wound Care",
+definition:"Wound care is the assessment and management of tissue injury to promote healing and prevent infection.",
+key:"Assess wound size, drainage, tissue, pain and infection; maintain aseptic technique."
+},
+
+{
+semester:"4th Semester",
+topic:"Infection Control",
+definition:"Infection control includes measures used to prevent and control healthcare-associated infections.",
+key:"Hand hygiene, PPE, aseptic technique, sterilization and safe waste disposal."
+},
+
+{
+semester:"4th Semester",
+topic:"Blood Transfusion",
+definition:"Blood transfusion is administration of blood or blood components to a patient.",
+key:"Verify patient identity and blood product, monitor vital signs and watch for transfusion reactions."
+},
+
+
+/* ================= 5TH SEMESTER ================= */
+
+{
+semester:"5th Semester",
+topic:"Community Health Nursing",
+definition:"Community health nursing combines nursing knowledge with public health principles to improve the health of individuals, families and communities.",
+key:"Health promotion, disease prevention, community assessment, education and follow-up."
+},
+
+{
+semester:"5th Semester",
+topic:"National Health Programmes",
+definition:"National health programmes are organized government programmes designed to prevent and control major health problems.",
+key:"They focus on disease prevention, treatment, health promotion and strengthening health services."
+},
+
+{
+semester:"5th Semester",
+topic:"Primary Health Care",
+definition:"Primary health care is essential healthcare that is accessible to individuals and communities.",
+key:"Accessibility, community participation, health education, appropriate technology and intersectoral coordination."
+},
+
+{
+semester:"5th Semester",
+topic:"Health Education",
+definition:"Health education is a process of helping people gain knowledge and skills to improve health.",
+key:"Assessment of needs, planning, implementation and evaluation of educational activities."
+},
+
+
+/* ================= 6TH SEMESTER ================= */
+
+{
+semester:"6th Semester",
+topic:"Child Health Nursing",
+definition:"Child health nursing focuses on promoting, maintaining and restoring the health of infants, children and adolescents.",
+key:"Growth and development, nutrition, immunization, illness prevention and family-centred care."
+},
+
+{
+semester:"6th Semester",
+topic:"Protein Energy Malnutrition in Children",
+definition:"PEM in children results from inadequate energy and protein intake and may affect growth and development.",
+key:"Poor growth, wasting, weakness, nutritional deficiencies and increased susceptibility to infection may occur."
+},
+
+{
+semester:"6th Semester",
+topic:"Acute Respiratory Infection",
+definition:"Acute respiratory infection is an infection affecting the respiratory tract with relatively sudden onset.",
+key:"Cough, fever, fast breathing and difficulty in breathing may occur."
+},
+
+{
+semester:"6th Semester",
+topic:"Neonatal Jaundice",
+definition:"Neonatal jaundice is yellow discoloration of the skin and sclera caused by elevated bilirubin in a newborn.",
+key:"Assess onset, severity, feeding, activity and bilirubin as clinically indicated."
+},
+
+{
+semester:"6th Semester",
+topic:"Kangaroo Mother Care",
+definition:"Kangaroo Mother Care is a method of caring for small or preterm babies using prolonged skin-to-skin contact with the mother or caregiver.",
+key:"Promotes warmth, breastfeeding, bonding and physiological stability."
+},
+
+{
+semester:"6th Semester",
+topic:"Hydrocephalus",
+definition:"Hydrocephalus is abnormal accumulation of cerebrospinal fluid within the brain's ventricular system.",
+key:"Increasing head circumference in infants, vomiting, irritability, altered consciousness and neurological signs may occur."
+},
+
+{
+semester:"6th Semester",
+topic:"Spina Bifida",
+definition:"Spina bifida is a neural tube defect caused by incomplete closure of the spinal column during development.",
+key:"Neurological deficits, weakness, bladder/bowel problems and associated hydrocephalus may occur."
+},
+
+{
+semester:"6th Semester",
+topic:"Cerebral Palsy",
+definition:"Cerebral palsy is a group of permanent disorders affecting movement and posture due to disturbances in the developing brain.",
+key:"Motor impairment, abnormal muscle tone, posture problems and associated developmental difficulties may occur."
+},
+
+
+/* ================= 7TH SEMESTER ================= */
+
+{
+semester:"7th Semester",
+topic:"Nursing Research",
+definition:"Nursing research is a systematic investigation using planned methods to generate or improve knowledge relevant to nursing practice.",
+key:"Research problem, literature review, objectives, variables, design, sampling, data collection, analysis and reporting."
+},
+
+{
+semester:"7th Semester",
+topic:"Research Problem",
+definition:"A research problem is a clear, focused, feasible and relevant issue that can be investigated systematically.",
+key:"It should identify a gap or concern and be suitable for research."
+},
+
+{
+semester:"7th Semester",
+topic:"Sampling",
+definition:"Sampling is the process of selecting participants from a defined population for a research study.",
+key:"Probability and non-probability sampling are the major categories."
+},
+
+{
+semester:"7th Semester",
+topic:"Data Collection",
+definition:"Data collection is the systematic gathering of information required for a research study.",
+key:"Questionnaires, interviews, observations and checklists are common data-collection methods."
+},
+
+{
+semester:"7th Semester",
+topic:"Nursing Management",
+definition:"Nursing management is the process of coordinating people and resources to achieve safe and effective nursing care.",
+key:"Planning, organizing, staffing, directing, coordination and evaluation."
+},
+
+{
+semester:"7th Semester",
+topic:"Leadership",
+definition:"Leadership is the process of influencing and guiding people toward a common goal.",
+key:"Communication, delegation, motivation, supervision, decision-making and accountability."
+},
+
+{
+semester:"7th Semester",
+topic:"Professional Nursing",
+definition:"Professional nursing involves providing safe, ethical, competent and evidence-based nursing care.",
+key:"Professional responsibility, ethics, accountability, communication, confidentiality and continuous learning."
+}
+
+];
+
+
+/* =========================================================
+   BASIC FUNCTIONS
+========================================================= */
+
+let activeSemester="1st Semester";
+
+
+function escapeHTML(text){
+
+return String(text).replace(/[&<>"']/g,function(m){
+
+return {
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+}[m];
+
+});
 
 }
 
-};
+
+function getTopic(topic){
+
+return DATA.find(function(x){
+
+return x.topic===topic;
+
+});
+
+}
 
 
-/* =========================
-   REGISTRATION
-========================= */
+function isResearch(topic){
 
-let student=null;
+return /research|sampling|data collection/i.test(topic);
 
-function registerStudent(event){
+}
 
-event.preventDefault();
 
-student={
+function isManagement(topic){
 
-name:document.getElementById("regName").value.trim(),
+return /management|leadership|professional nursing/i.test(topic);
 
-mobile:document.getElementById("regMobile").value.trim(),
+}
 
-email:document.getElementById("regEmail").value.trim(),
 
-semester:document.getElementById("regSemester").value,
+function goStudy(){
 
-university:document.getElementById("regUniversity").value.trim()
-
-};
-
-localStorage.setItem(
-"nurseStudyStudent",
-JSON.stringify(student)
-);
-
-document
-.getElementById("registration")
-.classList.add("hidden");
-
-renderSemester(student.semester);
-
-window.scrollTo({
-top:0,
+document.getElementById("study").scrollIntoView({
 behavior:"smooth"
 });
 
 }
 
 
-/* =========================
-   SEMESTERS
-========================= */
+/* =========================================================
+   SEMESTER BUTTONS
+========================================================= */
 
-function renderSemesterTabs(){
+function renderTabs(){
 
-const tabs=document.getElementById(
-"semesterTabs"
-);
+const tabs=document.getElementById("tabs");
 
 tabs.innerHTML="";
 
-Object.keys(nursingData).forEach(
-semester=>{
+const semesters=[...new Set(
+DATA.map(function(x){return x.semester;})
+)];
 
-const button=document.createElement(
-"button"
-);
+
+semesters.forEach(function(semester){
+
+const button=document.createElement("button");
 
 button.className="tab";
 
-button.innerText=semester;
+if(semester===activeSemester){
 
-button.onclick=()=>{
+button.classList.add("active");
+
+}
+
+button.textContent=semester;
+
+button.onclick=function(){
+
+activeSemester=semester;
+
+renderTabs();
 
 renderSemester(semester);
 
@@ -1824,106 +869,714 @@ tabs.appendChild(button);
 }
 
 
+/* =========================================================
+   TOPIC LIST
+========================================================= */
+
 function renderSemester(semester){
 
-const data=nursingData[semester];
+const list=DATA.filter(function(x){
 
-const content=document.getElementById(
-"semesterContent"
-);
-
-document
-.querySelectorAll(".tab")
-.forEach(
-button=>{
-
-button.classList.toggle(
-"active",
-button.innerText===semester
-);
+return x.semester===semester;
 
 });
 
 
-content.innerHTML=`
+let html=`
 
 <div class="card">
 
 <span class="tag">
-${semester}
+${escapeHTML(semester)}
 </span>
 
-<h3>
+<h2 style="color:var(--dark)">
 Nursing Subjects
-</h3>
+</h2>
 
-<p>
-${data.subjects.join(" • ")}
+<p style="color:var(--muted)">
+Each topic has detailed Notes, Viva Questions with Answers,
+MCQs with Answers and Important Questions with Model Answers.
 </p>
 
 </div>
 
-<div style="margin-top:15px">
+`;
 
-${data.topics.map(
-(topic,index)=>`
+
+list.forEach(function(topic,index){
+
+html+=`
 
 <div class="topic">
 
 <h3>
-${index+1}. ${topic[0]}
+${index+1}. ${escapeHTML(topic.topic)}
 </h3>
 
 <p>
-${topic[1]}
+${escapeHTML(topic.definition)}
+<br><br>
+<strong>Key points:</strong>
+${escapeHTML(topic.key)}
 </p>
+
 
 <div class="actions">
 
-<button onclick="readNotes('${topic[0]}')">
+<button onclick="showNotes('${escapeHTML(topic.topic)}')">
 📖 Read Notes
 </button>
 
-<button onclick="showViva('${topic[0]}')">
-🎤 Viva
+<button onclick="showViva('${escapeHTML(topic.topic)}')">
+🎤 Viva + Answer
 </button>
 
-<button onclick="showMCQ('${topic[0]}')">
-🧠 MCQ
+<button onclick="showMCQ('${escapeHTML(topic.topic)}')">
+🧠 MCQ + Answer
 </button>
 
-<button onclick="importantQuestion('${topic[0]}')">
-🎯 Important Question
+<button onclick="showImportant('${escapeHTML(topic.topic)}')">
+🎯 Important Q + Answer
 </button>
 
 </div>
 
 </div>
 
-`
-).join("")}
+`;
+
+});
+
+
+document.getElementById("content").innerHTML=html;
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openModal(title,body){
+
+document.getElementById("modalTitle").textContent=title;
+
+document.getElementById("modalBody").innerHTML=body;
+
+document.getElementById("modal").classList.remove("hidden");
+
+}
+
+
+function closeModal(){
+
+document.getElementById("modal").classList.add("hidden");
+
+}
+
+
+document.getElementById("modal").addEventListener(
+"click",
+function(event){
+
+if(event.target===this){
+
+closeModal();
+
+}
+
+}
+);
+
+
+/* =========================================================
+   ANSWER BOX
+========================================================= */
+
+function answerBoxes(items){
+
+return items.map(function(item){
+
+return `
+
+<div class="answerBox">
+
+<h4>
+${escapeHTML(item[0])}
+</h4>
+
+<div>
+${escapeHTML(item[1]).replace(/\n/g,"<br>")}
+</div>
 
 </div>
+
+`;
+
+}).join("");
+
+}
+
+
+/* =========================================================
+   DETAILED NOTES
+========================================================= */
+
+function showNotes(topic){
+
+const x=getTopic(topic);
+
+if(!x)return;
+
+
+let sections=[];
+
+
+if(isResearch(topic)){
+
+sections=[
+
+[
+"Definition",
+x.definition
+],
+
+[
+"Purpose / Importance",
+"To identify problems, generate evidence, improve nursing practice, improve patient care and support evidence-based nursing."
+],
+
+[
+"Main Steps",
+"1. Identify the research problem.\n2. Review literature.\n3. Develop objectives or research questions.\n4. Select research design.\n5. Identify population and sample.\n6. Develop data-collection tool.\n7. Collect data.\n8. Analyse data.\n9. Interpret findings.\n10. Prepare research report."
+],
+
+[
+"Key Points",
+x.key
+],
+
+[
+"Ethical Principles",
+"Informed consent, privacy, confidentiality, beneficence, non-maleficence, justice and ethical approval."
+],
+
+[
+"Role of Nurse",
+"Nurses can identify clinical problems, participate in research, collect data accurately, protect participants and apply research findings to improve patient care."
+],
+
+[
+"Conclusion",
+"Nursing research provides evidence that helps nurses improve the quality, safety and effectiveness of nursing care."
+]
+
+];
+
+}
+
+else if(isManagement(topic)){
+
+sections=[
+
+[
+"Definition",
+x.definition
+],
+
+[
+"Important Areas",
+x.key
+],
+
+[
+"Functions / Principles",
+"Planning, organizing, staffing, directing, coordination, supervision and evaluation."
+],
+
+[
+"Communication",
+"Clear communication helps nurses coordinate care, prevent errors and maintain teamwork."
+],
+
+[
+"Delegation",
+"Appropriate tasks should be delegated according to competence, patient needs and professional responsibility."
+],
+
+[
+"Nursing Responsibilities",
+"Assess needs, plan care, coordinate staff, supervise appropriately, maintain documentation and evaluate outcomes."
+],
+
+[
+"Importance",
+"Effective management and leadership improve patient safety, staff coordination, quality of care and efficient use of resources."
+],
+
+[
+"Conclusion",
+"Good nursing management requires communication, leadership, accountability, teamwork and professional decision-making."
+]
+
+];
+
+}
+
+else{
+
+sections=[
+
+[
+"Definition",
+x.definition
+],
+
+[
+"Causes / Risk Factors",
+x.key
+],
+
+[
+"Types / Classification",
+"Classification depends on the specific condition. Write the major types when applicable."
+],
+
+[
+"Signs & Symptoms",
+"Assess the patient's history, presenting complaints, vital signs and relevant physical findings. Document findings accurately."
+],
+
+[
+"Investigations",
+"Appropriate investigations may include blood tests, urine tests, imaging, monitoring or other condition-specific tests as prescribed."
+],
+
+[
+"Medical / General Management",
+"Management depends on the condition. Provide prescribed medicines, supportive treatment, monitoring and treatment of the underlying cause."
+],
+
+[
+"Nursing Management",
+"Monitor vital signs and relevant observations, administer prescribed treatment safely, maintain comfort and safety, provide nutrition and hydration as appropriate, educate the patient and family, and document care."
+],
+
+[
+"Complications",
+"Monitor for condition-specific complications and identify deterioration early."
+],
+
+[
+"Health Education",
+"Teach medication adherence, healthy lifestyle, warning signs, follow-up and prevention according to the patient's condition."
+],
+
+[
+"Conclusion",
+"Early assessment, appropriate treatment and good nursing care help improve patient outcomes."
+]
+
+];
+
+}
+
+
+openModal(
+"📖 Detailed Notes — "+topic,
+answerBoxes(sections)
+);
+
+}
+
+
+/* =========================================================
+   VIVA WITH ANSWERS
+========================================================= */
+
+function showViva(topic){
+
+const x=getTopic(topic);
+
+
+const questions=[
+
+[
+"What is "+topic+"?",
+x.definition
+],
+
+[
+"What are the important points?",
+x.key
+],
+
+[
+"What should a nurse assess?",
+"Assess the patient's history, signs and symptoms, vital signs and condition-specific findings."
+],
+
+[
+"What are the important nursing responsibilities?",
+"Monitor the patient, provide prescribed care safely, maintain comfort and safety, educate the patient/family and document findings."
+],
+
+[
+"What complications should the nurse watch for?",
+"Watch for deterioration and complications specific to the condition. Early recognition and timely reporting are important."
+],
+
+[
+"Why is this topic important in nursing?",
+"It helps nurses identify patient problems, provide safe care, prevent complications and educate patients."
+]
+
+];
+
+
+openModal(
+"🎤 Viva — "+topic+" — Questions & Answers",
+answerBoxes(questions)
+);
+
+}
+
+
+/* =========================================================
+   MCQ WITH ANSWERS
+========================================================= */
+
+function showMCQ(topic){
+
+const x=getTopic(topic);
+
+
+const questions=[
+
+{
+q:"Which statement best describes "+topic+"?",
+options:[
+x.definition,
+"It is only a laboratory test.",
+"It is unrelated to nursing care.",
+"It never requires assessment."
+],
+answer:0,
+explanation:"Option A is correct because it gives the appropriate definition."
+},
+
+{
+q:"Which statement is most appropriate regarding "+topic+"?",
+options:[
+x.key,
+"Patient assessment should always be avoided.",
+"Nursing documentation is unnecessary.",
+"Patient education has no role."
+],
+answer:0,
+explanation:"Option A is correct because it represents an important key point."
+},
+
+{
+q:"Which nursing action is most appropriate?",
+options:[
+"Assess the patient, provide appropriate care, monitor response and document.",
+"Ignore changes in vital signs.",
+"Give treatment without assessment.",
+"Do not educate the patient."
+],
+answer:0,
+explanation:"Assessment, safe care, monitoring and documentation are essential nursing responsibilities."
+},
+
+{
+q:"What is an important part of nursing care?",
+options:[
+"Patient education and prevention of complications.",
+"Ignoring patient concerns.",
+"Stopping all monitoring.",
+"Avoiding documentation."
+],
+answer:0,
+explanation:"Patient education and prevention of complications are important parts of nursing care."
+}
+
+];
+
+
+let html="";
+
+
+questions.forEach(function(item,index){
+
+html+=`
+
+<div class="mcq">
+
+<strong>
+Q${index+1}. ${escapeHTML(item.q)}
+</strong>
+
+<br><br>
+
+<div>
+A. ${escapeHTML(item.options[0])}
+</div>
+
+<div>
+B. ${escapeHTML(item.options[1])}
+</div>
+
+<div>
+C. ${escapeHTML(item.options[2])}
+</div>
+
+<div>
+D. ${escapeHTML(item.options[3])}
+</div>
+
+<p class="correct">
+✅ Correct Answer:
+${String.fromCharCode(65+item.answer)}
+</p>
+
+<p>
+<strong>Explanation:</strong>
+${escapeHTML(item.explanation)}
+</p>
+
+</div>
+
+`;
+
+});
+
+
+openModal(
+"🧠 MCQ — "+topic+" — Answers Included",
+html
+);
+
+}
+
+
+/* =========================================================
+   IMPORTANT QUESTION + COMPLETE ANSWER
+========================================================= */
+
+function showImportant(topic){
+
+const x=getTopic(topic);
+
+let answer="";
+
+
+if(isResearch(topic)){
+
+answer=`
+
+<strong>Definition:</strong><br>
+${escapeHTML(x.definition)}
+<br><br>
+
+<strong>Importance of Nursing Research:</strong><br>
+Nursing research helps improve nursing practice, patient safety,
+quality of care and evidence-based decision making.
+<br><br>
+
+<strong>Key Points:</strong><br>
+${escapeHTML(x.key)}
+<br><br>
+
+<strong>Research Process:</strong><br>
+1. Identification of research problem<br>
+2. Review of literature<br>
+3. Objectives / research questions<br>
+4. Research design<br>
+5. Population and sampling<br>
+6. Data-collection tool<br>
+7. Data collection<br>
+8. Data analysis<br>
+9. Interpretation of findings<br>
+10. Report writing
+<br><br>
+
+<strong>Ethical Considerations:</strong><br>
+Informed consent, privacy, confidentiality, beneficence,
+non-maleficence and justice.
+<br><br>
+
+<strong>Role of Nurse:</strong><br>
+The nurse can identify problems, collect data, participate
+in research and apply evidence to nursing practice.
+<br><br>
+
+<strong>Conclusion:</strong><br>
+Nursing research is important for improving evidence-based
+nursing practice and quality patient care.
+
+`;
+
+}
+
+else if(isManagement(topic)){
+
+answer=`
+
+<strong>Definition:</strong><br>
+${escapeHTML(x.definition)}
+<br><br>
+
+<strong>Important Areas:</strong><br>
+${escapeHTML(x.key)}
+<br><br>
+
+<strong>Functions:</strong><br>
+1. Planning<br>
+2. Organizing<br>
+3. Staffing<br>
+4. Directing<br>
+5. Coordination<br>
+6. Supervision<br>
+7. Evaluation
+<br><br>
+
+<strong>Communication:</strong><br>
+Effective communication improves teamwork and reduces errors.
+<br><br>
+
+<strong>Delegation:</strong><br>
+Tasks should be delegated according to patient needs,
+staff competence and professional responsibility.
+<br><br>
+
+<strong>Nursing Management:</strong><br>
+Assess needs, plan care, coordinate activities,
+supervise staff, maintain records and evaluate outcomes.
+<br><br>
+
+<strong>Importance:</strong><br>
+Good management improves patient safety, quality of care,
+staff coordination and efficient use of resources.
+<br><br>
+
+<strong>Conclusion:</strong><br>
+Effective nursing management requires leadership,
+communication, teamwork and accountability.
+
+`;
+
+}
+
+else{
+
+answer=`
+
+<strong>1. Definition:</strong><br>
+${escapeHTML(x.definition)}
+<br><br>
+
+<strong>2. Causes / Risk Factors:</strong><br>
+${escapeHTML(x.key)}
+<br><br>
+
+<strong>3. Types:</strong><br>
+Write the major classification/types applicable to the condition.
+<br><br>
+
+<strong>4. Signs and Symptoms:</strong><br>
+Assess the patient's complaints, vital signs,
+physical findings and condition-specific symptoms.
+<br><br>
+
+<strong>5. Investigations:</strong><br>
+Appropriate laboratory tests, imaging and other
+condition-specific investigations may be performed as prescribed.
+<br><br>
+
+<strong>6. Treatment / Management:</strong><br>
+Treatment depends on the underlying condition.
+Provide prescribed medicines, supportive care,
+monitoring and treatment of the underlying cause.
+<br><br>
+
+<strong>7. Nursing Management:</strong><br>
+• Monitor vital signs and patient condition.<br>
+• Administer prescribed medicines safely.<br>
+• Maintain comfort and safety.<br>
+• Maintain nutrition and hydration as appropriate.<br>
+• Observe for complications.<br>
+• Provide psychological support.<br>
+• Educate patient and family.<br>
+• Maintain accurate documentation.
+<br><br>
+
+<strong>8. Complications:</strong><br>
+Monitor for complications specific to the condition
+and report deterioration promptly.
+<br><br>
+
+<strong>9. Health Education:</strong><br>
+Explain medication adherence, diet, lifestyle,
+warning signs, follow-up and prevention.
+<br><br>
+
+<strong>10. Conclusion:</strong><br>
+Early assessment, appropriate treatment and effective
+nursing care help improve patient outcomes.
 
 `;
 
 }
 
 
-/* =========================
+openModal(
+
+"🎯 Important Question + Complete Answer — "+topic,
+
+`
+
+<div class="answerBox">
+
+<h4>
+Important Question
+</h4>
+
+Write a long answer on:
+<strong>${escapeHTML(topic)}</strong>
+
+</div>
+
+<div class="answerBox">
+
+<h4>
+Model Answer
+</h4>
+
+${answer}
+
+</div>
+
+`
+
+);
+
+}
+
+
+/* =========================================================
    SEARCH
-========================= */
+========================================================= */
 
 function searchSite(){
 
-const query=document
-.getElementById("searchInput")
-.value
-.toLowerCase()
-.trim();
+const input=document.getElementById("searchInput");
 
-const results=document
-.getElementById("searchResults");
+const query=input.value.toLowerCase().trim();
+
+const results=document.getElementById("searchResults");
+
 
 if(!query){
 
@@ -1933,29 +1586,18 @@ return;
 
 }
 
-let found=[];
 
-Object.keys(nursingData).forEach(
-semester=>{
+const found=DATA.filter(function(item){
 
-nursingData[semester].topics.forEach(
-topic=>{
+return (
 
-if(
-(topic[0]+" "+topic[1])
-.toLowerCase()
-.includes(query)
-){
+item.topic+
+" "+
+item.definition+
+" "+
+item.key
 
-found.push({
-semester:semester,
-title:topic[0],
-text:topic[1]
-});
-
-}
-
-});
+).toLowerCase().includes(query);
 
 });
 
@@ -1966,11 +1608,14 @@ results.innerHTML=`
 
 <div class="topic">
 
-<h3>No result found</h3>
+<h3>
+❌ No Result Found
+</h3>
 
 <p>
-This topic can be added to the NurseStudy
-content library later.
+Try another topic such as:
+Hypertension, COPD, Diabetes, Nursing Research,
+Sampling, Leadership or KMC.
 </p>
 
 </div>
@@ -1981,487 +1626,67 @@ return;
 
 }
 
-results.innerHTML=found.map(
-item=>`
+
+let html="";
+
+
+found.forEach(function(item){
+
+html+=`
 
 <div class="topic">
 
 <span class="tag">
-${item.semester}
+${escapeHTML(item.semester)}
 </span>
 
 <h3>
-${item.title}
+${escapeHTML(item.topic)}
 </h3>
 
 <p>
-${item.text}
+${escapeHTML(item.definition)}
 </p>
+
+<div class="actions">
+
+<button onclick="showNotes('${escapeHTML(item.topic)}')">
+📖 Notes
+</button>
+
+<button onclick="showViva('${escapeHTML(item.topic)}')">
+🎤 Viva + Answer
+</button>
+
+<button onclick="showMCQ('${escapeHTML(item.topic)}')">
+🧠 MCQ + Answer
+</button>
+
+<button onclick="showImportant('${escapeHTML(item.topic)}')">
+🎯 Important + Answer
+</button>
 
 </div>
-
-`
-).join("");
-
-}
-
-
-/* =========================
-   NOTES / VIVA / MCQ
-========================= */
-
-function openChat(title,messages){
-
-document
-.getElementById("chat")
-.classList.remove("hidden");
-
-const body=document
-.getElementById("chatBody");
-
-body.innerHTML="";
-
-messages.forEach(
-message=>{
-
-const div=document.createElement(
-"div"
-);
-
-div.className="message";
-
-div.innerHTML=
-"<strong>"+
-title+
-"</strong><br>"+
-message;
-
-body.appendChild(div);
-
-});
-
-}
-
-
-function readNotes(topic){
-
-let found=null;
-
-Object.values(nursingData)
-.forEach(
-semester=>{
-
-semester.topics.forEach(
-item=>{
-
-if(item[0]===topic){
-found=item;
-}
-
-});
-
-});
-
-if(!found)return;
-
-openChat(
-"📖 "+topic,
-[
-found[1],
-"Exam answer pattern: Definition → Causes/Risk factors → Types → Signs & Symptoms → Investigations → Management → Nursing Management → Complications → Health Education."
-]
-);
-
-}
-
-
-function showViva(topic){
-
-openChat(
-"🎤 Viva - "+topic,
-[
-"What is "+topic+"?",
-"What are the important causes or risk factors?",
-"What signs and symptoms should a nurse assess?",
-"What investigations may be relevant?",
-"What are the important nursing responsibilities?"
-]
-);
-
-}
-
-
-function showMCQ(topic){
-
-openChat(
-"🧠 MCQ - "+topic,
-[
-"Which approach is best for nursing exam preparation?",
-"A. Learn only definition",
-"B. Learn definition, key points, nursing management and complications",
-"C. Skip nursing management",
-"D. Skip assessment",
-"Correct Answer: B"
-]
-);
-
-}
-
-
-function importantQuestion(topic){
-
-openChat(
-"🎯 Important Question",
-[
-"Write a long answer on "+topic+".",
-"Use this structure:",
-"Definition → Causes → Types → Signs & Symptoms → Investigations → Treatment → Nursing Management → Complications → Health Education."
-]
-);
-
-}
-
-
-/* =========================
-   BOOK REQUEST
-========================= */
-
-function requestBook(event){
-
-event.preventDefault();
-
-const request={
-
-book:bookName.value,
-
-name:studentName.value,
-
-contact:studentContact.value,
-
-semester:bookSemester.value,
-
-message:bookMessage.value,
-
-date:new Date().toLocaleString()
-
-};
-
-let requests=
-JSON.parse(
-localStorage.getItem("bookRequests")||"[]"
-);
-
-requests.unshift(request);
-
-localStorage.setItem(
-"bookRequests",
-JSON.stringify(requests)
-);
-
-event.target.reset();
-
-alert(
-"Book request submitted successfully."
-);
-
-}
-
-
-function offerBook(event){
-
-event.preventDefault();
-
-const offer={
-
-book:offerBookName.value,
-
-name:offerStudentName.value,
-
-contact:offerContact.value,
-
-semester:offerSemester.value,
-
-message:offerMessage.value,
-
-date:new Date().toLocaleString()
-
-};
-
-let offers=
-JSON.parse(
-localStorage.getItem("bookOffers")||"[]"
-);
-
-offers.unshift(offer);
-
-localStorage.setItem(
-"bookOffers",
-JSON.stringify(offers)
-);
-
-event.target.reset();
-
-alert(
-"Thank you for offering a free book."
-);
-
-}
-
-
-/* =========================
-   DONATION
-========================= */
-
-const UPI_ID=
-"7763082034@kotak";
-
-
-function copyUPI(){
-
-navigator.clipboard
-.writeText(UPI_ID)
-.then(()=>{
-
-document
-.getElementById("upiMessage")
-.innerText=
-"UPI ID copied successfully.";
-
-})
-.catch(()=>{
-
-alert(
-"UPI ID: "+UPI_ID
-);
-
-});
-
-}
-
-
-function openUPI(){
-
-window.location.href=
-"upi://pay?pa="+
-encodeURIComponent(UPI_ID)+
-"&pn="+
-encodeURIComponent("NurseStudy")+
-"&cu=INR";
-
-}
-
-
-/* =========================
-   COMMUNITY
-========================= */
-
-function createPost(event){
-
-event.preventDefault();
-
-const post={
-
-name:postName.value,
-
-semester:postSemester.value,
-
-text:postText.value,
-
-date:new Date().toLocaleString()
-
-};
-
-let posts=
-JSON.parse(
-localStorage.getItem("nurseStudyPosts")||"[]"
-);
-
-posts.unshift(post);
-
-localStorage.setItem(
-"nurseStudyPosts",
-JSON.stringify(posts)
-);
-
-event.target.reset();
-
-renderPosts();
-
-alert(
-"Your post has been published."
-);
-
-}
-
-
-function renderPosts(){
-
-const box=
-document.getElementById("posts");
-
-const posts=
-JSON.parse(
-localStorage.getItem(
-"nurseStudyPosts"
-)||"[]"
-);
-
-if(!posts.length){
-
-box.innerHTML=`
-
-<div class="card">
-
-<p>
-No community posts yet.
-Be the first student to ask something.
-</p>
 
 </div>
 
 `;
 
-return;
+});
 
-}
 
-box.innerHTML=posts
-.slice(0,20)
-.map(
-(post,index)=>`
-
-<div class="post">
-
-<strong style="color:var(--dark)">
-${post.name}
-</strong>
-
-<span class="tag">
-${post.semester}
-</span>
-
-<p>
-${post.text}
-</p>
-
-<button
-class="btn light"
-onclick="messageStudent('${post.name}')"
->
-💬 Message
-</button>
-
-</div>
-
-`
-)
-.join("");
+results.innerHTML=html;
 
 }
 
 
-function messageStudent(name){
+/* =========================================================
+   START WEBSITE
+========================================================= */
 
-openChat(
-"💬 Message "+name,
-[
-"Hello! You can type your message below.",
-"Remember: never share passwords, OTPs, bank PINs or sensitive personal information."
-]
-);
+renderTabs();
 
-}
-
-
-/* =========================
-   CHAT
-========================= */
-
-function sendMessage(){
-
-const input=
-document.getElementById("chatInput");
-
-const text=
-input.value.trim();
-
-if(!text)return;
-
-const body=
-document.getElementById("chatBody");
-
-const div=
-document.createElement("div");
-
-div.className="message me";
-
-div.innerText=text;
-
-body.appendChild(div);
-
-input.value="";
-
-body.scrollTop=
-body.scrollHeight;
-
-}
-
-
-function closeChat(){
-
-document
-.getElementById("chat")
-.classList.add("hidden");
-
-}
-
-
-/* =========================
-   MOBILE MENU
-========================= */
-
-function toggleMenu(){
-
-alert(
-"Use the Study, Books, Donate and Community sections below."
-);
-
-}
-
-
-/* =========================
-   LOAD STUDENT
-========================= */
-
-try{
-
-student=
-JSON.parse(
-localStorage.getItem(
-"nurseStudyStudent"
-)||"null"
-);
-
-}
-catch(error){
-
-student=null;
-
-}
-
-renderSemesterTabs();
-
-renderPosts();
-
-if(student){
-
-document
-.getElementById("registration")
-.classList.add("hidden");
-
-renderSemester(student.semester);
-
-}
+renderSemester(activeSemester);
 
 </script>
 
