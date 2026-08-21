@@ -1,6 +1,6 @@
 {
   "name": "nursestudy",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "private": true,
   "description": "NurseStudy - B.Sc. Nursing study platform",
   "main": "server.js",
@@ -8,10 +8,9 @@
     "start": "node server.js"
   },
   "engines": {
-    "node": ">=20"
+    "node": "22.x"
   },
   "dependencies": {
-    "better-sqlite3": "^12.9.0",
     "express": "^5.1.0",
     "express-session": "^1.18.2"
   }
