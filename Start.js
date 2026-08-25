@@ -3,6 +3,7 @@ const http = require("http");
 const originalCreateServer = http.createServer;
 
 http.createServer = function (handler) {
+
   const wrappedHandler = function (req, res) {
 
     if (req.method === "GET" && req.url === "/") {
@@ -37,31 +38,34 @@ http.createServer = function (handler) {
 <script>
 (function () {
 
-  window.enterNurseStudy = function () {
+  function openNurseStudy() {
 
     try {
 
-      const name =
+      var name =
         document.getElementById("studentName").value.trim();
 
-      const phone =
+      var phone =
         document.getElementById("studentPhone").value.trim();
 
-      const gender =
+      var gender =
         document.getElementById("studentGender").value;
 
-      const semester =
+      var semester =
         document.getElementById("studentSemester").value;
 
-      const university =
+      var university =
         document.getElementById("studentUniversity").value;
 
-      const college =
+      var college =
         document.getElementById("studentCollege").value;
 
-      const course =
+      var course =
         document.getElementById("studentCourse").value ||
         "B.Sc. Nursing";
+
+      var agree =
+        document.getElementById("agree").checked;
 
       if (!name) {
         alert("Please enter your full name.");
@@ -73,24 +77,39 @@ http.createServer = function (handler) {
         return;
       }
 
-      if (!gender || !semester || !university || !college) {
-        alert("Please fill all required details.");
+      if (!gender) {
+        alert("Please select Gender.");
         return;
       }
 
-      if (!document.getElementById("agree").checked) {
+      if (!semester) {
+        alert("Please select Semester.");
+        return;
+      }
+
+      if (!university) {
+        alert("Please select University.");
+        return;
+      }
+
+      if (!college) {
+        alert("Please select College.");
+        return;
+      }
+
+      if (!agree) {
         alert("Please tick the agreement box.");
         return;
       }
 
-      const profile = {
-        name,
-        phone,
-        gender,
-        semester,
-        university,
-        college,
-        course
+      var profile = {
+        name: name,
+        phone: phone,
+        gender: gender,
+        semester: semester,
+        university: university,
+        college: college,
+        course: course
       };
 
       localStorage.setItem(
@@ -98,25 +117,43 @@ http.createServer = function (handler) {
         JSON.stringify(profile)
       );
 
-      document
-        .getElementById("loginPage")
-        .classList.add("hidden");
+      var loginPage =
+        document.getElementById("loginPage");
 
-      document
-        .getElementById("mainSite")
-        .classList.remove("hidden");
+      var mainSite =
+        document.getElementById("mainSite");
 
-      document.getElementById("welcomeName").textContent = name;
-
-      document.getElementById("welcomeDetails").textContent =
-        semester + " • " + university + " • " + college;
-
-      if (typeof buildTabs === "function") {
-        buildTabs();
+      if (loginPage) {
+        loginPage.classList.add("hidden");
       }
 
-      if (typeof showSemester === "function") {
-        showSemester(semester);
+      if (mainSite) {
+        mainSite.classList.remove("hidden");
+      }
+
+      var welcomeName =
+        document.getElementById("welcomeName");
+
+      if (welcomeName) {
+        welcomeName.textContent = name;
+      }
+
+      var welcomeDetails =
+        document.getElementById("welcomeDetails");
+
+      if (welcomeDetails) {
+        welcomeDetails.textContent =
+          semester + " • " +
+          university + " • " +
+          college;
+      }
+
+      if (typeof window.buildTabs === "function") {
+        window.buildTabs();
+      }
+
+      if (typeof window.showSemester === "function") {
+        window.showSemester(semester);
       }
 
       fetch("/api/student", {
@@ -125,28 +162,61 @@ http.createServer = function (handler) {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(profile)
-      }).catch(function () {});
+      }).catch(function (error) {
+        console.log("Student save error:", error);
+      });
 
       window.scrollTo(0, 0);
 
     } catch (error) {
 
-      console.error(error);
+      console.error("NurseStudy error:", error);
 
       alert(
-        "Website me error aa gaya. Page refresh karke dobara try karein."
+        "Entry error. Please refresh the website and try again."
+      );
+    }
+  }
+
+
+  /*
+     FORCE BUTTON CLICK
+     This works even if the old
+     onclick function is broken.
+  */
+
+  document.addEventListener(
+    "click",
+    function (event) {
+
+      var button = event.target.closest(
+        "button.fullBtn"
       );
 
-    }
+      if (!button) {
+        return;
+      }
 
-  };
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      openNurseStudy();
+
+    },
+    true
+  );
+
+  window.enterNurseStudy = openNurseStudy;
 
 })();
 </script>
 `;
 
         if (html.includes("</body>")) {
-          html = html.replace("</body>", fix + "</body>");
+          html = html.replace(
+            "</body>",
+            fix + "</body>"
+          );
         } else {
           html += fix;
         }
@@ -161,7 +231,10 @@ http.createServer = function (handler) {
     return handler(req, res);
   };
 
-  return originalCreateServer.call(http, wrappedHandler);
+  return originalCreateServer.call(
+    http,
+    wrappedHandler
+  );
 };
 
 require("./server.js");
