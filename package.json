@@ -5,7 +5,7 @@
   "description": "NurseStudy - B.Sc. Nursing study platform",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node start.js"
   },
   "engines": {
     "node": "22.x"
