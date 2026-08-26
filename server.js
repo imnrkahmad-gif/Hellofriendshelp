@@ -1923,4 +1923,2713 @@ app.get("/api/donation", (req, res) => {
 /* =========================================================
    OFFICIAL WEBSITE ROUTE
    PART 2 WILL CONTINUE FROM HERE
+/* =========================================================
+   FRONTEND
+========================================================= */
+
+function renderPage() {
+
+  const semesters = Object.keys(STUDY_DATA);
+
+  return `
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>NurseStudy - Nursing Student Platform</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+  background:#f4f9fb;
+  color:#243b53;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#ffffff;
+  border-bottom:1px solid #d9e2ec;
+}
+
+.container{
+  width:min(1150px,92%);
+  margin:auto;
+}
+
+.navbar{
+  min-height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo{
+  font-size:23px;
+  font-weight:900;
+  color:#102a43;
+}
+
+.navlinks{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.navlinks a{
+  text-decoration:none;
+  color:#0f766e;
+  font-weight:800;
+  font-size:13px;
+}
+
+.hero{
+  padding:60px 0;
+  background:
+    linear-gradient(
+      180deg,
+      #e9faf7,
+      #f4f9fb
+    );
+}
+
+.badge{
+  display:inline-block;
+  padding:8px 13px;
+  border-radius:50px;
+  background:#ddf6f2;
+  color:#08645e;
+  font-weight:800;
+  font-size:12px;
+}
+
+h1{
+  font-size:
+    clamp(38px,7vw,68px);
+  line-height:1;
+  margin:20px 0;
+  color:#102a43;
+}
+
+h2{
+  color:#102a43;
+}
+
+h3{
+  color:#243b53;
+}
+
+p{
+  line-height:1.65;
+}
+
+section{
+  padding:45px 0;
+}
+
+.searchbox{
+  background:#ffffff;
+  padding:8px;
+  border-radius:15px;
+  border:1px solid #d9e2ec;
+  display:flex;
+  gap:8px;
+  margin-top:25px;
+}
+
+.searchbox input{
+  flex:1;
+  border:0;
+  outline:none;
+  margin:0;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #d9e2ec;
+  margin:6px 0;
+  font:inherit;
+}
+
+textarea{
+  min-height:110px;
+  resize:vertical;
+}
+
+button,
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:11px 15px;
+  background:#0f766e;
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-block;
+}
+
+button:hover,
+.btn:hover{
+  opacity:.9;
+}
+
+.btn-light{
+  background:#e8f8f5;
+  color:#08645e;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(280px,1fr)
+    );
+  gap:16px;
+}
+
+.card{
+  background:#ffffff;
+  border:1px solid #d9e2ec;
+  border-radius:17px;
+  padding:18px;
+  margin:12px 0;
+  box-shadow:
+    0 7px 22px rgba(16,42,67,.06);
+}
+
+.semester-tabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:20px 0;
+}
+
+.semester-tab{
+  border:1px solid #d9e2ec;
+  background:white;
+  color:#0f766e;
+}
+
+.semester-tab.active{
+  background:#0f766e;
+  color:white;
+}
+
+.topic{
+  background:#ffffff;
+  border:1px solid #d9e2ec;
+  border-radius:18px;
+  padding:20px;
+  margin:15px 0;
+}
+
+.topic-layout{
+  display:grid;
+  grid-template-columns:
+    minmax(220px,380px)
+    1fr;
+  gap:22px;
+  align-items:start;
+}
+
+.topic-image{
+  width:100%;
+  max-height:330px;
+  object-fit:contain;
+  background:#ffffff;
+  border:1px solid #d9e2ec;
+  border-radius:14px;
+  padding:8px;
+}
+
+.easy-box{
+  background:#effcf8;
+  border:1px solid #b9eadf;
+  border-radius:12px;
+  padding:14px;
+  margin:12px 0;
+}
+
+.practical-box{
+  background:#eef4ff;
+  border:1px solid #c8d8ff;
+  border-radius:12px;
+  padding:14px;
+  margin:12px 0;
+}
+
+.notice{
+  background:#fff8e8;
+  border:1px solid #f0d39a;
+  border-radius:12px;
+  padding:14px;
+  margin:12px 0;
+}
+
+.labels{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:12px;
+}
+
+.label{
+  background:#eef4ff;
+  color:#2456a6;
+  border-radius:50px;
+  padding:7px 11px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.result{
+  background:#ffffff;
+  border:1px solid #d9e2ec;
+  border-radius:13px;
+  padding:14px;
+  margin:9px 0;
+}
+
+.gallery-image{
+  width:100%;
+  height:240px;
+  object-fit:contain;
+  border:1px solid #d9e2ec;
+  border-radius:12px;
+  background:white;
+}
+
+.quiz-question{
+  border:1px solid #d9e2ec;
+  border-radius:14px;
+  padding:15px;
+  margin:12px 0;
+  background:white;
+}
+
+.quiz-option{
+  display:block;
+  padding:11px;
+  border:1px solid #d9e2ec;
+  border-radius:9px;
+  margin:7px 0;
+  cursor:pointer;
+}
+
+.quiz-option:hover{
+  background:#f4f9fb;
+}
+
+.upi-box{
+  background:#effcf8;
+  border:1px solid #b9eadf;
+  border-radius:15px;
+  padding:18px;
+}
+
+.upi-id{
+  font-size:22px;
+  font-weight:900;
+  color:#08645e;
+  margin:10px 0;
+}
+
+.success{
+  background:#effcf8;
+  border:1px solid #b9eadf;
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px;
+}
+
+.error{
+  background:#fff0f0;
+  border:1px solid #f2b8b8;
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px;
+}
+
+footer{
+  background:#102a43;
+  color:#c7d5e2;
+  padding:40px 0;
+  margin-top:30px;
+}
+
+footer h2{
+  color:white;
+}
+
+@media(max-width:700px){
+
+  .navlinks{
+    display:none;
+  }
+
+  .searchbox{
+    flex-direction:column;
+  }
+
+  .topic-layout{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="container navbar">
+
+<div class="logo">
+🩺 NurseStudy
+</div>
+
+<div class="navlinks">
+
+<a href="#study">Study</a>
+
+<a href="#practical">Practical</a>
+
+<a href="#community">Community</a>
+
+<a href="#blood">Blood</a>
+
+<a href="#quiz">Quiz</a>
+
+<a href="#jobs">Jobs</a>
+
+<a href="#donation">Donate</a>
+
+</div>
+
+</div>
+
+</header>
+
+
+<section class="hero">
+
+<div class="container">
+
+<span class="badge">
+🎓 Nursing Semester 1–7
+</span>
+
+<h1>
+Learn Nursing.<br>
+<span style="color:#0f766e">
+Understand Practically.
+</span>
+</h1>
+
+<p>
+Theory + Easy Hindi/English + Practical Learning +
+Images + Viva + MCQ + Student Community +
+Blood Donor + Quiz + Scholarship + Nursing Jobs
+</p>
+
+<div class="searchbox">
+
+<input
+id="mainSearch"
+placeholder="Search Anatomy, Bone, Community, Pneumonia..."
+>
+
+<button onclick="searchTopic()">
+🔎 Search
+</button>
+
+</div>
+
+<div id="searchResults"></div>
+
+</div>
+
+</section>
+
+
+<section id="study">
+
+<div class="container">
+
+<h2>
+📚 Semester 1–7 Study Centre
+</h2>
+
+<p>
+Semester choose karo aur topic ko theory,
+easy language aur practical image ke saath padho.
+</p>
+
+<div class="semester-tabs">
+
+${semesters.map(
+  (semester,index) => `
+<button
+  class="semester-tab ${index === 0 ? "active" : ""}"
+  onclick="selectSemester(this, '${encodeURIComponent(semester)}')"
+>
+${escapeHTML(semester)}
+</button>
+`
+).join("")}
+
+</div>
+
+<div id="topicsContainer"></div>
+
+</div>
+
+</section>
+
+
+<section id="practical">
+
+<div class="container">
+
+<h2>
+🧪 Anatomy & Practical Image Gallery
+</h2>
+
+<p>
+Important anatomy aur practical topics ko images ke
+saath samajhne ke liye gallery.
+</p>
+
+<div
+id="practicalGallery"
+class="grid"
+></div>
+
+</div>
+
+</section>
+
+
+<section id="community">
+
+<div class="container">
+
+<h2>
+👥 Nursing Student Community
+</h2>
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>
+👤 Create Student Profile
+</h3>
+
+<input
+id="studentName"
+placeholder="Your Name"
+>
+
+<input
+id="studentPhone"
+placeholder="Mobile Number"
+>
+
+<input
+id="studentUniversity"
+placeholder="University"
+>
+
+<input
+id="studentCollege"
+placeholder="College"
+>
+
+<input
+id="studentSemester"
+placeholder="Semester"
+>
+
+<input
+id="studentCity"
+placeholder="City"
+>
+
+<button onclick="createProfile()">
+Create Profile
+</button>
+
+<div id="profileMessage"></div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+🔎 Find Nursing Students
+</h3>
+
+<input
+id="studentSearch"
+placeholder="Name / University / College / Semester / City"
+>
+
+<button
+onclick="findStudents()"
+>
+Search
+</button>
+
+<div id="studentResults"></div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+💬 Ask a Nursing Question
+</h3>
+
+<input
+id="postName"
+placeholder="Your Name"
+>
+
+<input
+id="postUniversity"
+placeholder="University"
+>
+
+<input
+id="postSemester"
+placeholder="Semester"
+>
+
+<input
+id="postTopic"
+placeholder="Topic"
+>
+
+<textarea
+id="postMessage"
+placeholder="Write your question..."
+></textarea>
+
+<button onclick="createPost()">
+Post Question
+</button>
+
+<div id="communityMessage"></div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+📢 Recent Student Questions
+</h3>
+
+<div id="communityPosts"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="blood">
+
+<div class="container">
+
+<h2>
+🩸 Blood Donation & Blood Donor
+</h2>
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>
+❤️ Become a Blood Donor
+</h3>
+
+<input
+id="donorName"
+placeholder="Name"
+>
+
+<select id="donorGroup">
+
+<option value="">Blood Group</option>
+
+<option>A+</option>
+<option>A-</option>
+<option>B+</option>
+<option>B-</option>
+<option>AB+</option>
+<option>AB-</option>
+<option>O+</option>
+<option>O-</option>
+
+</select>
+
+<input
+id="donorCity"
+placeholder="City"
+>
+
+<input
+id="donorPhone"
+placeholder="Phone"
+>
+
+<input
+id="donorAvailability"
+placeholder="Availability"
+>
+
+<button onclick="registerDonor()">
+Register Donor
+</button>
+
+<div id="donorMessage"></div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+🔎 Find Blood Donor
+</h3>
+
+<select id="findBloodGroup">
+
+<option value="">
+Any Blood Group
+</option>
+
+<option>A+</option>
+<option>A-</option>
+<option>B+</option>
+<option>B-</option>
+<option>AB+</option>
+<option>AB-</option>
+<option>O+</option>
+<option>O-</option>
+
+</select>
+
+<input
+id="findBloodCity"
+placeholder="City"
+>
+
+<button onclick="findDonors()">
+Find Donor
+</button>
+
+<div id="donorResults"></div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+🚨 Need Blood?
+</h3>
+
+<input
+id="bloodPatient"
+placeholder="Patient / Requester Name"
+>
+
+<input
+id="bloodGroup"
+placeholder="Required Blood Group"
+>
+
+<input
+id="bloodCity"
+placeholder="City"
+>
+
+<input
+id="bloodHospital"
+placeholder="Hospital"
+>
+
+<input
+id="bloodPhone"
+placeholder="Contact Number"
+>
+
+<select id="bloodUrgency">
+
+<option>Normal</option>
+<option>Urgent</option>
+<option>Emergency</option>
+
+</select>
+
+<textarea
+id="bloodDetails"
+placeholder="Additional details"
+></textarea>
+
+<button onclick="createBloodRequest()">
+Post Blood Request
+</button>
+
+<div id="bloodMessage"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="quiz">
+
+<div class="container">
+
+<h2>
+🎮 Nursing MCQ Quiz
+</h2>
+
+<div class="card">
+
+<p>
+MCQ solve karo aur score check karo.
+High score students ke liye prize/bonus claim
+system available hai. Final winner verification
+administrator karega.
+</p>
+
+<input
+id="quizName"
+placeholder="Your Name"
+>
+
+<div id="quizContainer"></div>
+
+<button onclick="submitQuiz()">
+🏆 Submit Quiz
+</button>
+
+<div id="quizResult"></div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+🏆 Leaderboard
+</h3>
+
+<button
+class="btn-light"
+onclick="loadLeaderboard()"
+>
+Refresh Leaderboard
+</button>
+
+<div id="leaderboard"></div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+🎁 Prize Claim
+</h3>
+
+<input
+id="prizeName"
+placeholder="Name"
+>
+
+<input
+id="prizeContact"
+placeholder="Contact"
+>
+
+<input
+id="prizeQuizId"
+placeholder="Quiz Result ID"
+>
+
+<textarea
+id="prizeMessage"
+placeholder="Prize claim message"
+></textarea>
+
+<button onclick="claimPrize()">
+Submit Prize Claim
+</button>
+
+<div id="prizeMessage"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="jobs">
+
+<div class="container">
+
+<h2>
+🎓 Scholarships & 👩‍⚕️ Nursing Vacancies
+</h2>
+
+<p>
+Scholarship aur vacancy ke liye official websites
+open karo aur current notification verify karke apply karo.
+</p>
+
+<div
+id="opportunityContainer"
+class="grid"
+></div>
+
+<div class="notice">
+
+<b>Important:</b>
+
+Application submit karne se pehle eligibility,
+last date, fees aur official notification zaroor check karein.
+
+</div>
+
+</div>
+
+</section>
+
+
+<section>
+
+<div class="container">
+
+<h2>
+🏫 University Search
+</h2>
+
+<input
+id="universitySearch"
+placeholder="Search University"
+>
+
+<button onclick="searchUniversities()">
+Search
+</button>
+
+<div id="universityResults"></div>
+
+</div>
+
+</section>
+
+
+<section id="donation">
+
+<div class="container">
+
+<h2>
+💰 Support NurseStudy
+</h2>
+
+<div class="card">
+
+<p>
+Agar aap NurseStudy platform ko support karna chahte hain,
+to UPI se voluntary donation kar sakte hain.
+</p>
+
+<div class="upi-box">
+
+<div>
+UPI ID
+</div>
+
+<div class="upi-id">
+${UPI_ID}
+</div>
+
+<button onclick="copyUPI()">
+📋 Copy UPI
+</button>
+
+<button
+class="btn-light"
+onclick="openUPI()"
+>
+📱 Open UPI App
+</button>
+
+<div id="upiMessage"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section>
+
+<div class="container">
+
+<h2>
+📚 Book / Study Help Request
+</h2>
+
+<div class="card">
+
+<input
+id="bookName"
+placeholder="Your Name"
+>
+
+<input
+id="bookSemester"
+placeholder="Semester"
+>
+
+<input
+id="bookSubject"
+placeholder="Book / Subject"
+>
+
+<input
+id="bookContact"
+placeholder="Contact"
+>
+
+<textarea
+id="bookMessage"
+placeholder="What help do you need?"
+></textarea>
+
+<button onclick="sendBookRequest()">
+Send Request
+</button>
+
+<div id="bookMessageResult"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<div class="container">
+
+<h2>
+🩺 NurseStudy
+</h2>
+
+<p>
+Nursing education • Practical learning • Student community
+</p>
+
+<p>
+© 2026 NurseStudy
+</p>
+
+</div>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   FRONTEND JAVASCRIPT
+========================================================= */
+
+let studentProfile = null;
+
+let quizQuestions = [];
+
+let latestQuizId = "";
+
+
+/* ---------------------------------------------------------
+   API HELPER
+--------------------------------------------------------- */
+
+async function api(url, options = {}) {
+
+  try {
+
+    const response =
+      await fetch(url, {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        ...options
+      });
+
+    return await response.json();
+
+  } catch (error) {
+
+    return {
+      success: false,
+      error:
+        "Server connection problem."
+    };
+
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   START APP
+--------------------------------------------------------- */
+
+async function startApp() {
+
+  await loadSemester(
+    Object.keys(${JSON.stringify(STUDY_DATA)})[0]
+  );
+
+  await loadPracticalGallery();
+
+  await loadCommunity();
+
+  await loadQuiz();
+
+  await loadOpportunities();
+
+  await loadLeaderboard();
+
+}
+
+
+/* ---------------------------------------------------------
+   SEMESTER
+--------------------------------------------------------- */
+
+async function selectSemester(button, semester) {
+
+  document
+    .querySelectorAll(".semester-tab")
+    .forEach(
+      item =>
+        item.classList.remove("active")
+    );
+
+  button.classList.add("active");
+
+  await loadSemester(
+    decodeURIComponent(semester)
+  );
+
+}
+
+
+async function loadSemester(semester) {
+
+  const response =
+    await api(
+      "/api/semester/" +
+      encodeURIComponent(semester)
+    );
+
+  if (!response.success) {
+
+    document
+      .getElementById("topicsContainer")
+      .innerHTML =
+      '<div class="error">' +
+      escapeHTML(response.error) +
+      '</div>';
+
+    return;
+
+  }
+
+  const topics =
+    response.topics || [];
+
+  document
+    .getElementById("topicsContainer")
+    .innerHTML = `
+
+<div class="card">
+
+<span class="badge">
+${escapeHTML(semester)}
+</span>
+
+<h2>
+${escapeHTML(semester)}
+— Theory + Practical
+</h2>
+
+<p>
+Har topic ko theory, easy Hindi/English,
+practical points aur image ke saath padho.
+</p>
+
+</div>
+
+${topics
+  .map(
+    (topic, index) => `
+
+<article class="topic">
+
+<h3>
+${index + 1}.
+${escapeHTML(topic.name)}
+</h3>
+
+<div class="topic-layout">
+
+<div>
+
+<img
+class="topic-image"
+src="${topic.image}"
+alt="${escapeHTML(topic.name)}"
+onerror="this.style.display='none'"
+>
+
+</div>
+
+<div>
+
+<p>
+<b>📖 Theory:</b>
+${escapeHTML(topic.theory)}
+</p>
+
+<div class="easy-box">
+
+<b>
+🗣️ Easy Hindi/English:
+</b>
+
+<p>
+${escapeHTML(topic.easy)}
+</p>
+
+</div>
+
+<div class="practical-box">
+
+<b>
+🧪 Practical:
+</b>
+
+<p>
+${escapeHTML(topic.practical)}
+</p>
+
+</div>
+
+<div class="labels">
+
+${topic.labels
+  .map(
+    label =>
+      `<span class="label">
+      ${escapeHTML(label)}
+      </span>`
+  )
+  .join("")}
+
+</div>
+
+<br>
+
+<button
+class="btn-light"
+onclick="showViva('${escapeHTML(topic.name)}')"
+>
+🎤 Viva
+</button>
+
+<button
+class="btn-light"
+onclick="showRevision('${escapeHTML(topic.name)}')"
+>
+🧠 Revision
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+`
+  )
+  .join("")}
+
+`;
+
+}
+
+
+/* ---------------------------------------------------------
+   SEARCH
+--------------------------------------------------------- */
+
+async function searchTopic() {
+
+  const query =
+    document
+      .getElementById("mainSearch")
+      .value
+      .trim();
+
+  if (!query) {
+
+    document
+      .getElementById("searchResults")
+      .innerHTML = "";
+
+    return;
+
+  }
+
+  const response =
+    await api(
+      "/api/topics?q=" +
+      encodeURIComponent(query)
+    );
+
+  if (!response.success) {
+
+    return;
+
+  }
+
+  const topics =
+    response.topics || [];
+
+  document
+    .getElementById("searchResults")
+    .innerHTML = `
+
+<h3>
+🔎 Search Results
+</h3>
+
+${
+  topics.length
+    ? topics
+        .map(
+          topic => `
+
+<div class="result">
+
+<span class="badge">
+${escapeHTML(topic.semester)}
+</span>
+
+<h3>
+${escapeHTML(topic.name)}
+</h3>
+
+<p>
+<b>Theory:</b>
+${escapeHTML(topic.theory)}
+</p>
+
+<div class="easy-box">
+
+<b>Easy:</b>
+
+${escapeHTML(topic.easy)}
+
+</div>
+
+<div class="practical-box">
+
+<b>Practical:</b>
+
+${escapeHTML(topic.practical)}
+
+</div>
+
+<img
+src="${topic.image}"
+alt="${escapeHTML(topic.name)}"
+class="gallery-image"
+onerror="this.style.display='none'"
+>
+
+</div>
+
+`
+        )
+        .join("")
+    : '<div class="result">No topic found.</div>'
+
+}
+
+`;
+
+}
+
+
+/* ---------------------------------------------------------
+   PRACTICAL GALLERY
+--------------------------------------------------------- */
+
+async function loadPracticalGallery() {
+
+  const response =
+    await api(
+      "/api/practical-images"
+    );
+
+  if (!response.success) {
+    return;
+  }
+
+  document
+    .getElementById("practicalGallery")
+    .innerHTML =
+      response.images
+        .map(
+          item => `
+
+<div class="card">
+
+<span class="badge">
+${escapeHTML(item.category)}
+</span>
+
+<h3>
+${escapeHTML(item.name)}
+</h3>
+
+<img
+class="gallery-image"
+src="${item.image}"
+alt="${escapeHTML(item.name)}"
+onerror="this.style.display='none'"
+>
+
+<div class="labels">
+
+${item.labels
+  .map(
+    label =>
+      `<span class="label">
+      ${escapeHTML(label)}
+      </span>`
+  )
+  .join("")}
+
+</div>
+
+</div>
+
+`
+        )
+        .join("");
+
+}
+
+
+/* ---------------------------------------------------------
+   VIVA
+--------------------------------------------------------- */
+
+function showViva(topic) {
+
+  alert(
+`VIVA REVISION
+
+Topic: ${topic}
+
+Important questions:
+
+1. Define ${topic}.
+2. Causes / risk factors kya hain?
+3. Signs and symptoms kya hain?
+4. Diagnosis kaise hota hai?
+5. Treatment kya hota hai?
+6. Nursing management kya hai?
+7. Complications kya ho sakti hain?
+8. Patient education kya denge?`
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   REVISION
+--------------------------------------------------------- */
+
+function showRevision(topic) {
+
+  alert(
+`QUICK REVISION
+
+${topic}
+
+Definition
+Causes / Risk Factors
+Signs & Symptoms
+Diagnosis
+Treatment
+Nursing Management
+Complications
+Health Education
+
+Exam me definition + signs/symptoms +
+management zaroor revise karein.`
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   STUDENT PROFILE
+--------------------------------------------------------- */
+
+async function createProfile() {
+
+  const response =
+    await api(
+      "/api/students",
+      {
+        method: "POST",
+
+        body:
+          JSON.stringify({
+
+            name:
+              document
+                .getElementById("studentName")
+                .value,
+
+            phone:
+              document
+                .getElementById("studentPhone")
+                .value,
+
+            university:
+              document
+                .getElementById("studentUniversity")
+                .value,
+
+            college:
+              document
+                .getElementById("studentCollege")
+                .value,
+
+            semester:
+              document
+                .getElementById("studentSemester")
+                .value,
+
+            city:
+              document
+                .getElementById("studentCity")
+                .value
+
+          })
+
+      }
+    );
+
+  showMessage(
+    "profileMessage",
+    response.success,
+    response.message ||
+    response.error
+  );
+
+  if (response.success) {
+
+    studentProfile =
+      response.student;
+
+    localStorage.setItem(
+      "nurseStudyProfile",
+      JSON.stringify(
+        response.student
+      )
+    );
+
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   FIND STUDENTS
+--------------------------------------------------------- */
+
+async function findStudents() {
+
+  const query =
+    document
+      .getElementById("studentSearch")
+      .value;
+
+  const response =
+    await api(
+      "/api/students?q=" +
+      encodeURIComponent(query)
+    );
+
+  const container =
+    document
+      .getElementById("studentResults");
+
+  if (!response.success) {
+
+    container.innerHTML =
+      '<div class="error">' +
+      escapeHTML(response.error) +
+      '</div>';
+
+    return;
+
+  }
+
+  if (!response.students.length) {
+
+    container.innerHTML =
+      '<div class="result">No students found.</div>';
+
+    return;
+
+  }
+
+  container.innerHTML =
+    response.students
+      .map(
+        student => `
+
+<div class="result">
+
+<b>
+👤 ${escapeHTML(student.name)}
+</b>
+
+<p>
+
+${escapeHTML(student.university || "University not added")}
+<br>
+
+${escapeHTML(student.college || "College not added")}
+<br>
+
+${escapeHTML(student.semester || "")}
+
+•
+
+${escapeHTML(student.city || "")}
+
+</p>
+
+<button
+class="btn-light"
+onclick="sendContactRequest('${escapeHTML(student.id)}')"
+>
+💬 Contact
+</button>
+
+</div>
+
+`
+      )
+      .join("");
+
+}
+
+
+/* ---------------------------------------------------------
+   CONTACT REQUEST
+--------------------------------------------------------- */
+
+async function sendContactRequest(toId) {
+
+  if (!studentProfile) {
+
+    alert(
+      "Pehle Student Profile create karo."
+    );
+
+    return;
+
+  }
+
+  const message =
+    prompt(
+      "Study related message likho:"
+    );
+
+  if (!message) {
+    return;
+  }
+
+  const response =
+    await api(
+      "/api/contact-request",
+      {
+        method: "POST",
+
+        body:
+          JSON.stringify({
+
+            fromId:
+              studentProfile.id,
+
+            toId,
+
+            message
+
+          })
+
+      }
+    );
+
+  alert(
+    response.message ||
+    response.error
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   COMMUNITY POST
+--------------------------------------------------------- */
+
+async function createPost() {
+
+  const response =
+    await api(
+      "/api/community",
+      {
+        method: "POST",
+
+        body:
+          JSON.stringify({
+
+            name:
+              document
+                .getElementById("postName")
+                .value,
+
+            university:
+              document
+                .getElementById("postUniversity")
+                .value,
+
+            semester:
+              document
+                .getElementById("postSemester")
+                .value,
+
+            topic:
+              document
+                .getElementById("postTopic")
+                .value,
+
+            message:
+              document
+                .getElementById("postMessage")
+                .value
+
+          })
+
+      }
+    );
+
+  showMessage(
+    "communityMessage",
+    response.success,
+    response.message ||
+    response.error
+  );
+
+  if (response.success) {
+
+    document
+      .getElementById("postMessage")
+      .value = "";
+
+    await loadCommunity();
+
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   LOAD COMMUNITY
+--------------------------------------------------------- */
+
+async function loadCommunity() {
+
+  const response =
+    await api(
+      "/api/community"
+    );
+
+  const container =
+    document
+      .getElementById("communityPosts");
+
+  if (!response.success) {
+    return;
+  }
+
+  container.innerHTML =
+    response.posts.length
+
+      ? response.posts
+          .map(
+            post => `
+
+<div class="result">
+
+<b>
+${escapeHTML(post.name)}
+</b>
+
+<span>
+•
+${escapeHTML(post.semester || "")}
+</span>
+
+<p>
+<b>
+${escapeHTML(post.topic || "Question")}
+</b>
+</p>
+
+<p>
+${escapeHTML(post.message)}
+</p>
+
+</div>
+
+`
+          )
+          .join("")
+
+      : '<div class="result">No questions yet.</div>';
+
+}
+
+
+/* ---------------------------------------------------------
+   DONOR REGISTRATION
+--------------------------------------------------------- */
+
+async function registerDonor() {
+
+  const response =
+    await api(
+      "/api/blood-donor",
+      {
+        method: "POST",
+
+        body:
+          JSON.stringify({
+
+            name:
+              document
+                .getElementById("donorName")
+                .value,
+
+            bloodGroup:
+              document
+                .getElementById("donorGroup")
+                .value,
+
+            city:
+              document
+                .getElementById("donorCity")
+                .value,
+
+            phone:
+              document
+                .getElementById("donorPhone")
+                .value,
+
+            availability:
+              document
+                .getElementById("donorAvailability")
+                .value
+
+          })
+
+      }
+    );
+
+  showMessage(
+    "donorMessage",
+    response.success,
+    response.message ||
+    response.error
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   FIND DONORS
+--------------------------------------------------------- */
+
+async function findDonors() {
+
+  const group =
+    document
+      .getElementById("findBloodGroup")
+      .value;
+
+  const city =
+    document
+      .getElementById("findBloodCity")
+      .value;
+
+  const response =
+    await api(
+      "/api/blood-donors?group=" +
+      encodeURIComponent(group) +
+      "&city=" +
+      encodeURIComponent(city)
+    );
+
+  const container =
+    document
+      .getElementById("donorResults");
+
+  if (!response.success) {
+    return;
+  }
+
+  if (!response.donors.length) {
+
+    container.innerHTML =
+      '<div class="result">No matching donor found.</div>';
+
+    return;
+
+  }
+
+  container.innerHTML =
+    response.donors
+      .map(
+        donor => `
+
+<div class="result">
+
+<b>
+🩸 ${escapeHTML(donor.bloodGroup)}
+</b>
+
+<p>
+${escapeHTML(donor.name)}
+<br>
+${escapeHTML(donor.city)}
+</p>
+
+<p>
+${escapeHTML(
+  donor.availability ||
+  "Availability not specified"
+)}
+</p>
+
+</div>
+
+`
+      )
+      .join("");
+
+}
+
+
+/* ---------------------------------------------------------
+   BLOOD REQUEST
+--------------------------------------------------------- */
+
+async function createBloodRequest() {
+
+  const response =
+    await api(
+      "/api/blood-request",
+      {
+        method: "POST",
+
+        body:
+          JSON.stringify({
+
+            name:
+              document
+                .getElementById("bloodPatient")
+                .value,
+
+            bloodGroup:
+              document
+                .getElementById("bloodGroup")
+                .value,
+
+            city:
+              document
+                .getElementById("bloodCity")
+                .value,
+
+            hospital:
+              document
+                .getElementById("bloodHospital")
+                .value,
+
+            phone:
+              document
+                .getElementById("bloodPhone")
+                .value,
+
+            urgency:
+              document
+                .getElementById("bloodUrgency")
+                .value,
+
+            details:
+              document
+                .getElementById("bloodDetails")
+                .value
+
+          })
+
+      }
+    );
+
+  showMessage(
+    "bloodMessage",
+    response.success,
+    response.message ||
+    response.error
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   QUIZ
+--------------------------------------------------------- */
+
+async function loadQuiz() {
+
+  const response =
+    await api("/api/quiz");
+
+  if (!response.success) {
+    return;
+  }
+
+  quizQuestions =
+    response.questions || [];
+
+  document
+    .getElementById("quizContainer")
+    .innerHTML =
+      quizQuestions
+        .map(
+          (question,index) => `
+
+<div class="quiz-question">
+
+<b>
+${index + 1}.
+${escapeHTML(question.question)}
+</b>
+
+${question.options
+  .map(
+    (option,optionIndex) => `
+
+<label class="quiz-option">
+
+<input
+type="radio"
+name="quiz-${index}"
+value="${optionIndex}"
+>
+
+${escapeHTML(option)}
+
+</label>
+
+`
+  )
+  .join("")}
+
+</div>
+
+`
+        )
+        .join("");
+
+}
+
+
+/* ---------------------------------------------------------
+   SUBMIT QUIZ
+--------------------------------------------------------- */
+
+async function submitQuiz() {
+
+  const name =
+    document
+      .getElementById("quizName")
+      .value
+      .trim();
+
+  if (!name) {
+
+    alert(
+      "Quiz submit karne se pehle name enter karo."
+    );
+
+    return;
+
+  }
+
+  const answers =
+    quizQuestions.map(
+      (question,index) => {
+
+        const selected =
+          document.querySelector(
+            'input[name="quiz-' +
+            index +
+            '"]:checked'
+          );
+
+        return selected
+          ? Number(selected.value)
+          : -1;
+
+      }
+    );
+
+  const response =
+    await api(
+      "/api/quiz/submit",
+      {
+        method: "POST",
+
+        body:
+          JSON.stringify({
+            name,
+            answers
+          })
+
+      }
+    );
+
+  if (!response.success) {
+
+    document
+      .getElementById("quizResult")
+      .innerHTML =
+        '<div class="error">' +
+        escapeHTML(response.error) +
+        '</div>';
+
+    return;
+
+  }
+
+  latestQuizId =
+    response.result.id;
+
+  document
+    .getElementById("quizResult")
+    .innerHTML = `
+
+<div class="success">
+
+🏆 <b>
+Score:
+${response.result.score}/${response.result.total}
+</b>
+
+<br>
+
+Percentage:
+${response.result.percentage}%
+
+<br><br>
+
+${escapeHTML(response.message)}
+
+<br><br>
+
+<b>
+Quiz Result ID:
+${escapeHTML(response.result.id)}
+</b>
+
+</div>
+
+`;
+
+  await loadLeaderboard();
+
+}
+
+
+/* ---------------------------------------------------------
+   LEADERBOARD
+--------------------------------------------------------- */
+
+async function loadLeaderboard() {
+
+  const response =
+    await api(
+      "/api/leaderboard"
+    );
+
+  const container =
+    document
+      .getElementById("leaderboard");
+
+  if (!response.success) {
+    return;
+  }
+
+  container.innerHTML =
+    response.leaderboard.length
+
+      ? response.leaderboard
+          .map(
+            (item,index) => `
+
+<div class="result">
+
+<b>
+#${index + 1}
+${escapeHTML(item.name)}
+</b>
+
+<br>
+
+${item.score}/${item.total}
+
+•
+
+${item.percentage}%
+
+</div>
+
+`
+          )
+          .join("")
+
+      : '<div class="result">No quiz results yet.</div>';
+
+}
+
+
+/* ---------------------------------------------------------
+   PRIZE CLAIM
+--------------------------------------------------------- */
+
+async function claimPrize() {
+
+  let quizId =
+    document
+      .getElementById("prizeQuizId")
+      .value;
+
+  if (!quizId) {
+    quizId = latestQuizId;
+  }
+
+  const response =
+    await api(
+      "/api/prize-claim",
+      {
+        method: "POST",
+
+        body:
+          JSON.stringify({
+
+            name:
+              document
+                .getElementById("prizeName")
+                .value,
+
+            contact:
+              document
+                .getElementById("prizeContact")
+                .value,
+
+            quizId,
+
+            message:
+              document
+                .getElementById("prizeMessage")
+                .value
+
+          })
+
+      }
+    );
+
+  showMessage(
+    "prizeMessage",
+    response.success,
+    response.message ||
+    response.error
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   SCHOLARSHIP / JOBS
+--------------------------------------------------------- */
+
+async function loadOpportunities() {
+
+  const response =
+    await api(
+      "/api/opportunities"
+    );
+
+  const container =
+    document
+      .getElementById(
+        "opportunityContainer"
+      );
+
+  if (!response.success) {
+    return;
+  }
+
+  container.innerHTML =
+    response.opportunities
+      .map(
+        item => `
+
+<div class="card">
+
+<span class="badge">
+${escapeHTML(item.category)}
+</span>
+
+<h3>
+${escapeHTML(item.title)}
+</h3>
+
+<p>
+${escapeHTML(item.description)}
+</p>
+
+<a
+class="btn"
+href="${item.url}"
+target="_blank"
+rel="noopener noreferrer"
+>
+🌐 Official Website
+</a>
+
+</div>
+
+`
+      )
+      .join("");
+
+}
+
+
+/* ---------------------------------------------------------
+   UNIVERSITY SEARCH
+--------------------------------------------------------- */
+
+async function searchUniversities() {
+
+  const query =
+    document
+      .getElementById("universitySearch")
+      .value;
+
+  const response =
+    await api(
+      "/api/universities?q=" +
+      encodeURIComponent(query)
+    );
+
+  const container =
+    document
+      .getElementById(
+        "universityResults"
+      );
+
+  if (!response.success) {
+    return;
+  }
+
+  container.innerHTML =
+    response.universities.length
+
+      ? response.universities
+          .map(
+            university => `
+
+<div class="card">
+
+<h3>
+🏫
+${escapeHTML(university.name)}
+</h3>
+
+<p>
+${escapeHTML(university.state)}
+</p>
+
+<a
+class="btn"
+href="${university.official}"
+target="_blank"
+rel="noopener noreferrer"
+>
+Official Website
+</a>
+
+</div>
+
+`
+          )
+          .join("")
+
+      : '<div class="result">University not found.</div>';
+
+}
+
+
+/* ---------------------------------------------------------
+   UPI
+--------------------------------------------------------- */
+
+function copyUPI() {
+
+  if (
+    navigator.clipboard &&
+    navigator.clipboard.writeText
+  ) {
+
+    navigator.clipboard
+      .writeText("${UPI_ID}");
+
+  }
+
+  document
+    .getElementById("upiMessage")
+    .innerHTML = `
+
+<div class="success">
+
+✅ UPI ID copied:
+
+<b>
+${UPI_ID}
+</b>
+
+</div>
+
+`;
+
+}
+
+
+function openUPI() {
+
+  window.location.href =
+    "upi://pay?pa=${UPI_ID}" +
+    "&pn=NurseStudy" +
+    "&cu=INR";
+
+}
+
+
+/* ---------------------------------------------------------
+   BOOK HELP
+--------------------------------------------------------- */
+
+async function sendBookRequest() {
+
+  const response =
+    await api(
+      "/api/book-request",
+      {
+        method: "POST",
+
+        body:
+          JSON.stringify({
+
+            name:
+              document
+                .getElementById("bookName")
+                .value,
+
+            semester:
+              document
+                .getElementById("bookSemester")
+                .value,
+
+            book:
+              document
+                .getElementById("bookSubject")
+                .value,
+
+            contact:
+              document
+                .getElementById("bookContact")
+                .value,
+
+            message:
+              document
+                .getElementById("bookMessage")
+                .value
+
+          })
+
+      }
+    );
+
+  showMessage(
+    "bookMessageResult",
+    response.success,
+    response.message ||
+    response.error
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   MESSAGE HELPER
+--------------------------------------------------------- */
+
+function showMessage(
+  elementId,
+  success,
+  message
+) {
+
+  const element =
+    document.getElementById(
+      elementId
+    );
+
+  if (!element) {
+    return;
+  }
+
+  element.innerHTML = `
+
+<div class="${success ? "success" : "error"}">
+
+${escapeHTML(
+  message ||
+  (
+    success
+      ? "Success"
+      : "Something went wrong"
+  )
+)}
+
+</div>
+
+`;
+
+}
+
+
+/* ---------------------------------------------------------
+   AUTO LOAD SAVED PROFILE
+--------------------------------------------------------- */
+
+try {
+
+  const savedProfile =
+    localStorage.getItem(
+      "nurseStudyProfile"
+    );
+
+  if (savedProfile) {
+
+    studentProfile =
+      JSON.parse(savedProfile);
+
+  }
+
+} catch (error) {
+
+  console.log(
+    "Profile load error:",
+    error.message
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   START
+--------------------------------------------------------- */
+
+startApp();
+
+</script>
+
+</body>
+
+</html>
+`;
+
+}
+
+
+/* =========================================================
+   PART 3 WILL ADD THE FINAL EXPRESS ROUTE + SERVER START
+========================================================= */
+/* =========================================================
+   FINAL EXPRESS ROUTE
+========================================================= */
+
+app.get("/", (req, res) => {
+
+  res.send(renderPage());
+
+});
+
+
+/* =========================================================
+   HEALTH / STATUS
+========================================================= */
+
+app.get("/status", (req, res) => {
+
+  res.json({
+    success: true,
+    message: "NurseStudy website is running.",
+    service: "NurseStudy",
+    port: PORT,
+    time: new Date().toISOString()
+  });
+
+});
+
+
+/* =========================================================
+   404 API RESPONSE
+========================================================= */
+
+app.use("/api", (req, res) => {
+
+  res.status(404).json({
+    success: false,
+    error: "API route not found."
+  });
+
+});
+
+
+/* =========================================================
+   START SERVER
+========================================================= */
+
+app.listen(
+  PORT,
+  "0.0.0.0",
+  () => {
+
+    console.log(
+      "===================================="
+    );
+
+    console.log(
+      "🩺 NurseStudy Server Started"
+    );
+
+    console.log(
+      "Port:",
+      PORT
+    );
+
+    console.log(
+      "UPI:",
+      UPI_ID
+    );
+
+    console.log(
+      "===================================="
+    );
+
+  }
+);
 ========================================================= */
